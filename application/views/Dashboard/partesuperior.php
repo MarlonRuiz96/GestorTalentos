@@ -27,7 +27,7 @@
             </li>
             <hr class="sidebar-divider">
            
-            <!-- Apartado de Clientes -->
+            <!-- Apartado de Candidatos -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#clientes" aria-expanded="true" aria-controls="clientes">
                     <i class="far fa-user" style="font-size: 20px;"></i>
@@ -35,10 +35,10 @@
                 </a>
                 <div id="clientes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Gestion de Clientes</h6>
-                        <a class="collapse-item" href="<?= site_url('AltaCliente') ?>">Añadir Cliente
+                        <h6 class="collapse-header">Consultar Candidatos</h6>
+                        <a class="collapse-item" href="<?= site_url('Candidatos') ?>">Consultar Candidatos
                         </a>
-                        <a class="collapse-item" href="<?= site_url('Clientes') ?>">Clientes
+                        <a class="collapse-item" href="<?= site_url('Clientes') ?>">Nuevo Candidato
                         </a>
                     </div>
                 </div>
