@@ -27,36 +27,50 @@
                             <div class="card-3d-wrapper">
                                 <div class="card-front">
                                     <div class="center-wrap">
-                                        <div class="section text-center">
-                                            <h4 class="mb-4 pb-3">Ingrese el token para poder iniciar </h4>
-                                            <div class="form-group">
-                                                <input type="text" class="form-style" placeholder="Token">
-                                                <i class="input-icon uil uil-at"></i>
+                                        <form action="<?php echo site_url('TokenController/verificar'); ?>"
+                                            method="post">
+                                            <div class="section text-center">
+                                                <h4 class="mb-4 pb-3">Ingrese el token para poder iniciar </h4>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-style" placeholder="Token"
+                                                        name="token">
+                                                    <i class="input-icon uil uil-at"></i>
+                                                </div>
+                                                <input type="submit" value="Iniciar" class="btn mt-4">
+                                                <p class="mb-0 mt-4 text-center">
+                                                    <a href="https://api.whatsapp.com/send?phone=50517389&text=Necesito ayuda con mi Token"
+                                                        class="link">
+                                                        ¿Necesitas ayuda?
+                                                    </a>
+                                                </p>
                                             </div>
+                                        </form>
 
-                                            <a href="https://www.web-leb.com/code" class="btn mt-4">Iniciar</a>
-                                            <p class="mb-0 mt-4 text-center"> <a
-                                                    href="https://api.whatsapp.com/send?phone=50517389&text=Necesito ayuda con mi Token"
-                                                    class="link">¿Necesitas ayuda?</a>
-                                            </p>
-                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-back">
-                                    <div class="center-wrap">
-                                        <div class="section text-center">
-                                            <h4 class="mb-3 pb-3">Iniciar Sesión</h4>
-                                            <div class="form-group">
-                                                <input type="text" class="form-style" placeholder="Usuario">
-                                                <i class="input-icon uil uil-user"></i>
-                                            </div>
-                                            
-                                            
-                                            <div class="form-group mt-2">
-                                                <input type="password" class="form-style" placeholder="Contraseña">
-                                                <i class="input-icon uil uil-lock-alt"></i>
-                                            </div>
-                                            <a href="https://www.web-leb.com/code" class="btn mt-4">Iniciar</a>
+
+
+                                    <div class="card-back">
+                                        <div class="center-wrap">
+                                            <form action="<?php echo site_url('loginController/login'); ?>"
+                                                method="post">
+                                                <div class="section text-center">
+                                                    <h4 class="mb-3 pb-3">Iniciar Sesión</h4>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-style" placeholder="Usuario"
+                                                            name="usuario">
+                                                        <i class="input-icon uil uil-user"></i>
+                                                    </div>
+
+                                                    <div class="form-group mt-2">
+                                                        <input type="password" class="form-style"
+                                                            placeholder="Contraseña" name="clave">
+                                                        <i class="input-icon uil uil-lock-alt"></i>
+                                                    </div>
+                                                    <input type="submit" value="Iniciar" class="btn mt-4">
+                                                    
+                                                </div>
+                                            </form>
+
                                         </div>
                                     </div>
                                 </div>
@@ -65,8 +79,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 </body>
 
 </html>
