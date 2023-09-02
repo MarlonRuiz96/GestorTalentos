@@ -18,8 +18,7 @@ public function indexConsulta() {
 
 public function indexAlta() {
     verificar_autenticacion($this);
-    $data['categorias'] = $this->ProductoModel->getCategoria();
-    $this->load->view ('Producto/IngresarProducto',$data);
+    $this->load->view ('Candidato/IngresarCandidato');
 }  
 public function guardarCambios($id_Producto) {
     $referer = $_SERVER['HTTP_REFERER'];

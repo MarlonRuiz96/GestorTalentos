@@ -43,35 +43,35 @@
                     </div>
                 </div>
             </li>
-            <!-- Apartado de Productos -->
+            <!-- Apartado de Ofertas  -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#producto" aria-expanded="true" aria-controls="producto">
                     <i class="fas fa-store-alt" style="font-size: 15px;"></i>
-                    <span class="nav-link" style="font-size: 15px;">Inventario</span>
+                    <span class="nav-link" style="font-size: 15px;">Ofertas</span>
                 </a>
                 <div id="producto" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Gestion de Ventas</h6>
-                        <a class="collapse-item" href="<?= site_url('AltaProducto') ?>">Añadir producto
+                        <a class="collapse-item" href="<?= site_url('AltaProducto') ?>">Ver Ofertas
                         </a>
-                        <a class="collapse-item" href="<?= site_url('ConsultaProducto') ?>">Productos en Inventario
+                        <a class="collapse-item" href="<?= site_url('ConsultaProducto') ?>">Ingresar Oferta
                         </a>
                     </div>
                 </div>
             </li>
 
-            <!-- Apartado de Compra -->
+            <!-- Apartado de Proceso de seleccion -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#compra" aria-expanded="true" aria-controls="compra">
                     <i class="fa-solid fa-cart-arrow-down" style="font-size: 15px;"></i>
-                    <span class="nav-link" style="font-size: 15px;">Compra</span>
+                    <span class="nav-link" style="font-size: 15px;">Procesos</span>
                 </a>
                 <div id="compra" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Gestion de Compras</h6>
-                        <a class="collapse-item" href="<?= site_url('AltaCompra') ?>">Ingreso de Compras
+                        <a class="collapse-item" href="<?= site_url('AltaCompra') ?>">Ver Procesos
                         </a>
-                        <a class="collapse-item" href="<?= site_url('ConsultaCompra') ?>">Compras
+                        <a class="collapse-item" href="<?= site_url('ConsultaCompra') ?>"> Pendiente
                         </a>
                     </div>
                 </div>

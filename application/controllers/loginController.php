@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 require_once APPPATH . 'config/timezone_config.php';
-class loginController extends CI_Controller
+class LoginController extends CI_Controller
 {
 
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('usuarioModel'); 
+        $this->load->model('UsuarioModel'); 
     }
     public function index()
     {
@@ -22,12 +22,12 @@ class loginController extends CI_Controller
         $clave = $this->input->post('clave');
 
 
-        $this->load->model('usuarioModel');
-        $usuario_valido = $this->usuarioModel->validar_usuario($usuario, $clave);
+        $this->load->model('UsuarioModel');
+        $usuario_valido = $this->UsuarioModel->validar_usuario($usuario, $clave);
 
 
         if ($usuario_valido) {
-            $id_usuario = $this->usuarioModel->obtener_id_usuario_por_nombre($usuario);
+            $id_usuario = $this->UsuarioModel->obtener_id_usuario_por_nombre($usuario);
             $this->session->set_userdata('id_usuario', $id_usuario);
             $this->crear_sesion($id_usuario);
             redirect('DashboardController');

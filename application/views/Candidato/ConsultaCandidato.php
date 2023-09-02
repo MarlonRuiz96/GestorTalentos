@@ -18,7 +18,7 @@
         </header>
         <main>
             <div class="nuevo-producto">
-                <a class="btn btn-success" id="new" style="float: right; margin-right: 2px;" href="<?= site_url('ProductoController/indexAlta')?>">
+                <a class="btn btn-success" id="new" style="float: right; margin-right: 2px;" href="<?= site_url('CandidatoController/indexAlta')?>">
                     <i class="fa-solid fa-notes-medical"></i> Nuevo Candidato
                 </a>
             </div>
