@@ -104,6 +104,12 @@ thead {
     color: #fff;
 }
 
+label {
+    font-weight: bold;
+    color: #4c7dae;
+    font-size: 20px;
+    padding-bottom: 20px;
+  }
 /* Otros estilos */
 /* Estilos para pantallas más pequeñas */
 @media (max-width: 768px) {
@@ -138,4 +144,7 @@ thead {
     text-decoration: none; 
     background-color: black;
     color: #fff; 
+
+
 }
+

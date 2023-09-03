@@ -5,9 +5,8 @@ class CandidatoModel extends CI_Model {
 
     public function getCandidato() {
         $estado = "Activo";
-        $this->db->select('c.idCandidato, c.Nombres,c.Apellidos, c.DPI, c.Contacto, e.Nombre');
+        $this->db->select('c.idCandidato, c.Nombres,c.Direccion , c.Contacto, c.Correo');
         $this->db->from('candidato c');
-        $this->db->join('empresa e', 'c.idEmpresa = e.idEmpresa');
         $query = $this->db->get();
 
         if ($query->num_rows() > 0) {
@@ -17,63 +16,26 @@ class CandidatoModel extends CI_Model {
         }
     }
 
-    public function getCategoria() {
-        $this->db->select('*');
-        $this->db->from('categoria');
-        $query = $this->db->get();
-
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
-        } else {
-            return array();
-        }
-    }
-
-    public function ObtenerProductoPorId($id_producto) {
-        $this->db->select('p.id_producto, p.producto, p.existencia, p.id_categoria,');
-        $this->db->from('producto p');
-        $this->db->where('p.id_producto', $id_producto);
-        $query = $this->db->get();
-    
-        if ($query->num_rows() > 0) {
-            return $query->row(); 
-        } else {
-            return null;
-        }
-    }
-
-    public function actualizarProducto($id_producto, $nuevoProducto, $nuevaCategoria, $nuevaExistencia, $usuario_mod, $fecha_mod) {
-        $datosActualizados = array(
-            'producto' => $nuevoProducto,
-            'id_categoria' => $nuevaCategoria,
-            'existencia' => $nuevaExistencia,
-            'fecha_mod' => $usuario_mod,
-            'usuario_mod' => $usuario_mod
-           
-        );
-    
-        $this->db->where('id_producto', $id_producto);
-        $this->db->update('producto', $datosActualizados);
-    }
-
-
-    public function insertarProducto($data) {
-        $this->db->insert('producto', $data);
-    }
     
 
-    public function eliminarProducto($id_producto) {
-        $usuario_mod = $this->session->userdata('id_usuario');
-        $fecha_mod = date('Y-m-d');
-        $nuevoEstado = "Inactivo";
-        $datosActualizados = array(
-            'estado' => $nuevoEstado,
-            'usuario_mod' => $usuario_mod,
-            'fecha_mod' => $fecha_mod
-        );
-        $this->db->where('id_producto', $id_producto);
-        $this->db->update('producto', $datosActualizados);
+   
+    public function InsertarCandidato($data) {
+        $this->db->insert('candidato', $data);
     }
-    
+
+    public function ActualizarCandidato($idCandidato, $nuevoNombre, $nuevaDireccion, $nuevoConctacto,$nuevoCorreo)
+{
+    $datosActualizados = array(
+        'Nombres' => $nuevoNombre,
+        'Direccion' => $nuevaDireccion,
+        'Contacto' => $nuevoConctacto,
+        'Correo' => $nuevoCorreo,
+       
+    );
+
+    $this->db->where('idCandidato', $idCandidato);
+    $this->db->update('candidato', $datosActualizados);
+}    
+
 
 }

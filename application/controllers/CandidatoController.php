@@ -20,50 +20,46 @@ public function indexAlta() {
     verificar_autenticacion($this);
     $this->load->view ('Candidato/IngresarCandidato');
 }  
-public function guardarCambios($id_Producto) {
-    $referer = $_SERVER['HTTP_REFERER'];
+public function CrearCandidato(){
+    verificar_autenticacion($this);
 
-    $nuevoProducto = $this->input->post('editProducto');
-    $nuevaCategoria = $this->input->post('editCategoria');
-    $nuevaExistencia = $this->input->post('editExistencia');
-    $usuario_mod = $this->session->userdata('id_usuario'); 
-    $fecha_mod = date("Y-m-d");
-    
-    $this->ProductoModel->actualizarProducto($id_Producto, $nuevoProducto, $nuevaCategoria, $nuevaExistencia,$usuario_mod, $fecha_mod);
-    return redirect('ConsultaProducto');
-}
-
-public function nuevoProducto(){
     if ($this->input->server('REQUEST_METHOD') === 'POST') {
-        $producto = $this->input->post('editProducto');
-        $id_categoria = $this->input->post('editCategoria');
-        $existencia = $this->input->post('editExistencia');
-        $usuario_crear = $this->session->userdata('id_usuario'); 
-        $fecha_crear = date("Y-m-d");
+        $nombres = $this->input->post('nombreC');
+        $direccion = $this->input->post('Direccion');
+        $contacto = $this->input->post('Telefono');
+        $correo = $this->input->post('email');
+
+
+        $fecha_actual = date("Y-m-d");
 
         $data = array(
-            'producto' => $producto,
-            'id_categoria' => $id_categoria,
-            'existencia' => $existencia,
-            'fecha_crear' => $fecha_crear,
-            'usuario_crear' => $usuario_crear,
-            'estado' => 'Activo',
+            'Nombres' => $nombres,
+            'Direccion' => $direccion,
+            'Contacto' => $contacto,
+            'Correo' => $correo,
+            'fecha_crear' => $fecha_actual,
+           
         );
-
-        $this->ProductoModel->insertarProducto($data);
-        redirect('ConsultaProducto');
-
-    } else {
-        redirect('LoginController');
+        $this->CandidatoModel->InsertarCandidato($data);
+        redirect('Candidatos');
     }
+
+}
+
+public function GuardarCambios($idCandidato){
+
+        $referer = $_SERVER['HTTP_REFERER'];
     
-}
+        $nuevoNombre = $this->input->post('editNombre');
+        $nuevaDireccion = $this->input->post('editDireccion');
+        $nuevoConctacto = $this->input->post('editContacto');
+        $nuevoCorreo = $this->input->post('editCorreo');
+        
+        $this->CandidatoModel->ActualizarCandidato($idCandidato, $nuevoNombre, $nuevaDireccion, $nuevoConctacto,$nuevoCorreo);
+        return redirect('Candidatos');
+    
 
-public function eliminarProducto($id_Producto) {
-    $this->ProductoModel->eliminarProducto($id_Producto);
-    return redirect('ConsultaProducto');
 }
-
 }
 
 ?>

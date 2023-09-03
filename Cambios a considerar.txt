@@ -1,0 +1,12 @@
+En la base en linea 
+
+Tabla candidado
+-Nombres
+-Direccion
+-Contacto
+-Correo
+
+se agrega el cammpo: fecha_crear (date)
+
+se quito la llave foranea de idempresa, es innecesario por que un candidato no espeficifamente es 
+de cierta empresa
