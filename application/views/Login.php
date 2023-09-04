@@ -11,6 +11,7 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo base_url('assets/login.css'); ?>">
+    <link rel="stylesheet" href="assets/login.css">
 
 </head>
 
@@ -51,7 +52,7 @@
 
                                     <div class="card-back">
                                         <div class="center-wrap">
-                                            <form action="<?php echo site_url('loginController/login'); ?>"
+                                            <form action="<?php echo site_url('LoginController/login'); ?>"
                                                 method="post">
                                                 <div class="section text-center">
                                                     <h4 class="mb-3 pb-3">Iniciar Sesión</h4>

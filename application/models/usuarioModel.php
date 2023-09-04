@@ -1,5 +1,5 @@
 <?php
-class usuarioModel extends CI_Model {
+class UsuarioModel extends CI_Model {
     public function validar_usuario($usuario, $clave) {
         $this->db->where('usuario', $usuario);
         $this->db->where('clave', $clave);

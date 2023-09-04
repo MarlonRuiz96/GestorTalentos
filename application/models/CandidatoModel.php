@@ -6,7 +6,7 @@ class CandidatoModel extends CI_Model {
     public function getCandidato() {
         $estado = "Activo";
         $this->db->select('c.idCandidato, c.Nombres,c.Direccion , c.Contacto, c.Correo');
-        $this->db->from('candidato c');
+        $this->db->from('Candidato c');
         $query = $this->db->get();
 
         if ($query->num_rows() > 0) {
@@ -20,7 +20,7 @@ class CandidatoModel extends CI_Model {
 
    
     public function InsertarCandidato($data) {
-        $this->db->insert('candidato', $data);
+        $this->db->insert('Candidato', $data);
     }
 
     public function ActualizarCandidato($idCandidato, $nuevoNombre, $nuevaDireccion, $nuevoConctacto,$nuevoCorreo)
@@ -34,7 +34,7 @@ class CandidatoModel extends CI_Model {
     );
 
     $this->db->where('idCandidato', $idCandidato);
-    $this->db->update('candidato', $datosActualizados);
+    $this->db->update('Candidato', $datosActualizados);
 }    
 
 
