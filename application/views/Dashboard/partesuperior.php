@@ -29,7 +29,7 @@
            
             <!-- Apartado de Candidatos -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#clientes" aria-expanded="true" aria-controls="clientes">
+            <a class="nav-link" href="<?= site_url('Candidatos') ?>">
                     <i class="far fa-user" style="font-size: 20px;"></i>
                     <span class="nav-link" style="font-size: 15px;">Candidatos</span>
                 </a>

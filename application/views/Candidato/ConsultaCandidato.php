@@ -76,7 +76,7 @@
                                     data-bs-target="#editarModal" data-cliente='<?php echo json_encode($row); ?>'>Editar
                                 </a>
                                 <a href="<?= site_url('CandidatoController/VerCandidato/' . $row->idCandidato); ?>"
-                                class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editarModal">Ver pruebas
+                                class="btn btn-success" >Ver pruebas
                                     </a>
 
                             </td>
