@@ -22,9 +22,24 @@ class CandidatoModel extends CI_Model
 
 
     public function InsertarCandidato($data)
-    {
-        $this->db->insert('Candidato', $data);
-    }
+{
+    // Insertamos los datos en la tabla candidatos
+    $this->db->insert('Candidato', $data);
+
+    // Obtenemos el id del candidato recién creado
+    $idCandidato = $this->db->insert_id();
+
+    // Insertamos los datos en la tabla temperamento
+    $dataTemperamento = array(
+        'melancolico' =>0,
+        'flematico' => 0,
+        'colerico' => 0,
+        'sanguineo' => 0,
+        'idCandidatofk' => $idCandidato,
+    );
+
+    $this->db->insert('temperamento', $dataTemperamento);
+}
 
     public function ActualizarCandidato($idCandidato, $nuevoNombre, $nuevaDireccion, $nuevoConctacto, $nuevoCorreo)
     {
@@ -42,7 +57,7 @@ class CandidatoModel extends CI_Model
     public function getCandidatoPorId($idCandidato)
     {
         $this->db->select('idCandidato, Nombres, Direccion, Contacto, Correo');
-        $this->db->from('candidato');
+        $this->db->from('Candidato');
         $this->db->where('idCandidato', $idCandidato);
 
         $query = $this->db->get();
@@ -54,5 +69,22 @@ class CandidatoModel extends CI_Model
         }
 
     }
+
+    public function getDatosPrueba($idCandidato)
+    {
+        $this->db->select('idTemperamento, melancolico, flematico, colerico, sanguineo');
+        $this->db->from('temperamento');
+        $this->db->where('idCandidatofk', $idCandidato);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->row();
+        } else {
+            return null;
+        }
+
+    }
+    
 
 }

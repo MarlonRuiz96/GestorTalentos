@@ -24,7 +24,7 @@
     <div class="container">
 
         <main>
-        <h2 class="text-center">Datos del Candidato</h2>
+            <h2 class="text-center">Datos del Candidato</h2>
 
             <form>
                 <div class="form-row">
@@ -45,50 +45,69 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputAddress">Correo</label>
-                        <input type="text" class="form-control" id="Contacto"
+                        <input type="text" class="form-control" id="Correo"
                             value="<?php echo $candidato_data->Correo; ?>" readonly>
                     </div>
                 </div>
 
 
-                <div class="form-group">
-                    <label for="inputAddress2">Address 2</label>
-                    <input type="text" class="form-control" id="inputAddress2"
-                        placeholder="Apartment, studio, or floor">
-                </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="inputCity">City</label>
-                        <input type="text" class="form-control" id="inputCity">
+                    
+                    <div class="form-row">
+                        <div>
+                            <canvas id="myChart"></canvas>
+                        </div>
+
                     </div>
-                    <div class="form-group col-md-4">
-                        <label for="inputState">State</label>
-                        <select id="inputState" class="form-control">
-                            <option selected>Choose...</option>
-                            <option>...</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label for="inputZip">Zip</label>
-                        <input type="text" class="form-control" id="inputZip">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gridCheck">
-                        <label class="form-check-label" for="gridCheck">
-                            Check me out
-                        </label>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Sign in</button>
+
+
+
+
+
             </form>
+
+        
+        </main>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            // Convierte los datos de $dataTemperamento en formato JSON
+            var temperamentoData = <?php echo json_encode($dataTemperamento); ?>;
+            console.log(temperamentoData);
+
+            // Configuración de datos para la gráfica
+            var data = {
+                labels: ['Melancólico', 'Flemático', 'Colérico', 'Sanguíneo'],
+                datasets: [{
+                    label: 'Temperamentos',
+                    data: [temperamentoData.melancolico, temperamentoData.flematico, temperamentoData.colerico, temperamentoData.sanguineo],
+                    backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 205, 86)',
+                        'rgb(255, 228, 225)'
+                    ]
+                }]
+            };
+
+            // Otras opciones de configuración de la gráfica
+            var options = {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            };
+
+            // Crear la gráfica utilizando Chart.js
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: data,
+                options: options
+            });
+        </script>
     </div>
-
-
-    </main>
-   
-
 </body>
 
 </html>

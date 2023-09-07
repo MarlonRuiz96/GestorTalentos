@@ -33,7 +33,10 @@ class CandidatoController extends CI_Controller
             $direccion = $this->input->post('Direccion');
             $contacto = $this->input->post('Telefono');
             $correo = $this->input->post('email');
+            $token = random_int(0, 99999);
 
+            // Convertimos el número aleatorio a una cadena de 5 caracteres
+            $token = str_pad($token, 5, "0", STR_PAD_LEFT);
 
             $fecha_actual = date("Y-m-d");
 
@@ -43,9 +46,12 @@ class CandidatoController extends CI_Controller
                 'Contacto' => $contacto,
                 'Correo' => $correo,
                 'fecha_crear' => $fecha_actual,
+                'Token' => $token,
 
             );
+            
             $this->CandidatoModel->InsertarCandidato($data);
+
             redirect('Candidatos');
         }
 
@@ -66,11 +72,15 @@ class CandidatoController extends CI_Controller
 
 
     }
-    public function VerCandidato($idCandidato) {
+    public function VerCandidato($idCandidato)
+    {
         $data['candidato_data'] = $this->CandidatoModel->getCandidatoPorId($idCandidato);
+        $data['dataTemperamento'] = $this->CandidatoModel->getDatosPrueba($idCandidato);
+
         $this->load->view('Candidato/ConsultarPerfil', $data);
     }
-    
+
+
 
 
 
