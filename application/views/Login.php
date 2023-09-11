@@ -28,13 +28,13 @@
                             <div class="card-3d-wrapper">
                                 <div class="card-front">
                                     <div class="center-wrap">
-                                        <form action="<?php echo site_url('TokenController/verificar'); ?>"
+                                        <form action="<?php echo site_url('DpiController/login'); ?>"
                                             method="post">
                                             <div class="section text-center">
-                                                <h4 class="mb-4 pb-3">Ingrese el token para poder iniciar </h4>
+                                                <h4 class="mb-4 pb-3">Ingrese su DPI </h4>
                                                 <div class="form-group">
-                                                    <input type="text" class="form-style" placeholder="Token"
-                                                        name="token">
+                                                    <input type="text" class="form-style" placeholder="Ingrese su DPI"
+                                                        name="DPI">
                                                     <i class="input-icon uil uil-at"></i>
                                                 </div>
                                                 <input type="submit" value="Iniciar" class="btn mt-4">

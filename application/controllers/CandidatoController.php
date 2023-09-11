@@ -29,24 +29,26 @@ class CandidatoController extends CI_Controller
         verificar_autenticacion($this);
 
         if ($this->input->server('REQUEST_METHOD') === 'POST') {
-            $nombres = $this->input->post('nombreC');
-            $direccion = $this->input->post('Direccion');
-            $contacto = $this->input->post('Telefono');
-            $correo = $this->input->post('email');
-            $token = random_int(0, 99999);
+            $nombres = "";
+            $Puesto = "";
+            $DPI = $this->input->post('DPI');
+            $Temperamento =0;
+            $Contacto ="";  
+            $correo = "";
 
-            // Convertimos el número aleatorio a una cadena de 5 caracteres
-            $token = str_pad($token, 5, "0", STR_PAD_LEFT);
+          
 
+         
             $fecha_actual = date("Y-m-d");
 
             $data = array(
                 'Nombres' => $nombres,
-                'Direccion' => $direccion,
-                'Contacto' => $contacto,
+                'Puesto' => $Puesto,
+                'DPI' => $DPI,
+                'temperamento' =>$Temperamento,
+                'Contacto' => $Contacto,
                 'Correo' => $correo,
                 'fecha_crear' => $fecha_actual,
-                'Token' => $token,
 
             );
             
@@ -63,11 +65,11 @@ class CandidatoController extends CI_Controller
         $referer = $_SERVER['HTTP_REFERER'];
 
         $nuevoNombre = $this->input->post('editNombre');
-        $nuevaDireccion = $this->input->post('editDireccion');
-        $nuevoConctacto = $this->input->post('editContacto');
+        $nuevaPuesto = $this->input->post('editPuesto');
+        $nuevoConctacto = $this->input->post('editDPI');
         $nuevoCorreo = $this->input->post('editCorreo');
 
-        $this->CandidatoModel->ActualizarCandidato($idCandidato, $nuevoNombre, $nuevaDireccion, $nuevoConctacto, $nuevoCorreo);
+        $this->CandidatoModel->ActualizarCandidato($idCandidato, $nuevoNombre, $nuevaPuesto, $nuevoConctacto, $nuevoCorreo);
         return redirect('Candidatos');
 
 

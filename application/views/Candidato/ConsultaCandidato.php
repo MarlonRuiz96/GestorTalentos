@@ -37,14 +37,14 @@
                         </th>
                         <th>
                             <i class="fa-solid fa-boxes-stacked" style="color: #e63946;"></i>
-                            Direccion
+                            Puesto
                         <th>
                             <i class="fa-solid fa-list" style="color: #e63946;"></i>
                             Contacto
                         </th>
                         <th>
                             <i class="fa-solid fa-bolt" style="color: #e63946;"></i>
-                            Direccion
+                            Correo
                         </th>
 
 
@@ -61,7 +61,7 @@
                                 <?php echo $row->Nombres; ?>
                             </td>
                             <td>
-                                <?php echo $row->Direccion; ?>
+                                <?php echo $row->Puesto; ?>
                             </td>
                             <td>
                                 <?php echo $row->Contacto; ?>
@@ -103,9 +103,9 @@
                         <br>
 
                         <div>
-                            <label for="editDireccion">Direccion </label>
-                            <input type="text" id="editDireccion" name="editDireccion"
-                                placeholder="Ingrese la direccion">
+                            <label for="editPuesto">Puesto </label>
+                            <input type="text" id="editPuesto" name="editPuesto"
+                                placeholder="Ingrese la Puesto">
                         </div>
                         <br>
                         <div>
@@ -116,7 +116,7 @@
                         <div>
                             <label for="editCorreo">Correo </label>
                             <input type="text" id="editCorreo" name="editCorreo"
-                                placeholder="Ingrese la direccion de correo ">
+                                placeholder="Ingrese la Puesto de correo ">
                         </div>
                     </form>
                 </div>
@@ -153,13 +153,13 @@
                     event.preventDefault();
                     const productoData = JSON.parse(button.getAttribute('data-cliente'));
                     const editNombre = document.getElementById('editNombre');
-                    const editDireccion = document.getElementById('editDireccion');
+                    const editPuesto = document.getElementById('editPuesto');
                     const editContacto = document.getElementById('editContacto');
                     const editCorreo = document.getElementById('editCorreo');
 
 
                     editNombre.value = productoData.Nombres;
-                    editDireccion.value = productoData.Direccion;
+                    editPuesto.value = productoData.Puesto;
                     editContacto.value = productoData.Contacto;
                     editCorreo.value = productoData.Correo;
 

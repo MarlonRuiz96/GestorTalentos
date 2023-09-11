@@ -36,6 +36,8 @@ class LoginController extends CI_Controller
         }
     }
 
+    
+
     private function crear_sesion($id_usuario) {
         $token = bin2hex(random_bytes(32));
         $this->load->model('SesionModel'); 

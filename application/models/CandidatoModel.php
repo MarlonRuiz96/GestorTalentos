@@ -7,7 +7,7 @@ class CandidatoModel extends CI_Model
     public function getCandidato()
     {
         $estado = "Activo";
-        $this->db->select('c.idCandidato, c.Nombres,c.Direccion , c.Contacto, c.Correo');
+        $this->db->select('c.idCandidato, c.Nombres,c.Puesto , c.Contacto, c.Correo, c.temperamento');
         $this->db->from('Candidato c');
         $query = $this->db->get();
 
@@ -21,31 +21,43 @@ class CandidatoModel extends CI_Model
 
 
 
-    public function InsertarCandidato($data)
-{
-    // Insertamos los datos en la tabla candidatos
-    $this->db->insert('Candidato', $data);
+    public function InsertarCandidato($data) //Insertar 0 en los temperamentos
+    {
+        // Insertamos los datos en la tabla candidatos
+        $this->db->insert('Candidato', $data);
 
-    // Obtenemos el id del candidato recién creado
-    $idCandidato = $this->db->insert_id();
+        // Obtenemos el id del candidato recién creado
+        $idCandidato = $this->db->insert_id();
 
-    // Insertamos los datos en la tabla temperamento
-    $dataTemperamento = array(
-        'melancolico' =>0,
-        'flematico' => 0,
-        'colerico' => 0,
-        'sanguineo' => 0,
-        'idCandidatofk' => $idCandidato,
-    );
+        $fecha_actual = date("Y-m-d");
 
-    $this->db->insert('temperamento', $dataTemperamento);
-}
+        // Insertamos los datos en la tabla temperamento
+        $dataTemperamento = array(
+            'melancolico' => 0,
+            'flematico' => 0,
+            'colerico' => 0,
+            'sanguineo' => 0,
+            'idCandidatofk' => $idCandidato,
+        );
+        $dataCandidato = array(
+            'Nombres' => "",
+            'Puesto' => "",
+            'DPI' => "",
+            'temperamento' => 0,
+            'Contacto' => "",
+            'Correo' => "",
+            'fecha_crear' => $fecha_actual,
 
-    public function ActualizarCandidato($idCandidato, $nuevoNombre, $nuevaDireccion, $nuevoConctacto, $nuevoCorreo)
+        );
+
+        $this->db->insert('temperamento', $dataTemperamento);
+    }
+
+    public function ActualizarCandidato($idCandidato, $nuevoNombre, $nuevaPuesto, $nuevoConctacto, $nuevoCorreo)
     {
         $datosActualizados = array(
             'Nombres' => $nuevoNombre,
-            'Direccion' => $nuevaDireccion,
+            'Puesto' => $nuevaPuesto,
             'Contacto' => $nuevoConctacto,
             'Correo' => $nuevoCorreo,
 
@@ -56,7 +68,7 @@ class CandidatoModel extends CI_Model
     }
     public function getCandidatoPorId($idCandidato)
     {
-        $this->db->select('idCandidato, Nombres, Direccion, Contacto, Correo');
+        $this->db->select('idCandidato, Nombres, Puesto, Contacto, Correo');
         $this->db->from('Candidato');
         $this->db->where('idCandidato', $idCandidato);
 
@@ -85,6 +97,6 @@ class CandidatoModel extends CI_Model
         }
 
     }
-    
+
 
 }

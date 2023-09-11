@@ -24,7 +24,20 @@ class UsuarioModel extends CI_Model {
         }
     }
 
+    public function obtenerTokenCandidato($token) {
+        $this->db->where('Token', $token);
+        $query = $this->db->get('Candidato');
+
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            return $row->idCandidato;
+        } else {
+            return false;
+        }
+    }
+
 
 
     
 }
+

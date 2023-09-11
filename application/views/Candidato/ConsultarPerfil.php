@@ -34,9 +34,9 @@
                             value="<?php echo $candidato_data->Nombres; ?>" readonly>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="inputPassword4">Direccion</label>
-                        <input type="text" class="form-control" id="Direccion"
-                            value="<?php echo $candidato_data->Direccion; ?>" readonly>
+                        <label for="inputPassword4">Puesto</label>
+                        <input type="text" class="form-control" id="Puesto"
+                            value="<?php echo $candidato_data->Puesto; ?>" readonly>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputAddress">Contacto</label>
@@ -80,7 +80,7 @@
                 labels: ['Melancólico', 'Flemático', 'Colérico', 'Sanguíneo'],
                 datasets: [{
                     label: 'Temperamentos',
-                    data: [temperamentoData.melancolico, temperamentoData.flematico, temperamentoData.colerico, temperamentoData.sanguineo],
+                    data: [temperamentoData.melancolico, temperamentoData.colerico, temperamentoData.flematico, temperamentoData.sanguineo],
                     backgroundColor: [
                         'rgb(255, 99, 132)',
                         'rgb(54, 162, 235)',

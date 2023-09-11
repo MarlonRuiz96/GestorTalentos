@@ -23,37 +23,17 @@
         <div class="form-box">
             <form id="userForm" action="<?= site_url('CandidatoController/CrearCandidato') ?>" method="post"
                 onsubmit="return validateForm()">
-                <div class="inputbox">
-                    <i class="fa-solid fa-user fa-lg"></i>
-                    <input type="text" id="nombreC" name="nombreC" required>
-                    <label for="nombreCliente">Nombre completo </label>
-                </div>
+            
 
                 <div class="inputbox">
                     <i class="fa-solid fa-house"></i>
-                    <input type="text" id="Direccion" name="Direccion" required>
-                    <label for="Direccion">Direccion</label>
+                    <input type="text" id="DPI" name="DPI" required>
+                    <label for="DPI">DPI</label>
                 </div>
-                <div class="inputbox">
-                    <i class="fa-solid fa-phone"></i>
-                    <input type="text" id="Telefono" name="Telefono" required>
-                    <label for="Telefono">Teléfono</label>
-                </div>
-                <div class="inputbox">
-                    <i class="fa-solid fa-envelope"></i>
-                    <input type="email" id="email" name="email" required>
-                    <label for="email">Correo electrónico</label>
-                </div>
+               
+              
 
-                <div class="inputbox">
-                    <i class="fa-solid fa-venus-mars"></i>
-                     <select name="genero" id="genero">
-
-                        <option value="masculino">Masculino</option>
-                        <option value="femenino">Femenino</option>
-                    </select>
-                    <label for="genero"></label>
-                </div>
+              
             
 
                 <button type="submit">Crear Candidato</button>
