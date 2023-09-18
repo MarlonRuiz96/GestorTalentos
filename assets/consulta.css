@@ -134,3 +134,7 @@ thead {
     background-color: black;
     color: #fff; 
 }
+
+.form-check a {
+    display: inline-block;
+  }

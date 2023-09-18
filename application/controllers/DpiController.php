@@ -61,38 +61,48 @@ class DpiController extends CI_Controller
     public function RealizarPruebas($DPI)
     {
 
-        $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); //obtengo todos los campos del candidato
-        $temperamento = $data['Candidato']->temperamento;
 
-        if ($temperamento) {
+        $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
 
-            $this->load->view('Pruebas/Temperamento', $data);
+        $indice = $data['Candidato']->Temporal; //Obtengo el indice para las preguntas, esto me ayuda para verificar en que pregunta se quedo el candidato
+
+        $data['Formulario'] = $this->DpiModel->dataTemperamentos($indice);
+
+        $temperamentoActivo = $data['Candidato']->temperamento;
 
 
-
+        if ($temperamentoActivo) {
+            $this->DpiModel->actualizarTemporal($DPI, $indice);
+            $this->load->view('Pruebas/Temperamento', $data); // Cargar la vista de la prueba de temperamentos
         } else {
-            $this->load->view('Pruebas/Login', $data);
+            $this->load->view('Pruebas/Login', $data); // Cargar la vista de inicio de sesión
+        }
+    }
 
+    public function sanguineo($DPI)
+    {
+
+        $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
+        $indice = $data['Candidato']->Temporal; //Obtengo el indice para las preguntas, esto me ayuda para verificar en que pregunta se quedo el candidato
+        $data['Formulario'] = $this->DpiModel->dataTemperamentos($indice);
+        $temperamentoActivo = $data['Candidato']->temperamento;
+        $sanguineoActual = $data['Candidato']->sanguineo;
+
+        $this->DpiModel->actualizarSanguineo($DPI, $sanguineoActual);
+
+
+        if ($temperamentoActivo) {
+            $this->DpiModel->actualizarTemporal($DPI, $indice);
+            $this->load->view('Pruebas/Temperamento', $data); // Cargar la vista de la prueba de temperamentos
+        } else {
+            $this->load->view('Pruebas/Login', $data); // Cargar la vista de inicio de sesión
         }
 
 
 
-
-       }
-
-public function temperamento($idCandidatofk){
-
-    $posicion = $this->input->post('respuesta_posicion');
-
-    $respuesta = $this->input->post('respuesta');
-    
-    $this->DpiModel->agregarTemperamento($idCandidatofk,$respuesta,$posicion);
-
-    return('Pruebas/Login');
+    }
 
 
-
-}
 
 
 

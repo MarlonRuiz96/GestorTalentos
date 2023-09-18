@@ -7,7 +7,7 @@ class DpiModel extends CI_Model
 
     public function VerificarDPI($DPI)
     {
-        $this->db->select('idCandidato, Nombres, Puesto, DPI, Contacto, Correo, temperamento');
+        $this->db->select('idCandidato, Nombres, Puesto, DPI, Contacto, Correo, temperamento,Temporal, sanguineo');
         $this->db->from('candidato');
         $this->db->where('DPI', $DPI);
 
@@ -35,47 +35,48 @@ class DpiModel extends CI_Model
         $this->db->update('candidato', $data);
     }
 
-    public function agregarTemperamento($idCandidatofk, $respuesta, $posicion)
+
+
+    public function dataTemperamentos($Indice)
     {
+        // Consulta para obtener los datos de la tabla de respuesta
+        $this->db->select('idRespuesta,P1,P2,P3,P4');
+        $this->db->from('respuesta');
+        $this->db->where('idRespuesta', $Indice);
 
-        $temperamento = '';
-        
-        switch ($posicion) {
-            case '1':
-                $temperamento = 'Melancólico';
-                break;
-            case '2':
-                $temperamento = 'Colérico';
-                break;
-            case '3':
-                $temperamento = 'Flemático';
-                break;
-            case '4':
-                $temperamento = 'Sanguíneo';
-                break;
-            default:
-            $temperamento = 'Nada';
-            break;
-        }
 
-        // Crear un arreglo de datos para la inserción
-        $data = array(
-            'Temperamento' => $temperamento,
-            'Respuesta' => $respuesta,
-            'idCandidato' => $idCandidatofk,
-        );
+        $query = $this->db->get();
 
-        // Insertar los datos en la tabla 'respuesta'
-        $this->db->insert('respuesta', $data);
-
-        // Comprobar si la inserción fue exitosa
-        if ($this->db->affected_rows() > 0) {
-            // Éxito: la inserción se realizó correctamente
-            return true;
+        if ($query->num_rows() > 0) {
+            return $query->row();
         } else {
-            // Error: la inserción falló
-            return false;
+            return null;
         }
+    }
+  
+
+    public function actualizarTemporal($DPI, $indice) {
+       
+        $nuevovalor = $indice+1;
+
+        $data = array(
+            'Temporal' => $nuevovalor,
+        );
+    
+        $this->db->where('DPI', $DPI);
+        $this->db->update('candidato', $data);
+    }
+
+    public function actualizarSanguineo($DPI, $sanguineoActual) {
+       
+        $nuevovalor = $sanguineoActual+1;
+
+        $data = array(
+            'sanguineo' => $nuevovalor,
+        );
+    
+        $this->db->where('DPI', $DPI);
+        $this->db->update('candidato', $data);
     }
 
 }
