@@ -57,12 +57,16 @@ class DpiController extends CI_Controller
         $this->load->view('Pruebas/Login', $data);
     }
 
+    
+
+   
 
     public function RealizarPruebas($DPI)
     {
 
 
         $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
+
 
         $indice = $data['Candidato']->Temporal; //Obtengo el indice para las preguntas, esto me ayuda para verificar en que pregunta se quedo el candidato
 
@@ -71,9 +75,11 @@ class DpiController extends CI_Controller
         $temperamentoActivo = $data['Candidato']->temperamento;
 
 
-        if ($temperamentoActivo) {
-            $this->DpiModel->actualizarTemporal($DPI, $indice);
+        if ($temperamentoActivo && $indice < 41) {
+
             $this->load->view('Pruebas/Temperamento', $data); // Cargar la vista de la prueba de temperamentos
+            $this->DpiModel->actualizarTemporal($DPI, $indice);
+
         } else {
             $this->load->view('Pruebas/Login', $data); // Cargar la vista de inicio de sesión
         }
@@ -83,25 +89,137 @@ class DpiController extends CI_Controller
     {
 
         $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
+
         $indice = $data['Candidato']->Temporal; //Obtengo el indice para las preguntas, esto me ayuda para verificar en que pregunta se quedo el candidato
-        $data['Formulario'] = $this->DpiModel->dataTemperamentos($indice);
-        $temperamentoActivo = $data['Candidato']->temperamento;
-        $sanguineoActual = $data['Candidato']->sanguineo;
 
-        $this->DpiModel->actualizarSanguineo($DPI, $sanguineoActual);
+        $aspectopersonalidad = $this->DpiModel->dataTemperamentos($indice - 1);
+
+        $idCandidato = $data['Candidato']->idCandidato;
+
+        $personalidad = $aspectopersonalidad->P4;
 
 
-        if ($temperamentoActivo) {
-            $this->DpiModel->actualizarTemporal($DPI, $indice);
-            $this->load->view('Pruebas/Temperamento', $data); // Cargar la vista de la prueba de temperamentos
-        } else {
-            $this->load->view('Pruebas/Login', $data); // Cargar la vista de inicio de sesión
+        $tipo = "D";
+
+        if ($indice <= 21) {
+            $this->DpiModel->IngresarFortaleza($personalidad, $idCandidato, $tipo);
+
+        } elseif ($indice > 21) {
+            $this->DpiModel->IngresarDebilidad($personalidad, $idCandidato, $tipo);
+
+
         }
 
 
 
+
+
+
+        $puntosactual = $data['Candidato']->sanguineo; //pbtener el dato actual
+
+        $this->DpiModel->actualizarSanguineo($DPI, $puntosactual); // Le sumo un punto a sanguineo
+
+        $this->RealizarPruebas($DPI);
+
+
     }
 
+    public function melancolico($DPI)
+    {
+
+        $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
+        $indice = $data['Candidato']->Temporal; //Obtengo el indice para las preguntas, esto me ayuda para verificar en que pregunta se quedo el candidato
+
+        $aspectopersonalidad = $this->DpiModel->dataTemperamentos($indice - 1);
+
+        $idCandidato = $data['Candidato']->idCandidato;
+
+
+        $personalidad = $aspectopersonalidad->P1;
+
+        $tipo = "A";
+
+        if ($indice <= 21) {
+            $this->DpiModel->IngresarFortaleza($personalidad, $idCandidato, $tipo);
+
+        } elseif ($indice > 21) {
+            $this->DpiModel->IngresarDebilidad($personalidad, $idCandidato, $tipo);
+
+
+        }
+
+
+        $puntosactual = $data['Candidato']->melancolico; //pbtener el dato actual
+
+        $this->DpiModel->actualizarMelancolico($DPI, $puntosactual); // Le sumo un punto a sanguineo
+
+        $this->RealizarPruebas($DPI);
+
+
+    }
+    public function flematico($DPI)
+    {
+
+        $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
+        $indice = $data['Candidato']->Temporal; //Obtengo el indice para las preguntas, esto me ayuda para verificar en que pregunta se quedo el candidato
+
+        $aspectopersonalidad = $this->DpiModel->dataTemperamentos($indice - 1);
+
+        $idCandidato = $data['Candidato']->idCandidato;
+
+
+        $personalidad = $aspectopersonalidad->P3;
+
+        $tipo = "C";
+
+        if ($indice <= 21) {
+            $this->DpiModel->IngresarFortaleza($personalidad, $idCandidato, $tipo);
+
+        } elseif ($indice > 21) {
+            $this->DpiModel->IngresarDebilidad($personalidad, $idCandidato, $tipo);
+
+
+        }
+        $puntosactual = $data['Candidato']->flematico; //pbtener el dato actual
+
+        $this->DpiModel->actualizarFlematico($DPI, $puntosactual); // Le sumo un punto a sanguineo
+
+        $this->RealizarPruebas($DPI);
+
+
+    }
+
+    public function colerico($DPI)
+    {
+
+        $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
+        $indice = $data['Candidato']->Temporal; //Obtengo el indice para las preguntas, esto me ayuda para verificar en que pregunta se quedo el candidato
+
+        $aspectopersonalidad = $this->DpiModel->dataTemperamentos($indice - 1);
+
+        $idCandidato = $data['Candidato']->idCandidato;
+
+
+        $personalidad = $aspectopersonalidad->P2;
+
+        $tipo = "B";
+
+        if ($indice <= 21) {
+            $this->DpiModel->IngresarFortaleza($personalidad, $idCandidato, $tipo);
+
+        } elseif ($indice > 21) {
+            $this->DpiModel->IngresarDebilidad($personalidad, $idCandidato, $tipo);
+
+
+        }
+        $puntosactual = $data['Candidato']->colerico; //pbtener el dato actual
+
+        $this->DpiModel->actualizarColerico($DPI, $puntosactual); // Le sumo un punto a sanguineo
+
+        $this->RealizarPruebas($DPI);
+
+
+    }
 
 
 

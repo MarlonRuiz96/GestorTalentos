@@ -28,15 +28,15 @@
             <!-- En tu vista 'Pruebas/Temperamento.php' -->
 
                 <div class="text-center">
-                    <a href="<?= site_url('DpiController/sanguineo/' . $Candidato->DPI); ?>" class="btn btn-success">
+                    <a href="<?= site_url('DpiController/melancolico/' . $Candidato->DPI); ?>" class="btn btn-success">
                         <?php echo $Formulario->P1; ?>
                     </a>
 
-                    <a href="<?= site_url('DpiController/sanguineo/' . $Candidato->DPI); ?>" class="btn btn-success">
+                    <a href="<?= site_url('DpiController/colerico/' . $Candidato->DPI); ?>" class="btn btn-success">
                         <?php echo $Formulario->P2; ?>
                     </a>
 
-                    <a href="<?= site_url('DpiController/sanguineo/' . $Candidato->DPI); ?>" class="btn btn-success">
+                    <a href="<?= site_url('DpiController/flematico/' . $Candidato->DPI); ?>" class="btn btn-success">
                         <?php echo $Formulario->P3; ?>
                     </a>
 

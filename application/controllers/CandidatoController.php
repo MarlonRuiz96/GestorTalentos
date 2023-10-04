@@ -15,7 +15,6 @@ class CandidatoController extends CI_Controller
     {
         verificar_autenticacion($this);
         $data['prueba_data'] = $this->CandidatoModel->getCandidato();
-        //$data['categorias'] = $this->ProductoModel->getCategoria();
         $this->load->view('Candidato/ConsultaCandidato', $data);
     }
 
@@ -78,12 +77,42 @@ class CandidatoController extends CI_Controller
     {
         $data['candidato_data'] = $this->CandidatoModel->getCandidatoPorId($idCandidato);
         $data['dataTemperamento'] = $this->CandidatoModel->getDatosPrueba($idCandidato);
+        $IdCandidato = $data['candidato_data']->idCandidato;
+
+        $data['FortalezaA']= $this->CandidatoModel->FortalezaA($IdCandidato);
+        $data['DebilidadA']= $this->CandidatoModel->DebilidadA($IdCandidato);
+
+        $data['FortalezaB']= $this->CandidatoModel->FortalezaB($IdCandidato);
+        $data['DebilidadB']= $this->CandidatoModel->DebilidadB($IdCandidato);
+
+        $data['FortalezaC']= $this->CandidatoModel->FortalezaC($IdCandidato);
+        $data['DebilidadC']= $this->CandidatoModel->DebilidadC($IdCandidato);
+
+        $data['FortalezaD']= $this->CandidatoModel->FortalezaD($IdCandidato);
+        $data['DebilidadD']= $this->CandidatoModel->DebilidadD($IdCandidato);
 
         $this->load->view('Candidato/ConsultarPerfil', $data);
     }
 
+    
+
+    public function guardarNotas()
+    {
+
+        $DPI = $this->input->post('DPI');
+        $notas = $this->input->post('notas');
+
+        $data['Candidato'] = $this->CandidatoModel->VerificarDPI($DPI); // Obtener los datos del candidato
+        $idCandidato =$data['Candidato']->idCandidato;
 
 
+        $this->CandidatoModel->guardarAnotaciones($idCandidato, $notas);
+
+        $this->VerCandidato($idCandidato);
+
+
+
+    }
 
 
 }

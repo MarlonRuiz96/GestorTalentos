@@ -68,7 +68,7 @@ class CandidatoModel extends CI_Model
     }
     public function getCandidatoPorId($idCandidato)
     {
-        $this->db->select('idCandidato, Nombres, Puesto, Contacto, Correo');
+        $this->db->select('idCandidato, Nombres, Puesto, Contacto, Correo, notas, DPI');
         $this->db->from('Candidato');
         $this->db->where('idCandidato', $idCandidato);
 
@@ -84,9 +84,9 @@ class CandidatoModel extends CI_Model
 
     public function getDatosPrueba($idCandidato)
     {
-        $this->db->select('idTemperamento, melancolico, flematico, colerico, sanguineo');
-        $this->db->from('temperamento');
-        $this->db->where('idCandidatofk', $idCandidato);
+        $this->db->select('melancolico, colerico, flematico,sanguineo');
+        $this->db->from('candidato');
+        $this->db->where('idCandidato', $idCandidato);
 
         $query = $this->db->get();
 
@@ -98,5 +98,189 @@ class CandidatoModel extends CI_Model
 
     }
 
+    public function FortalezaA($idCandidato)
+    {
 
+        $tipo = "A";
+        $this->db->select('Personalidad');
+        $this->db->from('fortaleza');
+        $this->db->where('idCandidato', $idCandidato);
+        $this->db->where('Tipo', $tipo);
+
+
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+    public function DebilidadA($idCandidato)
+    {
+
+        $tipo = "A";
+        $this->db->select('Personalidad');
+        $this->db->from('debilidad');
+        $this->db->where('idCandidato', $idCandidato);
+        $this->db->where('Tipo', $tipo);
+
+
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+
+    public function FortalezaB($idCandidato)
+    {
+
+        $tipo = "B";
+        $this->db->select('Personalidad');
+        $this->db->from('fortaleza');
+        $this->db->where('idCandidato', $idCandidato);
+        $this->db->where('Tipo', $tipo);
+
+
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+    public function DebilidadB($idCandidato)
+    {
+
+        $tipo = "B";
+        $this->db->select('Personalidad');
+        $this->db->from('debilidad');
+        $this->db->where('idCandidato', $idCandidato);
+        $this->db->where('Tipo', $tipo);
+
+
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+
+    public function FortalezaC($idCandidato)
+    {
+
+        $tipo = "C";
+        $this->db->select('Personalidad');
+        $this->db->from('fortaleza');
+        $this->db->where('idCandidato', $idCandidato);
+        $this->db->where('Tipo', $tipo);
+
+
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+    public function DebilidadC($idCandidato)
+    {
+
+        $tipo = "C";
+        $this->db->select('Personalidad');
+        $this->db->from('debilidad');
+        $this->db->where('idCandidato', $idCandidato);
+        $this->db->where('Tipo', $tipo);
+
+
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+
+    public function FortalezaD($idCandidato)
+    {
+
+        $tipo = "D";
+        $this->db->select('Personalidad');
+        $this->db->from('fortaleza');
+        $this->db->where('idCandidato', $idCandidato);
+        $this->db->where('Tipo', $tipo);
+
+
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+    public function DebilidadD($idCandidato)
+    {
+
+        $tipo = "D";
+        $this->db->select('Personalidad');
+        $this->db->from('debilidad');
+        $this->db->where('idCandidato', $idCandidato);
+        $this->db->where('Tipo', $tipo);
+
+
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+    public function VerificarDPI($DPI)
+    {
+        $this->db->select('idCandidato, Nombres, Puesto, DPI, Contacto, Correo, temperamento,Temporal, sanguineo, melancolico, flematico, colerico, notas');
+        $this->db->from('candidato');
+        $this->db->where('DPI', $DPI);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->row();
+        } else {
+            return null;
+        }
+
+    }
+    public function guardarAnotaciones($idCandidato, $notas) {
+        // Actualiza las notas del candidato en la base de datos
+        $this->db->where('idCandidato', $idCandidato);
+        $data = array(
+            'notas' => $notas
+        );
+        $this->db->update('candidato', $data);
+
+        // Verifica si la actualización fue exitosa
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
