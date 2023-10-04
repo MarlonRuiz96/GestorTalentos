@@ -30,22 +30,63 @@ CREATE TABLE IF NOT EXISTS `candidato` (
   `Correo` varchar(45) DEFAULT NULL,
   `fecha_crear` date DEFAULT NULL,
   `Temporal` int(11) DEFAULT NULL,
+  `melancolico` int(11) DEFAULT NULL,
+  `colerico` int(11) DEFAULT NULL,
+  `flematico` int(11) DEFAULT NULL,
   `sanguineo` int(11) DEFAULT NULL,
+  `notas` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`idCandidato`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla rh.candidato: ~9 rows (aproximadamente)
+-- Volcando datos para la tabla rh.candidato: ~10 rows (aproximadamente)
 DELETE FROM `candidato`;
-INSERT INTO `candidato` (`idCandidato`, `Nombres`, `Puesto`, `DPI`, `temperamento`, `Contacto`, `Correo`, `fecha_crear`, `Temporal`, `sanguineo`) VALUES
-	(1, 'Stefany ', 'Secretaria', '2474218042217', 0, '40405050', '2174218045454', NULL, 1, NULL),
-	(3, 'Jose Fernando Suhul Gonzalez', 'Cocinero', '2474218042216', 0, '41115228', 'mruiz996@outlook.com', '2023-09-03', 1, NULL),
-	(4, 'Estefania Maria Ochoa esquivel', 'Secretaria', '2474218042215', 0, '45454874', 'maria@prueba.com', '2023-09-03', 1, NULL),
-	(5, 'Jenner Pertzi Ocit Gamez', 'Mecanico', '2474218042211', 0, '50507070', 'Jennerpt@gmail.com', '2023-09-03', 1, NULL),
-	(6, 'Junior Morales Estrada', 'Maestro', '2474218042212', 0, '12312312', 'jmoralese@gmail.com', '2023-09-03', 1, NULL),
-	(7, 'Sofia Ochoa', 'Secretaria', '2474218042213', 0, '50504174', 'mruiz996@outlook.com', '2023-09-07', 1, NULL),
-	(8, 'Marlon Ivan Ruiz Gonzalez ', 'Gerencial', '2474218042214', 1, '50517989', 'mruiz996@outlook.com', '2023-09-07', 2, 1),
-	(9, 'Karina de leon', 'Doctora', '2318218042214', 0, '50517898', 'mruiz996@outlook.com', '2023-09-10', 1, NULL),
-	(10, 'Carlos Antonio Gonzalez', 'DIGITADOR', '2474308042214', 0, '50517389', 'mruiz996@outlook.com', '2023-09-10', 1, NULL);
+INSERT INTO `candidato` (`idCandidato`, `Nombres`, `Puesto`, `DPI`, `temperamento`, `Contacto`, `Correo`, `fecha_crear`, `Temporal`, `melancolico`, `colerico`, `flematico`, `sanguineo`, `notas`) VALUES
+	(1, 'Stefany ', 'Secretaria', '2474218042217', 0, '40405050', '2174218045454', NULL, 1, NULL, NULL, NULL, NULL, NULL),
+	(3, 'Jose Fernando Suhul Gonzalez', 'Cocinero', '2474218042216', 0, '41115228', 'mruiz996@outlook.com', '2023-09-03', 1, NULL, NULL, NULL, NULL, NULL),
+	(4, 'Estefania Maria Ochoa esquivel', 'Secretaria', '2474218042215', 0, '45454874', 'maria@prueba.com', '2023-09-03', 1, NULL, NULL, NULL, NULL, NULL),
+	(5, 'Jenner Pertzi Ocit Gamez', 'Mecanico', '2474218042211', 0, '50507070', 'Jennerpt@gmail.com', '2023-09-03', 1, NULL, NULL, NULL, NULL, NULL),
+	(6, 'Junior Morales Estrada', 'Maestro', '2474218042212', 1, '12312312', 'jmoralese@gmail.com', '2023-09-03', 41, 13, 6, 11, 10, NULL),
+	(7, 'Sofia Ochoa', 'Secretaria', '2474218042213', 0, '50504174', 'mruiz996@outlook.com', '2023-09-07', 1, NULL, NULL, NULL, NULL, NULL),
+	(8, 'Marlon Ivan Ruiz Gonzalez ', 'Gerencial', '2474218042214', 1, '50517989', 'mruiz996@outlook.com', '2023-09-07', 41, 11, 10, 14, 6, 'Este candidato es apto\r\n'),
+	(9, 'Karina de leon', 'Doctora', '2318218042214', 0, '50517898', 'mruiz996@outlook.com', '2023-09-10', 1, NULL, NULL, NULL, NULL, NULL),
+	(10, 'Carlos Antonio Gonzalez', 'DIGITADOR', '2474308042214', 0, '50517389', 'mruiz996@outlook.com', '2023-09-10', 1, NULL, NULL, NULL, NULL, NULL),
+	(11, '', '', '2035800790605', 0, '', '', '2023-10-01', NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- Volcando estructura para tabla rh.debilidad
+CREATE TABLE IF NOT EXISTS `debilidad` (
+  `idPersonalidad` int(11) NOT NULL AUTO_INCREMENT,
+  `Personalidad` varchar(50) DEFAULT NULL,
+  `Tipo` varchar(50) DEFAULT NULL,
+  `idCandidato` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idPersonalidad`) USING BTREE,
+  KEY `FK_personalidad_candidatso` (`idCandidato`) USING BTREE,
+  CONSTRAINT `FK_personalidad_candidatso` FOREIGN KEY (`idCandidato`) REFERENCES `candidato` (`idCandidato`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- Volcando datos para la tabla rh.debilidad: ~0 rows (aproximadamente)
+DELETE FROM `debilidad`;
+INSERT INTO `debilidad` (`idPersonalidad`, `Personalidad`, `Tipo`, `idCandidato`) VALUES
+	(1, 'Desanimado', 'C', 8),
+	(2, 'Implacable', 'D', 8),
+	(3, 'Resistente', 'B', 8),
+	(4, 'Olvidadizo', 'A', 8),
+	(5, 'Interrumpe', 'A', 8),
+	(6, 'Imprevisible', 'A', 8),
+	(7, 'Descuidado', 'A', 8),
+	(8, 'Orgulloso', 'B', 8),
+	(9, 'Sin motivación', 'C', 8),
+	(10, 'Desprendido', 'D', 8),
+	(11, 'Adicto al trabajo', 'B', 8),
+	(12, 'Indiscreto', 'B', 8),
+	(13, 'Desorganizado', 'A', 8),
+	(14, 'Introvertido', 'C', 8),
+	(15, 'Quejumbroso', 'D', 8),
+	(16, 'Lento', 'D', 8),
+	(17, 'Solitario', 'C', 8),
+	(18, 'Suspicaz', 'C', 8),
+	(19, 'Precipitado', 'B', 8),
+	(20, 'Variable', 'A', 8),
+	(21, 'Variable', 'A', 8);
 
 -- Volcando estructura para tabla rh.empresa
 CREATE TABLE IF NOT EXISTS `empresa` (
@@ -57,10 +98,45 @@ CREATE TABLE IF NOT EXISTS `empresa` (
   PRIMARY KEY (`idEmpresa`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla rh.empresa: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla rh.empresa: ~0 rows (aproximadamente)
 DELETE FROM `empresa`;
 INSERT INTO `empresa` (`idEmpresa`, `Nombre`, `Direccion`, `Contacto`, `Numero`) VALUES
 	(1, 'Megapolizas', '7 av 18-78 zona 13', 'Humberto\r\n', '23184444');
+
+-- Volcando estructura para tabla rh.fortaleza
+CREATE TABLE IF NOT EXISTS `fortaleza` (
+  `idPersonalidad` int(11) NOT NULL AUTO_INCREMENT,
+  `Personalidad` varchar(50) DEFAULT NULL,
+  `Tipo` varchar(50) DEFAULT NULL,
+  `idCandidato` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idPersonalidad`),
+  KEY `FK_personalidad_candidato` (`idCandidato`),
+  CONSTRAINT `FK_personalidad_candidato` FOREIGN KEY (`idCandidato`) REFERENCES `candidato` (`idCandidato`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- Volcando datos para la tabla rh.fortaleza: ~2 rows (aproximadamente)
+DELETE FROM `fortaleza`;
+INSERT INTO `fortaleza` (`idPersonalidad`, `Personalidad`, `Tipo`, `idCandidato`) VALUES
+	(41, 'Animado', 'A', 8),
+	(42, 'Persuasivo', 'B', 8),
+	(43, 'Abnegado', 'C', 8),
+	(44, 'Competitivo', 'B', 8),
+	(45, 'Entusiasta', 'A', 8),
+	(46, 'Autosuficiente', 'B', 8),
+	(47, 'Planificador', 'C', 8),
+	(48, 'Tímido', 'D', 8),
+	(49, 'Ordenado', 'C', 8),
+	(50, 'Humorístico', 'A', 8),
+	(51, 'Osado', 'B', 8),
+	(52, 'Culto', 'C', 8),
+	(53, 'Idealista', 'C', 8),
+	(54, 'Introspectivo', 'C', 8),
+	(55, 'Cordial', 'A', 8),
+	(56, 'Tenaz', 'B', 8),
+	(57, 'Leal', 'C', 8),
+	(58, 'Contento', 'D', 8),
+	(59, 'Perfeccionista', 'C', 8),
+	(60, 'Se comporta bien', 'C', 8);
 
 -- Volcando estructura para tabla rh.prueba
 CREATE TABLE IF NOT EXISTS `prueba` (
@@ -71,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `prueba` (
   PRIMARY KEY (`idPrueba`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla rh.prueba: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla rh.prueba: ~0 rows (aproximadamente)
 DELETE FROM `prueba`;
 INSERT INTO `prueba` (`idPrueba`, `Nombre`, `Descripcion`, `Duracion`) VALUES
 	(1, 'Temperamentos', 'Temperamento del candidato', '30 Minutos');
@@ -84,14 +160,51 @@ CREATE TABLE IF NOT EXISTS `respuesta` (
   `P3` varchar(45) DEFAULT NULL,
   `P4` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idRespuesta`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla rh.respuesta: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla rh.respuesta: ~40 rows (aproximadamente)
 DELETE FROM `respuesta`;
 INSERT INTO `respuesta` (`idRespuesta`, `P1`, `P2`, `P3`, `P4`) VALUES
 	(1, 'Animado', 'Aventurero', 'Analítico', 'Adaptable'),
 	(2, 'Jugueton', 'Persuasivo', 'Persistente', 'Placido'),
-	(3, 'Sociable', 'Decidido', 'Abnegado', 'Sumiso');
+	(3, 'Sociable', 'Decidido', 'Abnegado', 'Sumiso'),
+	(4, 'Convincente', 'Competitivo', 'Considerado', 'Controlado'),
+	(5, 'Entusiasta', 'Inventivo', 'Respetuoso', 'Reservado'),
+	(6, 'Enérgico', 'Autosuficiente', 'Sensible', 'Contento'),
+	(7, 'Activista', 'Positivo', 'Planificador', 'Paciente'),
+	(8, 'Espontáneo', 'Seguro', 'Puntual', 'Tímido'),
+	(9, 'Optimista', 'Abierto', 'Ordenado', 'Atento'),
+	(10, 'Humorístico', 'Dominante', 'Fiel', 'Amigable'),
+	(11, 'Encantador', 'Osado', 'Detallista', 'Diplomático'),
+	(12, 'Alegre', 'Confiado', 'Culto', 'Constante'),
+	(13, 'Inspirador', 'Independiente', 'Idealista', 'Inofensivo'),
+	(14, 'Cálido', 'Decisivo', 'Introspectivo', 'Humor seco'),
+	(15, 'Cordial', 'Instigador', 'Músico', 'Conciliador'),
+	(16, 'Conversador', 'Tenaz', 'Considerado', 'Tolerante'),
+	(17, 'Vivaz', 'Líder', 'Leal', 'Escucha'),
+	(18, 'Listo', 'Jefe', 'Organizado', 'Contento'),
+	(19, 'Popular', 'Productivo', 'Perfeccionista', 'Permisivo'),
+	(20, 'Jovial', 'Atrevido', 'Se comporta bien', 'Equilibrado'),
+	(21, 'Estridente', 'Mandón', 'Desanimado', 'Soso'),
+	(22, 'Indisciplinado', 'Antipático', 'Sin entusiasmo', 'Implacable'),
+	(23, 'Repetidor', 'Resistente', 'Resentido', 'Reticente'),
+	(24, 'Olvidadizo', 'Franco', 'Exigente', 'Temeroso'),
+	(25, 'Interrumpe', 'Impaciente', 'Inseguro', 'Indeciso'),
+	(26, 'Imprevisible', 'Frío', 'No comprometido', 'Impopular'),
+	(27, 'Descuidado', 'Terco', 'Difícil contentar', 'Vacilante'),
+	(28, 'Tolerante', 'Orgulloso', 'Pesimista', 'Insípido'),
+	(29, 'Iracundo', 'Argumentador', 'Sin motivación', 'Taciturno'),
+	(30, 'Ingénuo', 'Nervioso', 'Negativo', 'Desprendido'),
+	(31, 'Egocéntrico', 'Adicto al trabajo', 'Distraído', 'Ansioso'),
+	(32, 'Hablador', 'Indiscreto', 'Susceptible', 'Tímido'),
+	(33, 'Desorganizado', 'Dominante', 'Deprimido', 'Dudoso'),
+	(34, 'Inconsistente', 'Intolerante', 'Introvertido', 'Indiferente'),
+	(35, 'Desordenado', 'Manipulador', 'Moroso', 'Quejumbroso'),
+	(36, 'Ostentoso', 'Testarudo', 'Escéptico', 'Lento'),
+	(37, 'Emocional', 'Prepotente', 'Solitario', 'Perezoso'),
+	(38, 'Atolondrado', 'Malgeniado', 'Suspicaz', 'Sin ambición'),
+	(39, 'Inquieto', 'Precipitado', 'Vengativo', 'Poca voluntad'),
+	(40, 'Variable', 'Astuto', 'Comprometedor', 'Crítico');
 
 -- Volcando estructura para tabla rh.sesiones
 CREATE TABLE IF NOT EXISTS `sesiones` (
@@ -103,9 +216,9 @@ CREATE TABLE IF NOT EXISTS `sesiones` (
   PRIMARY KEY (`id_sesion`),
   KEY `fk_sesiones_usuario` (`id_usuario`),
   CONSTRAINT `fk_sesiones_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla rh.sesiones: ~22 rows (aproximadamente)
+-- Volcando datos para la tabla rh.sesiones: ~28 rows (aproximadamente)
 DELETE FROM `sesiones`;
 INSERT INTO `sesiones` (`id_sesion`, `id_usuario`, `token`, `fecha_creacion`, `fecha_actualizacion`) VALUES
 	(1, 1, '9b45d9cc197465d84ab4d8eaa7b5f77c6008c0ea365ff14c10711d0f3f94abe3', '2023-08-27 22:39:04', '2023-08-28 07:06:24'),
@@ -129,7 +242,14 @@ INSERT INTO `sesiones` (`id_sesion`, `id_usuario`, `token`, `fecha_creacion`, `f
 	(19, 1, 'a54af0315dcb978852df2b5bc3d8b83662c7604a77bf48403a6b3bb78763fdbb', '2023-09-09 17:54:01', '2023-09-10 01:54:01'),
 	(20, 1, '5a8bf9b54d7755aaadd763f59702650e30f3c91f5e25910a5a929084e6eb4218', '2023-09-09 17:56:42', '2023-09-10 01:59:45'),
 	(21, 1, '07752eb2feb1a00dbca2c310d1ac9cbf416e54b7b97cba1b557cd440259cf626', '2023-09-09 18:00:06', '2023-09-10 02:13:50'),
-	(22, 1, '13b7cc069bc116eb48081f869acc345f552d19a7a2e41279a3c209c265b07e0a', '2023-09-09 22:50:52', '2023-09-10 06:59:07');
+	(22, 1, '13b7cc069bc116eb48081f869acc345f552d19a7a2e41279a3c209c265b07e0a', '2023-09-09 22:50:52', '2023-09-10 06:59:07'),
+	(23, 1, '0b0fda132367a110c76562f3c659bbd2bf801a09a825ba60ad3377432b896dbf', '2023-09-29 23:21:47', '2023-09-30 07:28:22'),
+	(24, 1, '880c48cb710524c7141b1e4daddbf90f704c9c28b71b8db79d17701df88d4c8f', '2023-09-29 23:58:47', '2023-09-30 07:58:51'),
+	(25, 1, '7f3ba6fc6f93418d6f854946fa65928042aeedcbf7811774cbd71ce5ae8c82ee', '2023-09-30 21:49:30', '2023-10-01 05:49:45'),
+	(26, 1, 'e0ab948039fc46404b21da5acd69399cbbe0e9da479bae20708374aa266cf19c', '2023-09-30 22:08:41', '2023-10-01 06:11:14'),
+	(27, 1, '3341cf13d027c268d6db83659608173a4a95b8e33e0f03efa3aacd9746f467f3', '2023-10-01 11:40:58', '2023-10-01 19:40:58'),
+	(28, 1, '42210598640028bee06a1fbeee8786e4a19e61656b53cbcd39ff46a4febe5038', '2023-10-01 11:41:23', '2023-10-02 07:42:11'),
+	(29, 1, '4142fecc20163b64ca32b042605e625097259945c99b5dd7aec80b58657d0733', '2023-10-03 21:59:09', '2023-10-04 08:02:00');
 
 -- Volcando estructura para tabla rh.sesionestoken
 CREATE TABLE IF NOT EXISTS `sesionestoken` (
@@ -143,7 +263,7 @@ CREATE TABLE IF NOT EXISTS `sesionestoken` (
   CONSTRAINT `fk_sesiones_candidato` FOREIGN KEY (`idCandidato`) REFERENCES `candidato` (`idCandidato`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla rh.sesionestoken: ~23 rows (aproximadamente)
+-- Volcando datos para la tabla rh.sesionestoken: ~21 rows (aproximadamente)
 DELETE FROM `sesionestoken`;
 INSERT INTO `sesionestoken` (`id_sesion`, `idCandidato`, `token`, `fecha_creacion`, `fecha_actualizacion`) VALUES
 	(11, 8, 'b422d99ac7a12618257fcfa75a7a761c2456882b700fcf1ecad95ca0840396c9', '2023-09-08 21:15:13', '2023-09-08 21:15:13'),
@@ -181,7 +301,7 @@ CREATE TABLE IF NOT EXISTS `temperamento` (
   PRIMARY KEY (`idTemperamento`),
   KEY `fkCandidato` (`idCandidatofk`),
   CONSTRAINT `fkCandidato` FOREIGN KEY (`idCandidatofk`) REFERENCES `candidato` (`idCandidato`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- Volcando datos para la tabla rh.temperamento: ~5 rows (aproximadamente)
 DELETE FROM `temperamento`;
@@ -190,7 +310,8 @@ INSERT INTO `temperamento` (`idTemperamento`, `melancolico`, `colerico`, `flemat
 	(3, 10, 10, 10, 1, 4),
 	(4, 1, 1, 1, 5, 8),
 	(5, 7, 8, 4, 5, 9),
-	(6, 8, 8, 8, 4, 10);
+	(6, 8, 8, 8, 4, 10),
+	(7, 0, 0, 0, 0, 11);
 
 -- Volcando estructura para tabla rh.usuario
 CREATE TABLE IF NOT EXISTS `usuario` (
@@ -200,7 +321,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   PRIMARY KEY (`id_usuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla rh.usuario: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla rh.usuario: ~0 rows (aproximadamente)
 DELETE FROM `usuario`;
 INSERT INTO `usuario` (`id_usuario`, `usuario`, `clave`) VALUES
 	(1, 'admin', '123');
