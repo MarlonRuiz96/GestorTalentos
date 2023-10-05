@@ -114,6 +114,34 @@ class CandidatoController extends CI_Controller
 
     }
 
+    public function activarTemperamento($DPI){
+
+        $data['Candidato'] = $this->CandidatoModel->VerificarDPI($DPI); // Obtener los datos del candidato
+
+        $idCandidato =$data['Candidato']->idCandidato;
+
+        $this->CandidatoModel->activarTemperamento($idCandidato);
+
+        $this->VerCandidato($idCandidato);
+
+
+
+    }
+
+    public function desactivarTemperamento($DPI){
+
+        $data['Candidato'] = $this->CandidatoModel->VerificarDPI($DPI); // Obtener los datos del candidato
+
+        $idCandidato =$data['Candidato']->idCandidato;
+
+        $this->CandidatoModel->desactivarTemperamento($idCandidato);
+
+        $this->VerCandidato($idCandidato);
+
+
+
+    }
+
 
 }
 

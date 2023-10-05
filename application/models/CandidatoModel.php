@@ -283,4 +283,30 @@ class CandidatoModel extends CI_Model
             return false;
         }
     }
+    public function activarTemperamento($idCandidato)
+    {
+      // Actualiza el estado de la prueba de temperamentos a 1
+      $data = array(
+        'temperamento' => 1
+      );
+  
+      $this->db->where('idCandidato', $idCandidato);
+      $this->db->update('candidato', $data);
+  
+      return $this->db->affected_rows();
+    }
+
+    public function desactivarTemperamento($idCandidato)
+    {
+      // Actualiza el estado de la prueba de temperamentos a 1
+      $data = array(
+        'temperamento' => 0
+      );
+  
+      $this->db->where('idCandidato', $idCandidato);
+      $this->db->update('candidato', $data);
+  
+      return $this->db->affected_rows();
+    }
+    
 }

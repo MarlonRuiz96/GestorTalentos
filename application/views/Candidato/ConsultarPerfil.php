@@ -14,17 +14,23 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
 </head>
 
 <body>
     <header>
-        <h1 class="text-center">Pruebas Psicometricas</h1>
+        <h1 class="text-center">Candidato</h1>
     </header>
 
     <div class="container">
 
         <main>
-            <h2 class="text-center">Datos del Candidato</h2>
+
+            <h2 class="text">
+                Datos del Candidato
+
+            </h2>
 
             <form>
                 <div class="form-row">
@@ -49,11 +55,28 @@
                             value="<?php echo $candidato_data->Correo; ?>" readonly>
                     </div>
                 </div>
+                <br>
+                <div class="container">
+                    <main>
+                        <h2 class="text">Pruebas </h2>
 
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>Temperamento:</h5>
+                            </div>
+                            <div>
+                                <a href="<?= site_url('CandidatoController/activarTemperamento/' . $candidato_data->DPI); ?>"
+                                    class="btn btn-success">Activar</a>
+                                <a href="<?= site_url('CandidatoController/desactivarTemperamento/' . $candidato_data->DPI); ?>"
+                                    class="btn btn-danger">Desactivar</a>
+                            </div>
+                        </div>
+                    </main>
 
-
+                </div>
 
             </form>
+            <br><br><br>
             <form id="editForm" action="<?php echo site_url('CandidatoController/guardarNotas'); ?>" method="POST">
 
                 <div class="container">
@@ -65,12 +88,9 @@
                         <!-- Columna 2: Espacio para anotaciones -->
 
                         <div class="col-md-6">
-                            <div class="form-group col-md-6">
-                                <label for="inputAddress">DPI</label>
-                                <input type="text" class="form-control" id="DPI"
-                                    name="DPI"
-                                    value="<?php echo $candidato_data->DPI; ?>" readonly>
-                            </div>
+                            <input type="text" class="form-control" id="DPI" name="DPI"
+                                value="<?php echo $candidato_data->DPI; ?>" style="display: none;">
+
                             <h2>Anotaciones</h2>
                             <!-- Textarea más grande para anotaciones -->
                             <textarea class="form-control" rows="5" id="Anotaciones"
@@ -282,10 +302,11 @@
                     label: 'Temperamentos',
                     data: [temperamentoData.melancolico, temperamentoData.colerico, temperamentoData.flematico, temperamentoData.sanguineo],
                     backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)',
-                        'rgb(255, 228, 225)'
+                        'rgb(23, 162, 184)',
+                        'rgb(40, 167, 69)',
+
+                        'rgb(220, 53, 69)',
+                        'rgb(255, 193, 7)'
                     ]
                 }]
             };
@@ -308,6 +329,7 @@
             });
         </script>
     </div>
+
 </body>
 
 </html>
