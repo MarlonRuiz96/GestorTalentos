@@ -18,6 +18,34 @@ class CandidatoModel extends CI_Model
         }
     }
 
+    public function getFortaleza($idCandidato) {
+        $this->db->select('Tipo, COUNT(*) AS cantidad');
+        $this->db->from('fortaleza');
+        $this->db->where('idCandidato', $idCandidato);
+        $this->db->group_by('Tipo');
+        $this->db->order_by('cantidad', 'desc');
+        $this->db->limit(1);
+
+        $resultado = $this->db->get()->row();
+
+        return $resultado;
+    }
+
+    public function getDebilidad($idCandidato) {
+        $this->db->select('Tipo, COUNT(*) AS cantidad');
+        $this->db->from('debilidad');
+        $this->db->where('idCandidato', $idCandidato);
+        $this->db->group_by('Tipo');
+        $this->db->order_by('cantidad', 'desc');
+        $this->db->limit(1);
+
+        $resultado = $this->db->get()->row();
+
+        return $resultado;
+    }
+
+
+
 
 
 
@@ -85,7 +113,7 @@ class CandidatoModel extends CI_Model
     public function getDatosPrueba($idCandidato)
     {
         $this->db->select('melancolico, colerico, flematico,sanguineo');
-        $this->db->from('candidato');
+        $this->db->from('Candidato');
         $this->db->where('idCandidato', $idCandidato);
 
         $query = $this->db->get();
@@ -256,7 +284,7 @@ class CandidatoModel extends CI_Model
     public function VerificarDPI($DPI)
     {
         $this->db->select('idCandidato, Nombres, Puesto, DPI, Contacto, Correo, temperamento,Temporal, sanguineo, melancolico, flematico, colerico, notas');
-        $this->db->from('candidato');
+        $this->db->from('Candidato');
         $this->db->where('DPI', $DPI);
 
         $query = $this->db->get();
@@ -274,7 +302,7 @@ class CandidatoModel extends CI_Model
         $data = array(
             'notas' => $notas
         );
-        $this->db->update('candidato', $data);
+        $this->db->update('Candidato', $data);
 
         // Verifica si la actualización fue exitosa
         if ($this->db->affected_rows() > 0) {
@@ -291,7 +319,7 @@ class CandidatoModel extends CI_Model
       );
   
       $this->db->where('idCandidato', $idCandidato);
-      $this->db->update('candidato', $data);
+      $this->db->update('Candidato', $data);
   
       return $this->db->affected_rows();
     }

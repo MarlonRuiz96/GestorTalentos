@@ -90,13 +90,13 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editarModalLabel">Datos del producto</h5>
+                    <h5 class="modal-title" id="editarModalLabel">Datos del Candidato</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="editForm" action="" method="POST">
                         <div>
-                            <label for="editNombre">Nombre de producto </label>
+                            <label for="editNombre">Nombre </label>
                             <input type="text" id="editNombre" name="editNombre"
                                 placeholder="Ingrese el nombre del CANDIDATO">
                         </div>

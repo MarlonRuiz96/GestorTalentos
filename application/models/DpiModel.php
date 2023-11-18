@@ -8,7 +8,7 @@ class DpiModel extends CI_Model
     public function VerificarDPI($DPI)
     {
         $this->db->select('idCandidato, Nombres, Puesto, DPI, Contacto, Correo, temperamento,Temporal, sanguineo, melancolico, flematico, colerico');
-        $this->db->from('candidato');
+        $this->db->from('Candidato');
         $this->db->where('DPI', $DPI);
 
         $query = $this->db->get();
@@ -32,7 +32,7 @@ class DpiModel extends CI_Model
         );
 
         $this->db->where('DPI', $dpi); // Ajusta la condición según la clave primaria de tu tabla
-        $this->db->update('candidato', $data);
+        $this->db->update('Candidato', $data);
     }
     
 
@@ -66,7 +66,7 @@ class DpiModel extends CI_Model
         );
 
         $this->db->where('DPI', $DPI);
-        $this->db->update('candidato', $data);
+        $this->db->update('Candidato', $data);
     }
 
     public function actualizarSanguineo($DPI, $sanguineoActual)
@@ -80,7 +80,7 @@ class DpiModel extends CI_Model
         );
 
         $this->db->where('DPI', $DPI);
-        $this->db->update('candidato', $data);
+        $this->db->update('Candidato', $data);
     }
 
     public function actualizarColerico($DPI, $datoActual)
@@ -93,7 +93,7 @@ class DpiModel extends CI_Model
         );
 
         $this->db->where('DPI', $DPI);
-        $this->db->update('candidato', $data);
+        $this->db->update('Candidato', $data);
     }
     public function actualizarFlematico($DPI, $datoActual)
     {
@@ -105,7 +105,7 @@ class DpiModel extends CI_Model
         );
 
         $this->db->where('DPI', $DPI);
-        $this->db->update('candidato', $data);
+        $this->db->update('Candidato', $data);
     }
 
     public function actualizarMelancolico($DPI, $datoActual)
@@ -118,7 +118,7 @@ class DpiModel extends CI_Model
         );
 
         $this->db->where('DPI', $DPI);
-        $this->db->update('candidato', $data);
+        $this->db->update('Candidato', $data);
     }
 
 

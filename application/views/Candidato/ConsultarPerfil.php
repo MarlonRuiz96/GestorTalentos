@@ -102,188 +102,75 @@
                 </div>
             </form>
 
-            <!-- Melancólico -->
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h2>Melancólico</h2>
-                        <div class="d-flex flex-wrap">
-                            <!-- Tabla de Fortalezas -->
-                            <div class="mr-3 mb-3">
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Fortalezas</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($FortalezaA as $row): ?>
-                                            <tr>
-                                                <td>
-                                                    <?php echo $row->Personalidad; ?>
-                                                </td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- Tabla de Debilidades -->
-                            <div class="mb-3">
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Debilidades</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($DebilidadA as $row): ?>
-                                            <tr>
-                                                <td>
-                                                    <?php echo $row->Personalidad; ?>
-                                                </td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <h2>Colerico</h2>
-                        <div class="d-flex flex-wrap">
-                            <!-- Tabla de Fortalezas -->
-                            <div class="mr-3 mb-3">
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Fortalezas</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($FortalezaB as $row): ?>
-                                            <tr>
-                                                <td>
-                                                    <?php echo $row->Personalidad; ?>
-                                                </td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- Tabla de Debilidades -->
-                            <div class="mb-3">
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Debilidades</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($DebilidadB as $row): ?>
-                                            <tr>
-                                                <td>
-                                                    <?php echo $row->Personalidad; ?>
-                                                </td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <h2>Flematico</h2>
-                        <div class="d-flex flex-wrap">
-                            <!-- Tabla de Fortalezas -->
-                            <div class="mr-3 mb-3">
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Fortalezas</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($FortalezaC as $row): ?>
-                                            <tr>
-                                                <td>
-                                                    <?php echo $row->Personalidad; ?>
-                                                </td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- Tabla de Debilidades -->
-                            <div class="mb-3">
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Debilidades</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($DebilidadC as $row): ?>
-                                            <tr>
-                                                <td>
-                                                    <?php echo $row->Personalidad; ?>
-                                                </td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <h2>Sanguineo</h2>
-                        <div class="d-flex flex-wrap">
-                            <!-- Tabla de Fortalezas -->
-                            <div class="mr-3 mb-3">
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Fortalezas</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($FortalezaD as $row): ?>
-                                            <tr>
-                                                <td>
-                                                    <?php echo $row->Personalidad; ?>
-                                                </td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- Tabla de Debilidades -->
-                            <div class="mb-3">
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Debilidades</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($DebilidadD as $row): ?>
-                                            <tr>
-                                                <td>
-                                                    <?php echo $row->Personalidad; ?>
-                                                </td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
 
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="2">
+                            <?php echo $textoFortaleza['temperamento'];
+                            ?> <br>
+                            <?php echo $textoFortaleza['texto'];
+                            ?><br>
+                            <?php echo $textoFortaleza['tipo'];
+                            ?>
+                        </th>
+                    </tr>
+                </thead>
+                <thead>
+                    <tr>
+                        <th>Las emociones del
+                            <?php echo $textoFortaleza['temperamento'];
+                            ?>
+                        </th>
+                        <th>El
+                            <?php echo $textoFortaleza['temperamento'];
+                            ?> en el trabajo
+                        </th>
 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <?php echo $textoFortaleza['emociones'];
+                            ?>
+                        </td>
+                        <td>
+                            <?php echo $textoFortaleza['trabajo'];
+                            ?>
+                        </td>
+                    </tr>
+
+                </tbody>
+                <thead>
+                    <tr>
+                        <th>El
+                            <?php echo $textoFortaleza['temperamento'];
+                            ?> como padre.
+                        </th>
+                        <th>El
+                            <?php echo $textoFortaleza['temperamento'];
+                            ?> como amigo.
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <?php echo $textoFortaleza['familia'];
+                            ?>
+                        </td>
+                        <td>
+                            <?php echo $textoFortaleza['amigo'];
+                            ?>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
             <!-- Repite la estructura para otras personalidades -->
 
 
