@@ -75,6 +75,7 @@ class CandidatoModel extends CI_Model
             'Contacto' => "",
             'Correo' => "",
             'fecha_crear' => $fecha_actual,
+            'Temporal'=> 1,
 
         );
 

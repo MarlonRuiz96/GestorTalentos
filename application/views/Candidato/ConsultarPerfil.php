@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
+
 </head>
 
 <body>
@@ -66,10 +67,13 @@
                             </div>
                             <div>
                                 <a href="<?= site_url('CandidatoController/activarTemperamento/' . $candidato_data->DPI); ?>"
-                                    class="btn btn-success">Activar</a>
+                                    class="btn btn-success sweetalert-link"
+                                    data-title="Activar temperamento">Activar</a>
                                 <a href="<?= site_url('CandidatoController/desactivarTemperamento/' . $candidato_data->DPI); ?>"
-                                    class="btn btn-danger">Desactivar</a>
+                                    class="btn btn-danger sweetalert-link"
+                                    data-title="Desactivar temperamento">Desactivar</a>
                             </div>
+
                         </div>
                     </main>
 
@@ -215,7 +219,82 @@
                 options: options
             });
         </script>
+
+
+        <script>
+            // Espera a que el documento esté cargado
+            document.addEventListener('DOMContentLoaded', function () {
+                // Selecciona todos los elementos con la clase 'sweetalert-link'
+                const sweetalertLinks = document.querySelectorAll('.sweetalert-link');
+
+                // Itera sobre cada enlace y agrega un evento de clic
+                sweetalertLinks.forEach(function (link) {
+                    link.addEventListener('click', function (event) {
+                        event.preventDefault(); // Previene el comportamiento predeterminado del enlace
+
+                        const targetUrl = this.getAttribute('href'); // Obtiene la URL del atributo href
+
+                        // Muestra el SweetAlert2 de confirmación
+                        Swal.fire({
+                            title: this.getAttribute('data-title'),
+                            text: '¿Estás seguro?',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#d33',
+                            cancelButtonColor: '#3085d6',
+                            confirmButtonText: 'Sí, desactivar',
+                            cancelButtonText: 'Cancelar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Si el usuario confirma, redirige a la URL del enlace
+                                window.location.href = targetUrl;
+                            }
+                        });
+                    });
+                });
+            });
+        </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const sweetalertLinks = document.querySelectorAll('.sweetalert-link');
+
+        sweetalertLinks.forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                const targetUrl = this.getAttribute('href');
+
+                Swal.fire({
+                    title: this.getAttribute('data-title'),
+                    text: '¿Estás seguro?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#28a745',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Sí, activar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = targetUrl;
+                    }
+                });
+            });
+        });
+    });
+</script>
+
+
+
+
+
+
+
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 </body>
 
