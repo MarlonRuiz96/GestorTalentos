@@ -54,7 +54,9 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['Dashboard'] = 'DashboardController/index';
 $route['Candidatos'] = 'CandidatoController/indexConsulta';
+$route['Usuarios'] = 'UsuarioController/index';
 $route['LoginPrueba'] = 'DpiController/index';
+
 
 
 

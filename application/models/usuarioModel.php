@@ -36,6 +36,18 @@ class UsuarioModel extends CI_Model {
         }
     }
 
+    public function getUsuario()
+    {
+        $this->db->select('id_usuario,usuario, clave');
+        $this->db->from('usuario');
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
 
 
     
