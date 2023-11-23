@@ -18,31 +18,7 @@ class CandidatoModel extends CI_Model
         }
     }
 
-    public function getFortaleza($idCandidato) {
-        $this->db->select('Tipo, COUNT(*) AS cantidad');
-        $this->db->from('fortaleza');
-        $this->db->where('idCandidato', $idCandidato);
-        $this->db->group_by('Tipo');
-        $this->db->order_by('cantidad', 'desc');
-        $this->db->limit(1);
-
-        $resultado = $this->db->get()->row();
-
-        return $resultado;
-    }
-
-    public function getDebilidad($idCandidato) {
-        $this->db->select('Tipo, COUNT(*) AS cantidad');
-        $this->db->from('debilidad');
-        $this->db->where('idCandidato', $idCandidato);
-        $this->db->group_by('Tipo');
-        $this->db->order_by('cantidad', 'desc');
-        $this->db->limit(1);
-
-        $resultado = $this->db->get()->row();
-
-        return $resultado;
-    }
+   
 
 
 
@@ -127,161 +103,35 @@ class CandidatoModel extends CI_Model
 
     }
 
-    public function FortalezaA($idCandidato)
-    {
+   
+    
+    public function masGrande($idCandidato) {
+        $query = $this->db->query("
+            SELECT 
+                idCandidato,
+                CASE GREATEST(melancolico, colerico, flematico, sanguineo)
+                    WHEN melancolico THEN 'melancolico'
+                    WHEN colerico THEN 'colerico'
+                    WHEN flematico THEN 'flematico'
+                    WHEN sanguineo THEN 'sanguineo'
+                    ELSE 'Empate'
+                END AS temperamento_mas_grande
+            FROM 
+                candidato
+            WHERE idCandidato = $idCandidato
+        ");
 
-        $tipo = "A";
-        $this->db->select('Personalidad');
-        $this->db->from('fortaleza');
-        $this->db->where('idCandidato', $idCandidato);
-        $this->db->where('Tipo', $tipo);
-
-
-
-        $query = $this->db->get();
-
-        if ($query->num_rows() > 0) {
-            return $query->result();
-        } else {
-            return array();
-        }
-    }
-    public function DebilidadA($idCandidato)
-    {
-
-        $tipo = "A";
-        $this->db->select('Personalidad');
-        $this->db->from('debilidad');
-        $this->db->where('idCandidato', $idCandidato);
-        $this->db->where('Tipo', $tipo);
-
-
-
-        $query = $this->db->get();
-
-        if ($query->num_rows() > 0) {
-            return $query->result();
-        } else {
-            return array();
-        }
+        return $query->row(); // Retorna una sola fila con el resultado
     }
 
-    public function FortalezaB($idCandidato)
-    {
+    
+  
 
-        $tipo = "B";
-        $this->db->select('Personalidad');
-        $this->db->from('fortaleza');
-        $this->db->where('idCandidato', $idCandidato);
-        $this->db->where('Tipo', $tipo);
+    
 
 
-
-        $query = $this->db->get();
-
-        if ($query->num_rows() > 0) {
-            return $query->result();
-        } else {
-            return array();
-        }
-    }
-    public function DebilidadB($idCandidato)
-    {
-
-        $tipo = "B";
-        $this->db->select('Personalidad');
-        $this->db->from('debilidad');
-        $this->db->where('idCandidato', $idCandidato);
-        $this->db->where('Tipo', $tipo);
-
-
-
-        $query = $this->db->get();
-
-        if ($query->num_rows() > 0) {
-            return $query->result();
-        } else {
-            return array();
-        }
-    }
-
-    public function FortalezaC($idCandidato)
-    {
-
-        $tipo = "C";
-        $this->db->select('Personalidad');
-        $this->db->from('fortaleza');
-        $this->db->where('idCandidato', $idCandidato);
-        $this->db->where('Tipo', $tipo);
-
-
-
-        $query = $this->db->get();
-
-        if ($query->num_rows() > 0) {
-            return $query->result();
-        } else {
-            return array();
-        }
-    }
-    public function DebilidadC($idCandidato)
-    {
-
-        $tipo = "C";
-        $this->db->select('Personalidad');
-        $this->db->from('debilidad');
-        $this->db->where('idCandidato', $idCandidato);
-        $this->db->where('Tipo', $tipo);
-
-
-
-        $query = $this->db->get();
-
-        if ($query->num_rows() > 0) {
-            return $query->result();
-        } else {
-            return array();
-        }
-    }
-
-    public function FortalezaD($idCandidato)
-    {
-
-        $tipo = "D";
-        $this->db->select('Personalidad');
-        $this->db->from('fortaleza');
-        $this->db->where('idCandidato', $idCandidato);
-        $this->db->where('Tipo', $tipo);
-
-
-
-        $query = $this->db->get();
-
-        if ($query->num_rows() > 0) {
-            return $query->result();
-        } else {
-            return array();
-        }
-    }
-    public function DebilidadD($idCandidato)
-    {
-
-        $tipo = "D";
-        $this->db->select('Personalidad');
-        $this->db->from('debilidad');
-        $this->db->where('idCandidato', $idCandidato);
-        $this->db->where('Tipo', $tipo);
-
-
-
-        $query = $this->db->get();
-
-        if ($query->num_rows() > 0) {
-            return $query->result();
-        } else {
-            return array();
-        }
-    }
+    
+    
     public function VerificarDPI($DPI)
     {
         $this->db->select('idCandidato, Nombres, Puesto, DPI, Contacto, Correo, temperamento,Temporal, sanguineo, melancolico, flematico, colerico, notas');

@@ -116,8 +116,7 @@
                             ?> <br>
                             <?php echo $textoFortaleza['texto'];
                             ?><br>
-                            <?php echo $textoFortaleza['tipo'];
-                            ?>
+                            FORTALEZAS
                         </th>
                     </tr>
                 </thead>
@@ -176,8 +175,74 @@
 
             </table>
             <!-- Repite la estructura para otras personalidades -->
+<br><br>
 
+<table>
+                <thead>
+                    <tr>
+                        <th colspan="2">
+                            <?php echo $textoFortaleza['temperamento'];
+                            ?> <br>
+                            <?php echo $textoFortaleza['texto'];
+                            ?><br>
+                            DEBILIDADES
+                        </th>
+                    </tr>
+                </thead>
+                <thead>
+                    <tr>
+                        <th>Las emociones del
+                            <?php echo $textoFortaleza['temperamento'];
+                            ?>
+                        </th>
+                        <th>El
+                            <?php echo $textoFortaleza['temperamento'];
+                            ?> en el trabajo
+                        </th>
 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <?php echo $textoFortaleza['emocionesD'];
+                            ?>
+                        </td>
+                        <td>
+                            <?php echo $textoFortaleza['trabajoD'];
+                            ?>
+                        </td>
+                    </tr>
+
+                </tbody>
+                <thead>
+                    <tr>
+                        <th>El
+                            <?php echo $textoFortaleza['temperamento'];
+                            ?> como padre.
+                        </th>
+                        <th>El
+                            <?php echo $textoFortaleza['temperamento'];
+                            ?> como amigo.
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <?php echo $textoFortaleza['familiaD'];
+                            ?>
+                        </td>
+                        <td>
+                            <?php echo $textoFortaleza['amigoD'];
+                            ?>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
         </main>
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

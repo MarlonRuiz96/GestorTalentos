@@ -69,7 +69,7 @@
                     </td>
                     <td style="text-align: center;">
                         <div style="display: flex; flex-direction: column; align-items: center;">
-                            <a href="<?= site_url('DpiController/melancolico/' . $Candidato->DPI); ?>"
+                            <a href="<?= site_url('DpiController/colerico/' . $Candidato->DPI); ?>"
                                 class="btn btn-success">
                                 <?php echo $Formulario->P2; ?>
                             </a>
@@ -80,7 +80,7 @@
                     </td>
                     <td style="text-align: center;">
                         <div style="display: flex; flex-direction: column; align-items: center;">
-                            <a href="<?= site_url('DpiController/melancolico/' . $Candidato->DPI); ?>"
+                            <a href="<?= site_url('DpiController/flematico/' . $Candidato->DPI); ?>"
                                 class="btn btn-success">
                                 <?php echo $Formulario->P3; ?>
                             </a>
@@ -91,7 +91,7 @@
                     </td>
                     <td style="text-align: center;">
                         <div style="display: flex; flex-direction: column; align-items: center;">
-                            <a href="<?= site_url('DpiController/melancolico/' . $Candidato->DPI); ?>"
+                            <a href="<?= site_url('DpiController/sanguineo/' . $Candidato->DPI); ?>"
                                 class="btn btn-success">
                                 <?php echo $Formulario->P4; ?>
                             </a>
