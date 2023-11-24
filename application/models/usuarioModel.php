@@ -36,19 +36,52 @@ class UsuarioModel extends CI_Model {
         }
     }
 
+    //Funcion para obtener los usuarios activos
     public function getUsuario()
     {
-        $this->db->select('id_usuario,usuario, clave');
-        $this->db->from('usuario');
-        $query = $this->db->get();
+      $this->db->select('id_usuario,usuario, clave');
+      $this->db->from('usuario');
+      $this->db->where('estado', 'activo');
+      $query = $this->db->get();
+    
+      if ($query->num_rows() > 0) {
+        return $query->result();
+      } else {
+        return array();
+      }
+    }
+    
 
-        if ($query->num_rows() > 0) {
-            return $query->result();
-        } else {
-            return array();
-        }
+    public function ActualizarUsuario($id_usuario, $nuevoNombre, $nuevaPuesto){
+
+        $datosActualizados = array(
+            'usuario' => $nuevoNombre,
+            'clave' => $nuevaPuesto,
+           
+
+        );
+
+        $this->db->where('id_usuario', $id_usuario);
+        $this->db->update('usuario', $datosActualizados);
     }
 
+    public function bajaUsuario($id_usuario) {
+
+        $nuevoEstado = "Inactivo";
+        $datosActualizados = array(
+            'estado' => $nuevoEstado,
+          
+        );
+        $this->db->where('id_usuario', $id_usuario);
+        $this->db->update('usuario', $datosActualizados);
+    }
+    public function InsertarUsuario($data) 
+    {
+        // Insertamos los datos en la tabla candidatos
+        $this->db->insert('usuario', $data);
+
+      
+    }
 
     
 }

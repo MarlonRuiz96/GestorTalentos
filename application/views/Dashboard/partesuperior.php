@@ -52,9 +52,9 @@
                 <div id="producto" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Gestion de Ventas</h6>
-                        <a class="collapse-item" href="<?= site_url('AltaProducto') ?>">Ver Ofertas
+                        <a class="collapse-item" href="<?= site_url('#') ?>">Pendiente
                         </a>
-                        <a class="collapse-item" href="<?= site_url('ConsultaProducto') ?>">Ingresar Oferta
+                        <a class="collapse-item" href="<?= site_url('#') ?>">Pendiente
                         </a>
                     </div>
                 </div>
@@ -69,9 +69,9 @@
                 <div id="compra" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Gestion de Compras</h6>
-                        <a class="collapse-item" href="<?= site_url('AltaCompra') ?>">Ver Procesos
+                        <a class="collapse-item" href="<?= site_url('#') ?>">pendiente
                         </a>
-                        <a class="collapse-item" href="<?= site_url('ConsultaCompra') ?>"> Pendiente
+                        <a class="collapse-item" href="<?= site_url('#') ?>"> Pendiente
                         </a>
                     </div>
                 </div>

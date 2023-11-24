@@ -21,4 +21,65 @@ class UsuarioController extends CI_Controller
 
         $this->load->view('Usuario/ConsultarUsuario', $data);
     }
+
+    public function GuardarCambios($id_usuario){
+
+        $referer = $_SERVER['HTTP_REFERER'];
+
+        $nuevoNombre = $this->input->post('editNombre');
+        $nuevaPuesto = $this->input->post('editPuesto');
+
+
+        $this->usuarioModel->ActualizarUsuario($id_usuario, $nuevoNombre, $nuevaPuesto);
+        return redirect('Usuarios');
+
+
+        
+    }
+
+    public function desactivarUsuario($id_usuario){
+        $data['Usuario'] = $this->usuarioModel->bajaUsuario($id_usuario);
+
+        $data['data'] = $this->usuarioModel->getUsuario();
+        $this->load->view('Usuario/ConsultarUsuario', $data);    
+    }
+
+    public function AltaUsuario(){
+        $this->load->view('Usuario/IngresoUsuarios');
+
+    }
+
+    public function CrearUsuario(){
+
+        verificar_autenticacion($this);
+
+        if ($this->input->server('REQUEST_METHOD') === 'POST') {
+
+            $usuario = $this->input->post('usuario');
+            $password = $this->input->post('password');
+            $estado = "activo";
+
+
+
+
+
+            $fecha_actual = date("Y-m-d");
+
+            $data = array(
+                'usuario' => $usuario,
+                'clave' => $password,
+                'estado' => $estado,
+
+
+
+            );
+
+            $this->usuarioModel->InsertarUsuario($data);
+
+            redirect('Usuarios');
+        }
+    }
+
+
+
 }

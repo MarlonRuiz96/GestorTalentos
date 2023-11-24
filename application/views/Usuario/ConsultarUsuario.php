@@ -23,7 +23,7 @@
     <main>
         <div class="nuevo-producto">
             <a class="btn btn-success" id="new" style="float: right; margin-right: 2px;"
-                href="<?= site_url('UsuarioController/indexAlta') ?>">
+                href="<?= site_url('UsuarioController/AltaUsuario') ?>">
                 <i class="fa-solid fa-notes-medical"></i> Nuevo Usuario
             </a>
         </div>
@@ -40,8 +40,8 @@
                             Contraseña
                         </th>
                         <th>Acciones</th>
-                        
-                       
+
+
                     </tr>
                 </thead>
                 <tbody>
@@ -51,18 +51,23 @@
                                 <?php echo $row->usuario; ?>
                             </td>
                             <td>
-                                <?php echo $row->clave; ?>
+                                <?php
+                                $longitud = strlen($row->clave);
+                                echo str_repeat('*', $longitud); // Reemplaza la contraseña por asteriscos
+                                ?>
                             </td>
-                          
+
 
 
                             <td class="td_boton">
-                                <a href="<?= site_url($row->id_usuario); ?>" class="edit-btn btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#editarModal" data-cliente='<?php echo json_encode($row); ?>'>Editar
+                                <a href="<?= site_url($row->id_usuario); ?>" class="edit-btn btn btn-primary"
+                                    data-bs-toggle="modal" data-bs-target="#editarModal"
+                                    data-cliente='<?php echo json_encode($row); ?>'>Editar
                                 </a>
-                                <a href="<?= site_url('UsuarioController/VerUsuario/' . $row->id_usuario); ?>"
-                                class="btn btn-success" >Ver pruebas
-                                    </a>
+                                <a id="eliminarUsuario"
+                                    href="<?= site_url('UsuarioController/desactivarUsuario/' . $row->id_usuario); ?>"
+                                    class="delete-btn">Eliminar
+                                </a>
 
                             </td>
                         </tr>
@@ -81,28 +86,17 @@
                 <div class="modal-body">
                     <form id="editForm" action="" method="POST">
                         <div>
-                            <label for="editNombre">Nombre </label>
+                            <label for="editNombre">Usuario </label>
                             <input type="text" id="editNombre" name="editNombre"
                                 placeholder="Ingrese el nombre del Usuario">
                         </div>
                         <br>
 
                         <div>
-                            <label for="editPuesto">Puesto </label>
-                            <input type="text" id="editPuesto" name="editPuesto"
-                                placeholder="Ingrese la Puesto">
+                            <label for="editPuesto">Contraseña </label>
+                            <input type="text" id="editPuesto" name="editPuesto" placeholder="Ingrese la Puesto">
                         </div>
-                        <br>
-                        <div>
-                            <label for="editContacto">Telefono </label>
-                            <input type="text" id="editContacto" name="editContacto" placeholder="Ingrese el contacto">
-                        </div>
-                        <br>
-                        <div>
-                            <label for="editCorreo">Correo </label>
-                            <input type="text" id="editCorreo" name="editCorreo"
-                                placeholder="Ingrese la Puesto de correo ">
-                        </div>
+
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -139,14 +133,12 @@
                     const productoData = JSON.parse(button.getAttribute('data-cliente'));
                     const editNombre = document.getElementById('editNombre');
                     const editPuesto = document.getElementById('editPuesto');
-                    const editContacto = document.getElementById('editContacto');
-                    const editCorreo = document.getElementById('editCorreo');
 
 
-                    editNombre.value = productoData.Nombres;
-                    editPuesto.value = productoData.Puesto;
-                    editContacto.value = productoData.Contacto;
-                    editCorreo.value = productoData.Correo;
+
+                    editNombre.value = productoData.usuario;
+                    editPuesto.value = productoData.clave;
+
 
 
                     saveChangesUrl = '<?php echo site_url("UsuarioController/GuardarCambios/' + productoData.id_usuario + '"); ?>';
@@ -176,7 +168,7 @@
 
                 Swal.fire({
                     title: '¿Estás seguro?',
-                    text: "El producto será eliminado",
+                    text: "El usuario será eliminado",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -187,7 +179,7 @@
                     if (result.isConfirmed) {
                         Swal.fire({
                             title: 'Eliminado!',
-                            text: 'El producto ha sido eliminado',
+                            text: 'El usuario ha sido eliminado',
                             icon: 'success',
                             confirmButtonColor: '#3085d6'
                         }).then(() => {
