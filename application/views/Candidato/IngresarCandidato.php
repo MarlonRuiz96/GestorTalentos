@@ -13,6 +13,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="<?php echo base_url('assets/usuario/alta.css'); ?>">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.min.css">
+
 </head>
 
 <body>
@@ -23,29 +25,29 @@
         <div class="form-box">
             <form id="userForm" action="<?= site_url('CandidatoController/CrearCandidato') ?>" method="post"
                 onsubmit="return validateForm()">
-            
+
 
                 <div class="inputbox">
                     <i class="fa-solid fa-house"></i>
                     <input type="text" id="DPI" name="DPI" required>
                     <label for="DPI">DPI</label>
                 </div>
-               
-              
 
-              
-            
 
-                <button type="submit">Crear Candidato</button>
+
+                <button type="submit" class="btn btn-primary">Crear Candidato</button>
                 <br>
             </form>
         </div>
 
-
+        
     </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
         </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 
 </html>

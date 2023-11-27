@@ -1,0 +1,21 @@
+Cambios a hacer en el server
+
+-cambios en la base, agregar columna "BRIGGS" para validar si el test esta habilitado para el candidato
+-cambio en el tamaño de la casilla temperamento de 1 a 10 tipo int
+
+crear la tabla briggs:
+
+CREATE TABLE `Briggs` (
+    `idBriggs` INT(11) NOT NULL AUTO_INCREMENT,
+    `extrovertido` INT(1) NULL DEFAULT NULL,
+    `introvertido` INT(1) NULL DEFAULT NULL,
+    `sensorial` INT(1) NULL DEFAULT NULL,
+    `intuitivo` INT(1) NULL DEFAULT NULL,
+    `racional` INT(1) NULL DEFAULT NULL,
+    `emocional` INT(1) NULL DEFAULT NULL,
+    `calificador` INT(1) NULL DEFAULT NULL,
+    `perceptivo` INT(1) NULL DEFAULT NULL,
+    `idCandidato` INT(11) NOT NULL,
+    PRIMARY KEY (`idBriggs`),
+    CONSTRAINT `FK_Candidato_Briggs` FOREIGN KEY (`idCandidato`) REFERENCES `candidato` (`idCandidato`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

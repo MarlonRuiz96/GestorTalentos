@@ -81,6 +81,8 @@ class CandidatoController extends CI_Controller
 
         $data['candidato_data'] = $this->CandidatoModel->getCandidatoPorId($idCandidato);
         $data['dataTemperamento'] = $this->CandidatoModel->getDatosPrueba($idCandidato);
+        $data['dataBriggs'] = $this->CandidatoModel->getDatosBriggs($idCandidato);
+
         //$IdCandidato = $data['candidato_data']->idCandidato;
 
         //Obtengo cantidades 
@@ -90,17 +92,17 @@ class CandidatoController extends CI_Controller
 
 
 
-        $temperamento = 'Sin datos';
-        $texto = 'Sin datos';
-        $emociones = 'Sin datos';
-        $trabajo = 'Sin datos';
-        $familia = 'Sin datos';
-        $amigo = 'Sin datos';
+        $temperamento = '';
+        $texto = '';
+        $emociones = '';
+        $trabajo = '';
+        $familia = '';
+        $amigo = '';
         //DEBILIDADES:
-        $emocionesD = 'Sin datos';
-        $trabajoD = 'Sin datos';
-        $familiaD = 'Sin datos';
-        $amigoD = 'Sin datos';
+        $emocionesD = '';
+        $trabajoD = '';
+        $familiaD = '';
+        $amigoD = '';
         //DEBILIDADES:
 
 
@@ -117,8 +119,6 @@ class CandidatoController extends CI_Controller
             $trabajoD = 'No se orienta hacia las personas, se deprime ante las iperfecciones escoge trabajos dificiles, vacila al empezar proyectos nuevos, emplea demasiado tiempo planeando, prefiere analizar antes de trabajar, se auto-desaprueba, dificil de complacer, estandares demasiado altos, siente una gran necesidad de aprobación. ';
             $familiaD = 'Coloca metas demasiado altas, puede llegar a desanimar a los niños, puede ser meticuloso, se convierte en martir, le echa la culpa a los niños, se amohina ante los desacuerdos';
             $amigoD = 'Vive a través de otros, socialmente inseguro, retraído y remoto, critica a otros, rechaza muestras de afecto, le disgusta la oposición, sospecha de las personas, antagonista y vengativo, no perdona, lleno de contradicciones, recibe los compulidos con exceptisismo.';
-
-
         } else if (strtolower($tipoCasilla) === 'flematico') {
             $temperamento = 'Flemático';
             $texto = 'El introvertido, el observador, el pesimista';
@@ -131,12 +131,13 @@ class CandidatoController extends CI_Controller
             $trabajoD = 'Sin metas, falto de auto-motivacion, le es difícil mantenerse en acción, le disgusta que lo acosen, perezoso y sin cuidado, desanima a los otros, prefiere observar antes que actuar. ';
             $familiaD = 'Flojos en la disciplina, no organiza el hogar, toma la vida demasiado fácil.';
             $amigoD = 'impide el entusiasmo, no se involucra, impacible, indiferente a los planes, juzga a los demás, sacástico, se resiste a los cambios.';
-
         } else if (strtolower($tipoCasilla) === 'colerico') {
             $temperamento = 'Colérico';
             $texto = 'EL EXTROVERTIDO, EL ACTIVISTA, EL OPTIMISTA';
-            $emociones = 'Líder nato, dinámico y activo, una necesidad compulsiva para el cambio, actúa con rapidez, quiere corregir las injusticias, impasible, no se desanima fácilmente, independiente y autosuficiente, confiado en si mismo, puede manejar cualquier proyecto.';
-            $trabajo = 'Se propone metas, organiza bien, busca soluciones prácticas, actúa con rapidez, delega el trabajo, exige productividad, cumple lo propuesto, estimula actividad,  le interesa poco la oposición.';
+            $emociones = 'Líder nato, dinámico y activo, una necesidad compulsiva para el cambio, actúa
+        con rapidez, quiere corregir las injusticias, impasible, no se desanima fácilmente, independiente y autosuficiente, confiado en si mismo, puede manejar cualquier proyecto.';
+            $trabajo = 'Se propone metas, organiza bien, busca soluciones prácticas, actúa con rapidez, delega el trabajo, exige productividad, cumple lo propuesto, estimula actividad, 
+        le interesa poco la oposición.';
             $familia = 'Ejerce liderazgo sólido, establece metas, motiva su familia a actuar, sabe la respuesta correcta, organiza el hogar.';
             $amigo = 'Poco amigable, organiza el trabajo en grupo, dispuesto a liderar, casi siempre tiene razón, se destaca en emergencias.';
 
@@ -144,8 +145,7 @@ class CandidatoController extends CI_Controller
             $trabajoD = 'Intolerante ante los errores, no analiza los detalles, trivialidades le aburren, puede tomar desiciones temerarias puede ser rudo y sin tacto, manipula a las personas, el fin justifica los medios, el trabajo puede llegar a ser su Dios, demanda lealtad de parte de sus subordinados.';
             $familiaD = 'Tiende a ser dominante, demasiado ocupado para dar tiempo a su familia, contesta demasiado rápido, se impacienta con los que no tienen buen desempeño, impide que los hijos se relajen, puede hacer que los hijos se depriman.';
             $amigoD = 'Tiende a usar a las personas, domina a los demás, decide por otros, sabe todo, todo lo puede hacer mejor, demasiado independiente, posesivo con los amigos y compañeros, no puede decir "lo siento" puede estar en lo correcto y ser impopular.';
-
-        } else {
+        } else if (strtolower($tipoCasilla) === 'sanguineo') {
             $temperamento = 'Sanguineo';
             $texto = 'El extrovertido, el hablador, el optimista';
             $emociones = 'Personalidad atractiva, conversador, anecdotista, el alma de la fiesta, buen sentido del humor, ojos para los colores, toca a la gente cuando habla, entusiasta y democrático, alegre y burbujeante, curioso, buen actor, ingenuo e inocente, vive por el momento, carácter variable, en el fondo es sincero, siempre es un niño.';
@@ -158,6 +158,19 @@ class CandidatoController extends CI_Controller
             $familiaD = 'Mantiene el hogar en estado de frenesí, olvida las citas delos hijos, desorganizado, no escucha el asunto completo.';
             $amigoD = 'Odia estar a solas necesita ser el centro de atención, quiere ser popular, busca recibir el crédito por su acciones, doina la conversación, interrumpe y no escucha, contesta por otros, olvidadizo, siempre encuentra excusas, repite sus historias.';
 
+        } else {
+            // Manejo para cuando $tipoCasilla está vacío
+            $temperamento = '';
+            $texto = 'Sin datos';
+            $emociones = 'Sin datos';
+            $trabajo = 'Sin datos';
+            $familia = 'Sin datos';
+            $amigo = 'Sin datos';
+            // DEBILIDADES:
+            $emocionesD = 'Sin datos';
+            $trabajoD = 'Sin datos';
+            $familiaD = 'Sin datos';
+            $amigoD = 'Sin datos';
         }
 
         $data['textoFortaleza'] = array(
@@ -167,10 +180,10 @@ class CandidatoController extends CI_Controller
             'trabajo' => $trabajo,
             'familia' => $familia,
             'amigo' => $amigo,
-            'emocionesD'=> $emocionesD,
-            'trabajoD'=> $trabajoD,
-            'familiaD'=> $familiaD,
-            'amigoD'=> $amigoD,
+            'emocionesD' => $emocionesD,
+            'trabajoD' => $trabajoD,
+            'familiaD' => $familiaD,
+            'amigoD' => $amigoD,
         );
 
         $this->load->view('Candidato/ConsultarPerfil', $data);
@@ -220,6 +233,50 @@ class CandidatoController extends CI_Controller
         $idCandidato = $data['Candidato']->idCandidato;
 
         $this->CandidatoModel->desactivarTemperamento($idCandidato);
+
+
+
+        $this->VerCandidato($idCandidato);
+
+
+
+    }
+
+    public function activarbriggs($DPI)
+    {
+
+        $data['Candidato'] = $this->CandidatoModel->VerificarDPI($DPI); // Obtener los datos del candidato
+
+        $idCandidato = $data['Candidato']->idCandidato;
+
+        // Verifica si existe un registro para el idCandidato en la tabla Briggs
+        $existeRegistroBriggs = $this->CandidatoModel->existeRegistroBriggs($idCandidato);
+        if ($existeRegistroBriggs) {
+            
+            $this->CandidatoModel->activarbriggs($idCandidato); // Esto coloca 1 en la tabla Briggs
+        }else{
+            $this->CandidatoModel->insertarRegistroBriggs($idCandidato);//Creo un registro para almacenar los resultados del briggs
+            $this->CandidatoModel->activarbriggs($idCandidato); // Esto coloca 1 en la tabla Briggs
+
+        }
+
+
+        $this->VerCandidato($idCandidato); //esto me dirige a la pantalla principal 
+
+
+
+    }
+
+
+
+    public function desactivarbriggs($DPI)
+    {
+
+        $data['Candidato'] = $this->CandidatoModel->VerificarDPI($DPI); // Obtener los datos del candidato
+
+        $idCandidato = $data['Candidato']->idCandidato;
+
+        $this->CandidatoModel->desactivarbriggs($idCandidato);
 
         $this->VerCandidato($idCandidato);
 

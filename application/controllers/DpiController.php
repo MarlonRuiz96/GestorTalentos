@@ -8,6 +8,8 @@ class DpiController extends CI_Controller
     {
         parent::__construct();
         $this->load->model('DpiModel');
+        $this->load->model('CandidatoModel');
+
 
     }
     public function index()
@@ -57,9 +59,163 @@ class DpiController extends CI_Controller
         $this->load->view('Pruebas/Login', $data);
     }
 
-    
 
-   
+    public function pruebaBriggs($DPI)
+    {
+        $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
+        $idCandidato = $data['Candidato']->idCandidato; //obtengo el id del candidato segun su dpi que recibo antes
+
+
+        if ($data['Candidato']->Briggs === '1') {
+            $this->load->view('Pruebas/Briggs', $data);
+        } else {
+            $this->load->view('Pruebas/Login', $data);
+        }
+    }
+
+    public function procesarRespuestas()
+    {
+
+        $DPI = $this->input->post('DPI'); // Obtén el DPI desde el formulario
+        $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
+        $idCandidato = $data['Candidato']->idCandidato; // Obtén el id del candidato
+
+        // Verifica las respuestas del formulario y actualiza la tabla según corresponda
+        if ($this->input->post('respuesta1') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'extrovertido');
+        }
+        if ($this->input->post('respuesta2') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'extrovertido');
+        }
+        if ($this->input->post('respuesta3') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'extrovertido');
+        }
+        if ($this->input->post('respuesta4') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'extrovertido');
+        }
+        if ($this->input->post('respuesta5') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'extrovertido');
+        }
+        if ($this->input->post('respuesta6') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'introvertido');
+        }
+        if ($this->input->post('respuesta7') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'introvertido');
+        }
+        if ($this->input->post('respuesta8') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'introvertido');
+        }
+        if ($this->input->post('respuesta9') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'introvertido');
+        }
+        if ($this->input->post('respuesta10') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'introvertido');
+        }
+        if ($this->input->post('respuesta11') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'sensorial');
+        }
+        if ($this->input->post('respuesta12') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'sensorial');
+        }
+        if ($this->input->post('respuesta13') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'sensorial');
+        }
+        if ($this->input->post('respuesta14') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'sensorial');
+        }
+        if ($this->input->post('respuesta15') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'sensorial');
+        }
+        if ($this->input->post('respuesta16') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'intuitivo');
+        }
+        if ($this->input->post('respuesta17') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'intuitivo');
+        }
+        if ($this->input->post('respuesta18') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'intuitivo');
+        }
+        if ($this->input->post('respuesta19') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'intuitivo');
+        }
+        if ($this->input->post('respuesta20') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'intuitivo');
+        }
+
+        if ($this->input->post('respuesta21') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'racional');
+        }
+        if ($this->input->post('respuesta22') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'racional');
+        }
+        if ($this->input->post('respuesta23') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'racional');
+        }
+        if ($this->input->post('respuesta24') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'racional');
+        }
+        if ($this->input->post('respuesta25') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'racional');
+        }
+        if ($this->input->post('respuesta26') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'emocional');
+        }
+        if ($this->input->post('respuesta27') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'emocional');
+        }
+        if ($this->input->post('respuesta28') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'emocional');
+        }
+        if ($this->input->post('respuesta29') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'emocional');
+        }
+        if ($this->input->post('respuesta30') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'emocional');
+        }
+        if ($this->input->post('respuesta31') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'calificador');
+        }
+        if ($this->input->post('respuesta32') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'calificador');
+        }
+        if ($this->input->post('respuesta33') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'calificador');
+        }
+        if ($this->input->post('respuesta34') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'calificador');
+        }
+        if ($this->input->post('respuesta35') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'calificador');
+        }
+        if ($this->input->post('respuesta36') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'perceptivo');
+        }
+        if ($this->input->post('respuesta37') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'perceptivo');
+        }
+        if ($this->input->post('respuesta38') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'perceptivo');
+        }
+        if ($this->input->post('respuesta39') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'perceptivo');
+        }
+        if ($this->input->post('respuesta40') == 'x') {
+            $this->DpiModel->actualizarBriggs($idCandidato, 'perceptivo');
+        }
+                
+        
+
+        $this->CandidatoModel->desactivarbriggs($idCandidato);
+
+        //esta es la nueva data con el briggs desactivado
+        $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
+
+        $this->load->view('Pruebas/Login', $data);
+
+    }
+
+
+
 
     public function RealizarPruebas($DPI)
     {
@@ -67,7 +223,7 @@ class DpiController extends CI_Controller
 
         $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
 
-
+        $idCandidato = $data['Candidato']->idCandidato; //obtengo el id del candidato segun su dpi que recibo antes
         $indice = $data['Candidato']->Temporal; //Obtengo el indice para las preguntas, esto me ayuda para verificar en que pregunta se quedo el candidato
 
         $data['Formulario'] = $this->DpiModel->dataTemperamentos($indice);
@@ -80,8 +236,11 @@ class DpiController extends CI_Controller
             $this->load->view('Pruebas/Temperamento', $data); // Cargar la vista de la prueba de temperamentos
             $this->DpiModel->actualizarTemporal($DPI, $indice);
 
+
         } else {
-            $this->load->view('Pruebas/Login', $data); // Cargar la vista de inicio de sesión
+            $this->CandidatoModel->desactivarTemperamento($idCandidato);
+
+            $this->load->view('Pruebas/Login', $data);
         }
     }
 

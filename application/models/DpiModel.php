@@ -7,7 +7,7 @@ class DpiModel extends CI_Model
 
     public function VerificarDPI($DPI)
     {
-        $this->db->select('idCandidato, Nombres, Puesto, DPI, Contacto, Correo, temperamento,Temporal, sanguineo, melancolico, flematico, colerico');
+        $this->db->select('idCandidato, Nombres, Puesto, DPI, Contacto, Correo, temperamento,Temporal, sanguineo, melancolico, flematico, colerico, Briggs');
         $this->db->from('Candidato');
         $this->db->where('DPI', $DPI);
 
@@ -155,6 +155,16 @@ class DpiModel extends CI_Model
         return $this->db->affected_rows() > 0;
     }
 
+
+    public function actualizarBriggs($idCandidato, $campo) {
+        // Aquí se asume que cada campo en la tabla `Briggs` representa un tipo de personalidad
+        // Supongamos que la tabla `Briggs` tiene los campos: extrovertido, introvertido, sensorial, intuitivo, etc.
+        
+        // Asegúrate de ajustar el nombre de la tabla y los campos según tu base de datos
+        $this->db->set($campo, $campo.' + 1', FALSE); // Incrementa en 1 el campo indicado
+        $this->db->where('idCandidato', $idCandidato);
+        $this->db->update('Briggs');
+    }
 
     
     

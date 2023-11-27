@@ -70,15 +70,60 @@
         <div class="container">
 
             <main>
-                <div class="d-grid gap-2">
-                <a href="<?= site_url('DpiController/RealizarPruebas/' . $Candidato->DPI); ?>"
-                                class="btn btn-success" type="button">Iniciar Pruebas
-                                    </a>
+                <div class="temperamento">
+                    <a href="<?= site_url('DpiController/RealizarPruebas/' . $Candidato->DPI); ?>"
+                        class="btn btn-success" type="button">Iniciar Prueba de Temperamento
+                    </a>
+                </div>
+
+                <div class="briggs">
+                    <a href="<?= site_url('DpiController/pruebaBriggs/' . $Candidato->DPI); ?>"
+                        class="btn btn-success" type="button">Iniciar Prueba de Briggs
+                    </a>
+                </div>
+
+                <div class="Sin_pruebas">
+                    No hay pruebas a realizarse.
                 </div>
             </main>
+
         </div>
 
     </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const btnDivTemperamento = document.querySelector('.temperamento');
+
+            // Verifica si el valor de temperamento no es igual a '1'
+            if ('<?php echo $Candidato->temperamento; ?>' !== '1' || '<?php echo $Candidato->Temporal; ?>' === '41') {
+                btnDivTemperamento.style.display = 'none'; // Oculta el div si no cumple la condición
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const btnDivTemperamento = document.querySelector('.briggs');
+
+            if ('<?php echo $Candidato->Briggs; ?>' !== '1') {
+                btnDivTemperamento.style.display = 'none'; // Oculta el div si no cumple la condición
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const btnDivSinPruebas = document.querySelector('.Sin_pruebas');
+
+            // Verifica si el valor de temperamento no es igual a '0'
+            if ('<?php echo $Candidato->temperamento; ?>' !== '0') {
+                btnDivSinPruebas.style.display = 'none'; // Oculta el div si no cumple la condición
+            }
+        });
+    </script>
+
 
 </body>
 

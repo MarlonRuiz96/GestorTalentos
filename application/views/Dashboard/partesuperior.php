@@ -28,74 +28,42 @@
             <hr class="sidebar-divider">
            
             <!-- Apartado de Candidatos -->
-            <li class="nav-item">
+           <li class="nav-item">
             <a class="nav-link" href="<?= site_url('Candidatos') ?>">
                     <i class="far fa-user" style="font-size: 20px;"></i>
                     <span class="nav-link" style="font-size: 15px;">Candidatos</span>
                 </a>
-                <div id="clientes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Consultar Candidatos</h6>
-                        <a class="collapse-item" href="<?= site_url('Candidatos') ?>">Consultar Candidatos
-                        </a>
-                        <a class="collapse-item" href="<?= site_url('Clientes') ?>">Nuevo Candidato
-                        </a>
-                    </div>
-                </div>
+                
             </li>
             <!-- Apartado de Ofertas  -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#producto" aria-expanded="true" aria-controls="producto">
-                    <i class="fas fa-store-alt" style="font-size: 15px;"></i>
-                    <span class="nav-link" style="font-size: 15px;">Ofertas</span>
+            <a class="nav-link" href="<?= site_url('#') ?>">
+                    <i class="far fa-user" style="font-size: 20px;"></i>
+                    <span class="nav-link" style="font-size: 15px;">POR DEFINIR</span>
                 </a>
-                <div id="producto" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Gestion de Ventas</h6>
-                        <a class="collapse-item" href="<?= site_url('#') ?>">Pendiente
-                        </a>
-                        <a class="collapse-item" href="<?= site_url('#') ?>">Pendiente
-                        </a>
-                    </div>
-                </div>
+                
             </li>
 
             <!-- Apartado de Proceso de seleccion -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#compra" aria-expanded="true" aria-controls="compra">
-                    <i class="fa-solid fa-cart-arrow-down" style="font-size: 15px;"></i>
-                    <span class="nav-link" style="font-size: 15px;">Procesos</span>
+            <a class="nav-link" href="<?= site_url('#') ?>">
+                    <i class="far fa-user" style="font-size: 20px;"></i>
+                    <span class="nav-link" style="font-size: 15px;">POR DEFINIR</span>
                 </a>
-                <div id="compra" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Gestion de Compras</h6>
-                        <a class="collapse-item" href="<?= site_url('#') ?>">pendiente
-                        </a>
-                        <a class="collapse-item" href="<?= site_url('#') ?>"> Pendiente
-                        </a>
-                    </div>
-                </div>
+                
             </li>
 
             <hr class="sidebar-divider">
             <div class="sidebar-heading" style="font-size: 15px;">
-                USUARIOS 
+                Utilidades 
             </div>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Usuarios</span>
+            <a class="nav-link" href="<?= site_url('Usuarios') ?>">
+                    <i class="far fa-user" style="font-size: 20px;"></i>
+                    <span class="nav-link" style="font-size: 15px;">Usuarios</span>
                 </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Administración de Usuarios</h6>
-                        <a class="collapse-item" href="<?= site_url('RegistroUsuario') ?>">Registrar Usuario
-                        </a>
-                        <a class="collapse-item" href="<?= site_url('Usuarios') ?>">Usuarios existentes
-                        </a>
-                    </div>
-                </div>
+                
             </li>
             <hr class="sidebar-divider d-none d-md-block">
             <div class="sidebar-heading" style="font-size: 15px;">

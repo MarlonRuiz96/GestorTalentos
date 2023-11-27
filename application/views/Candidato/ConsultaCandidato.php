@@ -72,12 +72,13 @@
 
 
                             <td class="td_boton">
-                                <a href="<?= site_url($row->idCandidato); ?>" class="edit-btn btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#editarModal" data-cliente='<?php echo json_encode($row); ?>'>Editar
+                                <a href="<?= site_url($row->idCandidato); ?>" class="edit-btn btn btn-primary"
+                                    data-bs-toggle="modal" data-bs-target="#editarModal"
+                                    data-cliente='<?php echo json_encode($row); ?>'>Editar
                                 </a>
                                 <a href="<?= site_url('CandidatoController/VerCandidato/' . $row->idCandidato); ?>"
-                                class="btn btn-success" >Ver pruebas
-                                    </a>
+                                    class="btn btn-success">Ver pruebas
+                                </a>
 
                             </td>
                         </tr>
@@ -104,8 +105,7 @@
 
                         <div>
                             <label for="editPuesto">Puesto </label>
-                            <input type="text" id="editPuesto" name="editPuesto"
-                                placeholder="Ingrese la Puesto">
+                            <input type="text" id="editPuesto" name="editPuesto" placeholder="Ingrese la Puesto">
                         </div>
                         <br>
                         <div>
@@ -121,7 +121,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button id="guardarCambiosBtn" type="button" class="btn btn-primary">Guardar</button>
+                    <button id="guardarCambiosBtn" type="button"
+                        class="btn btn-primary sweetalert-guardar">Guardar</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
 
                 </div>
@@ -172,48 +173,42 @@
 
             guardarCambiosBtn.addEventListener('click', function (event) {
                 if (saveChangesUrl) {
-                    editForm.action = saveChangesUrl;
-                    editForm.submit(); // Envía el formulario
+                    Swal.fire({
+                        title: '¿Estás seguro?',
+                        text: '¿Quieres guardar los cambios?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Sí, guardar cambios'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire({
+                                title: 'Cambios',
+                                text: 'Cambios guardados con éxito.',
+                                icon: 'success',
+                                confirmButtonColor: '#3085d6'
+                            }).then(() => {
+                                editForm.action = saveChangesUrl;
+                                editForm.submit();
+                            });
+                        }
+                    });
                 }
             });
+
         });
+
     </script>
 
 
-    <script>
-        const deleteLinks = document.querySelectorAll('.delete-btn');
 
-        deleteLinks.forEach(link => {
-            link.addEventListener('click', function (event) {
-                event.preventDefault();
 
-                const deleteUrl = this.getAttribute('href');
 
-                Swal.fire({
-                    title: '¿Estás seguro?',
-                    text: "El producto será eliminado",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Sí, eliminar',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire({
-                            title: 'Eliminado!',
-                            text: 'El producto ha sido eliminado',
-                            icon: 'success',
-                            confirmButtonColor: '#3085d6'
-                        }).then(() => {
-                            window.location.href = deleteUrl;
-                        });
-                    }
-                });
-            });
-        });
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 
 </html>

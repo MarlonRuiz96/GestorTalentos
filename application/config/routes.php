@@ -57,6 +57,7 @@ $route['Candidatos'] = 'CandidatoController/indexConsulta';
 $route['Usuarios'] = 'UsuarioController/index';
 $route['LoginPrueba'] = 'DpiController/index';
 $route['RegistroUsuario'] = 'UsuarioController/AltaUsuario';
+$route['Usuarios'] = 'UsuarioController/index';
 
 
 
