@@ -1,24 +1,24 @@
 <?php
 class UsuarioModel extends CI_Model {
-    public function validar_usuario($usuario, $clave) {
-        $this->db->where('usuario', $usuario);
+    public function validar_Usuario($Usuario, $clave) {
+        $this->db->where('Usuario', $Usuario);
         $this->db->where('clave', $clave);
         $query = $this->db->get('Usuario');
 
         if ($query->num_rows() > 0) {
             $row = $query->row();
-            return $row->id_usuario;
+            return $row->id_Usuario;
         } else {
             return false;
         }
     }
-    public function obtener_id_usuario_por_nombre($usuario) {
-        $this->db->where('usuario', $usuario);
+    public function obtener_id_Usuario_por_nombre($Usuario) {
+        $this->db->where('Usuario', $Usuario);
         $query = $this->db->get('Usuario');
 
         if ($query->num_rows() > 0) {
             $row = $query->row();
-            return $row->id_usuario;
+            return $row->id_Usuario;
         } else {
             return false;
         }
@@ -36,11 +36,11 @@ class UsuarioModel extends CI_Model {
         }
     }
 
-    //Funcion para obtener los usuarios activos
+    //Funcion para obtener los Usuarios activos
     public function getUsuario()
     {
-      $this->db->select('id_usuario,usuario, clave');
-      $this->db->from('usuario');
+      $this->db->select('id_Usuario,Usuario, clave');
+      $this->db->from('Usuario');
       $this->db->where('estado', 'activo');
       $query = $this->db->get();
     
@@ -52,33 +52,33 @@ class UsuarioModel extends CI_Model {
     }
     
 
-    public function ActualizarUsuario($id_usuario, $nuevoNombre, $nuevaPuesto){
+    public function ActualizarUsuario($id_Usuario, $nuevoNombre, $nuevaPuesto){
 
         $datosActualizados = array(
-            'usuario' => $nuevoNombre,
+            'Usuario' => $nuevoNombre,
             'clave' => $nuevaPuesto,
            
 
         );
 
-        $this->db->where('id_usuario', $id_usuario);
-        $this->db->update('usuario', $datosActualizados);
+        $this->db->where('id_Usuario', $id_Usuario);
+        $this->db->update('Usuario', $datosActualizados);
     }
 
-    public function bajaUsuario($id_usuario) {
+    public function bajaUsuario($id_Usuario) {
 
         $nuevoEstado = "Inactivo";
         $datosActualizados = array(
             'estado' => $nuevoEstado,
           
         );
-        $this->db->where('id_usuario', $id_usuario);
-        $this->db->update('usuario', $datosActualizados);
+        $this->db->where('id_Usuario', $id_Usuario);
+        $this->db->update('Usuario', $datosActualizados);
     }
     public function InsertarUsuario($data) 
     {
         // Insertamos los datos en la tabla candidatos
-        $this->db->insert('usuario', $data);
+        $this->db->insert('Usuario', $data);
 
       
     }
