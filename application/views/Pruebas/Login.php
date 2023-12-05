@@ -70,18 +70,27 @@
         <div class="container">
 
             <main>
+                Pruebas a realizarse
                 <div class="temperamento">
                     <a href="<?= site_url('DpiController/RealizarPruebas/' . $Candidato->DPI); ?>"
                         class="btn btn-success" type="button">Iniciar Prueba de Temperamento
                     </a>
-                </div>
+                    <br><br><br>
 
+                </div>
                 <div class="briggs">
                     <a href="<?= site_url('DpiController/pruebaBriggs/' . $Candidato->DPI); ?>"
                         class="btn btn-success" type="button">Iniciar Prueba de Briggs
                     </a>
                 </div>
 
+                <div class="Valanti">
+                    <a href="<?= site_url('DpiController/pruebaValanti/' . $Candidato->DPI); ?>"
+                        class="btn btn-success" type="button">Iniciar Prueba Valanti
+                    </a>
+                </div>
+
+                
                 <div class="Sin_pruebas">
                     No hay pruebas a realizarse.
                 </div>
@@ -108,6 +117,16 @@
             const btnDivTemperamento = document.querySelector('.briggs');
 
             if ('<?php echo $Candidato->Briggs; ?>' !== '1') {
+                btnDivTemperamento.style.display = 'none'; // Oculta el div si no cumple la condición
+            }
+        });
+    </script>
+
+<script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const btnDivTemperamento = document.querySelector('.Valanti');
+
+            if ('<?php echo $Candidato->valanti; ?>' !== '1') {
                 btnDivTemperamento.style.display = 'none'; // Oculta el div si no cumple la condición
             }
         });

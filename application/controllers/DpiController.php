@@ -58,6 +58,19 @@ class DpiController extends CI_Controller
         // Redirecciona a la vista principal u otra página de confirmación
         $this->load->view('Pruebas/Login', $data);
     }
+    public function pruebaValanti($DPI)
+    {
+        $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
+        $idCandidato = $data['Candidato']->idCandidato; //obtengo el id del candidato segun su dpi que recibo antes
+
+
+        if ($data['Candidato']->valanti === '1') {
+            $this->load->view('Pruebas/Valanti', $data);
+        } else {
+            $this->load->view('Pruebas/Login', $data);
+        }
+    }
+
 
 
     public function pruebaBriggs($DPI)
@@ -71,6 +84,26 @@ class DpiController extends CI_Controller
         } else {
             $this->load->view('Pruebas/Login', $data);
         }
+    }
+
+    public function procesarValanti()
+    {
+
+        $DPI = $this->input->post('DPI'); // Obtén el DPI desde el formulario
+        $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
+        $idCandidato = $data['Candidato']->idCandidato; // Obtén el id del candidato
+
+
+
+
+
+        $this->CandidatoModel->desactivarValanti($idCandidato);
+
+        //esta es la nueva data con el briggs desactivado
+        $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
+
+        $this->load->view('Pruebas/Login', $data);
+
     }
 
     public function procesarRespuestas()
@@ -239,6 +272,8 @@ class DpiController extends CI_Controller
 
         } else {
             $this->CandidatoModel->desactivarTemperamento($idCandidato);
+            $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
+
 
             $this->load->view('Pruebas/Login', $data);
         }

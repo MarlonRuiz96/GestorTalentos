@@ -27,10 +27,10 @@ class CandidatoModel extends CI_Model
 
     public function InsertarCandidato($data) //Insertar 0 en los temperamentos
     {
-        // Insertamos los datos en la tabla candidatos
+        // Insertamos los datos en la tabla Candidatos
         $this->db->insert('Candidato', $data);
 
-        // Obtenemos el id del candidato recién creado
+        // Obtenemos el id del Candidato recién creado
         $idCandidato = $this->db->insert_id();
 
         $fecha_actual = date("Y-m-d");
@@ -171,7 +171,7 @@ class CandidatoModel extends CI_Model
     }
     public function guardarAnotaciones($idCandidato, $notas)
     {
-        // Actualiza las notas del candidato en la base de datos
+        // Actualiza las notas del Candidato en la base de datos
         $this->db->where('idCandidato', $idCandidato);
         $data = array(
             'notas' => $notas
@@ -206,7 +206,7 @@ class CandidatoModel extends CI_Model
         );
 
         $this->db->where('idCandidato', $idCandidato);
-        $this->db->update('candidato', $data);
+        $this->db->update('Candidato', $data);
 
         return $this->db->affected_rows();
     }
@@ -229,6 +229,32 @@ class CandidatoModel extends CI_Model
         // Actualiza el estado de la prueba de temperamentos a 1
         $data = array(
             'Briggs' => 0
+        );
+
+        $this->db->where('idCandidato', $idCandidato);
+        $this->db->update('Candidato', $data);
+
+        return $this->db->affected_rows();
+    }
+
+    public function activarValanti($idCandidato)
+    {
+        // Actualiza el estado de la prueba de temperamentos a 1
+        $data = array(
+            'valanti' => 1
+        );
+
+        $this->db->where('idCandidato', $idCandidato);
+        $this->db->update('Candidato', $data);
+
+        return $this->db->affected_rows();
+    }
+
+    public function desactivarValanti($idCandidato)
+    {
+        // Actualiza el estado de la prueba de temperamentos a 1
+        $data = array(
+            'valanti' => 0
         );
 
         $this->db->where('idCandidato', $idCandidato);

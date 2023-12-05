@@ -48,7 +48,7 @@
                     <?php foreach ($data as $row): ?>
                         <tr>
                             <td>
-                                <?php echo $row->usuario; ?>
+                                <?php echo $row->Usuario; ?>
                             </td>
                             <td>
                                 <?php
@@ -60,12 +60,12 @@
 
 
                             <td class="td_boton">
-                                <a href="<?= site_url($row->id_usuario); ?>" class="edit-btn btn btn-primary"
+                                <a href="<?= site_url($row->id_Usuario); ?>" class="edit-btn btn btn-primary"
                                     data-bs-toggle="modal" data-bs-target="#editarModal"
                                     data-cliente='<?php echo json_encode($row); ?>'>Editar
                                 </a>
                                 <a id="eliminarUsuario"
-                                    href="<?= site_url('UsuarioController/desactivarUsuario/' . $row->id_usuario); ?>"
+                                    href="<?= site_url('UsuarioController/desactivarUsuario/' . $row->id_Usuario); ?>"
                                     class="delete-btn">Eliminar
                                 </a>
 
@@ -136,12 +136,12 @@
 
 
 
-                    editNombre.value = productoData.usuario;
+                    editNombre.value = productoData.Usuario;
                     editPuesto.value = productoData.clave;
 
 
 
-                    saveChangesUrl = '<?php echo site_url("UsuarioController/GuardarCambios/' + productoData.id_usuario + '"); ?>';
+                    saveChangesUrl = '<?php echo site_url("UsuarioController/GuardarCambios/' + productoData.id_Usuario + '"); ?>';
                     $('#editarModal').modal('show');
 
                 });
@@ -168,7 +168,7 @@
 
                 Swal.fire({
                     title: '¿Estás seguro?',
-                    text: "El usuario será eliminado",
+                    text: "El Usuario será eliminado",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -179,7 +179,7 @@
                     if (result.isConfirmed) {
                         Swal.fire({
                             title: 'Eliminado!',
-                            text: 'El usuario ha sido eliminado',
+                            text: 'El Usuario ha sido eliminado',
                             icon: 'success',
                             confirmButtonColor: '#3085d6'
                         }).then(() => {
