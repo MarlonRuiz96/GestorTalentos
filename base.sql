@@ -34,14 +34,20 @@ CREATE TABLE IF NOT EXISTS `briggs` (
   PRIMARY KEY (`idBriggs`),
   KEY `FK_Candidato_Briggs` (`idCandidato`),
   CONSTRAINT `FK_Candidato_Briggs` FOREIGN KEY (`idCandidato`) REFERENCES `candidato` (`idCandidato`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla rh.briggs: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla rh.briggs: ~9 rows (aproximadamente)
 DELETE FROM `briggs`;
 INSERT INTO `briggs` (`idBriggs`, `extrovertido`, `introvertido`, `sensorial`, `intuitivo`, `racional`, `emocional`, `calificador`, `perceptivo`, `idCandidato`) VALUES
 	(1, 0, 0, 0, 0, 0, 0, 0, 0, 15),
 	(2, 0, 0, 0, 0, 0, 0, 0, 0, 14),
-	(3, 3, 2, 0, 1, 3, 3, 1, 2, 13);
+	(3, 3, 2, 0, 1, 3, 3, 1, 2, 13),
+	(4, 0, 0, 0, 0, 0, 0, 0, 0, 13),
+	(5, 0, 0, 0, 0, 0, 0, 0, 0, 13),
+	(6, 0, 0, 0, 0, 0, 0, 0, 0, 13),
+	(7, 0, 0, 0, 0, 0, 0, 0, 0, 13),
+	(8, 0, 0, 0, 0, 0, 0, 0, 0, 13),
+	(9, 0, 0, 0, 0, 0, 0, 0, 0, 13);
 
 -- Volcando estructura para tabla rh.candidato
 CREATE TABLE IF NOT EXISTS `candidato` (
@@ -60,15 +66,16 @@ CREATE TABLE IF NOT EXISTS `candidato` (
   `sanguineo` int(11) DEFAULT NULL,
   `notas` varchar(50) DEFAULT NULL,
   `Briggs` int(10) DEFAULT NULL,
+  `Valanti` int(10) DEFAULT NULL,
   PRIMARY KEY (`idCandidato`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla rh.candidato: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla rh.candidato: ~2 rows (aproximadamente)
 DELETE FROM `candidato`;
-INSERT INTO `candidato` (`idCandidato`, `Nombres`, `Puesto`, `DPI`, `temperamento`, `Contacto`, `Correo`, `fecha_crear`, `Temporal`, `melancolico`, `colerico`, `flematico`, `sanguineo`, `notas`, `Briggs`) VALUES
-	(13, 'Marlon Ruiz Gonzalez', 'Desarrollador Junior', '2474218042214', 0, '50517389', 'mruiz996@outlook.com', '2023-11-19', 41, 44, 95, 55, 21, '', 1),
-	(14, '', '', '2474218042213', 0, '', '', '2023-11-25', 2, 37, 42, 16, 6, NULL, 0),
-	(15, '', '', '1111111111111', 0, '', '', '2023-11-25', 1, 0, 0, 0, 0, NULL, 0);
+INSERT INTO `candidato` (`idCandidato`, `Nombres`, `Puesto`, `DPI`, `temperamento`, `Contacto`, `Correo`, `fecha_crear`, `Temporal`, `melancolico`, `colerico`, `flematico`, `sanguineo`, `notas`, `Briggs`, `Valanti`) VALUES
+	(13, 'Marlon Ruiz Gonzalez', 'Desarrollador Junior', '2474218042214', 1, '50517389', 'mruiz996@outlook.com', '2023-11-19', 41, 44, 95, 55, 21, '', 1, 0),
+	(14, '', '', '2474218042213', 0, '', '', '2023-11-25', 2, 37, 42, 16, 6, NULL, 0, NULL),
+	(15, '', '', '1111111111111', 0, '', '', '2023-11-25', 1, 0, 0, 0, 0, NULL, 0, NULL);
 
 -- Volcando estructura para tabla rh.debilidad
 CREATE TABLE IF NOT EXISTS `debilidad` (
@@ -81,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `debilidad` (
   CONSTRAINT `FK_personalidad_candidatso` FOREIGN KEY (`idCandidato`) REFERENCES `candidato` (`idCandidato`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=209 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla rh.debilidad: ~147 rows (aproximadamente)
+-- Volcando datos para la tabla rh.debilidad: ~142 rows (aproximadamente)
 DELETE FROM `debilidad`;
 INSERT INTO `debilidad` (`idPersonalidad`, `Personalidad`, `Tipo`, `idCandidato`) VALUES
 	(62, 'Mandón', 'B', 13),
@@ -242,7 +249,7 @@ CREATE TABLE IF NOT EXISTS `empresa` (
   PRIMARY KEY (`idEmpresa`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla rh.empresa: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla rh.empresa: ~0 rows (aproximadamente)
 DELETE FROM `empresa`;
 INSERT INTO `empresa` (`idEmpresa`, `Nombre`, `Direccion`, `Contacto`, `Numero`) VALUES
 	(1, 'Megapolizas', '7 av 18-78 zona 13', 'Humberto\r\n', '23184444');
@@ -258,7 +265,7 @@ CREATE TABLE IF NOT EXISTS `fortaleza` (
   CONSTRAINT `FK_personalidad_candidato` FOREIGN KEY (`idCandidato`) REFERENCES `candidato` (`idCandidato`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=222 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla rh.fortaleza: ~121 rows (aproximadamente)
+-- Volcando datos para la tabla rh.fortaleza: ~119 rows (aproximadamente)
 DELETE FROM `fortaleza`;
 INSERT INTO `fortaleza` (`idPersonalidad`, `Personalidad`, `Tipo`, `idCandidato`) VALUES
 	(101, 'Animado', 'A', 13),
@@ -392,7 +399,7 @@ CREATE TABLE IF NOT EXISTS `prueba` (
   PRIMARY KEY (`idPrueba`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla rh.prueba: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla rh.prueba: ~0 rows (aproximadamente)
 DELETE FROM `prueba`;
 INSERT INTO `prueba` (`idPrueba`, `Nombre`, `Descripcion`, `Duracion`) VALUES
 	(1, 'Temperamentos', 'Temperamento del candidato', '30 Minutos');
@@ -461,9 +468,9 @@ CREATE TABLE IF NOT EXISTS `sesiones` (
   PRIMARY KEY (`id_sesion`),
   KEY `fk_sesiones_usuario` (`id_usuario`),
   CONSTRAINT `fk_sesiones_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla rh.sesiones: ~37 rows (aproximadamente)
+-- Volcando datos para la tabla rh.sesiones: ~38 rows (aproximadamente)
 DELETE FROM `sesiones`;
 INSERT INTO `sesiones` (`id_sesion`, `id_usuario`, `token`, `fecha_creacion`, `fecha_actualizacion`) VALUES
 	(1, 1, '9b45d9cc197465d84ab4d8eaa7b5f77c6008c0ea365ff14c10711d0f3f94abe3', '2023-08-27 22:39:04', '2023-08-28 07:06:24'),
@@ -502,7 +509,10 @@ INSERT INTO `sesiones` (`id_sesion`, `id_usuario`, `token`, `fecha_creacion`, `f
 	(34, 1, '5e4dd114f89c60cdd1150dd4f75f2d16c2fc2973e27cd6e95ccfee63c1908f85', '2023-11-23 22:55:52', '2023-11-25 05:55:29'),
 	(35, 1, '840e65006d5982f8c39ff0db0687e40a2075ffcaec67b81995066f8e18bde3c7', '2023-11-24 23:00:02', '2023-11-26 02:36:47'),
 	(36, 1, 'edd421f6bea975cd6651490bbf37a24e4f4d08449bb47d2bd23cef21cf38636a', '2023-11-25 23:04:20', '2023-11-26 06:04:23'),
-	(37, 1, 'fb43718322b1b5e7723faef15fd94d996bd3880725c056b79903d0aefd0a79d0', '2023-11-26 23:21:05', '2023-11-27 07:22:02');
+	(37, 1, 'fb43718322b1b5e7723faef15fd94d996bd3880725c056b79903d0aefd0a79d0', '2023-11-26 23:21:05', '2023-11-27 07:22:02'),
+	(38, 1, '9b35ee7def980e765c1d472bb04c8447e1d2708ced1016bc13bfcc59070beb73', '2023-12-11 21:43:29', '2023-12-12 05:17:07'),
+	(39, 1, '1009be6143cc772e8ec3eaf7f0b617a1379e2f979687241e502d4511d90fa68d', '2023-12-17 13:16:58', '2023-12-17 20:56:03'),
+	(40, 1, '496408b5d9df84d8b773631b0a644f61349bd19be6064976ace8ddb09ec913e4', '2023-12-27 21:43:44', '2023-12-28 04:43:46');
 
 -- Volcando estructura para tabla rh.sesionestoken
 CREATE TABLE IF NOT EXISTS `sesionestoken` (
@@ -532,7 +542,7 @@ CREATE TABLE IF NOT EXISTS `temperamento` (
   CONSTRAINT `fkCandidato` FOREIGN KEY (`idCandidatofk`) REFERENCES `candidato` (`idCandidato`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla rh.temperamento: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla rh.temperamento: ~2 rows (aproximadamente)
 DELETE FROM `temperamento`;
 INSERT INTO `temperamento` (`idTemperamento`, `melancolico`, `colerico`, `flematico`, `sanguineo`, `idCandidatofk`) VALUES
 	(9, 0, 0, 0, 0, 13),
@@ -553,6 +563,25 @@ DELETE FROM `usuario`;
 INSERT INTO `usuario` (`id_usuario`, `usuario`, `clave`, `estado`) VALUES
 	(1, 'admin', '123', 'activo'),
 	(2, 'william', '1234562', 'activo');
+
+-- Volcando estructura para tabla rh.valanti
+CREATE TABLE IF NOT EXISTS `valanti` (
+  `idValanti` int(11) NOT NULL AUTO_INCREMENT,
+  `Verdad` float DEFAULT NULL,
+  `Rectitud` int(10) DEFAULT NULL,
+  `Paz` int(10) DEFAULT NULL,
+  `Amor` int(10) DEFAULT NULL,
+  `No_violencia` int(10) DEFAULT NULL,
+  `idCandidato` int(11) NOT NULL,
+  PRIMARY KEY (`idValanti`) USING BTREE,
+  KEY `FK_Usuario_Valanti` (`idCandidato`) USING BTREE,
+  CONSTRAINT `fkvalanti` FOREIGN KEY (`idCandidato`) REFERENCES `candidato` (`idCandidato`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- Volcando datos para la tabla rh.valanti: ~1 rows (aproximadamente)
+DELETE FROM `valanti`;
+INSERT INTO `valanti` (`idValanti`, `Verdad`, `Rectitud`, `Paz`, `Amor`, `No_violencia`, `idCandidato`) VALUES
+	(1, 53, 50, 48, 47, 50, 13);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -79,18 +79,18 @@
 
                 </div>
                 <div class="briggs">
-                    <a href="<?= site_url('DpiController/pruebaBriggs/' . $Candidato->DPI); ?>"
-                        class="btn btn-success" type="button">Iniciar Prueba de Briggs
+                    <a href="<?= site_url('DpiController/pruebaBriggs/' . $Candidato->DPI); ?>" class="btn btn-success"
+                        type="button">Iniciar Prueba de Briggs
                     </a>
                 </div>
 
                 <div class="Valanti">
-                    <a href="<?= site_url('DpiController/pruebaValanti/' . $Candidato->DPI); ?>"
-                        class="btn btn-success" type="button">Iniciar Prueba Valanti
+                    <a href="<?= site_url('DpiController/pruebaValanti/' . $Candidato->DPI); ?>" class="btn btn-success"
+                        type="button">Iniciar Prueba Valanti
                     </a>
                 </div>
 
-                
+
                 <div class="Sin_pruebas">
                     No hay pruebas a realizarse.
                 </div>
@@ -99,7 +99,15 @@
         </div>
 
     </div>
-
+<!--
+    <h1>Valores</h1>
+    <ul>
+        <li>Verdad: <?php echo $verdad; ?></li>
+        <li>Rectitud: <?php echo $rectitud; ?></li>
+        <li>Paz: <?php echo $paz; ?></li>
+        <li>Amor: <?php echo $amor; ?></li>
+        <li>No Violencia: <?php echo $noViolencia; ?></li>
+    </ul>-->
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -122,7 +130,7 @@
         });
     </script>
 
-<script>
+    <script>
         document.addEventListener('DOMContentLoaded', function () {
             const btnDivTemperamento = document.querySelector('.Valanti');
 

@@ -248,7 +248,6 @@ class CandidatoController extends CI_Controller
         $data['Candidato'] = $this->CandidatoModel->VerificarDPI($DPI); // Obtener los datos del candidato
 
         $idCandidato = $data['Candidato']->idCandidato;
-
         // Verifica si existe un registro para el idCandidato en la tabla Briggs
         $existeRegistroBriggs = $this->CandidatoModel->existeRegistroBriggs($idCandidato);
         if ($existeRegistroBriggs) {
@@ -259,12 +258,7 @@ class CandidatoController extends CI_Controller
             $this->CandidatoModel->activarbriggs($idCandidato); // Esto coloca 1 en la tabla Briggs
 
         }
-
-
         $this->VerCandidato($idCandidato); //esto me dirige a la pantalla principal 
-
-
-
     }
 
 
@@ -284,7 +278,34 @@ class CandidatoController extends CI_Controller
 
     }
 
+    public function activarValanti($DPI)
+    {
 
+        $data['Candidato'] = $this->CandidatoModel->VerificarDPI($DPI); // Obtener los datos del candidato
+
+        $idCandidato = $data['Candidato']->idCandidato;
+        // Verifica si existe un registro para el idCandidato en la tabla Briggs
+
+        $existeRegistroValanti = $this->CandidatoModel->existeRegistroValanti($idCandidato);
+
+        if ($existeRegistroValanti) {
+            
+            $this->CandidatoModel->activarValanti($idCandidato); // Esto coloca 1 en la tabla Briggs
+        }else{
+            $this->CandidatoModel->insertarRegistroValanti($idCandidato);//Creo un registro para almacenar los resultados del briggs
+            $this->CandidatoModel->activarValanti($idCandidato); // Esto coloca 1 en la tabla Briggs
+
+        }
+        $this->VerCandidato($idCandidato); //esto me dirige a la pantalla principal 
+    }
+    public function desactivarValanti($DPI)
+    {
+
+        $data['Candidato'] = $this->CandidatoModel->VerificarDPI($DPI); // Obtener los datos del candidato
+        $idCandidato = $data['Candidato']->idCandidato;
+        $this->CandidatoModel->desactivarValanti($idCandidato);
+        $this->VerCandidato($idCandidato);
+    }
 }
 
 ?>

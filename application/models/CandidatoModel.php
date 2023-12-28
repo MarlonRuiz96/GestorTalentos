@@ -241,7 +241,7 @@ class CandidatoModel extends CI_Model
     {
         // Actualiza el estado de la prueba de temperamentos a 1
         $data = array(
-            'valanti' => 1
+            'Valanti' => 1
         );
 
         $this->db->where('idCandidato', $idCandidato);
@@ -254,7 +254,7 @@ class CandidatoModel extends CI_Model
     {
         // Actualiza el estado de la prueba de temperamentos a 1
         $data = array(
-            'valanti' => 0
+            'Valanti' => 0
         );
 
         $this->db->where('idCandidato', $idCandidato);
@@ -289,6 +289,38 @@ class CandidatoModel extends CI_Model
         
     }
 
+    public function existeRegistroValanti($idCandidato)
+    {
+        $this->db->where('idCandidato', $idCandidato);
+        $query = $this->db->get('Valanti');
+        
+        return $query->num_rows() > 0; 
+    }
 
+    public function insertarRegistroValanti($idCandidato)
+    {
+        $data = array(
+            'Verdad' => 0, 
+            'Rectitud' => 0,
+            'Paz' => 0,
+            'Amor' => 0,
+            'No_violencia' => 0,
+            'idCandidato' => $idCandidato
+        );
 
+        $this->db->insert('Valanti', $data);
+        
+    }
+
+    public function actualizarBriggs($idCandidato, $campo) {
+        // Aquí se asume que cada campo en la tabla `Briggs` representa un tipo de personalidad
+        // Supongamos que la tabla `Briggs` tiene los campos: extrovertido, introvertido, sensorial, intuitivo, etc.
+        
+        // Asegúrate de ajustar el nombre de la tabla y los campos según tu base de datos
+        $this->db->set($campo, $campo.' + 1', FALSE); // Incrementa en 1 el campo indicado
+        $this->db->where('idCandidato', $idCandidato);
+        $this->db->update('Briggs');
+    }
+
+    
 }

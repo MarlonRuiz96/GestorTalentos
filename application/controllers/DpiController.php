@@ -95,16 +95,166 @@ class DpiController extends CI_Controller
 
 
 
+        $primeraA = $this->input->post('primeraA');
+        $primeraB = $this->input->post('primeraB');
+
+        $segundaA = $this->input->post('segundaA');
+        $segundaB = $this->input->post('segundaB');
+
+        $terceraA = $this->input->post('terceraA');
+        $terceraB = $this->input->post('terceraB');
+
+        $cuartaA = $this->input->post('cuartaA');
+        $cuartaB = $this->input->post('cuartaB');
+
+        $quintaA = $this->input->post('quintaA');
+        $quintaB = $this->input->post('quintaB');
+
+        $sextaA = $this->input->post('sextaA');
+        $sextaB = $this->input->post('sextaB');
+
+        $septimaA = $this->input->post('septimaA');
+        $septimaB = $this->input->post('septimaB');
+
+        $octavaA = $this->input->post('octavaA');
+        $octavaB = $this->input->post('octavaB');
+
+        $novenaA = $this->input->post('novenaA');
+        $novenaB = $this->input->post('novenaB');
+
+        $decimoA = $this->input->post('decimoA');
+        $decimoB = $this->input->post('decimoB');
+
+        $onceA = $this->input->post('onceA');
+        $onceB = $this->input->post('onceB');
+
+        $doceA = $this->input->post('doceA');
+        $doceB = $this->input->post('doceB');
+
+        $treceA = $this->input->post('treceA');
+        $treceB = $this->input->post('treceB');
+
+        $catorceA = $this->input->post('catorceA');
+        $catorceB = $this->input->post('catorceB');
+
+        $quinceA = $this->input->post('quinceA');
+        $quinceB = $this->input->post('quinceB');
+
+        $dieciseisA = $this->input->post('dieciseisA');
+        $dieciseisB = $this->input->post('dieciseisB');
+
+        $diecisieteA = $this->input->post('diecisieteA');
+        $diecisieteB = $this->input->post('diecisieteB');
+
+        $dieciochoA = $this->input->post('dieciochoA');
+        $dieciochoB = $this->input->post('dieciochoB');
+
+        $diecinueveA = $this->input->post('diecinueveA');
+        $diecinueveB = $this->input->post('diecinueveB');
+
+        $veinteA = $this->input->post('veinteA');
+        $veinteB = $this->input->post('veinteB');
+
+        $veintiunoA = $this->input->post('veintiunoA');
+        $veintiunoB = $this->input->post('veintiunoB');
+
+        $veintidosA = $this->input->post('veintidosA');
+        $veintidosB = $this->input->post('veintidosB');
+
+        $veintitresA = $this->input->post('veintitresA');
+        $veintitresB = $this->input->post('veintitresB');
+
+        $veinticuatroA = $this->input->post('veinticuatroA');
+        $veinticuatroB = $this->input->post('veinticuatroB');
+
+        $veinticincoA = $this->input->post('veinticincoA');
+        $veinticincoB = $this->input->post('veinticincoB');
+
+        $veintiseisA = $this->input->post('veintiseisA');
+        $veintiseisB = $this->input->post('veintiseisB');
+
+        $veintisieteA = $this->input->post('veintisieteA');
+        $veintisieteB = $this->input->post('veintisieteB');
+
+        $veintiochoA = $this->input->post('veintiochoA');
+        $veintiochoB = $this->input->post('veintiochoB');
+
+        $veintinueveA = $this->input->post('veintinueveA');
+        $veintinueveB = $this->input->post('veintinueveB');
+
+        $treintaA = $this->input->post('treintaA');
+        $treintaB = $this->input->post('treintaB');
 
 
-        $this->CandidatoModel->desactivarValanti($idCandidato);
+        $verdad = $terceraA+$quintaA+$sextaA+$septimaB+$octavaB+$novenaB+$doceA+$dieciseisA+$dieciochoB+$veinteA+$veintitresB+$veinticincoB;
 
-        //esta es la nueva data con el briggs desactivado
-        $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
+        $rectitud = $primeraB+$segundaB+$quintaB+$sextaB+$septimaA+$onceA+$treceB+$veintiunoA+$veinticuatroB+$veintiseisA+$veintiochoA+$veintinueveA;
+        
+        $paz = $terceraB+$cuartaA+$decimoB+$doceB+$catorceA+$quinceB+$diecisieteB+$diecinueveA+$veintiunoB+$veinticuatroA+$veinticincoA+$veintiseisB+$veintiochoB;
+        
+        $amor = $primeraA+$segundaA+$octavaA+$quinceA+$dieciseisB+$diecisieteA+$diecinueveB+$veintidosB+$veintisieteB+$treintaB;
 
-        $this->load->view('Pruebas/Login', $data);
+        $noViolencia = $cuartaB+$novenaA+$decimoA+$onceB+$treceA+$catorceB+$dieciochoA+$veinteB+$veintidosA+$veintitresA+$veintisieteA+$veintinueveB+$treintaA;
 
+
+
+        //VERDAD
+        $min = 15.6479452054795; // Este valor vendría de tu celda J2 en Excel
+        $desviacion = 4.7033423480048;
+        $verdadNormalizada = ceil($this->normalizar($verdad, $min, $desviacion) * 10 + 50);
+
+        //RECTITUD
+        $min = 21.0506849315069; // Este valor vendría de tu celda J2 en Excel
+        $desviacion = 4.44492661852588;
+        $rectitudNormalizada = ceil($this->normalizar($rectitud, $min, $desviacion) * 10 + 50);
+
+         //PAZ
+         $min = 17.3534246575342; // Este valor vendría de tu celda J2 en Excel
+         $desviacion = 6.60888710785178;
+         $pazNormalizada = ceil($this->normalizar($paz, $min, $desviacion) * 10 + 50);
+ 
+
+         //AMOR
+         $min = 16.6821917808219; // Este valor vendría de tu celda J2 en Excel
+         $desviacion = 5.41200571776265;
+         $amorNormalizado = ceil($this->normalizar($amor, $min, $desviacion) * 10 + 50);
+ 
+
+         //NO VIOLENCIA
+         $min = 21.2246575342466; // Este valor vendría de tu celda J2 en Excel
+         $desviacion = 7.19426270463846;
+         $noViolenciaNormalizado = ceil($this->normalizar($noViolencia, $min, $desviacion) * 10 + 50);
+ 
+        $this->DpiModel->AgregarResultadosValanti($idCandidato,$verdadNormalizada,$rectitudNormalizada,$pazNormalizada,$amorNormalizado,$noViolenciaNormalizado);
+
+        $data['verdad'] = $verdad;
+        $data['rectitud'] = $rectitud;
+        $data['paz'] = $paz;
+        $data['amor'] = $amor;
+        $data['noViolencia'] = $noViolencia;
+
+        $this->CandidatoModel->desactivarValanti($idCandidato); //Desactivo la prueba
+        $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI);  //Actualizo la data, por que la data anterior no tiene la preuba desactivada, esto me da conflicto
+        $this->load->view('Pruebas/Login', $data); //cargo la vista con la nueva data
+
+
+        
     }
+    function normalizar($valor, $min, $desviacion) {
+        // Valores de Excel para la normalización
+        
+        // Fórmula de normalización
+        return (($valor - $min) / $desviacion);
+    }
+    
+
+    
+  
+    function noViolencia($noViolencia) {
+
+        return (($noViolencia - 21.2246575342466) / (7.19426270463846 - 21.2246575342466)) * 10 + 50;
+    }
+    
 
     public function procesarRespuestas()
     {
@@ -235,8 +385,8 @@ class DpiController extends CI_Controller
         if ($this->input->post('respuesta40') == 'x') {
             $this->DpiModel->actualizarBriggs($idCandidato, 'perceptivo');
         }
-                
-        
+
+
 
         $this->CandidatoModel->desactivarbriggs($idCandidato);
 

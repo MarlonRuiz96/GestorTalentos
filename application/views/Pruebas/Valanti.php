@@ -52,64 +52,67 @@
                     <tr>
                         <td>1</td>
                         <td class="text-right">Dedico tiempo a las personas que están alrededor mío</td>
-                        <td><input type="text" class="form-control" id="primeraA" placeholder=""
-                                onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="primeraB" placeholder=""
-                                onkeypress="return validarNumero(event, this)"></td>
+                        <td><input type="text" class="form-control" id="primeraA" name="primeraA" placeholder=""
+                                onkeypress="return validarNumero(event, this)">
+                        </td>
+                        <td><input type="text" class="form-control" id="primeraB" name="primeraB" placeholder=""
+                                onkeypress="return validarNumero(event, this)">
+                        </td>
                         <td class="text-left">Actúo con perseverancia</td>
                     </tr>
+
 
                     <tr>
                         <td>2</td>
                         <td class="text-right">Soy tolerante</td>
-                        <td><input type="text" class="form-control" id="segundaA" placeholder=""
+                        <td><input type="text" class="form-control" id="segundaA" name="segundaA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="segundaB" placeholder=""
+                        <td><input type="text" class="form-control" id="segundaB" name="segundaB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Prefiero actuar con ética</td>
                     </tr>
                     <tr>
                         <td>3</td>
                         <td class="text-right">Al pensar, utilizo mi intuición o "sexto sentido"</td>
-                        <td><input type="text" class="form-control" id="terceraA" placeholder=""
+                        <td><input type="text" class="form-control" id="terceraA" name="terceraA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="terceraB" placeholder=""
+                        <td><input type="text" class="form-control" id="terceraB" name="terceraB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Me siento una persona digna</td>
                     </tr>
                     <tr>
                         <td>4</td>
                         <td class="text-right">Logro buena concentración mental</td>
-                        <td><input type="text" class="form-control" id="cuartaA" placeholder=""
+                        <td><input type="text" class="form-control" id="cuartaA" name="cuartaA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="cuartaB" placeholder=""
+                        <td><input type="text" class="form-control" id="cuartaB" name="cuartaB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Perdono todas las ofensas de cualquier persona</td>
                     </tr>
                     <tr>
                         <td>5</td>
                         <td class="text-right">Normalmente razono mucho</td>
-                        <td><input type="text" class="form-control" id="quintaA" placeholder=""
+                        <td><input type="text" class="form-control" id="quintaA" name="quintaA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="quintaB" placeholder=""
+                        <td><input type="text" class="form-control" id="quintaB" name="quintaB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Me destaco por el liderazgo en mis acciones</td>
                     </tr>
                     <tr>
                         <td>6</td>
                         <td class="text-right">Pienso con integridad</td>
-                        <td><input type="text" class="form-control" id="sextaA" placeholder=""
+                        <td><input type="text" class="form-control" id="sextaA" name="sextaA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="sextaB" placeholder=""
+                        <td><input type="text" class="form-control" id="sextaB" name="sextaB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Me coloco objetivos y metas en mi vida personal</td>
                     </tr>
                     <tr>
                         <td>7</td>
                         <td class="text-right">Soy una persona de iniciativa</td>
-                        <td><input type="text" class="form-control" id="septimaA" placeholder=""
+                        <td><input type="text" class="form-control" id="septimaA" name="septimaA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="septimaB" placeholder=""
+                        <td><input type="text" class="form-control" id="septimaB" name="septimaB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">En mi trabajo normalmente soy curioso</td>
                     </tr>
@@ -117,18 +120,18 @@
                     <tr>
                         <td>8</td>
                         <td class="text-right">Doy amor</td>
-                        <td><input type="text" class="form-control" id="octavaA" placeholder=""
+                        <td><input type="text" class="form-control" id="octavaA" name="octavaA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="octavaB" placeholder=""
+                        <td><input type="text" class="form-control" id="octavaB" name="octavaB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Para pensar hago síntesis de las distintas ideas</td>
                     </tr>
                     <tr>
                         <td>9</td>
                         <td class="text-right">Me siento en calma</td>
-                        <td><input type="text" class="form-control" id="novenaA" placeholder=""
+                        <td><input type="text" class="form-control" id="novenaA" name="novenaA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="novenaB" placeholder=""
+                        <td><input type="text" class="form-control" id="novenaB" name="novenaB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Pienso con veracidad</td>
                     </tr>
@@ -145,27 +148,27 @@
                     <tr>
                         <td>10</td>
                         <td class="text-right">Irrespetar la propiedad</td>
-                        <td><input type="text" class="form-control" id="novenaA" placeholder=""
+                        <td><input type="text" class="form-control" id="decimoA" name="decimoA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="novenaB" placeholder=""
+                        <td><input type="text" class="form-control" id="decimoB" name="decimoB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Sentir inquietud</td>
                     </tr>
                     <tr>
                         <td>11</td>
                         <td class="text-right">Ser irresponsable</td>
-                        <td><input type="text" class="form-control" id="onceA" placeholder=""
+                        <td><input type="text" class="form-control" id="onceA" name="onceA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="onceB" placeholder=""
+                        <td><input type="text" class="form-control" id="onceB" name="onceB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Ser desconsiderado hacia cualquier persona</td>
                     </tr>
                     <tr>
                         <td>12</td>
                         <td class="text-right">Caer en contradicciones al pensar</td>
-                        <td><input type="text" class="form-control" id="doceA" placeholder=""
+                        <td><input type="text" class="form-control" id="doceA" name="doceA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="doceB" placeholder=""
+                        <td><input type="text" class="form-control" id="doceB" name="doceB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Sentir intolerancia</td>
                     </tr>
@@ -173,9 +176,9 @@
                     <tr>
                         <td>13</td>
                         <td class="text-right">Ser violento</td>
-                        <td><input type="text" class="form-control" id="treceA" placeholder=""
+                        <td><input type="text" class="form-control" id="treceA" name="treceA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="treceB" placeholder=""
+                        <td><input type="text" class="form-control" id="treceB" name="treceB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Actuar con cobardía</td>
                     </tr>
@@ -183,27 +186,29 @@
                     <tr>
                         <td>14</td>
                         <td class="text-right">Sentirse presumido</td>
-                        <td><input type="text" class="form-control" id="catorceA" placeholder=""
+                        <td><input type="text" class="form-control" id="catorceA" name="catorceA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="catorceB" placeholder=""
+                        <td><input type="text" class="form-control" id="catorceB" name="catorceB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Generar divisiones y discordia entre los seres humanos</td>
                     </tr>
+
                     <tr>
                         <td>15</td>
                         <td class="text-right">Ser cruel</td>
-                        <td><input type="text" class="form-control" id="quinceA" placeholder=""
+                        <td><input type="text" class="form-control" id="quinceA" name="quinceA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="quinceB" placeholder=""
+                        <td><input type="text" class="form-control" id="quinceB" name="quinceB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Sentir ira</td>
                     </tr>
+
                     <tr>
                         <td>16</td>
                         <td class="text-right">Pensar con confusión</td>
-                        <td><input type="text" class="form-control" id="dieciseisA" placeholder=""
+                        <td><input type="text" class="form-control" id="dieciseisA" name="dieciseisA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="dieciseisB" placeholder=""
+                        <td><input type="text" class="form-control" id="dieciseisB" name="dieciseisB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Tener odio en el corazón</td>
                     </tr>
@@ -211,18 +216,19 @@
                     <tr>
                         <td>17</td>
                         <td class="text-right">Decir blasfemias</td>
-                        <td><input type="text" class="form-control" id="diecisieteA" placeholder=""
+                        <td><input type="text" class="form-control" id="diecisieteA" name="diecisieteA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="diecisieteB" placeholder=""
+                        <td><input type="text" class="form-control" id="diecisieteB" name="diecisieteB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Ser escandaloso</td>
                     </tr>
+
                     <tr>
                         <td>18</td>
                         <td class="text-right">Crear desigualdades entre los seres humanos</td>
-                        <td><input type="text" class="form-control" id="dieciochoA" placeholder=""
+                        <td><input type="text" class="form-control" id="dieciochoA" name="dieciochoA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="dieciochoB" placeholder=""
+                        <td><input type="text" class="form-control" id="dieciochoB" name="dieciochoB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Apasionarse por una idea</td>
                     </tr>
@@ -230,9 +236,9 @@
                     <tr>
                         <td>19</td>
                         <td class="text-right">Sentirse inconstante</td>
-                        <td><input type="text" class="form-control" id="diecinueveA" placeholder=""
+                        <td><input type="text" class="form-control" id="diecinueveA" name="diecinueveA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="diecinueveB" placeholder=""
+                        <td><input type="text" class="form-control" id="diecinueveB" name="diecinueveB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Crear rivalidad hacia otros</td>
                     </tr>
@@ -240,19 +246,20 @@
                     <tr>
                         <td>20</td>
                         <td class="text-right">Pensamientos irracionales</td>
-                        <td><input type="text" class="form-control" id="veinteA" placeholder=""
+                        <td><input type="text" class="form-control" id="veinteA" name="veinteA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="veinteB" placeholder=""
+                        <td><input type="text" class="form-control" id="veinteB" name="veinteB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Traicionar a un desconocido</td>
                     </tr>
 
+
                     <tr>
                         <td>21</td>
                         <td class="text-right">Ostentar las riquezas materiales</td>
-                        <td><input type="text" class="form-control" id="veintiunoA" placeholder=""
+                        <td><input type="text" class="form-control" id="veintiunoA" name="veintiunoA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="veintiunoB" placeholder=""
+                        <td><input type="text" class="form-control" id="veintiunoB" name="veintiunoB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Sentirse infeliz</td>
                     </tr>
@@ -260,9 +267,9 @@
                     <tr>
                         <td>22</td>
                         <td class="text-right">Entorpecer la cooperación entre los seres humanos</td>
-                        <td><input type="text" class="form-control" id="veintidosA" placeholder=""
+                        <td><input type="text" class="form-control" id="veintidosA" name="veintidosA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="veintidosB" placeholder=""
+                        <td><input type="text" class="form-control" id="veintidosB" name="veintidosB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">La maldad</td>
                     </tr>
@@ -270,29 +277,28 @@
                     <tr>
                         <td>23</td>
                         <td class="text-right">Odiar a cualquier ser de la naturaleza</td>
-                        <td><input type="text" class="form-control" id="veintitresA" placeholder=""
+                        <td><input type="text" class="form-control" id="veintitresA" name="veintitresA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="veintitresB" placeholder=""
+                        <td><input type="text" class="form-control" id="veintitresB" name="veintitresB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Hacer distinciones entre las personas</td>
                     </tr>
-
                     <tr>
                         <td>24</td>
                         <td class="text-right">Sentirse intranquilo</td>
-                        <td><input type="text" class="form-control" id="veinticuatroA" placeholder=""
-                                onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="veinticuatroB" placeholder=""
-                                onkeypress="return validarNumero(event, this)"></td>
+                        <td><input type="text" class="form-control" id="veinticuatroA" name="veinticuatroA"
+                                placeholder="" onkeypress="return validarNumero(event, this)"></td>
+                        <td><input type="text" class="form-control" id="veinticuatroB" name="veinticuatroB"
+                                placeholder="" onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Ser infiel</td>
                     </tr>
 
                     <tr>
                         <td>25</td>
                         <td class="text-right">Tener la mente dispersa</td>
-                        <td><input type="text" class="form-control" id="veinticincoA" placeholder=""
+                        <td><input type="text" class="form-control" id="veinticincoA" name="veinticincoA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="veinticincoB" placeholder=""
+                        <td><input type="text" class="form-control" id="veinticincoB" name="veinticincoB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Mostrar apatía al pensar</td>
                     </tr>
@@ -300,9 +306,9 @@
                     <tr>
                         <td>26</td>
                         <td class="text-right">La injusticia</td>
-                        <td><input type="text" class="form-control" id="veintiseisA" placeholder=""
+                        <td><input type="text" class="form-control" id="veintiseisA" name="veintiseisA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="veintiseisB" placeholder=""
+                        <td><input type="text" class="form-control" id="veintiseisB" name="veintiseisB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Sentirse angustiado</td>
                     </tr>
@@ -310,9 +316,9 @@
                     <tr>
                         <td>27</td>
                         <td class="text-right">Vengarse de los que odian a todo el mundo</td>
-                        <td><input type="text" class="form-control" id="veintisieteA" placeholder=""
+                        <td><input type="text" class="form-control" id="veintisieteA" name="veintisieteA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="veintisieteB" placeholder=""
+                        <td><input type="text" class="form-control" id="veintisieteB" name="veintisieteB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Vengarse del que hace daño a un familiar</td>
                     </tr>
@@ -320,9 +326,9 @@
                     <tr>
                         <td>28</td>
                         <td class="text-right">Usar abusivamente el poder</td>
-                        <td><input type="text" class="form-control" id="veintiochoA" placeholder=""
+                        <td><input type="text" class="form-control" id="veintiochoA" name="veintiochoA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="veintiochoB" placeholder=""
+                        <td><input type="text" class="form-control" id="veintiochoB" name="veintiochoB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Distraerse</td>
                     </tr>
@@ -330,9 +336,9 @@
                     <tr>
                         <td>29</td>
                         <td class="text-right">Ser desagradecido con los que ayudan</td>
-                        <td><input type="text" class="form-control" id="veintinueveA" placeholder=""
+                        <td><input type="text" class="form-control" id="veintinueveA" name="veintinueveA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="veintinueveB" placeholder=""
+                        <td><input type="text" class="form-control" id="veintinueveB" name="veintinueveB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Ser egoísta con todos</td>
                     </tr>
@@ -340,16 +346,18 @@
                     <tr>
                         <td>30</td>
                         <td class="text-right">Cualquier forma de irrespeto</td>
-                        <td><input type="text" class="form-control" id="treintaA" placeholder=""
+                        <td><input type="text" class="form-control" id="treintaA" name="treintaA" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
-                        <td><input type="text" class="form-control" id="treintaB" placeholder=""
+                        <td><input type="text" class="form-control" id="treintaB" name="treintaB" placeholder=""
                                 onkeypress="return validarNumero(event, this)"></td>
                         <td class="text-left">Odiar</td>
                     </tr>
 
+
+
                 </table>
 
-                <button type="button" onclick="validarYEnviar()" class="btn btn-primary">Enviar</button>
+                <button type="button" class="btn btn-primary" onclick="validarYEnviar()">Enviar</button>
 
                 <script>
                     function validarNumero(event, input) {
@@ -394,7 +402,7 @@
                             alert('En la fila 8 no se cumple lo indicado, recuerda que la suma tiene que dar 3');
                             return;
                         }
-                        if (!validarFila('decimaA', 'decimaB')) {
+                        if (!validarFila('decimoA', 'decimoB')) {
                             alert('En la fila 10 no se cumple lo indicado, recuerda que la suma tiene que dar 3');
                             return;
                         }
@@ -404,10 +412,6 @@
                             return;
                         }
 
-                        if (!validarFila('novenaA', 'novenaB')) {
-                            alert('En la fila 9 no se cumple lo indicado, recuerda que la suma tiene que dar 3');
-                            return;
-                        }
                         if (!validarFila('doceA', 'doceB')) {
                             alert('En la fila 12 no se cumple lo indicado, recuerda que la suma tiene que dar 3');
                             return;
@@ -504,9 +508,7 @@
                         }
 
 
-                        // Agrega aquí más llamadas a validarFila según sea necesario para otras filas
 
-                        // Si todas las validaciones pasan, envía el formulario
                         document.querySelector('form').submit();
                     }
 
@@ -518,10 +520,6 @@
                     }
                 </script>
             </form>
-
-
-
-
 
 
 

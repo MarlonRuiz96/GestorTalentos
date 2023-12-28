@@ -64,17 +64,22 @@
             </form>
 
 
-            <nav aria-label="Page navigation example"> <!-- Añadir margen superior -->
+            <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
+                    
                     <li class="page-item">
-                        <a class="page-link" href="#">Previous</a>
+                        <a class="page-link" href="#">Temperamentos</a>
                     </li>
-
                     <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
+                        <a class="page-link" href="#">Meyer-Briggs</a>
                     </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Valanti</a>
+                    </li>
+                    
                 </ul>
             </nav>
+
 
             <div class="contenido div-ocultar">
                 <main>
@@ -256,20 +261,19 @@
                         </tbody>
 
                     </table>
-
             </div>
-            <main>
-                <div class="contenido div-ocultar-2">
+            <div class="contenido div-ocultar-2">
+                <main>
 
                     <div class="d-flex justify-content-between align-items-center">
                         <h2 style="margin-right: 500px;">BRIGGS</h2>
                         <div>
                             <a href="<?= site_url('CandidatoController/activarbriggs/' . $candidato_data->DPI); ?>"
                                 class="btn btn-success sweetalert-briggs"
-                                data-title="Activar la prueba BRIGGS ">Activar</a>
+                                data-title="¿Activar la prueba Meyer-Briggs? ">Activar</a>
                             <a href="<?= site_url('CandidatoController/desactivarbriggs/' . $candidato_data->DPI); ?>"
                                 class="btn btn-danger sweetalert-briggs2"
-                                data-title="Desactivar la prueba BRIGGS?">Desactivar</a>
+                                data-title="¿Desactivar la prueba Meyer-Briggs?">Desactivar</a>
                         </div>
                     </div>
                     <div class="container">
@@ -282,8 +286,28 @@
 
                         </div>
                     </div>
-                </div>
-            </main>
+                </main>
+
+            </div>
+<!-- PRUEBA VALANTI-->
+            <div class="contenido div-ocultar-3">
+                <main>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h2 style="margin-right: 500px;">VALANTI</h2>
+                        <div>
+                            <a href="<?= site_url('CandidatoController/activarValanti/' . $candidato_data->DPI); ?>"
+                                class="btn btn-success sweetalert-briggs"
+                                data-title="¿Activar la prueba Valanti? ">Activar</a>
+                            <a href="<?= site_url('CandidatoController/desactivarValanti/' . $candidato_data->DPI); ?>"
+                                class="btn btn-danger sweetalert-briggs2"
+                                data-title="¿Desactivar la prueba Valanti?">Desactivar</a>
+                        </div>
+                    </div>
+
+                </main>
+
+            </div>
 
         </main>
 
@@ -523,8 +547,6 @@
 
 
         <script>
-            let currentPage = 1;
-
             function ocultarDivs(clase) {
                 const divsAOcultar = document.querySelectorAll(`.${clase}`);
                 divsAOcultar.forEach(div => {
@@ -545,23 +567,30 @@
                 link.addEventListener('click', function (e) {
                     e.preventDefault();
                     if (index === 0) {
-                        ocultarDivs('div-ocultar-2');
-                        mostrarDivs('div-ocultar');
-                        currentPage = 1;
+                        mostrarDivs('div-ocultar');//mostrar primero
+                        ocultarDivs('div-ocultar-2'); //ocultar segundo
+                        ocultarDivs('div-ocultar-3'); //ocultar tercero
+
                     } else if (index === 1) {
-                        ocultarDivs('div-ocultar');
-                        mostrarDivs('div-ocultar-2');
-                        currentPage = 2;
+                        mostrarDivs('div-ocultar-2');//mostrar segundo
+                        ocultarDivs('div-ocultar');//ocultar primero
+                        ocultarDivs('div-ocultar-3'); // ocultar tercero
+                    } else if (index === 2) {
+                        mostrarDivs('div-ocultar-3'); //mostrar tercero
+                        ocultarDivs('div-ocultar'); //ocultar primero
+                        ocultarDivs('div-ocultar-2'); //ocultar segundo
                     }
+                    // Agrega más condiciones para manejar más páginas si es necesario
                 });
             });
 
             mostrarDivs('div-ocultar'); // Mostrar el primer div 'div-ocultar' por defecto al cargar la página
         </script>
 
+
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-                // Función para ocultar el div-ocultar-2 al cargar la página
+                // Función para ocultar los elementos con la clase div-ocultar-2
                 function ocultarDivOcultar2() {
                     const divsOcultar2 = document.querySelectorAll('.div-ocultar-2');
                     divsOcultar2.forEach(div => {
@@ -569,17 +598,27 @@
                     });
                 }
 
+                // Función para ocultar los elementos con la clase div-ocultar-3
+                function ocultarDivOcultar3() {
+                    const divsOcultar3 = document.querySelectorAll('.div-ocultar-3');
+                    divsOcultar3.forEach(div => {
+                        div.style.display = 'none';
+                    });
+                }
+
                 ocultarDivOcultar2(); // Ocultar div-ocultar-2 al cargar la página
+                ocultarDivOcultar3(); // Ocultar div-ocultar-3 al cargar la página
             });
+
         </script>
 
 
         <script>
-              // Convierte los datos de $dataTemperamento en formato JSON
-              var dataBriggs = <?php echo json_encode($dataBriggs); ?>;
+            // Convierte los datos de $dataTemperamento en formato JSON
+            var dataBriggs = <?php echo json_encode($dataBriggs); ?>;
             console.log(temperamentoData);
             var ctx = document.getElementById("myCharts").getContext("2d");
-         
+
             var myChart = new Chart(ctx, {
                 type: "bar",
                 data: {

@@ -156,16 +156,22 @@ class DpiModel extends CI_Model
     }
 
 
-    public function actualizarBriggs($idCandidato, $campo) {
-        // Aquí se asume que cada campo en la tabla `Briggs` representa un tipo de personalidad
-        // Supongamos que la tabla `Briggs` tiene los campos: extrovertido, introvertido, sensorial, intuitivo, etc.
-        
-        // Asegúrate de ajustar el nombre de la tabla y los campos según tu base de datos
-        $this->db->set($campo, $campo.' + 1', FALSE); // Incrementa en 1 el campo indicado
+    public function AgregarResultadosValanti($idCandidato,$verdad,$rectitud,$paz,$amor,$noViolencia){
+
+        $data = array(
+            'Verdad' => $verdad,
+            'Rectitud' => $rectitud,
+            'Paz' => $paz,
+            'Amor' => $amor,
+            'No_violencia' => $noViolencia
+        );
+
         $this->db->where('idCandidato', $idCandidato);
-        $this->db->update('Briggs');
+        $this->db->update('valanti', $data);
+
+        
+
     }
 
-    
     
 }
