@@ -105,7 +105,7 @@ class CandidatoModel extends CI_Model
     }
     public function getDatosBriggs($idCandidato)
     {
-        $this->db->select('extrovertido, introvertido, sensorial,intuitivo,racional,emocional,calificador,perceptivo');
+        $this->db->select('extrovertido, introvertido, sensorial, intuitivo,racional,emocional,calificador,perceptivo');
         $this->db->from('Briggs');
         $this->db->where('idCandidato', $idCandidato);
 
@@ -117,6 +117,23 @@ class CandidatoModel extends CI_Model
             return null;
         }
 
+
+
+    }
+
+    public function getDatosValanti($idCandidato){
+
+        $this->db->select('Verdad,Rectitud, Paz, Amor, No_violencia, verdadEmpresa, rectitudEmpresa, pazEmpresa, amorEmpresa, noViolenciaEmpresa');
+        $this->db->from('valanti');
+        $this->db->where('idCandidato',$idCandidato);
+
+        $query = $this->db->get();
+
+        if($query->num_rows()>0){
+            return $query->row();
+        }else {
+            return null;
+        }
     }
 
 
@@ -185,6 +202,28 @@ class CandidatoModel extends CI_Model
             return false;
         }
     }
+
+    public function guardarValanti($idCandidato, $Verdad, $Rectitud, $Paz, $Amor, $NoViolencia)
+    {
+        // Actualiza las notas del Candidato en la base de datos
+        $this->db->where('idCandidato', $idCandidato);
+        $data = array(
+            'verdadEmpresa' => $Verdad,
+            'rectitudEmpresa' => $Rectitud,
+            'pazEmpresa' => $Paz,
+            'amorEmpresa' => $Amor,
+            'noViolenciaEmpresa' => $NoViolencia
+
+        );
+        $this->db->update('valanti', $data);
+
+        // Verifica si la actualización fue exitosa
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     public function activarTemperamento($idCandidato)
     {
         // Actualiza el estado de la prueba de temperamentos a 1
@@ -241,7 +280,7 @@ class CandidatoModel extends CI_Model
     {
         // Actualiza el estado de la prueba de temperamentos a 1
         $data = array(
-            'Valanti' => 1
+            'valanti' => 1
         );
 
         $this->db->where('idCandidato', $idCandidato);
@@ -254,7 +293,7 @@ class CandidatoModel extends CI_Model
     {
         // Actualiza el estado de la prueba de temperamentos a 1
         $data = array(
-            'Valanti' => 0
+            'valanti' => 0
         );
 
         $this->db->where('idCandidato', $idCandidato);
@@ -292,7 +331,7 @@ class CandidatoModel extends CI_Model
     public function existeRegistroValanti($idCandidato)
     {
         $this->db->where('idCandidato', $idCandidato);
-        $query = $this->db->get('Valanti');
+        $query = $this->db->get('valanti');
         
         return $query->num_rows() > 0; 
     }
@@ -305,10 +344,15 @@ class CandidatoModel extends CI_Model
             'Paz' => 0,
             'Amor' => 0,
             'No_violencia' => 0,
+            'verdadEmpresa' => 50,
+            'rectitudEmpresa' => 50,
+            'pazEmpresa' => 50,
+            'amorEmpresa' => 50,
+            'noViolenciaEmpresa' => 50,
             'idCandidato' => $idCandidato
         );
 
-        $this->db->insert('Valanti', $data);
+        $this->db->insert('valanti', $data);
         
     }
 

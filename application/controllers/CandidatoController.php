@@ -8,6 +8,8 @@ class CandidatoController extends CI_Controller
         parent::__construct();
         $this->load->model('CandidatoModel');
         $this->load->helper('autenticacion');
+        require_once(APPPATH . 'libraries/dompdf/autoload.inc.php');
+        $this->dompdf = new \Dompdf\Dompdf();
     }
 
 
@@ -82,6 +84,7 @@ class CandidatoController extends CI_Controller
         $data['candidato_data'] = $this->CandidatoModel->getCandidatoPorId($idCandidato);
         $data['dataTemperamento'] = $this->CandidatoModel->getDatosPrueba($idCandidato);
         $data['dataBriggs'] = $this->CandidatoModel->getDatosBriggs($idCandidato);
+        $data['dataValanti'] = $this->CandidatoModel->getDatosValanti($idCandidato);
 
         //$IdCandidato = $data['candidato_data']->idCandidato;
 
@@ -191,6 +194,7 @@ class CandidatoController extends CI_Controller
     }
 
 
+    ///SECCION PARA GUARDAR DATOS
 
     public function guardarNotas()
     {
@@ -203,6 +207,28 @@ class CandidatoController extends CI_Controller
 
 
         $this->CandidatoModel->guardarAnotaciones($idCandidato, $notas);
+
+        $this->VerCandidato($idCandidato);
+
+
+
+    }
+
+    public function guardarValanti()
+    {
+
+        $DPI = $this->input->post('DPI');
+        $Verdad = $this->input->post('Verdad');
+        $Rectitud = $this->input->post('Rectitud');
+        $Paz = $this->input->post('Paz');
+        $Amor = $this->input->post('Amor');
+        $NoViolencia = $this->input->post('NoViolencia');
+
+        $data['Candidato'] = $this->CandidatoModel->VerificarDPI($DPI); // Obtener los datos del candidato
+        $idCandidato = $data['Candidato']->idCandidato;
+
+
+        $this->CandidatoModel->guardarValanti($idCandidato, $Verdad, $Rectitud, $Paz, $Amor, $NoViolencia);
 
         $this->VerCandidato($idCandidato);
 
@@ -251,10 +277,10 @@ class CandidatoController extends CI_Controller
         // Verifica si existe un registro para el idCandidato en la tabla Briggs
         $existeRegistroBriggs = $this->CandidatoModel->existeRegistroBriggs($idCandidato);
         if ($existeRegistroBriggs) {
-            
+
             $this->CandidatoModel->activarbriggs($idCandidato); // Esto coloca 1 en la tabla Briggs
-        }else{
-            $this->CandidatoModel->insertarRegistroBriggs($idCandidato);//Creo un registro para almacenar los resultados del briggs
+        } else {
+            $this->CandidatoModel->insertarRegistroBriggs($idCandidato); //Creo un registro para almacenar los resultados del briggs
             $this->CandidatoModel->activarbriggs($idCandidato); // Esto coloca 1 en la tabla Briggs
 
         }
@@ -289,10 +315,10 @@ class CandidatoController extends CI_Controller
         $existeRegistroValanti = $this->CandidatoModel->existeRegistroValanti($idCandidato);
 
         if ($existeRegistroValanti) {
-            
+
             $this->CandidatoModel->activarValanti($idCandidato); // Esto coloca 1 en la tabla Briggs
-        }else{
-            $this->CandidatoModel->insertarRegistroValanti($idCandidato);//Creo un registro para almacenar los resultados del briggs
+        } else {
+            $this->CandidatoModel->insertarRegistroValanti($idCandidato); //Creo un registro para almacenar los resultados del briggs
             $this->CandidatoModel->activarValanti($idCandidato); // Esto coloca 1 en la tabla Briggs
 
         }
@@ -305,6 +331,29 @@ class CandidatoController extends CI_Controller
         $idCandidato = $data['Candidato']->idCandidato;
         $this->CandidatoModel->desactivarValanti($idCandidato);
         $this->VerCandidato($idCandidato);
+    }
+
+    public function reporte($idCandidato) {
+
+        $data['candidato_data'] = $this->CandidatoModel->getCandidatoPorId($idCandidato);
+        $data['dataTemperamento'] = $this->CandidatoModel->getDatosPrueba($idCandidato);
+        $data['dataBriggs'] = $this->CandidatoModel->getDatosBriggs($idCandidato);
+        $data['dataValanti'] = $this->CandidatoModel->getDatosValanti($idCandidato);    
+        $html = $this->load->view('reporte/candidato', $data, true);
+    
+        $this->dompdf->loadHtml($html);
+        $this->dompdf->setPaper('letter', 'portrait');
+        $this->dompdf->render();
+    
+        $output = $this->dompdf->output();
+        $pdfFileName = 'factura_' . $idCandidato . '.pdf';
+    
+        // Enviar el contenido PDF al cliente
+        header('Content-type: application/pdf');
+        header("Content-Disposition: inline; filename=$pdfFileName");
+        header('Content-Transfer-Encoding: binary');
+        header('Accept-Ranges: bytes');
+        echo $output;
     }
 }
 

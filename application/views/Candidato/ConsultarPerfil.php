@@ -27,6 +27,9 @@
     <div class="container">
 
         <main>
+        <a href="<?= site_url('CandidatoController/reporte/' . $candidato_data->idCandidato); ?>"
+    class="btn btn-warning sweetalert-linkReporte" data-title="Generar Reporte"
+    style="float: right;">Generar Reporte</a>
 
             <h2 class="text">
                 Datos del Candidato
@@ -66,17 +69,17 @@
 
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
-                    
+
                     <li class="page-item">
                         <a class="page-link" href="#">Temperamentos</a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" href="#">Meyer-Briggs</a>
+                        <a class="page-link" href="#">Myers-Briggs</a>
                     </li>
                     <li class="page-item">
                         <a class="page-link" href="#">Valanti</a>
                     </li>
-                    
+
                 </ul>
             </nav>
 
@@ -266,16 +269,17 @@
                 <main>
 
                     <div class="d-flex justify-content-between align-items-center">
-                        <h2 style="margin-right: 500px;">BRIGGS</h2>
+                        <h2 style="margin-right: 500px;">Resultados de la Prueba Myers-Briggs</h2>
                         <div>
                             <a href="<?= site_url('CandidatoController/activarbriggs/' . $candidato_data->DPI); ?>"
                                 class="btn btn-success sweetalert-briggs"
-                                data-title="¿Activar la prueba Meyer-Briggs? ">Activar</a>
+                                data-title="¿Activar la prueba Myers-Briggs? ">Activar</a>
                             <a href="<?= site_url('CandidatoController/desactivarbriggs/' . $candidato_data->DPI); ?>"
                                 class="btn btn-danger sweetalert-briggs2"
-                                data-title="¿Desactivar la prueba Meyer-Briggs?">Desactivar</a>
+                                data-title="¿Desactivar la prueba Myers-Briggs?">Desactivar</a>
                         </div>
                     </div>
+
                     <div class="container">
                         <div class="row">
                             <!-- Columna 1: Gráfico -->
@@ -285,23 +289,220 @@
 
 
                         </div>
+
+                        <div class="Extrovertido">
+                            <h2>Extrovertido</h2>
+                            <p>
+                                Remite al adjetivo extravertido, al que define como “dado a la extraversión”. Y a su
+                                vez, considera a la extraversión como la inclinación de la persona hacia el mundo
+                                exterior, propia de quienes tienen un carácter abierto, gracias a lo cual les resulta
+                                fácil vincularse con los demás. Si bien ambos términos están admitidos, se considera más
+                                adecuado extravertido; se cree que extrovertido surge por influencia de su antónimo,
+                                introvertido.
+                            </p>
+                        </div>
+                        <div class="Introvertido">
+                            <h2>Introvertido</h2>
+                            <p>
+                                Está preocupado por el mundo interior, de la mente, disfrutan pensar, explorar sus
+                                pensamientos y emociones. La introversión es una actitud típica que se caracteriza por
+                                la concentración del interés en los procesos internos del sujeto. Tienden a ser
+                                sumamente introspectivos.
+                            </p>
+                        </div>
+                        <div class="Sensorial">
+                            <h2>Sensorial</h2>
+                            <p>
+                                Los sentidos son las distintas capacidades de un ser vivo para, apelando a ciertos
+                                órganos, lograr la percepción de estímulos internos o externos. El ser humano tiene
+                                cinco sentidos primordiales: el olfato, el tacto, el oído, el gusto y la vista. La
+                                sensibilidad, asimismo, es la facultad que permite sentir (experimentar una sensación).
+                            </p>
+                        </div>
+
+                        <div class="Intuitivo">
+                            <h2>Intuitivo</h2>
+                            <p>
+                                Persona que tiene la facultad de comprender las cosas al instante, sin necesidad de
+                                realizar complejos razonamiento. El término también se utiliza para hacer referencia al
+                                resultado de intuir. Se utiliza como sinónimo de presentimiento (tener la sensación de
+                                que algo va a ocurrir o adivinar algo antes de que suceda)
+                            </p>
+                        </div>
+
+                        <div class="Racional">
+                            <h2>Racional</h2>
+                            <p>
+                                Persona que emplea la razón y tiene la facultad de discutir el motivo o causa, el
+                                argumento que se esgrime para apoyar algo, o el cociente intelectual que en ocasiones no
+                                necesita ser alto para mostrar su capacidad de razonamiento, son personas que se guían
+                                por las objetividades y no son aptas para aceptar cualquier teoría que no haya ninguna
+                                prueba.
+                            </p>
+                        </div>
+
+                        <div class="Emocional">
+                            <h2>Emocional</h2>
+                            <p>
+                                Se clasifica como emocional a una persona o situación en la cual diferentes tipos de
+                                sentimientos están visibles y a flor de piel. Es importante entender que una emoción es
+                                un fenómeno tanto físico como psíquico y que, por tanto, tales eventos no son siempre
+                                manejables y medibles de manera voluntaria por los individuos, derivando en
+                                personalidades en las cuales el sector emocional ejerce mayor influencia o poder sobre
+                                el sector racional del comportamiento.
+                            </p>
+                        </div>
+
+                        <div class="Calificador">
+                            <h2>Calificador</h2>
+                            <p>
+                                Personalidad que emplea distintos criterios para calificar a las personas, situaciones y
+                                objetos que se proponga a distinguir. Tiende a enumerar y clasificar varios eventos
+                                conforme lo establece su ideología y muy pocas veces comparte la opinión de los demás
+                                dando a entender que su opinión es la verdadera porque lo ha entendido en varias formas.
+                            </p>
+                        </div>
+
+                        <div class="Perceptivo">
+                            <h2>Perceptivo</h2>
+                            <p>
+                                Personalidad que interpreta y entiende mejor la información que recibe a través de la
+                                experiencia (probar, ver, saborear, etc.). y entiende que las cosas tienen un
+                                significado de manera inteligente. No es necesario que la persona obtenga una formación
+                                académica adecuada; porque, se basa en su método empírico.
+                            </p>
+                        </div>
+
+                        
                     </div>
                 </main>
-
+                <br>
             </div>
-<!-- PRUEBA VALANTI-->
+            <!-- PRUEBA VALANTI-->
             <div class="contenido div-ocultar-3">
                 <main>
-
                     <div class="d-flex justify-content-between align-items-center">
-                        <h2 style="margin-right: 500px;">VALANTI</h2>
-                        <div>
-                            <a href="<?= site_url('CandidatoController/activarValanti/' . $candidato_data->DPI); ?>"
-                                class="btn btn-success sweetalert-briggs"
-                                data-title="¿Activar la prueba Valanti? ">Activar</a>
-                            <a href="<?= site_url('CandidatoController/desactivarValanti/' . $candidato_data->DPI); ?>"
-                                class="btn btn-danger sweetalert-briggs2"
-                                data-title="¿Desactivar la prueba Valanti?">Desactivar</a>
+                        <h3 style="margin-right: 500px;">Perfil valoral, cuestionario Valanti</h2>
+                            <div>
+                                <a href="<?= site_url('CandidatoController/activarValanti/' . $candidato_data->DPI); ?>"
+                                    class="btn btn-success sweetalert-briggs"
+                                    data-title="¿Activar la prueba Valanti? ">Activar</a>
+                                <a href="<?= site_url('CandidatoController/desactivarValanti/' . $candidato_data->DPI); ?>"
+                                    class="btn btn-danger sweetalert-briggs2"
+                                    data-title="¿Desactivar la prueba Valanti?">Desactivar</a>
+                            </div>
+
+
+                    </div>
+                    <br>
+                    <div class="container">
+                        <div class="row">
+                            <!-- Columna 1: Gráfico -->
+                            <div class="col-md-6">
+                                <canvas id="radiaGlChart"></canvas>
+                            </div>
+                            <!-- Columna 2: Espacio para anotaciones -->
+
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <!-- Formulario 1 -->
+                                    <div class="col-md-6">
+                                        <form id="datosForm">
+
+                                            <h2>Participante:</h2>
+                                            <div class="form-group">
+                                                <label for="rectitud">Verdad:</label>
+                                                <input type="text" class="form-control" id="Verdad" name="Verdad"
+                                                    value="<?php echo isset($dataValanti->Verdad) ? $dataValanti->Verdad : ''; ?>">
+
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="rectitud">Rectitud:</label>
+                                                <input type="text" class="form-control" id="Rectitud" name="Rectitud"
+                                                    value="<?php echo isset($dataValanti->Rectitud) ? $dataValanti->Rectitud : ''; ?>">
+
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="paz">Paz:</label>
+                                                <input type="text" class="form-control" id="Paz" name="Paz"
+                                                    value="<?php echo isset($dataValanti->Paz) ? $dataValanti->Paz : ''; ?>">
+
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="amor">Amor:</label>
+                                                <input type="text" class="form-control" id="Amor" name="Amor"
+                                                    value="<?php echo isset($dataValanti->Amor) ? $dataValanti->Amor : ''; ?>">
+
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="noViolencia">No Violencia:</label>
+                                                <input type="text" class="form-control" id="NoViolencia"
+                                                    name="NoViolencia"
+                                                    value="<?php echo isset($dataValanti->No_violencia) ? $dataValanti->No_violencia : ''; ?>">
+
+                                            </div>
+
+
+                                        </form>
+
+                                    </div>
+
+                                    <!-- Formulario 2 DEL GESTOR DE TALENTOS -->
+                                    <div class="col-md-6">
+                                        <form id="datosFormNuevo"
+                                            action="<?php echo site_url('CandidatoController/guardarValanti'); ?>"
+                                            method="POST">
+                                            <input type="hidden" class="form-control" id="DPI" name="DPI"
+                                                value="<?php echo $candidato_data->DPI; ?>">
+
+                                            <h2> Gestor:</h2>
+                                            <div class="form-group">
+                                                <label for="Verdad">Verdad:</label>
+                                                <input type="number" class="form-control" id="Verdad" name="Verdad"
+                                                    value="<?php echo isset($dataValanti->verdadEmpresa) ? $dataValanti->verdadEmpresa : ''; ?>">
+
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="Rectitud">Rectitud:</label>
+                                                <input type="number" class="form-control" id="Rectitud" name="Rectitud"
+                                                    value="<?php echo isset($dataValanti->rectitudEmpresa) ? $dataValanti->rectitudEmpresa : ''; ?>">
+
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="Paz">Paz:</label>
+                                                <input type="number" class="form-control" id="Paz" name="Paz"
+                                                    value="<?php echo isset($dataValanti->pazEmpresa) ? $dataValanti->pazEmpresa : ''; ?>">
+
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="Amor">Amor:</label>
+                                                <input type="number" class="form-control" id="Amor" name="Amor"
+                                                    value="<?php echo isset($dataValanti->amorEmpresa) ? $dataValanti->amorEmpresa : ''; ?>">
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="NoViolencia">No Violencia:</label>
+                                                <input type="number" class="form-control" id="NoViolencia"
+                                                    name="NoViolencia"
+                                                    value="<?php echo isset($dataValanti->noViolenciaEmpresa) ? $dataValanti->noViolenciaEmpresa : ''; ?>">
+
+                                            </div>
+                                            <!-- Botón de guardar -->
+                                            <button type="submit" class="btn btn-primary mt-3"
+                                                id="GuardarDatosNuevo">Guardar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
@@ -311,7 +512,69 @@
 
         </main>
 
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script><!-- Esta linea siempre va al inicio
+    En esta parte va los SCRIPT de las graficas, recuerda cambiar el ID de cada grafica para no tener problema-->
+
+        <script>
+            // Convierte los datos de $dataTemperamento en formato JSON
+            var dataValanti = <?php echo json_encode($dataValanti); ?>;
+            var candidato = <?php echo json_encode($candidato_data); ?>;
+            var ctx = document.getElementById("radiaGlChart").getContext("2d");
+
+            var myChart = new Chart(ctx, {
+                type: "radar",
+                data: {
+                    labels: ["Verdad", "Rectitud", "Paz", "Amor", "No_Violencia"],
+                    datasets: [
+                        {
+                            label: [candidato.Nombres],
+                            data: [dataValanti.Verdad, dataValanti.Rectitud, dataValanti.Paz, dataValanti.Amor, dataValanti.No_violencia],
+                            borderColor: 'rgba(54, 162, 235, 1)', // Color de la línea
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)', // Color del área debajo de la línea
+                            borderWidth: 3
+                        },
+                        // Coma faltante aquí
+                        {
+                            label: 'Gestor de Talentos', // Coma faltante después de 'Gestor de Talentos'
+                            data: [dataValanti.verdadEmpresa, dataValanti.rectitudEmpresa, dataValanti.pazEmpresa, dataValanti.amorEmpresa, dataValanti.noViolenciaEmpresa],
+                            borderColor: 'rgba(255, 99, 132, 1)', // Color de la línea
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)', // Color del área debajo de la línea
+                            borderWidth: 3
+                        }
+
+                    ]
+
+                },
+                options: {
+                    responsive: true,
+                    display: true,
+
+                    elements: {
+                        line: {
+                            borderWidth: 3
+                        }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: {
+                                display: false
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 70
+                        }
+                    },
+                    tooltips: {
+                        callbacks: {
+                            label: function (tooltipItem, data) {
+                                return data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel;
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
+
+
         <script>
             // Convierte los datos de $dataTemperamento en formato JSON
             var temperamentoData = <?php echo json_encode($dataTemperamento); ?>;
@@ -616,7 +879,6 @@
         <script>
             // Convierte los datos de $dataTemperamento en formato JSON
             var dataBriggs = <?php echo json_encode($dataBriggs); ?>;
-            console.log(temperamentoData);
             var ctx = document.getElementById("myCharts").getContext("2d");
 
             var myChart = new Chart(ctx, {

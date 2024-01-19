@@ -20,14 +20,14 @@
 
 <body>
     <header>
-        <h1>Prueba de Briggss</h1>
+        <h1>Prueba de Myers-Briggss</h1>
     </header>
     <div class="container">
         <main>
             <div class="d-flex justify-content-start">
                 <img src="<?php echo base_url('assets/img/logo.jpeg'); ?>" class="d-block" alt="Imagen"
                     style="width: 35%; height: auto;"><br><br>
-                <p class="text-center"><br><br>Marque con una X aquellas opciones que reflejen algún aspecto de su
+                <p class="text-center"><br><br>Seleccione las opciones que reflejen algún aspecto de su
                     personalidad o se identifiquen con
                     parámetros de acción ante las diferentes situaciones que se plantean. Si no se relacionan con su
                     forma
@@ -39,7 +39,7 @@
 
             </div><br>
             <h2 style="text-align: center;">
-                Por favor no abandone la prueba o quedará anulada..
+                Por favor no abandone la prueba o quedará anulada.
             </h2>
 
             <br><br>
@@ -402,7 +402,7 @@
 
         highlightableElements.forEach(function (element) {
             element.addEventListener('mouseover', function () {
-                element.style.backgroundColor = '#f0f0f0';
+                element.style.backgroundColor = '#a6a2a2';
             });
 
             element.addEventListener('mouseout', function () {

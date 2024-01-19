@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Webleb</title>
+    <title>Gestor de Talentos</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">

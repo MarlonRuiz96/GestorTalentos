@@ -26,6 +26,92 @@ main {
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+.Extrovertido {
+    flex: 0;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #1d864a;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    box-shadow: 0 10px 15px rgba(1, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+.Introvertido {
+    flex: 0;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fcc832;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    box-shadow: 0 10px 15px rgba(1, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+.Sensorial {
+    flex: 0;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #347fab;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    box-shadow: 0 10px 15px rgba(1, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+.Intuitivo {
+    flex: 0;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ff5733;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    box-shadow: 0 10px 15px rgba(1, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+.Racional {
+    flex: 0;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #8e44ad;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    box-shadow: 0 10px 15px rgba(1, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+.Emocional {
+    flex: 0;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #3498db;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    box-shadow: 0 10px 15px rgba(1, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+.Calificador {
+    flex: 0;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f39c12;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    box-shadow: 0 10px 15px rgba(1, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+.Perceptivo {
+    flex: 0;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #27ae60;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    box-shadow: 0 10px 15px rgba(1, 0, 0, 0.2); /* Sombra más pronunciada */
+}
 
 footer {
     text-align: center;
@@ -148,3 +234,14 @@ thead {
     background-color: red;
     /* Color rojo para una suma incorrecta */
 }
+.parrafo-profesional {
+    background-color: rgba(0, 255, 0, 0.1); /* Fondo verde transparente */
+    padding: 20px; /* Espaciado interno para el contenido */
+    border-radius: 8px; /* Bordes redondeados */
+    font-family: Arial, sans-serif; /* Tipo de fuente */
+    font-size: 16px; /* Tamaño del texto */
+    color: #333; /* Color del texto */
+    border: 1px solid #ccc; /* Borde del contenedor */
+}
+
+
