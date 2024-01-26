@@ -70,12 +70,12 @@ CREATE TABLE IF NOT EXISTS `candidato` (
   PRIMARY KEY (`idCandidato`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla rh.candidato: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla rh.candidato: ~3 rows (aproximadamente)
 DELETE FROM `candidato`;
 INSERT INTO `candidato` (`idCandidato`, `Nombres`, `Puesto`, `DPI`, `temperamento`, `Contacto`, `Correo`, `fecha_crear`, `Temporal`, `melancolico`, `colerico`, `flematico`, `sanguineo`, `notas`, `Briggs`, `Valanti`) VALUES
-	(13, 'Marlon Ruiz Gonzalez', 'Desarrollador Junior', '2474218042214', 1, '50517389', 'mruiz996@outlook.com', '2023-11-19', 41, 44, 95, 55, 21, '', 1, 0),
-	(14, '', '', '2474218042213', 0, '', '', '2023-11-25', 2, 37, 42, 16, 6, NULL, 0, NULL),
-	(15, '', '', '1111111111111', 0, '', '', '2023-11-25', 1, 0, 0, 0, 0, NULL, 0, NULL);
+	(13, 'Marlon Ruiz Gonzalez', 'Desarrollador Junior', '2474218042214', 0, '50517389', 'mruiz996@outlook.com', '2023-11-19', 0, 44, 95, 55, 21, '', 1, 0),
+	(14, '', '', '2474218042213', 0, '', '', '2023-11-25', 2, 37, 42, 16, 6, NULL, 0, 1),
+	(15, '', '', '1111111111111', 0, '', '', '2023-11-25', 1, 0, 0, 0, 0, NULL, 0, 1);
 
 -- Volcando estructura para tabla rh.debilidad
 CREATE TABLE IF NOT EXISTS `debilidad` (
@@ -468,9 +468,9 @@ CREATE TABLE IF NOT EXISTS `sesiones` (
   PRIMARY KEY (`id_sesion`),
   KEY `fk_sesiones_usuario` (`id_usuario`),
   CONSTRAINT `fk_sesiones_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla rh.sesiones: ~38 rows (aproximadamente)
+-- Volcando datos para la tabla rh.sesiones: ~46 rows (aproximadamente)
 DELETE FROM `sesiones`;
 INSERT INTO `sesiones` (`id_sesion`, `id_usuario`, `token`, `fecha_creacion`, `fecha_actualizacion`) VALUES
 	(1, 1, '9b45d9cc197465d84ab4d8eaa7b5f77c6008c0ea365ff14c10711d0f3f94abe3', '2023-08-27 22:39:04', '2023-08-28 07:06:24'),
@@ -512,7 +512,13 @@ INSERT INTO `sesiones` (`id_sesion`, `id_usuario`, `token`, `fecha_creacion`, `f
 	(37, 1, 'fb43718322b1b5e7723faef15fd94d996bd3880725c056b79903d0aefd0a79d0', '2023-11-26 23:21:05', '2023-11-27 07:22:02'),
 	(38, 1, '9b35ee7def980e765c1d472bb04c8447e1d2708ced1016bc13bfcc59070beb73', '2023-12-11 21:43:29', '2023-12-12 05:17:07'),
 	(39, 1, '1009be6143cc772e8ec3eaf7f0b617a1379e2f979687241e502d4511d90fa68d', '2023-12-17 13:16:58', '2023-12-17 20:56:03'),
-	(40, 1, '496408b5d9df84d8b773631b0a644f61349bd19be6064976ace8ddb09ec913e4', '2023-12-27 21:43:44', '2023-12-28 04:43:46');
+	(40, 1, '496408b5d9df84d8b773631b0a644f61349bd19be6064976ace8ddb09ec913e4', '2023-12-27 21:43:44', '2023-12-28 04:43:46'),
+	(41, 1, '7fd7e5cc31f868e6d47569e4d3bc8651f580690bc37adb643261748b2af871a1', '2023-12-31 14:45:46', '2024-01-01 05:52:01'),
+	(42, 1, '0ccc8d414f9b27ca81e928a563064f8efc89eb366653d1f217d0824c24ae5add', '2024-01-01 17:49:41', '2024-01-01 17:49:41'),
+	(43, 1, '7b986b11b0dbf0e736055137345c5ca101670bc3f7ab6d55d6a3b4ed87fbe135', '2024-01-01 17:49:41', '2024-01-02 00:49:43'),
+	(44, 1, '8ccf3ca4a7ad96024e41dd934d959dea8b1b063b3bdeb27ef7dfbb44b734ed8b', '2024-01-16 21:01:30', '2024-01-17 04:02:16'),
+	(45, 1, 'ceb766dc73de33ed80cf63ca6ce019e8d71d79a4d92e3e0df80c1c321fee84cd', '2024-01-19 19:51:08', '2024-01-20 03:23:29'),
+	(46, 1, 'c34356a2de94c6d4aa9387c972f8ba4aed55a10ff186c81bf889e056e4e1b5c5', '2024-01-25 22:12:05', '2024-01-26 05:36:29');
 
 -- Volcando estructura para tabla rh.sesionestoken
 CREATE TABLE IF NOT EXISTS `sesionestoken` (
@@ -536,6 +542,7 @@ CREATE TABLE IF NOT EXISTS `temperamento` (
   `colerico` int(11) NOT NULL,
   `flematico` int(11) NOT NULL,
   `sanguineo` int(11) NOT NULL,
+  `realizado` int(10) NOT NULL,
   `idCandidatofk` int(11) NOT NULL,
   PRIMARY KEY (`idTemperamento`),
   KEY `fkCandidato` (`idCandidatofk`),
@@ -544,10 +551,9 @@ CREATE TABLE IF NOT EXISTS `temperamento` (
 
 -- Volcando datos para la tabla rh.temperamento: ~2 rows (aproximadamente)
 DELETE FROM `temperamento`;
-INSERT INTO `temperamento` (`idTemperamento`, `melancolico`, `colerico`, `flematico`, `sanguineo`, `idCandidatofk`) VALUES
-	(9, 0, 0, 0, 0, 13),
-	(10, 0, 0, 0, 0, 14),
-	(11, 0, 0, 0, 0, 15);
+INSERT INTO `temperamento` (`idTemperamento`, `melancolico`, `colerico`, `flematico`, `sanguineo`, `realizado`, `idCandidatofk`) VALUES
+	(9, 0, 0, 0, 0, 1, 13),
+	(10, 0, 0, 0, 0, 0, 14);
 
 -- Volcando estructura para tabla rh.usuario
 CREATE TABLE IF NOT EXISTS `usuario` (
@@ -572,16 +578,23 @@ CREATE TABLE IF NOT EXISTS `valanti` (
   `Paz` int(10) DEFAULT NULL,
   `Amor` int(10) DEFAULT NULL,
   `No_violencia` int(10) DEFAULT NULL,
+  `verdadEmpresa` int(10) DEFAULT NULL,
+  `rectitudEmpresa` int(10) DEFAULT NULL,
+  `pazEmpresa` int(10) DEFAULT NULL,
+  `amorEmpresa` int(10) DEFAULT NULL,
+  `noViolenciaEmpresa` int(10) DEFAULT NULL,
   `idCandidato` int(11) NOT NULL,
   PRIMARY KEY (`idValanti`) USING BTREE,
   KEY `FK_Usuario_Valanti` (`idCandidato`) USING BTREE,
   CONSTRAINT `fkvalanti` FOREIGN KEY (`idCandidato`) REFERENCES `candidato` (`idCandidato`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla rh.valanti: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla rh.valanti: ~3 rows (aproximadamente)
 DELETE FROM `valanti`;
-INSERT INTO `valanti` (`idValanti`, `Verdad`, `Rectitud`, `Paz`, `Amor`, `No_violencia`, `idCandidato`) VALUES
-	(1, 53, 50, 48, 47, 50, 13);
+INSERT INTO `valanti` (`idValanti`, `Verdad`, `Rectitud`, `Paz`, `Amor`, `No_violencia`, `verdadEmpresa`, `rectitudEmpresa`, `pazEmpresa`, `amorEmpresa`, `noViolenciaEmpresa`, `idCandidato`) VALUES
+	(1, 53, 50, 48, 47, 50, 55, 50, 65, 55, 55, 13),
+	(2, 0, 0, 0, 0, 0, 50, 50, 50, 50, 50, 15),
+	(3, 0, 0, 0, 0, 0, 50, 50, 50, 50, 50, 14);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>assets/css/bootstrap.min.css">
@@ -55,47 +55,58 @@
 
         /* Estilo para la tabla */
         .table {
-    margin-left: 50px;
-    margin-right: 20px;
-    width: 90%;
-    color: #212529;
-    border-collapse: collapse;
-}
+            margin-left: 50px;
+            margin-right: 20px;
+            width: 90%;
+            color: #212529;
+            border-collapse: collapse;
+        }
 
-.table th,
-.table td {
-    padding: 0.75rem;
-    vertical-align: top;
-    border-top: 1px solid #dee2e6;
-}
+        .table th,
+        .table td {
+            padding: 0.75rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+        }
 
-.table th {
-    background-color: #fff;
-}
+        .table th {
+            background-color: #fff;
+        }
 
-.table tbody tr:nth-child(odd) {
-    background-color: rgba(0, 123, 255, 0.05);
-}
+        .table tbody tr:nth-child(odd) {
+            background-color: rgba(0, 123, 255, 0.05);
+        }
 
-.table tbody tr:nth-child(even) {
-    background-color: #fff;
-}
+        .table tbody tr:nth-child(even) {
+            background-color: #fff;
+        }
 
-.Panel {
-    max-width: 700px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: #fff;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+        .Panel {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
 
+        #datosPersonalesDiv {
+                display: block;
+            }
     </style>
 
 </head>
 
 <body>
+
+<?php if ($candidato_data->temperamento == 1): ?>
+    <style>
+        #datosPersonalesDiv {
+            display: none;
+        }
+    </style>
+<?php endif; ?>
     <?php
     // Generar la variable $base64 aquí
     $imgpath = base_url('assets/reporte/encabezado.png');
@@ -105,52 +116,44 @@
     ?>
 
     <div class="header">
-        <img class="logo" src="<?php echo $base64; ?>">
+    <img class="logo" src="<?php echo $base64; ?>">
 
     </div>
     <br><br><br><br><br><br><br>
-    <div class="Panel">
-        <table class="table table-bordered">
-            <tbody>
-                <tr>
-                    <th>Nombres</th>
-                    <td>
-                        <?php echo $candidato_data->Nombres; ?>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Puesto</th>
-                    <td>
-                        <?php echo $candidato_data->Puesto; ?>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Contacto</th>
-                    <td>
-                        <?php echo $candidato_data->Contacto; ?>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Correo</th>
-                    <td>
-                        <?php echo $candidato_data->Correo; ?>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="DatosPersonales" id="datosPersonalesDiv">
+        <div class="Panel">
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th>Nombres</th>
+                        <td>
+                            <?php echo $candidato_data->Nombres; ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Puesto</th>
+                        <td>
+                            <?php echo $candidato_data->Puesto; ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Contacto</th>
+                        <td>
+                            <?php echo $candidato_data->Contacto; ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Correo</th>
+                        <td>
+                            <?php echo $candidato_data->Correo; ?>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 
-
-
-
-    </form>
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w7Qk5FlJz7I5Mou9DqI5owlr9xHtJK5RdeYiiJZu9VZwvAymatzsZVxmJW5eDsfQ"
-        crossorigin="anonymous"></script>
 </body>
 
 </html>

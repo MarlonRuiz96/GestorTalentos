@@ -74,7 +74,7 @@ class CandidatoModel extends CI_Model
     }
     public function getCandidatoPorId($idCandidato)
     {
-        $this->db->select('idCandidato, Nombres, Puesto, Contacto, Correo, notas, DPI');
+        $this->db->select('idCandidato, Nombres, Puesto, Contacto, Correo, notas, DPI, temperamento');
         $this->db->from('Candidato');
         $this->db->where('idCandidato', $idCandidato);
 
@@ -90,7 +90,7 @@ class CandidatoModel extends CI_Model
 
     public function getDatosPrueba($idCandidato)
     {
-        $this->db->select('melancolico, colerico, flematico,sanguineo');
+        $this->db->select('melancolico, colerico, flematico, sanguineo');
         $this->db->from('Candidato');
         $this->db->where('idCandidato', $idCandidato);
 
