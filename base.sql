@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `candidato` (
   PRIMARY KEY (`idCandidato`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla rh.candidato: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla rh.candidato: ~2 rows (aproximadamente)
 DELETE FROM `candidato`;
 INSERT INTO `candidato` (`idCandidato`, `Nombres`, `Puesto`, `DPI`, `temperamento`, `Contacto`, `Correo`, `fecha_crear`, `Temporal`, `melancolico`, `colerico`, `flematico`, `sanguineo`, `notas`, `Briggs`, `Valanti`) VALUES
 	(13, 'Marlon Ruiz Gonzalez', 'Desarrollador Junior', '2474218042214', 0, '50517389', 'mruiz996@outlook.com', '2023-11-19', 0, 44, 95, 55, 21, '', 1, 0),
@@ -468,7 +468,7 @@ CREATE TABLE IF NOT EXISTS `sesiones` (
   PRIMARY KEY (`id_sesion`),
   KEY `fk_sesiones_usuario` (`id_usuario`),
   CONSTRAINT `fk_sesiones_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- Volcando datos para la tabla rh.sesiones: ~46 rows (aproximadamente)
 DELETE FROM `sesiones`;
@@ -518,7 +518,12 @@ INSERT INTO `sesiones` (`id_sesion`, `id_usuario`, `token`, `fecha_creacion`, `f
 	(43, 1, '7b986b11b0dbf0e736055137345c5ca101670bc3f7ab6d55d6a3b4ed87fbe135', '2024-01-01 17:49:41', '2024-01-02 00:49:43'),
 	(44, 1, '8ccf3ca4a7ad96024e41dd934d959dea8b1b063b3bdeb27ef7dfbb44b734ed8b', '2024-01-16 21:01:30', '2024-01-17 04:02:16'),
 	(45, 1, 'ceb766dc73de33ed80cf63ca6ce019e8d71d79a4d92e3e0df80c1c321fee84cd', '2024-01-19 19:51:08', '2024-01-20 03:23:29'),
-	(46, 1, 'c34356a2de94c6d4aa9387c972f8ba4aed55a10ff186c81bf889e056e4e1b5c5', '2024-01-25 22:12:05', '2024-01-26 05:36:29');
+	(46, 1, 'c34356a2de94c6d4aa9387c972f8ba4aed55a10ff186c81bf889e056e4e1b5c5', '2024-01-25 22:12:05', '2024-01-26 05:36:29'),
+	(47, 1, 'e443baed4e3e35d99f060f6ffef1c54f6f5316ae529e95a905e53c43e759b11e', '2024-01-29 21:14:26', '2024-01-29 21:14:26'),
+	(48, 1, 'fe2f33b04ad6a8d94b025060c88349b4a9d47f8d013224716c7a0c305b49b8cc', '2024-01-29 21:14:26', '2024-01-30 04:14:41'),
+	(49, 1, 'ebf0ecc3cdb1438ff038bc1df27b77e933d8e62f93b866073c3847137d7ba670', '2024-02-05 22:47:47', '2024-02-06 05:47:50'),
+	(50, 1, '91e0e0a419817da6526f56bd7586efebf14ab98455715402ec8dc6a11a452971', '2024-02-06 22:02:59', '2024-02-07 05:03:04'),
+	(51, 1, 'd23f7626b763b5270101d84747c4f8d067438f3b88063ddd3aa0aa524ad0f62b', '2024-02-08 23:04:19', '2024-02-09 06:14:39');
 
 -- Volcando estructura para tabla rh.sesionestoken
 CREATE TABLE IF NOT EXISTS `sesionestoken` (

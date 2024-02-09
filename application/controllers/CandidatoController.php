@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+require FCPATH . 'vendor/autoload.php';
 class CandidatoController extends CI_Controller
 {
 
@@ -333,27 +334,15 @@ class CandidatoController extends CI_Controller
         $this->VerCandidato($idCandidato);
     }
 
-    public function reporte($idCandidato) {
-
+    public function reporte($idCandidato)
+    {
         $data['candidato_data'] = $this->CandidatoModel->getCandidatoPorId($idCandidato);
-        $data['dataTemperamento'] = $this->CandidatoModel->getDatosPrueba($idCandidato);
-        $data['dataBriggs'] = $this->CandidatoModel->getDatosBriggs($idCandidato);
-        $data['dataValanti'] = $this->CandidatoModel->getDatosValanti($idCandidato);    
-        $html = $this->load->view('reporte/candidato', $data, true);
-    
-        $this->dompdf->loadHtml($html);
-        $this->dompdf->setPaper('letter', 'portrait');
-        $this->dompdf->render();
-    
-        $output = $this->dompdf->output();
-        $pdfFileName = 'factura_' . $idCandidato . '.pdf';
-    
-        // Enviar el contenido PDF al cliente
-        header('Content-type: application/pdf');
-        header("Content-Disposition: inline; filename=$pdfFileName");
-        header('Content-Transfer-Encoding: binary');
-        header('Accept-Ranges: bytes');
-        echo $output;
+
+        $html = $this->load->view('reporte', $data, true);
+        $mpdf = new \Mpdf\Mpdf();
+        $mpdf->WriteHTML($html);
+        $mpdf->Output();
+
     }
 }
 

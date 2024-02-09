@@ -27,9 +27,9 @@
     <div class="container">
 
         <main>
-        <a href="<?= site_url('CandidatoController/reporte/' . $candidato_data->idCandidato); ?>"
-    class="btn btn-warning sweetalert-linkReporte" data-title="Generar Reporte"
-    style="float: right;">Generar Reporte</a>
+            <a href="<?= site_url('CandidatoController/reporte/' . $candidato_data->idCandidato); ?>"
+                class="btn btn-warning sweetalert-linkReporte" data-title="Generar Reporte"
+                style="float: right;">Generar Reporte</a>
 
             <h2 class="text">
                 Datos del Candidato
@@ -109,6 +109,8 @@
                                 <div class="col-md-6">
                                     <canvas id="myChart"></canvas>
                                 </div>
+                                <button id="saveChartButton">Guardar Gráfico</button>
+
                                 <!-- Columna 2: Espacio para anotaciones -->
 
                                 <div class="col-md-6">
@@ -373,7 +375,7 @@
                             </p>
                         </div>
 
-                        
+
                     </div>
                 </main>
                 <br>
@@ -576,11 +578,8 @@
 
 
         <script>
-            // Convierte los datos de $dataTemperamento en formato JSON
+            // Configuración de datos para la gráfica (tendrías que ajustar esto según tu estructura de datos)
             var temperamentoData = <?php echo json_encode($dataTemperamento); ?>;
-            console.log(temperamentoData);
-
-            // Configuración de datos para la gráfica
             var data = {
                 labels: ['Melancólico', 'Flemático', 'Colérico', 'Sanguíneo'],
                 datasets: [{
@@ -589,7 +588,6 @@
                     backgroundColor: [
                         'rgb(23, 162, 184)',
                         'rgb(40, 167, 69)',
-
                         'rgb(220, 53, 69)',
                         'rgb(255, 193, 7)'
                     ]
@@ -611,6 +609,16 @@
                 type: 'doughnut',
                 data: data,
                 options: options
+            });
+
+            // Función para guardar la gráfica como imagen
+            document.getElementById('saveChartButton').addEventListener('click', function () {
+                html2canvas(document.getElementById('myChart')).then(function (canvas) {
+                    var link = document.createElement('a');
+                    link.download = 'grafico_temperamentos.png';
+                    link.href = canvas.toDataURL();
+                    link.click();
+                });
             });
         </script>
         <script>

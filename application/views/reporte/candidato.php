@@ -2,7 +2,11 @@
 <html lang="es">
 
 <head>
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>assets/css/bootstrap.min.css">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,10 +20,20 @@
         body {
             margin: 0;
             padding: 0;
-
+            background-color: #F1F1F1;
+            font: 16px Georgia, serif;
+            /* Cambia 16px por el tamaño de fuente deseado y agrega tu fuente preferida después de Georgia */
         }
 
+
         /* Estilos para el encabezado o portada */
+        .h2 {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            line-height: 1.2;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
 
         form {
             position: absolute;
@@ -30,7 +44,6 @@
             /* Ajusta la posición horizontalmente */
             transform: translate(-50%, -50%);
             /* Centra el formulario */
-            padding: 20px;
             background-color: white;
             /* Fondo blanco para el formulario */
             border-radius: 10px;
@@ -55,36 +68,27 @@
 
         /* Estilo para la tabla */
         .table {
-            margin-left: 50px;
-            margin-right: 20px;
-            width: 90%;
-            color: #212529;
+            width: 50%;
             border-collapse: collapse;
         }
 
         .table th,
         .table td {
-            padding: 0.75rem;
-            vertical-align: top;
-            border-top: 1px solid #dee2e6;
+            position: fixed;
+            text-align: left;
         }
 
-        .table th {
-            background-color: #fff;
-        }
 
-        .table tbody tr:nth-child(odd) {
-            background-color: rgba(0, 123, 255, 0.05);
-        }
 
-        .table tbody tr:nth-child(even) {
-            background-color: #fff;
-        }
+
+
+
 
         .Panel {
+            padding-left: 20px;
+            padding-bottom: 20px;
             max-width: 700px;
-            margin: 40px auto;
-            padding: 20px;
+            margin: 40px;
             background-color: #fff;
             border: 2px solid #ccc;
             border-radius: 5px;
@@ -92,21 +96,23 @@
         }
 
         #datosPersonalesDiv {
-                display: block;
-            }
+            display: block;
+        }
+
+        
     </style>
 
 </head>
 
 <body>
 
-<?php if ($candidato_data->temperamento == 1): ?>
-    <style>
-        #datosPersonalesDiv {
-            display: none;
-        }
-    </style>
-<?php endif; ?>
+    <?php if ($candidato_data->temperamento == 1): ?>
+        <style>
+            #datosPersonalesDiv {
+                display: none;
+            }
+        </style>
+    <?php endif; ?>
     <?php
     // Generar la variable $base64 aquí
     $imgpath = base_url('assets/reporte/encabezado.png');
@@ -116,34 +122,35 @@
     ?>
 
     <div class="header">
-    <img class="logo" src="<?php echo $base64; ?>">
+        <img class="logo" src="<?php echo $base64; ?>">
 
     </div>
     <br><br><br><br><br><br><br>
     <div class="DatosPersonales" id="datosPersonalesDiv">
         <div class="Panel">
+            <h2>Datos personales:</h2>
             <table class="table table-bordered">
                 <tbody>
                     <tr>
-                        <th>Nombres</th>
+                        <th>Nombres:</th>
                         <td>
                             <?php echo $candidato_data->Nombres; ?>
                         </td>
                     </tr>
                     <tr>
-                        <th>Puesto</th>
+                        <th>Puesto:</th>
                         <td>
                             <?php echo $candidato_data->Puesto; ?>
                         </td>
                     </tr>
                     <tr>
-                        <th>Contacto</th>
+                        <th>Contacto:</th>
                         <td>
                             <?php echo $candidato_data->Contacto; ?>
                         </td>
                     </tr>
                     <tr>
-                        <th>Correo</th>
+                        <th>Correo:</th>
                         <td>
                             <?php echo $candidato_data->Correo; ?>
                         </td>
@@ -151,6 +158,11 @@
                 </tbody>
             </table>
         </div>
+
+    </div>
+
+    <div class="Panel">
+        <h2>Temperamentos:</h2><br>
     </div>
 
 
