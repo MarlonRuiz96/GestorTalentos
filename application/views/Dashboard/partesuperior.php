@@ -17,13 +17,13 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-trdophy"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Gestor de Talentos </div>
-            </a>
+                <img src="<?php echo base_url('assets/reporte/enca.png'); ?>" class="d-block" alt="Imagen"
+                    style="width: 100%; height: auto;">            </a>
             <hr class="sidebar-divider my-0">
             <li class="nav-item active">
                 <a class="nav-link" href="<?= site_url('Dashboard') ?>">
                 <i class="far fa-futbol" style="font-size: 24px;"></i>
-                <span class="nav-link" style="font-size: 15px;">Menú Principal</span></a>
+                <span class="nav-link" style="font-size: 15px;">Menú Principals</span></a>
             </li>
             <hr class="sidebar-divider">
            

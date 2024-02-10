@@ -1,85 +1,90 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Gestor de Talentos</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo base_url('assets/login.css'); ?>">
-    <link rel="stylesheet" href="assets/login.css">
-
+  <link rel="stylesheet" href="<?php echo base_url('assets/login2.css'); ?>">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestor de Talentos</title>
 </head>
 
 <body>
-    <div class="section">
-        <div class="container">
-            <div class="row full-height justify-content-center">
-                <div class="col-12 text-center align-self-center py-5">
-                    <div class="section pb-5 pt-5 pt-sm-2 text-center">
-                        <h6 class="mb-0 pb-3"><span>Realizar Prueba </span><span>Administrador</span></h6>
-                        <input class="checkbox" type="checkbox" id="reg-log" name="reg-log" />
-                        <label for="reg-log"></label>
-                        <div class="card-3d-wrap mx-auto">
-                            <div class="card-3d-wrapper">
-                                <div class="card-front">
-                                    <div class="center-wrap">
-                                        <form action="<?php echo site_url('DpiController/login'); ?>"
-                                            method="post">
-                                            <div class="section text-center">
-                                                <h4 class="mb-4 pb-3">Ingrese su DPI </h4>
-                                                <div class="form-group">
-                                                    <input type="text" class="form-style" placeholder="Ingrese su DPI"
-                                                        name="DPI">
-                                                    <i class="input-icon uil uil-at"></i>
-                                                </div>
-                                                <input type="submit" value="Iniciar" class="btn mt-4">
-                                                <p class="mb-0 mt-4 text-center">
-                                                    <a href="https://api.whatsapp.com/send?phone=50517389&text=Necesito ayuda con mi Token"
-                                                        class="link">
-                                                        ¿Necesitas ayuda?
-                                                    </a>
-                                                </p>
-                                            </div>
-                                        </form>
-
-                                    </div>
+  <section class="vh-100">
+    <div class="container-fluid h-custom">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-9 col-lg-6 col-xl-5">
+          <img src="<?php echo base_url('assets/reporte/encabezado.png'); ?>" class="img-fluid" alt="Sample image">
 
 
-                                    <div class="card-back">
-                                        <div class="center-wrap">
-                                            <form action="<?php echo site_url('LoginController/login'); ?>"
-                                                method="post">
-                                                <div class="section text-center">
-                                                    <h4 class="mb-3 pb-3">Iniciar Sesión</h4>
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-style" placeholder="Usuario"
-                                                            name="usuario">
-                                                        <i class="input-icon uil uil-user"></i>
-                                                    </div>
+        </div>
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+          <form action="<?php echo site_url('DpiController/login'); ?>" method="post">
 
-                                                    <div class="form-group mt-2">
-                                                        <input type="password" class="form-style"
-                                                            placeholder="Contraseña" name="clave">
-                                                        <i class="input-icon uil uil-lock-alt"></i>
-                                                    </div>
-                                                    <input type="submit" value="Iniciar" class="btn mt-4">
-                                                    
-                                                </div>
-                                            </form>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="divider d-flex align-items-center my-4">
+              <p class="text-center fw-bold mx-3 mb-0">Pruebas Psicométricas</p>
             </div>
+
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+              <input type="text" id="form3Example3" class="form-control form-control-lg"
+                placeholder="Ingresa tu DPI sin espacios" name="DPI"/>
+            </div>
+
+
+
+
+            <div class="text-center text-lg-start mt-4 pt-2">
+              <div class="text-center">
+              <input type="submit" value="Iniciar" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">
+
+              </div>
+
+              <p class="text-center small fw-bold mt-2 pt-1 mb-0">Ingresa como administrador <br><a href="<?php echo site_url('LoginController/admin'); ?>" class="link-danger">Ingreso</a></p>
+
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+    <div
+      class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-custom">
+      <!-- Copyright -->
+      <div class="text-white mb-3 mb-md-0">
+        Copyright © 2024. Todos los derechos reservados - Desarrollado por BroDevs.
+      </div>
+      <!-- Copyright -->
+
+      <!-- Right -->
+      <div>
+        <a href="#!" class="text-white me-4">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="#!" class="text-white me-4">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="#!" class="text-white me-4">
+          <i class="fab fa-google"></i>
+        </a>
+        <a href="#!" class="text-white">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </div>
+      <!-- Right -->
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
 </body>
 
 </html>

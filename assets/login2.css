@@ -1,0 +1,22 @@
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+.h-custom {
+height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+.h-custom {
+height: 100%;
+}
+}
+body {
+    background-color: #F7F7F7; /* Gris claro (R: 247, G: 247, B: 247) en hexadecimal */
+}
+
+.bg-custom {
+    background-color: #296DB3; /* Color personalizado */
+}

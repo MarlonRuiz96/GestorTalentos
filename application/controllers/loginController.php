@@ -15,6 +15,11 @@ class LoginController extends CI_Controller
         $this->load->view('Login');
     }
 
+    public function admin()
+    {
+
+        $this->load->view('loginAdmin');
+    }
     public function login()
     {
 

@@ -18,6 +18,8 @@ class DpiController extends CI_Controller
         $this->load->view('Pruebas/Login');
     }
 
+   
+
     public function login()
     {
         $this->load->model('DpiModel');
