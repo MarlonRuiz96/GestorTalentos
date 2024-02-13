@@ -70,26 +70,26 @@
         <div class="container">
 
             <main>
-                Pruebas a realizarse
-                <div class="temperamento">
+<h2>Pruebas a realizarse:</h2>                <div class="temperamento">
                     <a href="<?= site_url('DpiController/RealizarPruebas/' . $Candidato->DPI); ?>"
                         class="btn btn-success" type="button">Iniciar Prueba de Temperamento
                     </a>
-                    <br><br><br>
 
                 </div>
+                <br>
+
                 <div class="briggs">
                     <a href="<?= site_url('DpiController/pruebaBriggs/' . $Candidato->DPI); ?>" class="btn btn-success"
                         type="button">Iniciar Prueba de Briggs
                     </a>
                 </div>
-
+                <br>
                 <div class="Valanti">
                     <a href="<?= site_url('DpiController/pruebaValanti/' . $Candidato->DPI); ?>" class="btn btn-success"
                         type="button">Iniciar Prueba Valanti
                     </a>
                 </div>
-
+                <br>
 
                 <div class="Sin_pruebas">
                     No hay pruebas a realizarse.
@@ -99,7 +99,7 @@
         </div>
 
     </div>
-<!--
+    <!--
     <h1>Valores</h1>
     <ul>
         <li>Verdad: <?php echo $verdad; ?></li>

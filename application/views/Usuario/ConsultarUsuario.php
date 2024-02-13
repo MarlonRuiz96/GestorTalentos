@@ -48,7 +48,7 @@
                     <?php foreach ($data as $row): ?>
                         <tr>
                             <td>
-                                <?php echo $row->Usuario; ?>
+                                <?php echo $row->usuario; ?>
                             </td>
                             <td>
                                 <?php
@@ -136,7 +136,7 @@
 
 
 
-                    editNombre.value = productoData.Usuario;
+                    editNombre.value = productoData.usuario;
                     editPuesto.value = productoData.clave;
 
 

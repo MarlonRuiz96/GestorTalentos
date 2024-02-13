@@ -52,14 +52,17 @@
                     <tr>
                         <td>1</td>
                         <td class="text-right">Dedico tiempo a las personas que están alrededor mío</td>
-                        <td><input type="text" class="form-control" id="primeraA" name="primeraA" placeholder=""
-                                onkeypress="return validarNumero(event, this)">
+                        <td>
+                            <input type="text" class="form-control" id="primeraA" name="primeraA" placeholder=""
+                                onchange="autocompletarPrimeraB()">
                         </td>
-                        <td><input type="text" class="form-control" id="primeraB" name="primeraB" placeholder=""
-                                onkeypress="return validarNumero(event, this)">
+                        <td>
+                            <input type="text" class="form-control" id="primeraB" name="primeraB" placeholder=""
+                                readonly>
                         </td>
                         <td class="text-left">Actúo con perseverancia</td>
                     </tr>
+
 
 
                     <tr>
@@ -358,7 +361,23 @@
                 </table>
 
                 <button type="button" class="btn btn-primary" onclick="validarYEnviar()">Enviar</button>
+                <script>
+                    function autocompletarPrimeraB() {
+                        // Obtener el valor de la casilla "primeraA"
+                        var valorPrimeraA = parseInt(document.getElementById("primeraA").value);
 
+                        // Si el valor de "primeraA" no está vacío y es un número válido, autocompletar "primeraB"
+                        if (!isNaN(valorPrimeraA)) {
+                            // Calcular el valor de "primeraB" para que la suma sea siempre 3
+                            var valorPrimeraB = 3 - valorPrimeraA;
+                            // Asignar el valor de "primeraB" al campo de texto
+                            document.getElementById("primeraB").value = valorPrimeraB;
+                        } else {
+                            // Si el valor de "primeraA" está vacío o no es un número válido, limpiar "primeraB"
+                            document.getElementById("primeraB").value = "";
+                        }
+                    }
+                </script>
                 <script>
                     function validarNumero(event, input) {
                         // Verifica si el carácter ingresado es un número entre 1 y 3
