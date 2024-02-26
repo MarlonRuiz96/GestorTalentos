@@ -97,95 +97,95 @@ class DpiController extends CI_Controller
 
 
 
-        $primeraA = $this->input->post('primeraA');
-        $primeraB = $this->input->post('primeraB');
+        $primeraA = $this->input->post('primera_1');
+        $primeraB = $this->input->post('segunda_1');
 
-        $segundaA = $this->input->post('segundaA');
-        $segundaB = $this->input->post('segundaB');
+        $segundaA = $this->input->post('primera_2');
+        $segundaB = $this->input->post('segunda_2');
 
-        $terceraA = $this->input->post('terceraA');
-        $terceraB = $this->input->post('terceraB');
+        $terceraA = $this->input->post('primera_3');
+        $terceraB = $this->input->post('segunda_3');
 
-        $cuartaA = $this->input->post('cuartaA');
-        $cuartaB = $this->input->post('cuartaB');
+        $cuartaA = $this->input->post('primera_4');
+        $cuartaB = $this->input->post('segunda_4');
 
-        $quintaA = $this->input->post('quintaA');
-        $quintaB = $this->input->post('quintaB');
+        $quintaA = $this->input->post('primera_5');
+        $quintaB = $this->input->post('segunda_5');
 
-        $sextaA = $this->input->post('sextaA');
-        $sextaB = $this->input->post('sextaB');
+        $sextaA = $this->input->post('primera_6');
+        $sextaB = $this->input->post('segunda_6');
 
-        $septimaA = $this->input->post('septimaA');
-        $septimaB = $this->input->post('septimaB');
+        $septimaA = $this->input->post('primera_7');
+        $septimaB = $this->input->post('segunda_7');
 
-        $octavaA = $this->input->post('octavaA');
-        $octavaB = $this->input->post('octavaB');
+        $octavaA = $this->input->post('primera_8');
+        $octavaB = $this->input->post('segunda_8');
 
-        $novenaA = $this->input->post('novenaA');
-        $novenaB = $this->input->post('novenaB');
+        $novenaA = $this->input->post('primera_9');
+        $novenaB = $this->input->post('segunda_9');
 
-        $decimoA = $this->input->post('decimoA');
-        $decimoB = $this->input->post('decimoB');
+        $decimoA = $this->input->post('primera_10');
+        $decimoB = $this->input->post('segunda_10');
 
-        $onceA = $this->input->post('onceA');
-        $onceB = $this->input->post('onceB');
+        $onceA = $this->input->post('primera_11');
+        $onceB = $this->input->post('segunda_11');
 
-        $doceA = $this->input->post('doceA');
-        $doceB = $this->input->post('doceB');
+        $doceA = $this->input->post('primera_12');
+        $doceB = $this->input->post('segunda_12');
 
-        $treceA = $this->input->post('treceA');
-        $treceB = $this->input->post('treceB');
+        $treceA = $this->input->post('primera_13');
+        $treceB = $this->input->post('segunda_13');
 
-        $catorceA = $this->input->post('catorceA');
-        $catorceB = $this->input->post('catorceB');
+        $catorceA = $this->input->post('primera_14');
+        $catorceB = $this->input->post('segunda_14');
 
-        $quinceA = $this->input->post('quinceA');
-        $quinceB = $this->input->post('quinceB');
+        $quinceA = $this->input->post('primera_15');
+        $quinceB = $this->input->post('segunda_15');
 
-        $dieciseisA = $this->input->post('dieciseisA');
-        $dieciseisB = $this->input->post('dieciseisB');
+        $dieciseisA = $this->input->post('primera_16');
+        $dieciseisB = $this->input->post('segunda_16');
 
-        $diecisieteA = $this->input->post('diecisieteA');
-        $diecisieteB = $this->input->post('diecisieteB');
+        $diecisieteA = $this->input->post('primera_17');
+        $diecisieteB = $this->input->post('segunda_17');
 
-        $dieciochoA = $this->input->post('dieciochoA');
-        $dieciochoB = $this->input->post('dieciochoB');
+        $dieciochoA = $this->input->post('primera_18');
+        $dieciochoB = $this->input->post('segunda_18');
 
-        $diecinueveA = $this->input->post('diecinueveA');
-        $diecinueveB = $this->input->post('diecinueveB');
+        $diecinueveA = $this->input->post('primera_19');
+        $diecinueveB = $this->input->post('segunda_19');
 
-        $veinteA = $this->input->post('veinteA');
-        $veinteB = $this->input->post('veinteB');
+        $veinteA = $this->input->post('primera_20');
+        $veinteB = $this->input->post('segunda_20');
 
-        $veintiunoA = $this->input->post('veintiunoA');
-        $veintiunoB = $this->input->post('veintiunoB');
+        $veintiunoA = $this->input->post('primera_21');
+        $veintiunoB = $this->input->post('segunda_21');
 
-        $veintidosA = $this->input->post('veintidosA');
-        $veintidosB = $this->input->post('veintidosB');
+        $veintidosA = $this->input->post('primera_22');
+        $veintidosB = $this->input->post('segunda_22');
 
-        $veintitresA = $this->input->post('veintitresA');
-        $veintitresB = $this->input->post('veintitresB');
+        $veintitresA = $this->input->post('primera_23');
+        $veintitresB = $this->input->post('segunda_23');
 
-        $veinticuatroA = $this->input->post('veinticuatroA');
-        $veinticuatroB = $this->input->post('veinticuatroB');
+        $veinticuatroA = $this->input->post('primera_24');
+        $veinticuatroB = $this->input->post('segunda_24');
 
-        $veinticincoA = $this->input->post('veinticincoA');
-        $veinticincoB = $this->input->post('veinticincoB');
+        $veinticincoA = $this->input->post('primera_25');
+        $veinticincoB = $this->input->post('segunda_25');
 
-        $veintiseisA = $this->input->post('veintiseisA');
-        $veintiseisB = $this->input->post('veintiseisB');
+        $veintiseisA = $this->input->post('primera_26');
+        $veintiseisB = $this->input->post('segunda_26');
 
-        $veintisieteA = $this->input->post('veintisieteA');
-        $veintisieteB = $this->input->post('veintisieteB');
+        $veintisieteA = $this->input->post('primera_27');
+        $veintisieteB = $this->input->post('segunda_27');
 
-        $veintiochoA = $this->input->post('veintiochoA');
-        $veintiochoB = $this->input->post('veintiochoB');
+        $veintiochoA = $this->input->post('primera_28');
+        $veintiochoB = $this->input->post('segunda_28');
 
-        $veintinueveA = $this->input->post('veintinueveA');
-        $veintinueveB = $this->input->post('veintinueveB');
+        $veintinueveA = $this->input->post('primera_29');
+        $veintinueveB = $this->input->post('segunda_29');
 
-        $treintaA = $this->input->post('treintaA');
-        $treintaB = $this->input->post('treintaB');
+        $treintaA = $this->input->post('primera_30');
+        $treintaB = $this->input->post('segunda_30');
 
 
         $verdad = $terceraA+$quintaA+$sextaA+$septimaB+$octavaB+$novenaB+$doceA+$dieciseisA+$dieciochoB+$veinteA+$veintitresB+$veinticincoB;

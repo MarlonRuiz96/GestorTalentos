@@ -70,7 +70,8 @@
         <div class="container">
 
             <main>
-<h2>Pruebas a realizarse:</h2>                <div class="temperamento">
+                <h2>Pruebas a realizarse:</h2>
+                <div class="temperamento">
                     <a href="<?= site_url('DpiController/RealizarPruebas/' . $Candidato->DPI); ?>"
                         class="btn btn-success" type="button">Iniciar Prueba de Temperamento
                     </a>
@@ -109,45 +110,43 @@
         <li>No Violencia: <?php echo $noViolencia; ?></li>
     </ul>-->
 
+
+    </script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            const btnDivBriggs = document.querySelector('.briggs');
+            const btnDivValanti = document.querySelector('.Valanti');
+            const btnDivSinPruebas = document.querySelector('.Sin_pruebas');
             const btnDivTemperamento = document.querySelector('.temperamento');
 
-            // Verifica si el valor de temperamento no es igual a '1'
+            let contadorCondicionesNoCumplidas = 3;
+
+            // Verifica si el valor de Briggs no es igual a '1'
+            if ('<?php echo $Candidato->Briggs; ?>' !== '1') {
+                btnDivBriggs.style.display = 'none'; // Oculta el div si no cumple la condición
+                contadorCondicionesNoCumplidas--;
+
+
+            }
+
+            // Verifica si el valor de Valanti no es igual a '1'
+            if ('<?php echo $Candidato->valanti; ?>' !== '1') {
+                btnDivValanti.style.display = 'none'; // Oculta el div si no cumple la condición
+                contadorCondicionesNoCumplidas--;
+
+            }
+
+            // Verifica si el valor de temperamento no es igual a '1' o si el valor de Temporal es igual a '41'
             if ('<?php echo $Candidato->temperamento; ?>' !== '1' || '<?php echo $Candidato->Temporal; ?>' === '41') {
                 btnDivTemperamento.style.display = 'none'; // Oculta el div si no cumple la condición
+                contadorCondicionesNoCumplidas--;
+
             }
-        });
-    </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const btnDivTemperamento = document.querySelector('.briggs');
-
-            if ('<?php echo $Candidato->Briggs; ?>' !== '1') {
-                btnDivTemperamento.style.display = 'none'; // Oculta el div si no cumple la condición
-            }
-        });
-    </script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const btnDivTemperamento = document.querySelector('.Valanti');
-
-            if ('<?php echo $Candidato->valanti; ?>' !== '1') {
-                btnDivTemperamento.style.display = 'none'; // Oculta el div si no cumple la condición
-            }
-        });
-    </script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const btnDivSinPruebas = document.querySelector('.Sin_pruebas');
-
-            // Verifica si el valor de temperamento no es igual a '0'
-            if ('<?php echo $Candidato->temperamento; ?>' !== '0') {
-                btnDivSinPruebas.style.display = 'none'; // Oculta el div si no cumple la condición
-            }
+            if (contadorCondicionesNoCumplidas > 0) {
+            btnDivSinPruebas.style.display = 'none';
+        }
         });
     </script>
 
