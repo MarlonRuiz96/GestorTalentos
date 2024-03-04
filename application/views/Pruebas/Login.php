@@ -90,6 +90,11 @@
                         type="button">Iniciar Prueba Valanti
                     </a>
                 </div>
+                <div class="16pf">
+                    <a href="<?= site_url('DpiController/prueba16pf/' . $Candidato->DPI); ?>" class="btn btn-success"
+                        type="button">Iniciar Cuestionario 16 P.F
+                    </a>
+                </div>
                 <br>
 
                 <div class="Sin_pruebas">

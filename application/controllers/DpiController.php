@@ -88,6 +88,19 @@ class DpiController extends CI_Controller
         }
     }
 
+    public function prueba16pf($DPI)
+    {
+        $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
+        $idCandidato = $data['Candidato']->idCandidato; //obtengo el id del candidato segun su dpi que recibo antes
+
+
+        if ($data['Candidato']->fp16 === '1') {
+            $this->load->view('Pruebas/fp16', $data);
+        } else {
+            $this->load->view('Pruebas/Login', $data);
+        }
+    }
+
     public function procesarValanti()
     {
 

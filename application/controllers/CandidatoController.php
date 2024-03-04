@@ -333,6 +333,35 @@ class CandidatoController extends CI_Controller
         $this->CandidatoModel->desactivarValanti($idCandidato);
         $this->VerCandidato($idCandidato);
     }
+    public function activarpf($DPI)
+    {
+        $data['Candidato'] = $this->CandidatoModel->VerificarDPI($DPI); // Obtener los datos del candidato
+        $idCandidato = $data['Candidato']->idCandidato;
+        // Verifica si existe un registro para el idCandidato en la tabla 
+
+        $existeregistro = $this->CandidatoModel->existe16pf($idCandidato);
+
+        if ($existeregistro) {
+
+            $this->CandidatoModel->activar16pf($idCandidato); // Esto coloca 1 en la tabla Briggs
+        } else {
+            $this->CandidatoModel->crearregistro16pf($idCandidato); //Creo un registro para almacenar los resultados del briggs
+            $this->CandidatoModel->activar16pf($idCandidato); // Esto coloca 1 en la tabla Briggs
+
+        }
+        $this->VerCandidato($idCandidato); //esto me dirige a la pantalla principal 
+
+
+    }
+
+    public function desactivarpf($DPI)
+    {
+
+        $data['Candidato'] = $this->CandidatoModel->VerificarDPI($DPI); // Obtener los datos del candidato
+        $idCandidato = $data['Candidato']->idCandidato;
+        $this->CandidatoModel->desactivarpf($idCandidato);
+        $this->VerCandidato($idCandidato);
+    }
 
     public function reporte($idCandidato)
     {
@@ -342,8 +371,9 @@ class CandidatoController extends CI_Controller
         $mpdf = new \Mpdf\Mpdf();
         $mpdf->WriteHTML($html);
         $mpdf->Output();
-
     }
+
+
 }
 
 ?>

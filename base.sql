@@ -19,6 +19,36 @@
 CREATE DATABASE IF NOT EXISTS `rh` /*!40100 DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci */;
 USE `rh`;
 
+-- Volcando estructura para tabla rh.16pf
+CREATE TABLE IF NOT EXISTS `16pf` (
+  `id16pf` int(11) NOT NULL AUTO_INCREMENT,
+  `p1` int(10) DEFAULT NULL,
+  `p2` int(10) DEFAULT NULL,
+  `p3` int(10) DEFAULT NULL,
+  `p4` int(10) DEFAULT NULL,
+  `p5` int(10) DEFAULT NULL,
+  `p6` int(10) DEFAULT NULL,
+  `p7` int(10) DEFAULT NULL,
+  `p8` int(10) DEFAULT NULL,
+  `p9` int(10) DEFAULT NULL,
+  `p10` int(10) DEFAULT NULL,
+  `p11` int(10) DEFAULT NULL,
+  `p12` int(10) DEFAULT NULL,
+  `p13` int(10) DEFAULT NULL,
+  `p14` int(10) DEFAULT NULL,
+  `p15` int(10) DEFAULT NULL,
+  `p16` int(10) DEFAULT NULL,
+  `idCandidato` int(11) NOT NULL,
+  PRIMARY KEY (`id16pf`) USING BTREE,
+  KEY `FK_16fp` (`idCandidato`) USING BTREE,
+  CONSTRAINT `FK_16fp` FOREIGN KEY (`idCandidato`) REFERENCES `candidato` (`idCandidato`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- Volcando datos para la tabla rh.16pf: ~1 rows (aproximadamente)
+DELETE FROM `16pf`;
+INSERT INTO `16pf` (`id16pf`, `p1`, `p2`, `p3`, `p4`, `p5`, `p6`, `p7`, `p8`, `p9`, `p10`, `p11`, `p12`, `p13`, `p14`, `p15`, `p16`, `idCandidato`) VALUES
+	(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13);
+
 -- Volcando estructura para tabla rh.briggs
 CREATE TABLE IF NOT EXISTS `briggs` (
   `idBriggs` int(11) NOT NULL AUTO_INCREMENT,
@@ -67,15 +97,16 @@ CREATE TABLE IF NOT EXISTS `candidato` (
   `notas` varchar(50) DEFAULT NULL,
   `Briggs` int(10) DEFAULT NULL,
   `Valanti` int(10) DEFAULT NULL,
+  `fp16` int(10) DEFAULT NULL,
   PRIMARY KEY (`idCandidato`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla rh.candidato: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla rh.candidato: ~3 rows (aproximadamente)
 DELETE FROM `candidato`;
-INSERT INTO `candidato` (`idCandidato`, `Nombres`, `Puesto`, `DPI`, `temperamento`, `Contacto`, `Correo`, `fecha_crear`, `Temporal`, `melancolico`, `colerico`, `flematico`, `sanguineo`, `notas`, `Briggs`, `Valanti`) VALUES
-	(13, 'Marlon Ruiz Gonzalez', 'Desarrollador Junior', '2474218042214', 0, '50517389', 'mruiz996@outlook.com', '2023-11-19', 0, 44, 95, 55, 21, '', 1, 0),
-	(14, '', '', '2474218042213', 0, '', '', '2023-11-25', 2, 37, 42, 16, 6, NULL, 0, 1),
-	(15, '', '', '1111111111111', 0, '', '', '2023-11-25', 1, 0, 0, 0, 0, NULL, 0, 1);
+INSERT INTO `candidato` (`idCandidato`, `Nombres`, `Puesto`, `DPI`, `temperamento`, `Contacto`, `Correo`, `fecha_crear`, `Temporal`, `melancolico`, `colerico`, `flematico`, `sanguineo`, `notas`, `Briggs`, `Valanti`, `fp16`) VALUES
+	(13, 'Marlon Ruiz Gonzalez', 'Desarrollador Junior', '2474218042214', 1, '50517389', 'mruiz996@outlook.com', '2023-11-19', 1, 44, 95, 55, 21, '', 1, 1, 0),
+	(14, '', '', '2474218042213', 0, '', '', '2023-11-25', 2, 37, 42, 16, 6, NULL, 0, 1, 0),
+	(15, '', '', '1111111111111', 0, '', '', '2023-11-25', 1, 0, 0, 0, 0, NULL, 0, 1, 0);
 
 -- Volcando estructura para tabla rh.debilidad
 CREATE TABLE IF NOT EXISTS `debilidad` (
@@ -88,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `debilidad` (
   CONSTRAINT `FK_personalidad_candidatso` FOREIGN KEY (`idCandidato`) REFERENCES `candidato` (`idCandidato`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=209 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla rh.debilidad: ~142 rows (aproximadamente)
+-- Volcando datos para la tabla rh.debilidad: ~147 rows (aproximadamente)
 DELETE FROM `debilidad`;
 INSERT INTO `debilidad` (`idPersonalidad`, `Personalidad`, `Tipo`, `idCandidato`) VALUES
 	(62, 'Mandón', 'B', 13),
@@ -265,7 +296,7 @@ CREATE TABLE IF NOT EXISTS `fortaleza` (
   CONSTRAINT `FK_personalidad_candidato` FOREIGN KEY (`idCandidato`) REFERENCES `candidato` (`idCandidato`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=222 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla rh.fortaleza: ~119 rows (aproximadamente)
+-- Volcando datos para la tabla rh.fortaleza: ~121 rows (aproximadamente)
 DELETE FROM `fortaleza`;
 INSERT INTO `fortaleza` (`idPersonalidad`, `Personalidad`, `Tipo`, `idCandidato`) VALUES
 	(101, 'Animado', 'A', 13),
@@ -468,9 +499,9 @@ CREATE TABLE IF NOT EXISTS `sesiones` (
   PRIMARY KEY (`id_sesion`),
   KEY `fk_sesiones_usuario` (`id_usuario`),
   CONSTRAINT `fk_sesiones_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla rh.sesiones: ~46 rows (aproximadamente)
+-- Volcando datos para la tabla rh.sesiones: ~55 rows (aproximadamente)
 DELETE FROM `sesiones`;
 INSERT INTO `sesiones` (`id_sesion`, `id_usuario`, `token`, `fecha_creacion`, `fecha_actualizacion`) VALUES
 	(1, 1, '9b45d9cc197465d84ab4d8eaa7b5f77c6008c0ea365ff14c10711d0f3f94abe3', '2023-08-27 22:39:04', '2023-08-28 07:06:24'),
@@ -523,7 +554,11 @@ INSERT INTO `sesiones` (`id_sesion`, `id_usuario`, `token`, `fecha_creacion`, `f
 	(48, 1, 'fe2f33b04ad6a8d94b025060c88349b4a9d47f8d013224716c7a0c305b49b8cc', '2024-01-29 21:14:26', '2024-01-30 04:14:41'),
 	(49, 1, 'ebf0ecc3cdb1438ff038bc1df27b77e933d8e62f93b866073c3847137d7ba670', '2024-02-05 22:47:47', '2024-02-06 05:47:50'),
 	(50, 1, '91e0e0a419817da6526f56bd7586efebf14ab98455715402ec8dc6a11a452971', '2024-02-06 22:02:59', '2024-02-07 05:03:04'),
-	(51, 1, 'd23f7626b763b5270101d84747c4f8d067438f3b88063ddd3aa0aa524ad0f62b', '2024-02-08 23:04:19', '2024-02-09 06:14:39');
+	(51, 1, 'd23f7626b763b5270101d84747c4f8d067438f3b88063ddd3aa0aa524ad0f62b', '2024-02-08 23:04:19', '2024-02-09 06:14:39'),
+	(52, 1, '1ccb3e8fbe191ede63f556179d632e1b65ac07205f8d2f67bcbc9139ed81cb22', '2024-02-25 20:24:51', '2024-02-26 03:25:01'),
+	(53, 1, 'fa350032403f0401e545625a519648fbff918de3aff0e885ba230d62cbebc9ff', '2024-02-26 21:10:38', '2024-02-27 04:13:47'),
+	(54, 1, '2c11c50b9c519609ec55d798bddf2b98601f17739bbefd0d8006a5afee4d91ca', '2024-02-26 21:36:13', '2024-02-27 04:36:16'),
+	(55, 1, '446453904fe8deb525a3ef53c222537a870f20f7d00ccaa81479d7b020e69afa', '2024-03-03 20:59:59', '2024-03-04 04:00:02');
 
 -- Volcando estructura para tabla rh.sesionestoken
 CREATE TABLE IF NOT EXISTS `sesionestoken` (
@@ -597,7 +632,7 @@ CREATE TABLE IF NOT EXISTS `valanti` (
 -- Volcando datos para la tabla rh.valanti: ~3 rows (aproximadamente)
 DELETE FROM `valanti`;
 INSERT INTO `valanti` (`idValanti`, `Verdad`, `Rectitud`, `Paz`, `Amor`, `No_violencia`, `verdadEmpresa`, `rectitudEmpresa`, `pazEmpresa`, `amorEmpresa`, `noViolenciaEmpresa`, `idCandidato`) VALUES
-	(1, 53, 50, 48, 47, 50, 55, 50, 65, 55, 55, 13),
+	(1, 17, 3, 24, 20, 21, 50, 50, 50, 50, 50, 13),
 	(2, 0, 0, 0, 0, 0, 50, 50, 50, 50, 50, 15),
 	(3, 0, 0, 0, 0, 0, 50, 50, 50, 50, 50, 14);
 

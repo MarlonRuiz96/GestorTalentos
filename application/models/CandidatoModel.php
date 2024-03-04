@@ -52,7 +52,7 @@ class CandidatoModel extends CI_Model
             'Correo' => "",
             'fecha_crear' => $fecha_actual,
             'Temporal' => 1,
-            'Briggs' =>0,
+            'Briggs' => 0,
 
         );
 
@@ -121,17 +121,18 @@ class CandidatoModel extends CI_Model
 
     }
 
-    public function getDatosValanti($idCandidato){
+    public function getDatosValanti($idCandidato)
+    {
 
         $this->db->select('Verdad,Rectitud, Paz, Amor, No_violencia, verdadEmpresa, rectitudEmpresa, pazEmpresa, amorEmpresa, noViolenciaEmpresa');
         $this->db->from('valanti');
-        $this->db->where('idCandidato',$idCandidato);
+        $this->db->where('idCandidato', $idCandidato);
 
         $query = $this->db->get();
 
-        if($query->num_rows()>0){
+        if ($query->num_rows() > 0) {
             return $query->row();
-        }else {
+        } else {
             return null;
         }
     }
@@ -306,7 +307,7 @@ class CandidatoModel extends CI_Model
     {
         $this->db->where('idCandidato', $idCandidato);
         $query = $this->db->get('Briggs');
-        
+
         return $query->num_rows() > 0; // Retorna true si hay al menos un registro para el idCandidato
     }
 
@@ -325,21 +326,23 @@ class CandidatoModel extends CI_Model
         );
 
         $this->db->insert('Briggs', $data);
-        
+
     }
 
     public function existeRegistroValanti($idCandidato)
     {
         $this->db->where('idCandidato', $idCandidato);
         $query = $this->db->get('valanti');
-        
-        return $query->num_rows() > 0; 
+
+        return $query->num_rows() > 0;
     }
+
+
 
     public function insertarRegistroValanti($idCandidato)
     {
         $data = array(
-            'Verdad' => 0, 
+            'Verdad' => 0,
             'Rectitud' => 0,
             'Paz' => 0,
             'Amor' => 0,
@@ -353,10 +356,65 @@ class CandidatoModel extends CI_Model
         );
 
         $this->db->insert('valanti', $data);
-        
+
     }
 
-   
+    public function existe16pf($idCandidato)
+    {
+        $this->db->where('idCandidato', $idCandidato);
+        $query = $this->db->get('16pf');
 
-    
+        return $query->num_rows() > 0;
+    }
+    public function activar16pf($idCandidato)
+    {
+        // Actualiza el estado de la prueba de temperamentos a 1
+        $data = array(
+            'fp16' => 1
+        );
+
+        $this->db->where('idCandidato', $idCandidato);
+        $this->db->update('Candidato', $data);
+
+        return $this->db->affected_rows();
+    }
+    public function desactivarpf($idCandidato)
+    {
+        // Actualiza el estado de la prueba de temperamentos a 1
+        $data = array(
+            'fp16' => 0
+        );
+
+        $this->db->where('idCandidato', $idCandidato);
+        $this->db->update('Candidato', $data);
+
+        return $this->db->affected_rows();
+    }
+
+    public function crearregistro16pf($idCandidato)
+    {
+        $data = array(
+            'p1' => 0,
+            'p2' => 0,
+            'p3' => 0,
+            'p4' => 0,
+            'p5' => 0,
+            'p6' => 0,
+            'p7' => 0,
+            'p8' => 0,
+            'p9' => 0,
+            'p10' => 0,
+            'p11' => 0,
+            'p12' => 0,
+            'p13' => 0,
+            'p14' => 0,
+            'p15' => 0,
+            'p16' => 0,
+            'idCandidato' => $idCandidato
+        );
+
+        $this->db->insert('fp16', $data);
+
+    }
+
 }

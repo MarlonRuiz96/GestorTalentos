@@ -3,6 +3,8 @@
 <html lang="es">
 
 <head>
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php echo base_url('assets/consulta.css'); ?>">
@@ -30,7 +32,7 @@
             <a href="<?= site_url('CandidatoController/reporte/' . $candidato_data->idCandidato); ?>"
                 class="btn btn-warning sweetalert-linkReporte" data-title="Generar Reporte"
                 style="float: right;">Generar Reporte</a>
-
+            
             <h2 class="text">
                 Datos del Candidato
 
@@ -78,6 +80,9 @@
                     </li>
                     <li class="page-item">
                         <a class="page-link" href="#">Valanti</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">16 PF</a>
                     </li>
 
                 </ul>
@@ -511,7 +516,30 @@
                 </main>
 
             </div>
+            <!-- CODIGO PARA LA PRUEBA 16PF -->
 
+        
+            <div class="contenido div-ocultar-4">
+            <main>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 style="margin-right: 500px;">Cuestionario 16 P.F</h2>
+                            <div>
+                                <a href="<?= site_url('CandidatoController/activarpf/' . $candidato_data->DPI); ?>"
+                                    class="btn btn-success sweetalert-briggs"
+                                    data-title="¿Activar la prueba 16 P.F? ">Activar</a>
+                                <a href="<?= site_url('CandidatoController/desactivarpf/' . $candidato_data->DPI); ?>"
+                                    class="btn btn-danger sweetalert-briggs2"
+                                    data-title="¿Desactivar la prueba 16 P.F?">Desactivar</a>
+
+
+                            </div>
+
+
+
+
+                    </div>
+            </main>
+            </div>
         </main>
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script><!-- Esta linea siempre va al inicio
@@ -841,16 +869,28 @@
                         mostrarDivs('div-ocultar');//mostrar primero
                         ocultarDivs('div-ocultar-2'); //ocultar segundo
                         ocultarDivs('div-ocultar-3'); //ocultar tercero
+                        ocultarDivs('div-ocultar-4'); //ocultar CUARTO
 
                     } else if (index === 1) {
                         mostrarDivs('div-ocultar-2');//mostrar segundo
                         ocultarDivs('div-ocultar');//ocultar primero
                         ocultarDivs('div-ocultar-3'); // ocultar tercero
+                        ocultarDivs('div-ocultar-4'); //ocultar CUARTO
+
                     } else if (index === 2) {
                         mostrarDivs('div-ocultar-3'); //mostrar tercero
                         ocultarDivs('div-ocultar'); //ocultar primero
                         ocultarDivs('div-ocultar-2'); //ocultar segundo
+                        ocultarDivs('div-ocultar-4'); //ocultar CUARTO
+
+                    }else if (index === 3) {
+                        mostrarDivs('div-ocultar-4'); //mostrar tercero
+                        ocultarDivs('div-ocultar'); //ocultar primero
+                        ocultarDivs('div-ocultar-2'); //ocultar segundo
+                        ocultarDivs('div-ocultar-3'); //ocultar TERcer
+
                     }
+                    
                     // Agrega más condiciones para manejar más páginas si es necesario
                 });
             });
@@ -909,6 +949,9 @@
 
 
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
