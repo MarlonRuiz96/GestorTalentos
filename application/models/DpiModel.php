@@ -7,7 +7,7 @@ class DpiModel extends CI_Model
 
     public function VerificarDPI($DPI)
     {
-        $this->db->select('idCandidato, Nombres, Puesto, DPI, Contacto, Correo, temperamento,Temporal, sanguineo, melancolico, flematico, colerico, Briggs, valanti');
+        $this->db->select('idCandidato, Nombres, Puesto, DPI, Contacto, Correo, temperamento,Temporal, sanguineo, melancolico, flematico, colerico, Briggs, valanti,fp16');
         $this->db->from('Candidato');
         $this->db->where('DPI', $DPI);
 
@@ -183,5 +183,10 @@ class DpiModel extends CI_Model
         $this->db->update('Briggs');
     }
 
-    
+    public function AgregarPf($idCandidato, $datos)
+{
+    // Actualizar los campos en la tabla 16pf
+    $this->db->where('idCandidato', $idCandidato);
+    $this->db->update('16pf', $datos);
+}
 }

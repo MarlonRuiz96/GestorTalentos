@@ -95,12 +95,191 @@ class DpiController extends CI_Controller
 
 
         if ($data['Candidato']->fp16 === '1') {
-            $this->load->view('Pruebas/fp16', $data);
+            $this->load->view('Pruebas/Fp16', $data);
         } else {
             $this->load->view('Pruebas/Login', $data);
         }
     }
+    public function procesarPF(){
+        $DPI = $this->input->post('DPI'); // Obtén el DPI desde el formulario
+        $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
+        $idCandidato = $data['Candidato']->idCandidato; // Obtén el id del candidato
 
+       // Definir los números de las carillas que quieres sumar
+        $arrayReservado = array(2,19,36,53,70,87);
+        $arrayLento = array(3,20,37,54,71,88);
+        $arrayInfantil = array(4,21,38,55,72,89);
+        $arraySumiso = array(5,22,39,56,73,90);
+        $arrayTaciturno = array(6,23,40,57,74,91);
+        $arrayVariable = array(7,24,41,57,75,92);
+        $arrayTimido = array(8,25,42,58,76,93);
+        $arrayEmocional = array(9,26,43,59,77,94);
+        $arraySospechoso = array(10,27,44,60,78,95);
+        $arrayExcentrico = array(11,28,45,61,79,96);
+        $arraySimple = array(12,29,46,62,80,97);
+        $arrayInseguro = array(13,30,47,63,81,98);
+        $arrayRutinario = array(14,31,48,64,82,99);
+        $arrayDependiente = array(16,32,49,65,83,100);
+        $arrayDescontrolado = array(17,33,50,66,84,101);
+        $arrayTenso = array(18,34,51,67,85,102);
+
+        // Inicializar la suma
+        $sumaReservado = 0;
+        $sumaLento = 0;
+        $sumaInfantil = 0;
+        $sumaSumiso = 0;
+        $sumaTaciturno = 0;
+        $sumaVariable = 0;
+        $sumaTimido = 0;
+        $sumaEmocional = 0;
+        $sumaSospechoso = 0;
+        $sumaExcentrico = 0;
+        $sumaSimple = 0;
+        $sumaInseguro = 0;
+        $sumaRutinario = 0;
+        $sumaDependiente = 0;
+        $sumaDescontrolado = 0;
+        $sumaTenso = 0;
+
+        // Iterar sobre los números de carillas y sumar sus valores
+        foreach ($arrayReservado as $numero) {
+            $sumaReservado += intval($this->input->post($numero . 'a')); // Sumar el valor de la opción A
+            $sumaReservado += intval($this->input->post($numero . 'b')); // Sumar el valor de la opción B
+            $sumaReservado += intval($this->input->post($numero . 'c')); // Sumar el valor de la opción C
+        }
+
+        // Iterar sobre los números de las carillas y sumar sus valores para otras categorías
+        foreach ($arrayLento as $numero) {
+            $sumaLento += intval($this->input->post($numero . 'a')); // Sumar el valor de la opción A
+            $sumaLento += intval($this->input->post($numero . 'b')); // Sumar el valor de la opción B
+            $sumaLento += intval($this->input->post($numero . 'c')); // Sumar el valor de la opción C
+        }
+
+        foreach ($arrayInfantil as $numero) {
+            $sumaInfantil += intval($this->input->post($numero . 'a')); // Sumar el valor de la opción A
+            $sumaInfantil += intval($this->input->post($numero . 'b')); // Sumar el valor de la opción B
+            $sumaInfantil += intval($this->input->post($numero . 'c')); // Sumar el valor de la opción C
+        }
+
+        foreach ($arraySumiso as $numero) {
+            $sumaSumiso += intval($this->input->post($numero . 'a')); // Sumar el valor de la opción A
+            $sumaSumiso += intval($this->input->post($numero . 'b')); // Sumar el valor de la opción B
+            $sumaSumiso += intval($this->input->post($numero . 'c')); // Sumar el valor de la opción C
+        }
+
+        foreach ($arrayTaciturno as $numero) {
+            $sumaTaciturno += intval($this->input->post($numero . 'a')); // Sumar el valor de la opción A
+            $sumaTaciturno += intval($this->input->post($numero . 'b')); // Sumar el valor de la opción B
+            $sumaTaciturno += intval($this->input->post($numero . 'c')); // Sumar el valor de la opción C
+        }
+
+                // Iterar sobre los números de carillas y sumar sus valores para la categoría "Variable"
+        foreach ($arrayVariable as $numero) {
+            $sumaVariable += intval($this->input->post($numero . 'a')); // Sumar el valor de la opción A
+            $sumaVariable += intval($this->input->post($numero . 'b')); // Sumar el valor de la opción B
+            $sumaVariable += intval($this->input->post($numero . 'c')); // Sumar el valor de la opción C
+        }
+
+        // Iterar sobre los números de carillas y sumar sus valores para la categoría "Tímido"
+        foreach ($arrayTimido as $numero) {
+            $sumaTimido += intval($this->input->post($numero . 'a')); // Sumar el valor de la opción A
+            $sumaTimido += intval($this->input->post($numero . 'b')); // Sumar el valor de la opción B
+            $sumaTimido += intval($this->input->post($numero . 'c')); // Sumar el valor de la opción C
+        }
+
+        // Iterar sobre los números de carillas y sumar sus valores para la categoría "Emocional"
+        foreach ($arrayEmocional as $numero) {
+            $sumaEmocional += intval($this->input->post($numero . 'a')); // Sumar el valor de la opción A
+            $sumaEmocional += intval($this->input->post($numero . 'b')); // Sumar el valor de la opción B
+            $sumaEmocional += intval($this->input->post($numero . 'c')); // Sumar el valor de la opción C
+        }
+
+        // Iterar sobre los números de carillas y sumar sus valores para la categoría "Sospechoso"
+        foreach ($arraySospechoso as $numero) {
+            $sumaSospechoso += intval($this->input->post($numero . 'a')); // Sumar el valor de la opción A
+            $sumaSospechoso += intval($this->input->post($numero . 'b')); // Sumar el valor de la opción B
+            $sumaSospechoso += intval($this->input->post($numero . 'c')); // Sumar el valor de la opción C
+        }
+            
+
+        
+            // Iterar sobre los números de carillas y sumar sus valores para la categoría "Excentrico"
+        foreach ($arrayExcentrico as $numero) {
+            $sumaExcentrico += intval($this->input->post($numero . 'a')); // Sumar el valor de la opción A
+            $sumaExcentrico += intval($this->input->post($numero . 'b')); // Sumar el valor de la opción B
+            $sumaExcentrico += intval($this->input->post($numero . 'c')); // Sumar el valor de la opción C
+        }
+
+        // Iterar sobre los números de carillas y sumar sus valores para la categoría "Simple"
+        foreach ($arraySimple as $numero) {
+            $sumaSimple += intval($this->input->post($numero . 'a')); // Sumar el valor de la opción A
+            $sumaSimple += intval($this->input->post($numero . 'b')); // Sumar el valor de la opción B
+            $sumaSimple += intval($this->input->post($numero . 'c')); // Sumar el valor de la opción C
+        }
+
+        // Iterar sobre los números de carillas y sumar sus valores para la categoría "Inseguro"
+        foreach ($arrayInseguro as $numero) {
+            $sumaInseguro += intval($this->input->post($numero . 'a')); // Sumar el valor de la opción A
+            $sumaInseguro += intval($this->input->post($numero . 'b')); // Sumar el valor de la opción B
+            $sumaInseguro += intval($this->input->post($numero . 'c')); // Sumar el valor de la opción C
+        }
+
+        // Iterar sobre los números de carillas y sumar sus valores para la categoría "Rutinario"
+        foreach ($arrayRutinario as $numero) {
+            $sumaRutinario += intval($this->input->post($numero . 'a')); // Sumar el valor de la opción A
+            $sumaRutinario += intval($this->input->post($numero . 'b')); // Sumar el valor de la opción B
+            $sumaRutinario += intval($this->input->post($numero . 'c')); // Sumar el valor de la opción C
+        }
+
+        // Iterar sobre los números de carillas y sumar sus valores para la categoría "Dependiente"
+        foreach ($arrayDependiente as $numero) {
+            $sumaDependiente += intval($this->input->post($numero . 'a')); // Sumar el valor de la opción A
+            $sumaDependiente += intval($this->input->post($numero . 'b')); // Sumar el valor de la opción B
+            $sumaDependiente += intval($this->input->post($numero . 'c')); // Sumar el valor de la opción C
+        }
+
+        // Iterar sobre los números de carillas y sumar sus valores para la categoría "Descontrolado"
+        foreach ($arrayDescontrolado as $numero) {
+            $sumaDescontrolado += intval($this->input->post($numero . 'a')); // Sumar el valor de la opción A
+            $sumaDescontrolado += intval($this->input->post($numero . 'b')); // Sumar el valor de la opción B
+            $sumaDescontrolado += intval($this->input->post($numero . 'c')); // Sumar el valor de la opción C
+        }
+
+        // Iterar sobre los números de carillas y sumar sus valores para la categoría "Tenso"
+        foreach ($arrayTenso as $numero) {
+            $sumaTenso += intval($this->input->post($numero . 'a')); // Sumar el valor de la opción A
+            $sumaTenso += intval($this->input->post($numero . 'b')); // Sumar el valor de la opción B
+            $sumaTenso += intval($this->input->post($numero . 'c')); // Sumar el valor de la opción C
+        }
+
+        // Crear un array asociativo para almacenar las sumas de cada categoría
+        $sumasCategorias = array(
+            'p1' => $sumaReservado,
+            'p2' => $sumaLento,
+            'p3' => $sumaInfantil,
+            'p4' => $sumaSumiso,
+            'p5' => $sumaTaciturno,
+            'p6' => $sumaVariable,
+            'p7' => $sumaTimido,
+            'p8' => $sumaEmocional,
+            'p9' => $sumaSospechoso,
+            'p10' => $sumaExcentrico,
+            'p11' => $sumaSimple,
+            'p12' => $sumaInseguro,
+            'p13' => $sumaRutinario,
+            'p14' => $sumaDependiente,
+            'p15' => $sumaDescontrolado,
+            'p16' => $sumaTenso
+        );
+
+        $this->DpiModel->AgregarPf($idCandidato, $sumasCategorias);
+
+        $this->CandidatoModel->desactivarPf($idCandidato); //Desactivo la prueba
+        $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI);  //Actualizo la data, por que la data anterior no tiene la preuba desactivada, esto me da conflicto
+        $this->load->view('Pruebas/Login', $data); //cargo la vista con la nueva data
+
+
+    }
     public function procesarValanti()
     {
 

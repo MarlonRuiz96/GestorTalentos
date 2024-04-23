@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versión del servidor:         11.2.0-MariaDB - mariadb.org binary distribution
+-- Versión del servidor:         11.3.2-MariaDB - mariadb.org binary distribution
 -- SO del servidor:              Win64
--- HeidiSQL Versión:             12.3.0.6589
+-- HeidiSQL Versión:             12.6.0.6765
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `candidato` (
 -- Volcando datos para la tabla rh.candidato: ~3 rows (aproximadamente)
 DELETE FROM `candidato`;
 INSERT INTO `candidato` (`idCandidato`, `Nombres`, `Puesto`, `DPI`, `temperamento`, `Contacto`, `Correo`, `fecha_crear`, `Temporal`, `melancolico`, `colerico`, `flematico`, `sanguineo`, `notas`, `Briggs`, `Valanti`, `fp16`) VALUES
-	(13, 'Marlon Ruiz Gonzalez', 'Desarrollador Junior', '2474218042214', 1, '50517389', 'mruiz996@outlook.com', '2023-11-19', 1, 44, 95, 55, 21, '', 1, 1, 0),
+	(13, 'Marlon Ruiz Gonzalez', 'Desarrollador Junior', '2474218042214', 1, '50517389', 'mruiz996@outlook.com', '2023-11-19', 2, 44, 95, 55, 21, '', 1, 1, 1),
 	(14, '', '', '2474218042213', 0, '', '', '2023-11-25', 2, 37, 42, 16, 6, NULL, 0, 1, 0),
 	(15, '', '', '1111111111111', 0, '', '', '2023-11-25', 1, 0, 0, 0, 0, NULL, 0, 1, 0);
 
@@ -280,7 +280,7 @@ CREATE TABLE IF NOT EXISTS `empresa` (
   PRIMARY KEY (`idEmpresa`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla rh.empresa: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla rh.empresa: ~1 rows (aproximadamente)
 DELETE FROM `empresa`;
 INSERT INTO `empresa` (`idEmpresa`, `Nombre`, `Direccion`, `Contacto`, `Numero`) VALUES
 	(1, 'Megapolizas', '7 av 18-78 zona 13', 'Humberto\r\n', '23184444');
@@ -430,7 +430,7 @@ CREATE TABLE IF NOT EXISTS `prueba` (
   PRIMARY KEY (`idPrueba`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla rh.prueba: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla rh.prueba: ~1 rows (aproximadamente)
 DELETE FROM `prueba`;
 INSERT INTO `prueba` (`idPrueba`, `Nombre`, `Descripcion`, `Duracion`) VALUES
 	(1, 'Temperamentos', 'Temperamento del candidato', '30 Minutos');
@@ -499,9 +499,9 @@ CREATE TABLE IF NOT EXISTS `sesiones` (
   PRIMARY KEY (`id_sesion`),
   KEY `fk_sesiones_usuario` (`id_usuario`),
   CONSTRAINT `fk_sesiones_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla rh.sesiones: ~55 rows (aproximadamente)
+-- Volcando datos para la tabla rh.sesiones: ~57 rows (aproximadamente)
 DELETE FROM `sesiones`;
 INSERT INTO `sesiones` (`id_sesion`, `id_usuario`, `token`, `fecha_creacion`, `fecha_actualizacion`) VALUES
 	(1, 1, '9b45d9cc197465d84ab4d8eaa7b5f77c6008c0ea365ff14c10711d0f3f94abe3', '2023-08-27 22:39:04', '2023-08-28 07:06:24'),
@@ -558,7 +558,9 @@ INSERT INTO `sesiones` (`id_sesion`, `id_usuario`, `token`, `fecha_creacion`, `f
 	(52, 1, '1ccb3e8fbe191ede63f556179d632e1b65ac07205f8d2f67bcbc9139ed81cb22', '2024-02-25 20:24:51', '2024-02-26 03:25:01'),
 	(53, 1, 'fa350032403f0401e545625a519648fbff918de3aff0e885ba230d62cbebc9ff', '2024-02-26 21:10:38', '2024-02-27 04:13:47'),
 	(54, 1, '2c11c50b9c519609ec55d798bddf2b98601f17739bbefd0d8006a5afee4d91ca', '2024-02-26 21:36:13', '2024-02-27 04:36:16'),
-	(55, 1, '446453904fe8deb525a3ef53c222537a870f20f7d00ccaa81479d7b020e69afa', '2024-03-03 20:59:59', '2024-03-04 04:00:02');
+	(55, 1, '446453904fe8deb525a3ef53c222537a870f20f7d00ccaa81479d7b020e69afa', '2024-03-03 20:59:59', '2024-03-04 04:00:02'),
+	(56, 1, '27420f0399243b0484732dc21df218f0922aa43b121149ba5a7b00b523d1f6f7', '2024-04-10 23:22:58', '2024-04-11 07:24:53'),
+	(57, 1, '89c6f1f36f35319d5e730fff1dce915f6fad04d9691fe2ed6371ab523f18001a', '2024-04-12 22:13:42', '2024-04-13 06:14:13');
 
 -- Volcando estructura para tabla rh.sesionestoken
 CREATE TABLE IF NOT EXISTS `sesionestoken` (
