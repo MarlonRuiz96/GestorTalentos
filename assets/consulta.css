@@ -244,4 +244,56 @@ thead {
     border: 1px solid #ccc; /* Borde del contenedor */
 }
 
+#combinedTable {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#combinedTable td {
+    padding: 10px; /* Espaciado dentro de las celdas */
+    border: 1px solid #ddd; /* Bordes de las celdas */
+    text-align: left; /* Alinea el texto a la izquierda */
+    font-size: 14px; /* Ajusta el tamaño de la letra */
+    vertical-align: middle; /* Centra el contenido verticalmente */
+}
+
+#combinedTable .title {
+    width: 25%; /* Ancho de la columna de títulos */
+}
+
+#combinedTable .chart {
+    width: 25%; /* Aumenta el ancho de la columna de gráficos */
+    text-align: center; /* Centra el contenido horizontalmente */
+}
+
+#combinedTable .description {
+    width: 40%; /* Ancho de la columna de descripciones */
+}
+
+#combinedTable .chart canvas {
+    width: 100%; /* Ajusta el tamaño del canvas */
+    height: 50px; /* Ajusta la altura del canvas */
+}
+/* Estilo específico para el canvas graficaReservado */
+#graficaReservado,
+#graficaLento,
+#graficaInfantil,
+#graficaSumiso,
+#graficaTaciturno,
+#graficaVariable,
+#graficaTimido,
+#graficaEmocional,
+#graficaSospechoso,
+#graficaExcentrico,
+#graficaSimple,
+#graficaInseguro,
+#graficaRutinario,
+#graficaDependiente,
+#graficaDescontrolado,
+#graficaTenso {
+    width: 516px !important; /* Ajusta el ancho del canvas */
+    height: 100px !important; /* Ajusta la altura del canvas */
+    box-sizing: border-box; /* Asegura que el tamaño incluya el padding y el border */
+    display: block; /* Asegura que el canvas sea un elemento de bloque */
+}
 

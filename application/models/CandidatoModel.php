@@ -137,7 +137,22 @@ class CandidatoModel extends CI_Model
         }
     }
 
+    public function getDatos16pf($idCandidato)
+    {
 
+        $this->db->select('p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16');
+        $this->db->from('16pf');
+        $this->db->where('idCandidato', $idCandidato);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->row();
+        } else {
+            return null;
+        }
+    
+    }
 
     public function masGrande($idCandidato)
     {
@@ -417,4 +432,5 @@ class CandidatoModel extends CI_Model
 
     }
 
+    
 }

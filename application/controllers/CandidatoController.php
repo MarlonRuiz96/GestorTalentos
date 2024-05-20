@@ -85,6 +85,8 @@ class CandidatoController extends CI_Controller
         $data['dataTemperamento'] = $this->CandidatoModel->getDatosPrueba($idCandidato);
         $data['dataBriggs'] = $this->CandidatoModel->getDatosBriggs($idCandidato);
         $data['dataValanti'] = $this->CandidatoModel->getDatosValanti($idCandidato);
+        $data['data16pf'] = $this->CandidatoModel->getDatos16pf($idCandidato);
+
 
         //$IdCandidato = $data['candidato_data']->idCandidato;
 

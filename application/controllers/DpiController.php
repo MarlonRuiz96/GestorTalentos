@@ -106,22 +106,22 @@ class DpiController extends CI_Controller
         $idCandidato = $data['Candidato']->idCandidato; // Obtén el id del candidato
 
        // Definir los números de las carillas que quieres sumar
-        $arrayReservado = array(2,19,36,53,70,87);
-        $arrayLento = array(3,20,37,54,71,88);
-        $arrayInfantil = array(4,21,38,55,72,89);
-        $arraySumiso = array(5,22,39,56,73,90);
-        $arrayTaciturno = array(6,23,40,57,74,91);
-        $arrayVariable = array(7,24,41,57,75,92);
-        $arrayTimido = array(8,25,42,58,76,93);
-        $arrayEmocional = array(9,26,43,59,77,94);
-        $arraySospechoso = array(10,27,44,60,78,95);
-        $arrayExcentrico = array(11,28,45,61,79,96);
-        $arraySimple = array(12,29,46,62,80,97);
-        $arrayInseguro = array(13,30,47,63,81,98);
-        $arrayRutinario = array(14,31,48,64,82,99);
-        $arrayDependiente = array(16,32,49,65,83,100);
-        $arrayDescontrolado = array(17,33,50,66,84,101);
-        $arrayTenso = array(18,34,51,67,85,102);
+        $arrayReservado = array(2,19,36,53,70,87); //AMARILLO
+        $arrayLento = array(3,20,37,54,71,88); //VERDE CLARO
+        $arrayInfantil = array(4,21,38,55,72,89); //CELESTE
+        $arraySumiso = array(5,22,39,56,73,90); //OXIDO
+        $arrayTaciturno = array(6,23,40,57,74,91);//PIEL
+        $arrayVariable = array(7,24,41,58,75,92);//MORADO
+        $arrayTimido = array(8,25,42,59,76,93);//GRIS
+        $arrayEmocional = array(9,26,43,60,77,94); //CAFEM**
+        $arraySospechoso = array(10,27,44,61,78,95); //CAFER**
+        $arrayExcentrico = array(11,28,45,62,79,96); //NARANJAOX
+        $arraySimple = array(12,29,46,63,80,97); //MORADOOSC
+        $arrayInseguro = array(13,30,47,64,81,98); //MUSGO**
+        $arrayRutinario = array(14,31,48,65,82,99); //AZUL**
+        $arrayDependiente = array(15,32,49,66,83,100); //MILITAR**
+        $arrayDescontrolado = array(16,33,50,67,84,101);//CELESTECL
+        $arrayTenso = array(17,34,51,68,85,102); //BLANCO
 
         // Inicializar la suma
         $sumaReservado = 0;
