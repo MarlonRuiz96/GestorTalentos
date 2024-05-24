@@ -71,89 +71,64 @@
 
             <main>
                 <h2>Pruebas a realizarse:</h2>
-                <div class="temperamento">
-                    <a href="<?= site_url('DpiController/RealizarPruebas/' . $Candidato->DPI); ?>"
-                        class="btn btn-success" type="button">Iniciar Prueba de Temperamento
-                    </a>
+                <?php if ($Candidato->temperamento == 1): ?>
 
-                </div>
-                <br>
+                    <div class="temperamento">
+                        <a href="<?= site_url('DpiController/RealizarPruebas/' . $Candidato->DPI); ?>"
+                            class="btn btn-success" type="button">Iniciar Prueba de Temperamento
+                        </a>
 
-                <div class="briggs">
-                    <a href="<?= site_url('DpiController/pruebaBriggs/' . $Candidato->DPI); ?>" class="btn btn-success"
-                        type="button">Iniciar Prueba de Briggs
-                    </a>
-                </div>
+                    </div>
+                <?php endif; ?>
+
                 <br>
-                <div class="Valanti">
-                    <a href="<?= site_url('DpiController/pruebaValanti/' . $Candidato->DPI); ?>" class="btn btn-success"
-                        type="button">Iniciar Prueba Valanti
-                    </a>
-                </div>
-                <div class="16pf">
-                    <a href="<?= site_url('DpiController/prueba16pf/' . $Candidato->DPI); ?>" class="btn btn-success"
-                        type="button">Iniciar Cuestionario 16 P.F
-                    </a>
-                </div>
+                <?php if ($Candidato->Briggs == 1): ?>
+
+                    <div class="briggs">
+                        <a href="<?= site_url('DpiController/pruebaBriggs/' . $Candidato->DPI); ?>" class="btn btn-success"
+                            type="button">Iniciar Prueba de Briggs
+                        </a>
+                    </div>
+                <?php endif; ?>
+
                 <br>
+                <?php if ($Candidato->valanti == 1): ?>
+
+                    <div class="Valanti">
+                        <a href="<?= site_url('DpiController/pruebaValanti/' . $Candidato->DPI); ?>" class="btn btn-success"
+                            type="button">Iniciar Prueba Valanti
+                        </a>
+                    </div>
+                <?php endif; ?>
+
+                <br>
+                <?php if ($Candidato->fp16 == 1): ?>
+
+                    <div class="16pf">
+                        <a href="<?= site_url('DpiController/prueba16pf/' . $Candidato->DPI); ?>" class="btn btn-success"
+                            type="button">Iniciar Cuestionario 16 P.F
+                        </a>
+                    </div>
+                <?php endif; ?>
+
+                <br>
+                <?php if ($Candidato->temperamento == 0 && $Candidato->Briggs == 0 && $Candidato->valanti == 0 && $Candidato->fp16 == 0): ?>
 
                 <div class="Sin_pruebas">
                     No hay pruebas a realizarse.
                 </div>
+                <?php endif; ?>
+
             </main>
 
         </div>
 
     </div>
-    <!--
-    <h1>Valores</h1>
-    <ul>
-        <li>Verdad: <?php echo $verdad; ?></li>
-        <li>Rectitud: <?php echo $rectitud; ?></li>
-        <li>Paz: <?php echo $paz; ?></li>
-        <li>Amor: <?php echo $amor; ?></li>
-        <li>No Violencia: <?php echo $noViolencia; ?></li>
-    </ul>-->
 
 
     </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const btnDivBriggs = document.querySelector('.briggs');
-            const btnDivValanti = document.querySelector('.Valanti');
-            const btnDivSinPruebas = document.querySelector('.Sin_pruebas');
-            const btnDivTemperamento = document.querySelector('.temperamento');
 
-            let contadorCondicionesNoCumplidas = 3;
-
-            // Verifica si el valor de Briggs no es igual a '1'
-            if ('<?php echo $Candidato->Briggs; ?>' !== '1') {
-                btnDivBriggs.style.display = 'none'; // Oculta el div si no cumple la condición
-                contadorCondicionesNoCumplidas--;
-
-
-            }
-
-            // Verifica si el valor de Valanti no es igual a '1'
-            if ('<?php echo $Candidato->valanti; ?>' !== '1') {
-                btnDivValanti.style.display = 'none'; // Oculta el div si no cumple la condición
-                contadorCondicionesNoCumplidas--;
-
-            }
-
-            // Verifica si el valor de temperamento no es igual a '1' o si el valor de Temporal es igual a '41'
-            if ('<?php echo $Candidato->temperamento; ?>' !== '1' || '<?php echo $Candidato->Temporal; ?>' === '41') {
-                btnDivTemperamento.style.display = 'none'; // Oculta el div si no cumple la condición
-                contadorCondicionesNoCumplidas--;
-
-            }
-
-            if (contadorCondicionesNoCumplidas > 0) {
-            btnDivSinPruebas.style.display = 'none';
-        }
-        });
-    </script>
 
 
 </body>

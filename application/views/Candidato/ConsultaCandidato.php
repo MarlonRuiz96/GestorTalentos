@@ -1,3 +1,4 @@
+
 <?php require_once APPPATH . 'views/Dashboard/partesuperior.php' ?>
 <!DOCTYPE html>
 <html lang="es">

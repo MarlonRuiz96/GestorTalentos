@@ -428,7 +428,7 @@ class CandidatoModel extends CI_Model
             'idCandidato' => $idCandidato
         );
 
-        $this->db->insert('fp16', $data);
+        $this->db->insert('16pf', $data);
 
     }
 

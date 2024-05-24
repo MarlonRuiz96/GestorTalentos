@@ -25,7 +25,7 @@
     <div class="container">
         <main>
             <div class="d-flex justify-content-start">
-                <img src="<?php echo base_url('assets/img/logo.jpeg'); ?>" class="d-block" alt="Imagen"
+                <img src="<?php echo base_url('assets/img/logo.png'); ?>" class="d-block" alt="Imagen"
                     style="width: 35%; height: auto;"><br><br>
                 <p class="text-center"><br><br>A continuación, deberás elegir una de las cuatro alternativas que se te
                     presentan en cada pantalla. Toma en cuenta que no podrás regresar a corregir. Debes tomar tu tiempo
