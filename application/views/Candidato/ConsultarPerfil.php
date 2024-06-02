@@ -27,10 +27,11 @@
     </header>
 
     <div class="container">
-
+        <!--             <a href="<?= site_url('PdfController/facturaPdf/' . $candidato_data->idCandidato); ?>"
+-->
         <main>
-            <a href="<?= site_url('CandidatoController/reporte/' . $candidato_data->idCandidato); ?>"
-                class="btn btn-warning sweetalert-linkReporte" data-title="Generar Reporte"
+            <a href="<?= site_url('PdfController/facturaPdf/' . $candidato_data->idCandidato); ?>"
+                id="generateReportLink" class="btn btn-warning sweetalert-linkReporte" data-title="Generar Reporte"
                 style="float: right;">Generar Reporte</a>
 
             <h2 class="text">
@@ -115,6 +116,8 @@
                                     <canvas id="myChart"></canvas>
                                 </div>
 
+                                <img id="chartImage" style="display: none;">
+                                <input type="hidden" id="imagePathInput" name="imagePath">
                                 <!-- Columna 2: Espacio para anotaciones -->
 
                                 <div class="col-md-6">
@@ -840,7 +843,7 @@
     var options = {
         scales: {
             y: {
-                beginAtZero: true
+                beginAtZero: false
             }
         }
     };
@@ -1186,9 +1189,36 @@
     </script>
 
 
+    <script>
+    // Función para capturar y enviar la imagen
+    function captureAndSendImage(event) {
+        event.preventDefault(); // Prevenir la acción por defecto del enlace
 
+        // Convertir el canvas a imagen
+        var chartImage = document.getElementById('chartImage');
+        chartImage.src = document.getElementById('myChart').toDataURL();
 
-    </div>
+        // Enviar la imagen al servidor para obtener la ruta
+        chartImage.onload = function() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '<?= site_url('PdfController/uploadImage'); ?>', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    document.getElementById('imagePathInput').value = xhr.responseText;
+                    // Redirigir al enlace del PDF después de enviar la imagen
+                    window.location.href = document.getElementById('generateReportLink').href + '?imagePath=' +
+                        encodeURIComponent(xhr.responseText);
+                }
+            };
+            xhr.send('image=' + encodeURIComponent(chartImage.src));
+        };
+    }
+
+    // Agregar el evento al enlace
+    document.getElementById('generateReportLink').addEventListener('click', captureAndSendImage);
+    </script>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
