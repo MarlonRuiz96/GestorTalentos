@@ -28,11 +28,11 @@ class LoginController extends CI_Controller
 
 
         $this->load->model('ModeloUsuario');
-        $usuario_valido = $this->UsuarioModel->validar_usuario($usuario, $clave);
+        $usuario_valido = $this->ModeloUsuario->validar_usuario($usuario, $clave);
 
 
         if ($usuario_valido) {
-            $id_usuario = $this->UsuarioModel->obtener_id_usuario_por_nombre($usuario);
+            $id_usuario = $this->ModeloUsuario->obtener_id_usuario_por_nombre($usuario);
             $this->session->set_userdata('id_usuario', $id_usuario);
             $this->crear_sesion($id_usuario);
             redirect('DashboardController');

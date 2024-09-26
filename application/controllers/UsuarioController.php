@@ -8,7 +8,7 @@ class UsuarioController extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('usuarioModel');
+        $this->load->model('ModeloUsuario');
         $this->load->helper('autenticacion');
     }
 
@@ -17,7 +17,7 @@ class UsuarioController extends CI_Controller
     {
         verificar_autenticacion($this);
 
-        $data['data'] = $this->usuarioModel->getUsuario();
+        $data['data'] = $this->ModeloUsuario->getUsuario();
 
         $this->load->view('Usuario/ConsultarUsuario', $data);
     }
@@ -30,7 +30,7 @@ class UsuarioController extends CI_Controller
         $nuevaPuesto = $this->input->post('editPuesto');
 
 
-        $this->usuarioModel->ActualizarUsuario($id_usuario, $nuevoNombre, $nuevaPuesto);
+        $this->ModeloUsuario->ActualizarUsuario($id_usuario, $nuevoNombre, $nuevaPuesto);
         return redirect('Usuarios');
 
 
@@ -38,9 +38,9 @@ class UsuarioController extends CI_Controller
     }
 
     public function desactivarUsuario($id_usuario){
-        $data['Usuario'] = $this->usuarioModel->bajaUsuario($id_usuario);
+        $data['Usuario'] = $this->ModeloUsuario->bajaUsuario($id_usuario);
 
-        $data['data'] = $this->usuarioModel->getUsuario();
+        $data['data'] = $this->ModeloUsuario->getUsuario();
         $this->load->view('Usuario/ConsultarUsuario', $data);    
     }
 
@@ -74,7 +74,7 @@ class UsuarioController extends CI_Controller
 
             );
 
-            $this->usuarioModel->InsertarUsuario($data);
+            $this->ModeloUsuario->InsertarUsuario($data);
 
             redirect('Usuarios');
         }
