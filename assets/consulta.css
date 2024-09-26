@@ -297,3 +297,41 @@ thead {
     display: block; /* Asegura que el canvas sea un elemento de bloque */
 }
 
+.flex-container {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.chart-container {
+    flex: 1;
+    width: 50%; /* Ajusta esto según sea necesario */
+    height: 400px; /* Ajusta esto según sea necesario */
+    display: flex;
+    justify-content: center; /* Centra el canvas horizontalmente */
+}
+
+.info-container {
+    flex: 1;
+    padding-left: 20px;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+}
+
+
+.anotaciones-container {
+    display: flex;
+    align-items: flex-start; /* Alinea los elementos en la parte superior */
+}
+
+#Anotaciones {
+    flex: 1; /* El textarea toma todo el espacio disponible */
+    margin-right: 10px; /* Añade espacio entre el textarea y el botón */
+}
+
+#GuardarAnotaciones {
+    align-self: flex-start; /* Alinea el botón en la parte superior */
+}

@@ -585,9 +585,9 @@ CREATE TABLE IF NOT EXISTS `temperamento` (
   `flematico` int(11) NOT NULL,
   `sanguineo` int(11) NOT NULL,
   `realizado` int(10) NOT NULL,
-  `idCandidatofk` int(11) NOT NULL,
+  `idCandidato` int(11) NOT NULL,
   PRIMARY KEY (`idTemperamento`),
-  KEY `fkCandidato` (`idCandidatofk`),
+  KEY `fkCandidato` (`idCandidato`),
   CONSTRAINT `fkCandidato` FOREIGN KEY (`idCandidatofk`) REFERENCES `candidato` (`idCandidato`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 

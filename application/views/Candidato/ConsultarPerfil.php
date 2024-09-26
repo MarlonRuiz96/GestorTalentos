@@ -27,12 +27,12 @@
     </header>
 
     <div class="container">
-        <!--             <a href="<?= site_url('PdfController/facturaPdf/' . $candidato_data->idCandidato); ?>"
--->
+
         <main>
             <a href="<?= site_url('PdfController/facturaPdf/' . $candidato_data->idCandidato); ?>"
-                id="generateReportLink" class="btn btn-warning sweetalert-linkReporte" data-title="Generar Reporte"
+                id="generateReportLink" class="btn btn-success sweetalert-linkReporte" data-title="Generar Reporte"
                 style="float: right;">Generar Reporte</a>
+
 
             <h2 class="text">
                 Datos del Candidato
@@ -61,14 +61,27 @@
                         <input type="text" class="form-control" id="Correo"
                             value="<?php echo $candidato_data->Correo; ?>" readonly>
                     </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputAddress">DPI</label>
+                        <input type="text" class="form-control" id="Correo" value="<?php echo $candidato_data->DPI; ?>"
+                            readonly>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputAddress">Anotaciones</label>
+                        <form id="editForm" action="<?php echo site_url('CandidatoController/guardarNotas'); ?>"
+                            method="POST">
+                            <div class="anotaciones-container">
+                                <textarea class="form-control" id="Anotaciones" name="notas"
+                                    style="width: 100%;"><?php echo $candidato_data->notas; ?></textarea>
+                                <button class="btn btn-primary sweetalert-guardadsr" id="GuardarAnotaciones"
+                                    style="margin-left: 10px;">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+
+
                 </div>
-
-
-
-
-
             </form>
-
 
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
@@ -85,59 +98,53 @@
                     <li class="page-item">
                         <a class="page-link" href="#">16 PF</a>
                     </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">
+                            Cleaver
+                        </a>
+                    </li>
 
                 </ul>
             </nav>
 
 
+
+            <!-- PREUBA TEMPERAMENTOS-->
             <div class="contenido div-ocultar">
                 <main>
                     <div class="d-flex justify-content-between align-items-center">
-                        <h2 style="margin-right: 500px;">Temperamentos</h2>
+                        <h3 style="margin-right: 400px;">Temperamento</h3>
                         <div>
-                            <a href="<?= site_url('CandidatoController/activarTemperamento/' . $candidato_data->DPI); ?>"
-                                class="btn btn-success sweetalert-link" data-title="Activar temperamento">Activar</a>
+                            <?php if (!($candidato_data->temperamento)): ?>
+                            <a href="<?= site_url('CandidatoController/activarPruebas/' . $candidato_data->DPI . '/temperamento'); ?>"
+                                class="btn btn-success sweetalert-activar" data-title="¿Activar la prueba?">Activar
+                                Prueba</a>
+                            <?php else: ?>
+                            <a href="#" class="btn btn-success disabled"
+                                style="pointer-events: none; opacity: 0.5;">Prueba activada</a>
+                            <?php endif; ?>
 
-                            <a href="<?= site_url('CandidatoController/desactivarTemperamento/' . $candidato_data->DPI); ?>"
-                                class="btn btn-danger sweetalert-link2"
-                                data-title="Desactivar temperamento">Desactivar</a>
+                            <?php if ($candidato_data->temperamento): ?>
+
+                            <a href="<?= site_url('CandidatoController/desactivarPruebas/' . $candidato_data->DPI . '/temperamento'); ?>"
+                                class="btn btn-danger sweetalert-desactivar"
+                                data-title="¿Desactivar la Prueba">Desactivar
+                                Prueba</a>
+                            <?php else: ?>
+                            <a href="#" class="btn btn-danger disabled"
+                                style="pointer-events: none; opacity: 0.5;">Prueba desactivada</a>
+                            <?php endif; ?>
+
+                            <a href="<?= site_url('CandidatoController/reiniciarDatos/' . $candidato_data->DPI . '/temperamento'); ?>"
+                                class="btn btn-warning sweetalert-reiniciar"
+                                data-title="Estas a punto de reiniciar los datos, la prueba sera desactivada, tendrás que activarla nuevamente.">
+                                Reiniciar datos
+                            </a>
+
                         </div>
+
+
                     </div>
-
-
-
-                    <form id="editForm" action="<?php echo site_url('CandidatoController/guardarNotas'); ?>"
-                        method="POST">
-
-                        <div class="container">
-                            <div class="row">
-                                <!-- Columna 1: Gráfico -->
-                                <div class="col-md-6">
-                                    <canvas id="myChart"></canvas>
-                                </div>
-
-                                <img id="chartImage" style="display: none;">
-                                <input type="hidden" id="imagePathInput" name="imagePath">
-                                <!-- Columna 2: Espacio para anotaciones -->
-
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" id="DPI" name="DPI"
-                                        value="<?php echo $candidato_data->DPI; ?>" style="display: none;">
-
-                                    <h2>Anotaciones</h2>
-                                    <!-- Textarea más grande para anotaciones -->
-                                    <textarea class="form-control" rows="5" id="Anotaciones"
-                                        name="notas"><?php echo $candidato_data->notas; ?></textarea>
-                                    <!-- Botón de guardar -->
-                                    <button class="btn btn-primary mt-3 sweetalert-guardadsr"
-                                        id="GuardarAnotaciones">Guardar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
-
-
                     <table>
                         <thead>
                             <tr>
@@ -274,19 +281,41 @@
 
                     </table>
             </div>
+
+            <!--PRUEBA MYERS BRIGGS-->
             <div class="contenido div-ocultar-2">
                 <main>
 
                     <div class="d-flex justify-content-between align-items-center">
-                        <h2 style="margin-right: 500px;">Resultados de la Prueba Myers-Briggs</h2>
-                        <div>
-                            <a href="<?= site_url('CandidatoController/activarbriggs/' . $candidato_data->DPI); ?>"
-                                class="btn btn-success sweetalert-briggs"
-                                data-title="¿Activar la prueba Myers-Briggs? ">Activar</a>
-                            <a href="<?= site_url('CandidatoController/desactivarbriggs/' . $candidato_data->DPI); ?>"
-                                class="btn btn-danger sweetalert-briggs2"
-                                data-title="¿Desactivar la prueba Myers-Briggs?">Desactivar</a>
-                        </div>
+                        <h2 style="margin-right: 400px;">Myers-Briggs</h2>
+						<div>
+							<?php if (!($candidato_data->Briggs)): ?>
+								<a href="<?= site_url('CandidatoController/activarPruebas/' . $candidato_data->DPI . '/Briggs'); ?>"
+								   class="btn btn-success sweetalert-activar" data-title="¿Activar la prueba?">Activar
+									Prueba</a>
+							<?php else: ?>
+								<a href="#" class="btn btn-success disabled"
+								   style="pointer-events: none; opacity: 0.5;">Prueba activada</a>
+							<?php endif; ?>
+
+							<?php if ($candidato_data->Briggs): ?>
+
+								<a href="<?= site_url('CandidatoController/desactivarPruebas/' . $candidato_data->DPI . '/Briggs'); ?>"
+								   class="btn btn-danger sweetalert-desactivar"
+								   data-title="¿Desactivar la Prueba">Desactivar
+									Prueba</a>
+							<?php else: ?>
+								<a href="#" class="btn btn-danger disabled"
+								   style="pointer-events: none; opacity: 0.5;">Prueba desactivada</a>
+							<?php endif; ?>
+
+							<a href="<?= site_url('CandidatoController/reiniciarDatos/' . $candidato_data->DPI . '/Briggs'); ?>"
+							   class="btn btn-warning sweetalert-reiniciar"
+							   data-title="Estas a punto de reiniciar los datos, la prueba sera desactivada, tendrás que activarla nuevamente.">
+								Reiniciar datos
+							</a>
+
+						</div>
                     </div>
 
                     <div class="container">
@@ -519,8 +548,6 @@
 
             </div>
             <!-- CODIGO PARA LA PRUEBA 16PF -->
-
-
             <div class="contenido div-ocultar-4">
                 <main>
                     <div class="d-flex justify-content-between align-items-center">
@@ -663,569 +690,535 @@
                     </div>
                 </main>
             </div>
+            <!-- FORMULARIO CLEAVER-->
+            <div class="div-ocultar-5 contenido">
+                <main>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 style="margin-right: 500px;">Cleaver</h3>
+                        <div>
+                            <?php if (!($candidato_data->cleaver)): ?>
+                            <a href="<?= site_url('CandidatoController/activarCleaver/' . $candidato_data->DPI); ?>"
+                                class="btn btn-success sweetalert-activar" data-title="¿Activar la prueba?">Activar
+                                Prueba</a>
+                            <?php else: ?>
+                            <a href="#" class="btn btn-success disabled"
+                                style="pointer-events: none; opacity: 0.5;">Prueba activada</a>
+                            <?php endif; ?>
+
+                            <?php if ($candidato_data->cleaver): ?>
+
+                            <a href="<?= site_url('CandidatoController/deactivarCleaver/' . $candidato_data->DPI); ?>"
+                                class="btn btn-danger sweetalert-desactivar"
+                                data-title="¿Desactivar la Prueba">Desactivar
+                                Prueba</a>
+                            <?php else: ?>
+                            <a href="#" class="btn btn-danger disabled"
+                                style="pointer-events: none; opacity: 0.5;">Prueba desactivada</a>
+                            <?php endif; ?>
+
+                            <a href="<?= site_url('CandidatoController/reiniciarCleaver/' . $candidato_data->DPI); ?>"
+                                class="btn btn-warning sweetalert-reiniciar"
+                                data-title="Estas a punto de reiniciar los datos, la prueba sera desactivada, tendrás que activarla nuevamente.">Reiniciar
+                                datos</a>
+                        </div>
+
+
+                    </div>
+                    <div>
+                        <h2>Normal</h2>
+                        <div class="flex-container">
+                            <div class="chart-container">
+                                <canvas id="normalChart"></canvas>
+                            </div>
+                            <div class="info-container">
+                                <?php echo $maxCleaver['maxM']['interpretacionM']; ?>
+
+                            </div>
+                        </div>
+
+                        <h2>Motivación</h2>
+                        <div class="flex-container">
+                            <div class="chart-container">
+                                <canvas id="motivacionChart"></canvas>
+                            </div>
+                            <div class="info-container">
+                                <?php echo $maxCleaver['maxL']['interpretacionL']; ?>
+
+                            </div>
+                        </div>
+
+                        <h2>Presión</h2>
+                        <div class="flex-container">
+                            <div class="chart-container">
+                                <canvas id="presionChart"></canvas>
+                            </div>
+                            <div class="info-container">
+                                <?php echo $maxCleaver['maxT']['interpretacionT']; ?>
+
+                            </div>
+                        </div>
+                </main>
+
+            </div>
 
 
 
+    </div>
 
-        </main>
+
+
+    </main>
     </div>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <!-- APARTADO PARA OCULTAR LOS DIVS-->
     <script>
-    var datosReservado = 5;
-    var datosLento = 1;
-    var datosInfantil = 2;
-    var datosSumiso = 3;
-    var datosTaciturno = 4;
-    var datosVariable = 2;
-    var datosTimido = 1;
-    var datosEmocional = 3;
-    var datosSospechoso = 4;
-    var datosExcentrico = 2;
-    var datosSimple = 3;
-    var datosInseguro = 4;
-    var datosRutinario = 1;
-    var datosDependiente = 2;
-    var datosDescontrolado = 3;
-    var datosTenso = 4;
-
-    function createChart(ctx, data) {
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: [''], // Etiqueta vacía
-                datasets: [{
-                    label: '',
-                    data: [data],
-                    backgroundColor: 'rgba(54, 162, 235, 0.6)', // Color azul para el fondo de todas las barras
-                    borderColor: 'rgba(54, 162, 235, 1)', // Color azul para los bordes de todas las barras
-                    borderWidth: 1
-                }]
+    document.addEventListener("DOMContentLoaded", () => {
+        // Funciones para ocultar y mostrar divs
+        const toggleDivs = {
+            ocultar: (clases) => {
+                clases.forEach(clase => {
+                    document.querySelectorAll(`.${clase}`).forEach(div => {
+                        div.style.display = 'none';
+                    });
+                });
             },
-            options: {
-                indexAxis: 'y',
-                maintainAspectRatio: false, // Para que se adapte al contenedor
-                responsive: true, // Para que sea responsivo
-                plugins: {
-                    legend: {
-                        display: false // Desactivar leyenda
-                    },
-                    datalabels: {
-                        display: false // Desactivar etiquetas de datos
-                    }
-                },
-                scales: {
-                    y: {
-                        display: false // Ocultar etiquetas del eje y
-                    },
-                    x: {
-                        beginAtZero: true, // Comenzar en cero
-                        max: 6 // Valor máximo basado en los datos
-                    }
-                }
+            mostrar: (clase) => {
+                document.querySelectorAll(`.${clase}`).forEach(div => {
+                    div.style.display = 'block';
+                });
             }
+        };
+
+        // Manejo de la paginación para mostrar y ocultar divs
+        const linksPaginacion = document.querySelectorAll('.pagination .page-link');
+        const divClasses = ['div-ocultar', 'div-ocultar-2', 'div-ocultar-3', 'div-ocultar-4', 'div-ocultar-5'];
+
+        linksPaginacion.forEach((link, index) => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                toggleDivs.ocultar(divClasses);
+                toggleDivs.mostrar(divClasses[index]);
+            });
         });
-    }
-    var data16 = <?php echo json_encode($data16pf); ?>;
 
-    // Crear gráficos individuales
-    createChart(document.getElementById('graficaReservado').getContext('2d'), data16.p1);
-    createChart(document.getElementById('graficaLento').getContext('2d'), data16.p2);
-    createChart(document.getElementById('graficaInfantil').getContext('2d'), data16.p3);
-    createChart(document.getElementById('graficaSumiso').getContext('2d'), data16.p4);
-    createChart(document.getElementById('graficaTaciturno').getContext('2d'), data16.p5);
-    createChart(document.getElementById('graficaVariable').getContext('2d'), data16.p6);
-    createChart(document.getElementById('graficaTimido').getContext('2d'), data16.p7);
-    createChart(document.getElementById('graficaEmocional').getContext('2d'), data16.p8);
-    createChart(document.getElementById('graficaSospechoso').getContext('2d'), data16.p9);
-    createChart(document.getElementById('graficaExcentrico').getContext('2d'), data16.p10);
-    createChart(document.getElementById('graficaSimple').getContext('2d'), data16.p11);
-    createChart(document.getElementById('graficaInseguro').getContext('2d'), data16.p12);
-    createChart(document.getElementById('graficaRutinario').getContext('2d'), data16.p13);
-    createChart(document.getElementById('graficaDependiente').getContext('2d'), data16.p14);
-    createChart(document.getElementById('graficaDescontrolado').getContext('2d'), data16.p15);
-    createChart(document.getElementById('graficaTenso').getContext('2d'), data16.p16);
+        // Mostrar el primer div por defecto al cargar la página
+        toggleDivs.mostrar(divClasses[0]);
 
+        // Función general para manejar SweetAlert2
+        const handleSweetAlert = (selector, options) => {
+            const links = document.querySelectorAll(selector);
+            links.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const targetUrl = link.getAttribute('href');
+                    const title = link.getAttribute('data-title');
 
+                    Swal.fire({
+                        title: title,
+                        text: options.text,
+                        icon: options.icon,
+                        showCancelButton: true,
+                        confirmButtonColor: options.confirmButtonColor,
+                        cancelButtonColor: options.cancelButtonColor,
+                        confirmButtonText: options.confirmButtonText,
+                        cancelButtonText: options.cancelButtonText
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire({
+                                title: options.successTitle,
+                                text: options.successText,
+                                icon: 'success',
+                                confirmButtonColor: '#3085d6'
+                            }).then(() => {
+                                window.location.href = targetUrl;
+                            });
+                        }
+                    });
+                });
+            });
+        };
 
-
-
-    // Agrega más gráficos según sea necesario
-    </script>
-
-
-    <script>
-    // Convierte los datos de $dataTemperamento en formato JSON
-    var dataValanti = <?php echo json_encode($dataValanti); ?>;
-    var candidato = <?php echo json_encode($candidato_data); ?>;
-    var ctx = document.getElementById("radiaGlChart").getContext("2d");
-
-    var myChart = new Chart(ctx, {
-        type: "radar",
-        data: {
-            labels: ["Verdad", "Rectitud", "Paz", "Amor", "No_Violencia"],
-            datasets: [{
-                    label: [candidato.Nombres],
-                    data: [dataValanti.Verdad, dataValanti.Rectitud, dataValanti.Paz, dataValanti.Amor,
-                        dataValanti.No_violencia
-                    ],
-                    borderColor: 'rgba(54, 162, 235, 1)', // Color de la línea
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)', // Color del área debajo de la línea
-                    borderWidth: 3
-                },
-                // Coma faltante aquí
-                {
-                    label: 'Gestor de Talentos', // Coma faltante después de 'Gestor de Talentos'
-                    data: [dataValanti.verdadEmpresa, dataValanti.rectitudEmpresa, dataValanti
-                        .pazEmpresa, dataValanti.amorEmpresa, dataValanti.noViolenciaEmpresa
-                    ],
-                    borderColor: 'rgba(255, 99, 132, 1)', // Color de la línea
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)', // Color del área debajo de la línea
-                    borderWidth: 3
-                }
-
-            ]
-
-        },
-        options: {
-            responsive: true,
-            display: true,
-
-            elements: {
-                line: {
-                    borderWidth: 3
-                }
-            },
-            scales: {
-                r: {
-                    angleLines: {
-                        display: false
-                    },
-                    suggestedMin: 0,
-                    suggestedMax: 70
-                }
-            },
-            tooltips: {
-                callbacks: {
-                    label: function(tooltipItem, data) {
-                        return data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem
-                            .yLabel;
-                    }
-                }
-            }
-        }
-    });
-    </script>
-
-
-    <script>
-    // Configuración de datos para la gráfica (tendrías que ajustar esto según tu estructura de datos)
-    var temperamentoData = <?php echo json_encode($dataTemperamento); ?>;
-    var data = {
-        labels: ['Melancólico', 'Flemático', 'Colérico', 'Sanguíneo'],
-        datasets: [{
-            label: 'Temperamentos',
-            data: [temperamentoData.melancolico, temperamentoData.flematico, temperamentoData.colerico,
-                temperamentoData.sanguineo
-            ],
-            backgroundColor: [
-                'rgb(23, 162, 184)',
-                'rgb(40, 167, 69)',
-                'rgb(220, 53, 69)',
-                'rgb(255, 193, 7)'
-            ]
-        }]
-    };
-
-    // Otras opciones de configuración de la gráfica
-    var options = {
-        scales: {
-            y: {
-                beginAtZero: false
-            }
-        }
-    };
-
-    // Crear la gráfica utilizando Chart.js
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: data,
-        options: options
-    });
-
-    // Función para guardar la gráfica como imagen
-    document.getElementById('saveChartButton').addEventListener('click', function() {
-        html2canvas(document.getElementById('myChart')).then(function(canvas) {
-            var link = document.createElement('a');
-            link.download = 'grafico_temperamentos.png';
-            link.href = canvas.toDataURL();
-            link.click();
-        });
-    });
-    </script>
-    <script>
-    // Espera a que el documento esté cargado
-    document.addEventListener('DOMContentLoaded', function() {
-        // Selecciona todos los elementos con la clase 'sweetalert-link'
-        const sweetalertLinks = document.querySelectorAll('.sweetalert-guardar');
-
-        // Itera sobre cada enlace y agrega un evento de clic
-        sweetalertLinks.forEach(function(link) {
-            link.addEventListener('click', function(event) {
-                event
-                    .preventDefault(); // Previene el comportamiento predeterminado del enlace
-
-                const targetUrl = this.getAttribute(
-                    'href'); // Obtiene la URL del atributo href
-
-                // Muestra el SweetAlert2 de confirmación
-                Swal.fire({
-                    title: this.getAttribute('data-title'),
+        // Configuración para diferentes tipos de SweetAlert2
+        const sweetAlertConfigs = [{
+                selector: '.sweetalert-guardar',
+                options: {
                     text: '¿Estás seguro?',
                     icon: 'warning',
-                    showCancelButton: true,
                     confirmButtonColor: '#28a745',
                     cancelButtonColor: '#3085d6',
                     confirmButtonText: 'Sí, Guardar',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire({
-                            title: 'Observaciones',
-                            text: 'Observaciones guardadas con éxito.',
-                            icon: 'success',
-                            confirmButtonColor: '#3085d6'
-                        }).then(() => {
-                            window.location.href = targetUrl;
-                        });
-                    }
-                });
-            });
-        });
-    });
-    </script>
-
-    <script>
-    // Espera a que el documento esté cargado
-    document.addEventListener('DOMContentLoaded', function() {
-        // Selecciona todos los elementos con la clase 'sweetalert-link'
-        const sweetalertLinks = document.querySelectorAll('.sweetalert-link');
-
-        // Itera sobre cada enlace y agrega un evento de clic
-        sweetalertLinks.forEach(function(link) {
-            link.addEventListener('click', function(event) {
-                event
-                    .preventDefault(); // Previene el comportamiento predeterminado del enlace
-
-                const targetUrl = this.getAttribute(
-                    'href'); // Obtiene la URL del atributo href
-
-                // Muestra el SweetAlert2 de confirmación
-                Swal.fire({
-                    title: this.getAttribute('data-title'),
+                    cancelButtonText: 'Cancelar',
+                    successTitle: 'Observaciones',
+                    successText: 'Observaciones guardadas con éxito.'
+                }
+            },
+            {
+                selector: '.sweetalert-activar',
+                options: {
                     text: '¿Estás seguro?',
                     icon: 'warning',
-                    showCancelButton: true,
                     confirmButtonColor: '#28a745',
                     cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Sí, Activar',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire({
-                            title: 'Prueba activada.',
-                            text: 'La prueba fue activada con éxito.',
-                            icon: 'success',
-                            confirmButtonColor: '#3085d6'
-                        }).then(() => {
-                            window.location.href =
-                                targetUrl; // Cambio de deleteUrl a targetUrl
-                        });
-                    }
-                });
-            });
-        });
-    });
-    </script>
-    <script>
-    // Espera a que el documento esté cargado
-    document.addEventListener('DOMContentLoaded', function() {
-        // Selecciona todos los elementos con la clase 'sweetalert-link'
-        const sweetalertLinks = document.querySelectorAll('.sweetalert-briggs');
-
-        // Itera sobre cada enlace y agrega un evento de clic
-        sweetalertLinks.forEach(function(link) {
-            link.addEventListener('click', function(event) {
-                event
-                    .preventDefault(); // Previene el comportamiento predeterminado del enlace
-
-                const targetUrl = this.getAttribute(
-                    'href'); // Obtiene la URL del atributo href
-
-                // Muestra el SweetAlert2 de confirmación
-                Swal.fire({
-                    title: this.getAttribute('data-title'),
+                    confirmButtonText: 'Sí, activar.',
+                    cancelButtonText: 'Cancelar',
+                    successTitle: 'Prueba activada.',
+                    successText: 'La prueba fue activada con éxito.'
+                }
+            },
+            {
+                selector: '.sweetalert-desactivar',
+                options: {
                     text: '¿Estás seguro?',
                     icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#28a745',
-                    cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Sí, Activar',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire({
-                            title: 'Prueba activada.',
-                            text: 'La prueba fue activada con éxito.',
-                            icon: 'success',
-                            confirmButtonColor: '#3085d6'
-                        }).then(() => {
-                            window.location.href = targetUrl;
-                        });
-                    }
-                });
-            });
-        });
-    });
-    </script>
-
-    <script>
-    // Espera a que el documento esté cargado
-    document.addEventListener('DOMContentLoaded', function() {
-        // Selecciona todos los elementos con la clase 'sweetalert-link'
-        const sweetalertLinks = document.querySelectorAll('.sweetalert-briggs2');
-
-        // Itera sobre cada enlace y agrega un evento de clic
-        sweetalertLinks.forEach(function(link) {
-            link.addEventListener('click', function(event) {
-                event
-                    .preventDefault(); // Previene el comportamiento predeterminado del enlace
-
-                const targetUrl = this.getAttribute(
-                    'href'); // Obtiene la URL del atributo href
-
-                // Muestra el SweetAlert2 de confirmación
-                Swal.fire({
-                    title: this.getAttribute('data-title'),
-                    text: '¿Estás seguro?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#28a745',
-                    cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Sí, desactivar.',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire({
-                            title: 'Prueba desactivada.',
-                            text: 'La prueba fue desactivada con éxito.',
-                            icon: 'success',
-                            confirmButtonColor: '#3085d6'
-                        }).then(() => {
-                            window.location.href = targetUrl;
-                        });
-                    }
-                });
-            });
-        });
-    });
-    </script>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const sweetalertLinks = document.querySelectorAll('.sweetalert-link2');
-
-        sweetalertLinks.forEach(function(link) {
-            link.addEventListener('click', function(event) {
-                event.preventDefault();
-
-                const targetUrl = this.getAttribute('href');
-
-                Swal.fire({
-                    title: this.getAttribute('data-title'),
-                    text: '¿Estás seguro?',
-                    icon: 'warning',
-                    showCancelButton: true,
                     confirmButtonColor: '#d33',
                     cancelButtonColor: '#3085d6',
                     confirmButtonText: 'Sí, Desactivar',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire({
-                            title: 'Prueba desactivada.',
-                            text: 'La prueba fue desactivada con éxito.',
-                            icon: 'success',
-                            confirmButtonColor: '#3085d6'
-                        }).then(() => {
-                            window.location.href = targetUrl;
-                        });
-                    }
-                });
-            });
-        });
-    });
-    </script>
-
-
-    <script>
-    function ocultarDivs(clase) {
-        const divsAOcultar = document.querySelectorAll(`.${clase}`);
-        divsAOcultar.forEach(div => {
-            div.style.display = 'none';
-        });
-    }
-
-    function mostrarDivs(clase) {
-        const divsAMostrar = document.querySelectorAll(`.${clase}`);
-        divsAMostrar.forEach(div => {
-            div.style.display = 'block';
-        });
-    }
-
-    const linksPaginacion = document.querySelectorAll('.pagination .page-link');
-
-    linksPaginacion.forEach((link, index) => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (index === 0) {
-                mostrarDivs('div-ocultar'); //mostrar primero
-                ocultarDivs('div-ocultar-2'); //ocultar segundo
-                ocultarDivs('div-ocultar-3'); //ocultar tercero
-                ocultarDivs('div-ocultar-4'); //ocultar CUARTO
-
-            } else if (index === 1) {
-                mostrarDivs('div-ocultar-2'); //mostrar segundo
-                ocultarDivs('div-ocultar'); //ocultar primero
-                ocultarDivs('div-ocultar-3'); // ocultar tercero
-                ocultarDivs('div-ocultar-4'); //ocultar CUARTO
-
-            } else if (index === 2) {
-                mostrarDivs('div-ocultar-3'); //mostrar tercero
-                ocultarDivs('div-ocultar'); //ocultar primero
-                ocultarDivs('div-ocultar-2'); //ocultar segundo
-                ocultarDivs('div-ocultar-4'); //ocultar CUARTO
-
-            } else if (index === 3) {
-                mostrarDivs('div-ocultar-4'); //mostrar tercero
-                ocultarDivs('div-ocultar'); //ocultar primero
-                ocultarDivs('div-ocultar-2'); //ocultar segundo
-                ocultarDivs('div-ocultar-3'); //ocultar TERcer
-
-            }
-
-            // Agrega más condiciones para manejar más páginas si es necesario
-        });
-    });
-
-    mostrarDivs('div-ocultar'); // Mostrar el primer div 'div-ocultar' por defecto al cargar la página
-    </script>
-
-
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Función para ocultar los elementos con la clase div-ocultar-2
-        function ocultarDivOcultar2() {
-            const divsOcultar2 = document.querySelectorAll('.div-ocultar-2');
-            divsOcultar2.forEach(div => {
-                div.style.display = 'none';
-            });
-        }
-
-        // Función para ocultar los elementos con la clase div-ocultar-3
-        function ocultarDivOcultar3() {
-            const divsOcultar3 = document.querySelectorAll('.div-ocultar-3');
-            divsOcultar3.forEach(div => {
-                div.style.display = 'none';
-            });
-        }
-
-        function ocultarDivOcultar4() {
-            const divsOcultar4 = document.querySelectorAll('.div-ocultar-4');
-            divsOcultar4.forEach(div => {
-                div.style.display = 'none';
-            });
-        }
-
-        ocultarDivOcultar2(); // Ocultar div-ocultar-2 al cargar la página
-        ocultarDivOcultar3(); // Ocultar div-ocultar-3 al cargar la página
-        ocultarDivOcultar4(); // Ocultar div-ocultar-4 al cargar la página
-
-    });
-    </script>
-
-
-    <script>
-    // Convierte los datos de $dataTemperamento en formato JSON
-    var dataBriggs = <?php echo json_encode($dataBriggs); ?>;
-    var ctx = document.getElementById("myCharts").getContext("2d");
-
-    var myChart = new Chart(ctx, {
-        type: "bar",
-        data: {
-            labels: ["Extrovertido", "Introvertido", "Sensorial", "Intuitivo", "Racional", "Emocional",
-                "Calificador", "Perceptivo"
-            ],
-            datasets: [{
-                label: "Resultados de la prueba BRIGGS", //esto que es?
-                data: [dataBriggs.extrovertido, dataBriggs.introvertido, dataBriggs.sensorial,
-                    dataBriggs.intuitivo, dataBriggs.racional, dataBriggs.emocional, dataBriggs
-                    .calificador, dataBriggs.perceptivo
-                ],
-                backgroundColor: ["#1d864a", "#fcc832", "#347fab", "#ff5733", "#8e44ad", "#3498db",
-                    "#f39c12", "#27ae60"
-                ]
-            }]
-        },
-        options: {
-            title: {
-                text: "Datos de la personalidad"
-            }
-        }
-    });
-    </script>
-
-
-    <script>
-    // Función para capturar y enviar la imagen
-    function captureAndSendImage(event) {
-        event.preventDefault(); // Prevenir la acción por defecto del enlace
-
-        // Convertir el canvas a imagen
-        var chartImage = document.getElementById('chartImage');
-        chartImage.src = document.getElementById('myChart').toDataURL();
-
-        // Enviar la imagen al servidor para obtener la ruta
-        chartImage.onload = function() {
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', '<?= site_url('PdfController/uploadImage'); ?>', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    document.getElementById('imagePathInput').value = xhr.responseText;
-                    // Redirigir al enlace del PDF después de enviar la imagen
-                    window.location.href = document.getElementById('generateReportLink').href + '?imagePath=' +
-                        encodeURIComponent(xhr.responseText);
+                    cancelButtonText: 'Cancelar',
+                    successTitle: 'Prueba desactivada.',
+                    successText: 'La prueba fue desactivada con éxito.'
                 }
-            };
-            xhr.send('image=' + encodeURIComponent(chartImage.src));
-        };
-    }
+            },
+            {
+                selector: '.sweetalert-reiniciar',
+                options: {
+                    text: '¿Estás seguro?',
+                    icon: 'warning',
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Sí, Reiniciar datos',
+                    cancelButtonText: 'Cancelar',
+                    successTitle: 'Accion realizada con éxito.',
+                    successText: 'Los datos de la prueba fueron reiniciados con éxito.'
+                }
+            }
+        ];
 
-    // Agregar el evento al enlace
-    document.getElementById('generateReportLink').addEventListener('click', captureAndSendImage);
+        // Aplicar las configuraciones de SweetAlert2
+        sweetAlertConfigs.forEach(config => handleSweetAlert(config.selector, config.options));
+
+        // Optimizar la ocultación de múltiples divs al final del documento
+        document.querySelectorAll('.div-ocultar-2, .div-ocultar-3, .div-ocultar-4, .div-ocultar-5').forEach(
+            div => {
+                div.style.display = 'none';
+            });
+    });
     </script>
 
-
+    <!-- Librerías necesarias -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Gráficas -->
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Datos provenientes del servidor
+        const cleaver = <?php echo json_encode($dataCleaver); ?>;
+        const data16 = <?php echo json_encode($data16pf); ?>;
+        const dataValanti = <?php echo json_encode($dataValanti); ?>;
+        const candidato = <?php echo json_encode($candidato_data); ?>;
+        const dataTemperamento = <?php echo json_encode($dataTemperamento); ?>;
+        const dataBriggs = <?php echo json_encode($dataBriggs); ?>;
 
+        // Configuración común para todos los gráficos de línea
+        const commonLineOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        stepSize: 5,
+                        callback: (value) => value
+                    }
+                },
+                x: {
+                    ticks: {
+                        autoSkip: false
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: false
+                },
+                datalabels: {
+                    display: false
+                }
+            },
+            layout: {
+                padding: {
+                    left: 10,
+                    right: 10,
+                    top: 10,
+                    bottom: 10
+                }
+            },
+            elements: {
+                line: {
+                    tension: 0
+                }
+            }
+        };
+
+        // Función para crear gráficos de línea
+        const createLineChart = (ctx, label, data, color) => {
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['D', 'I', 'S', 'C'],
+                    datasets: [{
+                        label: label,
+                        data: data,
+                        borderColor: color,
+                        borderWidth: 1,
+                        pointBackgroundColor: color,
+                        pointBorderColor: color,
+                        fill: false
+                    }]
+                },
+                options: commonLineOptions
+            });
+        };
+
+        // Crear gráficos de línea
+        createLineChart(document.getElementById('normalChart').getContext('2d'), 'NORMAL', [cleaver.T1, cleaver
+            .T2, cleaver.T3, cleaver.T4
+        ], 'blue');
+        createLineChart(document.getElementById('motivacionChart').getContext('2d'), 'MOTIVACION', [cleaver.M1,
+            cleaver.M2, cleaver.M3, cleaver.M4
+        ], 'green');
+        createLineChart(document.getElementById('presionChart').getContext('2d'), 'PRESION', [cleaver.L1,
+            cleaver.L2, cleaver.L3, cleaver.L4
+        ], 'red');
+
+        // Función para crear gráficos de barra
+        const createBarChart = (ctx, data) => {
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [''], // Etiqueta vacía
+                    datasets: [{
+                        label: '',
+                        data: [data],
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        datalabels: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            display: false
+                        },
+                        x: {
+                            beginAtZero: true,
+                            max: 6
+                        }
+                    }
+                }
+            });
+        };
+
+        // Crear múltiples gráficos de barra
+        const barChartIds = [
+            'graficaReservado', 'graficaLento', 'graficaInfantil', 'graficaSumiso',
+            'graficaTaciturno', 'graficaVariable', 'graficaTimido', 'graficaEmocional',
+            'graficaSospechoso', 'graficaExcentrico', 'graficaSimple', 'graficaInseguro',
+            'graficaRutinario', 'graficaDependiente', 'graficaDescontrolado', 'graficaTenso'
+        ];
+
+        barChartIds.forEach((id, index) => {
+            const ctx = document.getElementById(id).getContext('2d');
+            const dataKey = `p${index + 1}`; // Asumiendo que data16 tiene p1, p2, ..., p16
+            createBarChart(ctx, data16[dataKey]);
+        });
+
+        // Gráfico Radar
+        const radarCtx = document.getElementById("radiaGlChart").getContext("2d");
+        new Chart(radarCtx, {
+            type: "radar",
+            data: {
+                labels: ["Verdad", "Rectitud", "Paz", "Amor", "No_Violencia"],
+                datasets: [{
+                        label: candidato.Nombres,
+                        data: [
+                            dataValanti.Verdad,
+                            dataValanti.Rectitud,
+                            dataValanti.Paz,
+                            dataValanti.Amor,
+                            dataValanti.No_violencia
+                        ],
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderWidth: 3
+                    },
+                    {
+                        label: 'Gestor de Talentos',
+                        data: [
+                            dataValanti.verdadEmpresa,
+                            dataValanti.rectitudEmpresa,
+                            dataValanti.pazEmpresa,
+                            dataValanti.amorEmpresa,
+                            dataValanti.noViolenciaEmpresa
+                        ],
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderWidth: 3
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                elements: {
+                    line: {
+                        borderWidth: 3
+                    }
+                },
+                scales: {
+                    r: {
+                        angleLines: {
+                            display: false
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 70
+                    }
+                },
+                tooltips: {
+                    callbacks: {
+                        label: (tooltipItem, data) => {
+                            const dataset = data.datasets[tooltipItem.datasetIndex];
+                            const label = dataset.label || '';
+                            return `${label}: ${tooltipItem.raw}`;
+                        }
+                    }
+                }
+            }
+        });
+
+        // Gráfico Doughnut para Temperamentos
+        const doughnutCtx = document.getElementById('myChart').getContext('2d');
+        new Chart(doughnutCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Melancólico', 'Flemático', 'Colérico', 'Sanguíneo'],
+                datasets: [{
+                    label: 'Temperamentos',
+                    data: [
+                        dataTemperamento.melancolico,
+                        dataTemperamento.flematico,
+                        dataTemperamento.colerico,
+                        dataTemperamento.sanguineo
+                    ],
+                    backgroundColor: [
+                        'rgb(23, 162, 184)',
+                        'rgb(40, 167, 69)',
+                        'rgb(220, 53, 69)',
+                        'rgb(255, 193, 7)'
+                    ]
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: false
+                    }
+                }
+            }
+        });
+
+        // Guardar gráfica como imagen
+        document.getElementById('saveChartButton').addEventListener('click', () => {
+            html2canvas(document.getElementById('myChart')).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'grafico_temperamentos.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        });
+
+        // Gráfico BRIGGS
+        const briggsCtx = document.getElementById("myCharts").getContext("2d");
+        new Chart(briggsCtx, {
+            type: "bar",
+            data: {
+                labels: ["Extrovertido", "Introvertido", "Sensorial", "Intuitivo", "Racional",
+                    "Emocional", "Calificador", "Perceptivo"
+                ],
+                datasets: [{
+                    label: "Resultados de la prueba BRIGGS",
+                    data: [
+                        dataBriggs.extrovertido,
+                        dataBriggs.introvertido,
+                        dataBriggs.sensorial,
+                        dataBriggs.intuitivo,
+                        dataBriggs.racional,
+                        dataBriggs.emocional,
+                        dataBriggs.calificador,
+                        dataBriggs.perceptivo
+                    ],
+                    backgroundColor: ["#1d864a", "#fcc832", "#347fab", "#ff5733", "#8e44ad",
+                        "#3498db", "#f39c12", "#27ae60"
+                    ]
+                }]
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: "Datos de la personalidad"
+                    }
+                }
+            }
+        });
+
+        // Función para capturar y enviar la imagen
+        const captureAndSendImage = (event) => {
+            event.preventDefault();
+
+            const chartImage = document.getElementById('chartImage');
+            chartImage.src = document.getElementById('myChart').toDataURL();
+
+            chartImage.onload = () => {
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '<?= site_url('PdfController/uploadImage'); ?>', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onreadystatechange = () => {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        document.getElementById('imagePathInput').value = xhr.responseText;
+                        window.location.href =
+                            `${document.getElementById('generateReportLink').href}?imagePath=${encodeURIComponent(xhr.responseText)}`;
+                    }
+                };
+                xhr.send(`image=${encodeURIComponent(chartImage.src)}`);
+            };
+        };
+
+        // Agregar el evento al enlace para generar el reporte
+        document.getElementById('generateReportLink').addEventListener('click', captureAndSendImage);
+
+        // Loguear los datos del candidato
+        const candidatoData = <?= json_encode($candidato_data) ?>;
+        console.log(candidatoData);
+    });
+    </script>
 
 </body>
 

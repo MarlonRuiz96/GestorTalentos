@@ -41,7 +41,7 @@ class CandidatoModel extends CI_Model
             'flematico' => 0,
             'colerico' => 0,
             'sanguineo' => 0,
-            'idCandidatofk' => $idCandidato,
+            'idCandidato' => $idCandidato,
         );
         $dataCandidato = array(
             'Nombres' => "",
@@ -74,7 +74,7 @@ class CandidatoModel extends CI_Model
     }
     public function getCandidatoPorId($idCandidato)
     {
-        $this->db->select('idCandidato, Nombres, Puesto, Contacto, Correo, notas, DPI, temperamento');
+        $this->db->select('*');
         $this->db->from('Candidato');
         $this->db->where('idCandidato', $idCandidato);
 
@@ -90,7 +90,7 @@ class CandidatoModel extends CI_Model
 
     public function getDatosPrueba($idCandidato)
     {
-        $this->db->select('melancolico, colerico, flematico, sanguineo');
+        $this->db->select('*');
         $this->db->from('Candidato');
         $this->db->where('idCandidato', $idCandidato);
 
@@ -105,7 +105,7 @@ class CandidatoModel extends CI_Model
     }
     public function getDatosBriggs($idCandidato)
     {
-        $this->db->select('extrovertido, introvertido, sensorial, intuitivo,racional,emocional,calificador,perceptivo');
+        $this->db->select('*');
         $this->db->from('Briggs');
         $this->db->where('idCandidato', $idCandidato);
 
@@ -124,7 +124,7 @@ class CandidatoModel extends CI_Model
     public function getDatosValanti($idCandidato)
     {
 
-        $this->db->select('Verdad,Rectitud, Paz, Amor, No_violencia, verdadEmpresa, rectitudEmpresa, pazEmpresa, amorEmpresa, noViolenciaEmpresa');
+        $this->db->select('*');
         $this->db->from('valanti');
         $this->db->where('idCandidato', $idCandidato);
 
@@ -140,8 +140,25 @@ class CandidatoModel extends CI_Model
     public function getDatos16pf($idCandidato)
     {
 
-        $this->db->select('p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16');
+        $this->db->select('*');
         $this->db->from('16pf');
+        $this->db->where('idCandidato', $idCandidato);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->row();
+        } else {
+            return null;
+        }
+    
+    }
+
+    public function getDatoscleaver($idCandidato)
+    {
+
+        $this->db->select('*');
+        $this->db->from('graficacleaver');
         $this->db->where('idCandidato', $idCandidato);
 
         $query = $this->db->get();
@@ -431,6 +448,82 @@ class CandidatoModel extends CI_Model
         $this->db->insert('16pf', $data);
 
     }
+    public function existecleaver($idCandidato)
+    {
+        $this->db->where('idCandidato', $idCandidato);
+        $query = $this->db->get('cleaver');
 
-    
+        return $query->num_rows() > 0;
+    }
+    public function activarCleaver($idCandidato)
+    {
+        // Actualiza el estado de la prueba de temperamentos a 1
+        $data = array(
+            'cleaver' => 1
+        );
+
+        $this->db->where('idCandidato', $idCandidato);
+        $this->db->update('Candidato', $data);
+
+        return $this->db->affected_rows();
+    }
+    public function desactivarcleaver($idCandidato)
+    {
+        // Actualiza el estado de la prueba de temperamentos a 1
+        $data = array(
+            'cleaver' => 0
+        );
+
+        $this->db->where('idCandidato', $idCandidato);
+        $this->db->update('Candidato', $data);
+
+        return $this->db->affected_rows();
+    }
+
+    public function crearRegistroCleaver($idCandidato)
+    {
+        $data = array(
+            'idCandidato' => $idCandidato
+        );
+
+        $this->db->insert('cleaver', $data);
+
+    }
+
+    public function resetPrueba($idCandidato, $prueba)
+    {
+
+		$this->db->where('idCandidato', $idCandidato);
+		$this->db->delete($prueba);
+
+
+
+	}
+    public function desactivarPrueba($idCandidato, $prueba)
+    {
+        $data = array(
+            $prueba => 0
+        );
+
+        $this->db->where('idCandidato', $idCandidato);
+        $this->db->update("Candidato", $data);
+
+        return $this->db->affected_rows();
+    }
+
+	public function activarPrueba($idCandidato, $prueba)
+	{
+		$data = array(
+			$prueba => 1
+		);
+
+		$this->db->where('idCandidato', $idCandidato);
+		$this->db->update("Candidato", $data);
+
+		return $this->db->affected_rows();
+	}
+
+
+
+
 }

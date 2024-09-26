@@ -86,16 +86,146 @@ class CandidatoController extends CI_Controller
         $data['dataBriggs'] = $this->CandidatoModel->getDatosBriggs($idCandidato);
         $data['dataValanti'] = $this->CandidatoModel->getDatosValanti($idCandidato);
         $data['data16pf'] = $this->CandidatoModel->getDatos16pf($idCandidato);
+        $data['dataCleaver'] = $this->CandidatoModel->getDatoscleaver($idCandidato);
+        
 
 
-        //$IdCandidato = $data['candidato_data']->idCandidato;
+          // Validar si dataCleaver está vacío
+    if (empty($data['dataCleaver'])) {
+      // Manejar el caso donde dataCleaver está vacío
+      $data['maxCleaver'] = array(
+          'maxM' => array('celda' => '', 'valor' => '', 'interpretacionM' => 'No hay datos disponibles'),
+          'maxL' => array('celda' => '', 'valor' => '', 'interpretacionL' => 'No hay datos disponibles'),
+          'maxT' => array('celda' => '', 'valor' => '', 'interpretacionT' => 'No hay datos disponibles'),
+          'minM' => array('celda' => '', 'valor' => ''),
+          'minL' => array('celda' => '', 'valor' => ''),
+          'minT' => array('celda' => '', 'valor' => '')
+      );
+
+    } else {
+            // Encontrar los máximos para M, L y T
+        $M_values = array('M1' => $data['dataCleaver']->M1, 'M2' => $data['dataCleaver']->M2, 'M3' => $data['dataCleaver']->M3, 'M4' => $data['dataCleaver']->M4);
+        $L_values = array('L1' => $data['dataCleaver']->L1, 'L2' => $data['dataCleaver']->L2, 'L3' => $data['dataCleaver']->L3, 'L4' => $data['dataCleaver']->L4);
+        $T_values = array('T1' => $data['dataCleaver']->T1, 'T2' => $data['dataCleaver']->T2, 'T3' => $data['dataCleaver']->T3, 'T4' => $data['dataCleaver']->T4);
+
+        $maxM = array_keys($M_values, max($M_values))[0];
+        $maxL = array_keys($L_values, max($L_values))[0];
+        $maxT = array_keys($T_values, max($T_values))[0];
+
+        $minM = array_keys($M_values, min($M_values))[0];
+        $minL = array_keys($L_values, min($L_values))[0];
+        $minT = array_keys($T_values, min($T_values))[0];
+
+        // Interpretación de los valores máximos de M
+        $interpretacionM = '';
+        $interpretacionL = '';
+        $interpretacionT = '';
+         
+
+
+         /*
+        M1= D
+        M2= I
+        M3=S
+        M4=  C
+          */
+
+          if ($maxM === 'M1' && $minM === 'M2') {
+            $interpretacionM = "Creatividad: Tiende a ser lógico, crítico e incisivo en sus enfoques hacia la obtención de metas. Se sentirá retado por problemas que requieren esfuerzos de análisis y originalidad. Será llano y crítico con la gente.";
+          } else if ($maxM === 'M1' && $minM === 'M3') {
+            $interpretacionM = "Empuje: Responde rápidamente a los retos, demuestra movilidad y flexibilidad en sus enfoques. Tiende a ser iniciador versátil respondiendo rápidamente a la competencia.";
+          } else if ($maxM === 'M1' && $minM === 'M4') {
+            $interpretacionM = "Individualidad: Actúa de una manera directa y positiva ante la oposición. Es una persona fuerte que toma posición y lucha por mantenerla. Está dispuesto a tomar riesgos y puede aún ignorar niveles jerárquicos.";
+          } else if ($maxM === 'M2' && $minM === 'M1') {
+            $interpretacionM = "Buena voluntad: Tiende a comportarse en una forma equilibrada y cordial, desplegando 'agresividad social' en situaciones que percibe como favorables y sin amenazas. Tiende a mostrarse simpático y a establecer relaciones armoniosas con la gente desde el primer contacto.";
+          } else if ($maxM === 'M2' && $minM === 'M3') {
+            $interpretacionM = "Habilidad de contactos: Tiende a buscar a la gente con entusiasmo y chispa. Es una persona abierta que despliega un optimismo contagioso y trata de ganarse a la gente a través de la persuasión de un acercamiento sociable.";
+          } else if ($maxM === 'M2' && $minM === 'M4') {
+            $interpretacionM = "Confianza en sí mismo: Despliega confianza en sí mismo en la mayoría de sus tratos con otras personas. Aunque siempre lucha por ganarse a la gente, se muestra reacio a ceder su propio punto de vista. Esta persona tiende a no aguantar que una situación se presente, él será capaz de resolverla.";
+          } else if ($maxM === 'M3' && $minM === 'M1') {
+            $interpretacionM = "Paciencia: Tiende a ser constante y consistente prefiriendo tratar un proyecto o tarea a la vez. En general, esta persona dirigirá sus habilidades y experiencias hacia áreas que requieren profundidad y especialización. Ecuánime bajo las presiones, busca estabilidad.";
+          } else if ($maxM === 'M3' && $minM === 'M2') {
+            $interpretacionM = "Reflexión (Concentración): Tiende a ser un individuo controlado y paciente. Se mueve con moderación y premeditación en la mayoría de las situaciones con cuidado y concentración.";
+          } else if ($maxM === 'M3' && $minM === 'M4') {
+            $interpretacionM = "Persistencia: Tiende a ser un individuo persistente y perseverante que una vez que decide algo, no fácilmente se desvía de su objetivo. Tenderá a tomar un ritmo de trabajo y a apegarse a él. Puede ser rígido e independiente cuando se aplica la fuerza para hacerle cambiar.";
+          } else if ($maxM === 'M4' && $minM === 'M1') {
+            $interpretacionM = "Adaptabilidad: Tiende a actuar de una forma cuidadosa y conservadora en general. Está dispuesto a modificar o transigir en su posición con el objeto de lograr sus objetivos. Siendo un estricto observador de las políticas, puede aparecer arbitrario y poco flexible al seguir.";
+          } else if ($maxM === 'M4' && $minM === 'M2') {
+            $interpretacionM = "Perfeccionismo: Esta persona tiende a ser un seguidor exacto de las órdenes y los sistemas. Toma decisiones basadas en hechos conocidos o procedimientos establecidos. En todas sus actividades, trata meticulosamente de apegarse a los estándares establecidos, ya sea por sí mismo o por los demás.";
+          } else if ($maxM === 'M4' && $minM === 'M3') {
+            $interpretacionM = "Sensibilidad: Esta persona estará muy consciente en evitar riesgos o problemas. Tiende a buscar significados ocultos. La tensión puede ser evidente particularmente si está bajo presión por obtener resultados. En general, se sentirá intranquilo mientras que no tenga una seguridad completa.";
+          } else {
+            $interpretacionM = "No se pudo determinar una interpretación con los datos proporcionados.";
+          }
+
+
+          if ($maxL === 'L1' && $minL === 'L2') {
+            $interpretacionL = "Motivación: Creatividad: Cuando está motivado, tiende a ser lógico, crítico e incisivo en sus enfoques hacia la obtención de metas. Se siente retado por problemas que requieren esfuerzos de análisis y originalidad. Será llano y crítico con la gente.";
+          } else if ($maxL === 'L1' && $minL === 'L3') {
+            $interpretacionL = "Motivación: Empuje: Cuando está motivado, responde rápidamente a los retos, demostrando movilidad y flexibilidad en sus enfoques. Tiende a ser iniciador versátil respondiendo rápidamente a la competencia.";
+          } else if ($maxL === 'L1' && $minL === 'L4') {
+            $interpretacionL = "Motivación: Individualidad: Cuando está motivado, actúa de una manera directa y positiva ante la oposición. Es una persona fuerte que toma posición y lucha por mantenerla. Está dispuesto a tomar riesgos y puede aún ignorar niveles jerárquicos.";
+          } else if ($maxL === 'L2' && $minL === 'L1') {
+            $interpretacionL = "Motivación: Buena voluntad: Cuando está motivado, tiende a comportarse de forma equilibrada y cordial, desplegando 'agresividad social' en situaciones que percibe como favorables y sin amenazas. Tiende a mostrarse simpático y a establecer relaciones armoniosas con la gente desde el primer contacto.";
+          } else if ($maxL === 'L2' && $minL === 'L3') {
+            $interpretacionL = "Motivación: Habilidad de contactos: Cuando está motivado, tiende a buscar a la gente con entusiasmo y chispa. Es una persona abierta que despliega un optimismo contagioso y trata de ganarse a la gente a través de la persuasión de un acercamiento sociable.";
+          } else if ($maxL === 'L2' && $minL === 'L4') {
+            $interpretacionL = "Motivación: Confianza en sí mismo: Cuando está motivado, despliega confianza en sí mismo en la mayoría de sus tratos con otras personas. Aunque siempre lucha por ganarse a la gente, se muestra reacio a ceder su propio punto de vista. Esta persona tiende a no aguantar que una situación se presente, él será capaz de resolverla.";
+          } else if ($maxL === 'L3' && $minL === 'L1') {
+            $interpretacionL = "Motivación: Paciencia: Cuando está motivado, tiende a ser constante y consistente prefiriendo tratar un proyecto o tarea a la vez. En general, esta persona dirigirá sus habilidades y experiencias hacia áreas que requieren profundidad y especialización. Ecuánime bajo las presiones, busca estabilidad.";
+          } else if ($maxL === 'L3' && $minL === 'L2') {
+            $interpretacionL = "Motivación: Reflexión (Concentración): Cuando está motivado, tiende a ser un individuo controlado y paciente. Se mueve con moderación y premeditación en la mayoría de las situaciones con cuidado y concentración.";
+          } else if ($maxL === 'L3' && $minL === 'L4') {
+            $interpretacionL = "Motivación: Persistencia: Cuando está motivado, tiende a ser un individuo persistente y perseverante que una vez que decide algo, no fácilmente se desvía de su objetivo. Tenderá a tomar un ritmo de trabajo y a apegarse a él. Puede ser rígido e independiente cuando se aplica la fuerza para hacerle cambiar.";
+          } else if ($maxL === 'L4' && $minL === 'L1') {
+            $interpretacionL = "Motivación: Adaptabilidad: Cuando está motivado, tiende a actuar de una forma cuidadosa y conservadora en general. Está dispuesto a modificar o transigir en su posición con el objeto de lograr sus objetivos. Siendo un estricto observador de las políticas, puede aparecer arbitrario y poco flexible al seguir.";
+          } else if ($maxL === 'L4' && $minL === 'L2') {
+            $interpretacionL = "Motivación: Perfeccionismo: Cuando está motivado, esta persona tiende a ser un seguidor exacto de las órdenes y los sistemas. Toma decisiones basadas en hechos conocidos o procedimientos establecidos. En todas sus actividades, trata meticulosamente de apegarse a los estándares establecidos, ya sea por sí mismo o por los demás.";
+          } else if ($maxL === 'L4' && $minL === 'L3') {
+            $interpretacionL = "Motivación: Sensibilidad: Cuando está motivado, esta persona estará muy consciente en evitar riesgos o problemas. Tiende a buscar significados ocultos. La tensión puede ser evidente particularmente si está bajo presión por obtener resultados. En general, se sentirá intranquilo mientras que no tenga una seguridad completa.";
+          } else {
+            $interpretacionL = "No se pudo determinar una interpretación con los datos proporcionados.";
+          }
+
+          if ($maxT === 'T1' && $minT === 'T2') {
+            $interpretacionT = "Presión: Creatividad: Bajo presión, tiende a ser lógico, crítico e incisivo en sus enfoques hacia la obtención de metas. Se siente retado por problemas que requieren esfuerzos de análisis y originalidad. Será llano y crítico con la gente.";
+          } else if ($maxT === 'T1' && $minT === 'T3') {
+            $interpretacionT = "Presión: Empuje: Bajo presión, responde rápidamente a los retos, demostrando movilidad y flexibilidad en sus enfoques. Tiende a ser iniciador versátil respondiendo rápidamente a la competencia.";
+          } else if ($maxT === 'T1' && $minT === 'T4') {
+            $interpretacionT = "Presión: Individualidad: Bajo presión, actúa de una manera directa y positiva ante la oposición. Es una persona fuerte que toma posición y lucha por mantenerla. Está dispuesto a tomar riesgos y puede aún ignorar niveles jerárquicos.";
+          } else if ($maxT === 'T2' && $minT === 'T1') {
+            $interpretacionT = "Presión: Buena voluntad: Bajo presión, tiende a comportarse de forma equilibrada y cordial, desplegando 'agresividad social' en situaciones que percibe como favorables y sin amenazas. Tiende a mostrarse simpático y a establecer relaciones armoniosas con la gente desde el primer contacto.";
+          } else if ($maxT === 'T2' && $minT === 'T3') {
+            $interpretacionT = "Presión: Habilidad de contactos: Bajo presión, tiende a buscar a la gente con entusiasmo y chispa. Es una persona abierta que despliega un optimismo contagioso y trata de ganarse a la gente a través de la persuasión de un acercamiento sociable.";
+          } else if ($maxT === 'T2' && $minT === 'T4') {
+            $interpretacionT = "Presión: Confianza en sí mismo: Bajo presión, despliega confianza en sí mismo en la mayoría de sus tratos con otras personas. Aunque siempre lucha por ganarse a la gente, se muestra reacio a ceder su propio punto de vista. Esta persona tiende a no aguantar que una situación se presente, él será capaz de resolverla.";
+          } else if ($maxT === 'T3' && $minT === 'T1') {
+            $interpretacionT = "Presión: Paciencia: Bajo presión, tiende a ser constante y consistente prefiriendo tratar un proyecto o tarea a la vez. En general, esta persona dirigirá sus habilidades y experiencias hacia áreas que requieren profundidad y especialización. Ecuánime bajo las presiones, busca estabilidad.";
+          } else if ($maxT === 'T3' && $minT === 'T2') {
+            $interpretacionT = "Presión: Reflexión (Concentración): Bajo presión, tiende a ser un individuo controlado y paciente. Se mueve con moderación y premeditación en la mayoría de las situaciones con cuidado y concentración.";
+          } else if ($maxT === 'T3' && $minT === 'T4') {
+            $interpretacionT = "Presión: Persistencia: Bajo presión, tiende a ser un individuo persistente y perseverante que una vez que decide algo, no fácilmente se desvía de su objetivo. Tenderá a tomar un ritmo de trabajo y a apegarse a él. Puede ser rígido e independiente cuando se aplica la fuerza para hacerle cambiar.";
+          } else if ($maxT === 'T4' && $minT === 'T1') {
+            $interpretacionT = "Presión: Adaptabilidad: Bajo presión, tiende a actuar de una forma cuidadosa y conservadora en general. Está dispuesto a modificar o transigir en su posición con el objeto de lograr sus objetivos. Siendo un estricto observador de las políticas, puede aparecer arbitrario y poco flexible al seguir.";
+          } else if ($maxT === 'T4' && $minT === 'T2') {
+            $interpretacionT = "Presión: Perfeccionismo: Bajo presión, esta persona tiende a ser un seguidor exacto de las órdenes y los sistemas. Toma decisiones basadas en hechos conocidos o procedimientos establecidos. En todas sus actividades, trata meticulosamente de apegarse a los estándares establecidos, ya sea por sí mismo o por los demás.";
+          } else if ($maxT === 'T4' && $minT === 'T3') {
+            $interpretacionT = "Presión: Sensibilidad: Bajo presión, esta persona estará muy consciente en evitar riesgos o problemas. Tiende a buscar significados ocultos. La tensión puede ser evidente particularmente si está bajo presión por obtener resultados. En general, se sentirá intranquilo mientras que no tenga una seguridad completa.";
+          } else {
+            $interpretacionT = "No se pudo determinar una interpretación con los datos proporcionados.";
+          }
+
+    $data['maxCleaver'] = array(
+        'maxM' => array('celda' => $maxM, 'valor' => $M_values[$maxM], 'interpretacionM' => $interpretacionM),
+        'maxL' => array('celda' => $maxL, 'valor' => $L_values[$maxL], 'interpretacionL' => $interpretacionL),
+        'maxT' => array('celda' => $maxT, 'valor' => $T_values[$maxT],'interpretacionT'=> $interpretacionT)
+    );
+  }
+
 
         //Obtengo cantidades 
         $resultado = $this->CandidatoModel->masGrande($idCandidato);
         $tipoCasilla = $resultado->temperamento_mas_grande;
-
-
-
 
         $temperamento = '';
         $texto = '';
@@ -109,8 +239,6 @@ class CandidatoController extends CI_Controller
         $familiaD = '';
         $amigoD = '';
         //DEBILIDADES:
-
-
 
         if (strtolower($tipoCasilla) === 'melancolico') {
             $temperamento = 'Melancólico';
@@ -364,6 +492,42 @@ class CandidatoController extends CI_Controller
         $this->VerCandidato($idCandidato);
     }
 
+    public function activarCleaver($DPI)
+    {
+        $data['Candidato'] = $this->CandidatoModel->VerificarDPI($DPI); // Obtener los datos del candidato
+        $idCandidato = $data['Candidato']->idCandidato;
+        // Verifica si existe un registro para el idCandidato en la tabla 
+
+        $existeregistro = $this->CandidatoModel->existecleaver($idCandidato);
+
+        if ($existeregistro) {
+
+            $this->CandidatoModel->activarCleaver($idCandidato); // Esto coloca 1 en la tabla Briggs
+            
+
+          
+              
+          // Insertar los nuevos valores en la tabla `graficaCleaver`
+          
+        } else {
+            $this->CandidatoModel->crearRegistroCleaver($idCandidato); //Creo un registro para almacenar los resultados del briggs
+            $this->CandidatoModel->activarCleaver($idCandidato); // Esto coloca 1 en la tabla Briggs
+
+        }
+        $this->VerCandidato($idCandidato); //esto me dirige a la pantalla principal 
+
+
+    }
+
+    public function deactivarCleaver($DPI)
+    {
+
+        $data['Candidato'] = $this->CandidatoModel->VerificarDPI($DPI); // Obtener los datos del candidato
+        $idCandidato = $data['Candidato']->idCandidato;
+        $this->CandidatoModel->desactivarcleaver($idCandidato);
+        $this->VerCandidato($idCandidato);
+    }
+
     public function reporte($idCandidato)
     {
         $data['candidato_data'] = $this->CandidatoModel->getCandidatoPorId($idCandidato);
@@ -374,6 +538,36 @@ class CandidatoController extends CI_Controller
         $mpdf->Output();
     }
 
+    public function reiniciarDatos($DPI, $prueba)
+    {
+      $data['Candidato'] = $this->CandidatoModel->VerificarDPI($DPI); // Obtener los datos del candidato
+      $idCandidato = $data['Candidato']->idCandidato;
+
+      $this->CandidatoModel->resetPrueba($idCandidato, $prueba);
+
+      $this->VerCandidato($idCandidato);
+
+
+
+    }
+
+    public function desactivarPruebas($DPI, $prueba)
+    {
+
+        $data['Candidato'] = $this->CandidatoModel->VerificarDPI($DPI); // Obtener los datos del candidato
+        $idCandidato = $data['Candidato']->idCandidato;
+        $this->CandidatoModel->desactivarPrueba($idCandidato, $prueba);
+        $this->VerCandidato($idCandidato);
+    }
+
+    public function activarPruebas($DPI, $prueba)
+    {
+// crear la logica para activar la prueba 16/09
+        $data['Candidato'] = $this->CandidatoModel->VerificarDPI($DPI); // Obtener los datos del candidato
+        $idCandidato = $data['Candidato']->idCandidato;
+        $this->CandidatoModel->activarPrueba($idCandidato, $prueba);
+        $this->VerCandidato($idCandidato);
+    }
 
 }
 

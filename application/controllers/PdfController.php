@@ -5,6 +5,10 @@ class PdfController extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->load->model('DpiModel');
+        $this->load->model('CandidatoModel');
+        
+
         require_once(APPPATH . 'libraries/dompdf/autoload.inc.php');
         $this->dompdf = new \Dompdf\Dompdf();
     }
@@ -29,25 +33,46 @@ class PdfController extends CI_Controller {
             echo base_url('uploads/' . $fileName);
         }
     }
+    private function getBase64Image($path) {
+        $ext = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        return 'data:image/' . $ext . ';base64,' . base64_encode($data);
+    }
 
     public function facturaPdf($idCandidato) {
         // Obtener la ruta de la imagen desde los parámetros GET
         $imagePath = $this->input->get('imagePath');
 
         // Obtener el logo como base64
-        $logoPath = base_url('uploads/grafica.png');
-        $ext = pathinfo($logoPath, PATHINFO_EXTENSION);
-        $data = file_get_contents($logoPath);
-        $base64Logo = 'data:image/' . $ext . ';base64,' . base64_encode($data);
+        // Obtener el logo y el GestorT como base64
+    $base64Logo = $this->getBase64Image(base_url('uploads/grafica.png'));
+    $base64LogoGestorT = $this->getBase64Image(base_url('assets/img/logo.png'));
+    $encabezado = $this->getBase64Image(base_url('assets/img/encabezado.png'));
 
-        // Pasar los datos a la vista
-        $viewData = [
+
+
+        // Obtener los datos del candidato
+        $candidatoData = $this->CandidatoModel->getCandidatoPorId($idCandidato);
+        $dataTemperamento = $this->CandidatoModel->getDatosPrueba($idCandidato);
+        $dataBriggs = $this->CandidatoModel->getDatosBriggs($idCandidato);
+        $dataValanti = $this->CandidatoModel->getDatosValanti($idCandidato);
+        $data16pf = $this->CandidatoModel->getDatos16pf($idCandidato);
+
+        // Combinar todos los datos en un solo array
+        $data = [
             'base64Logo' => $base64Logo,
-            'imagePath' => $imagePath
+            'imagePath' => $imagePath,
+            'candidato_data' => $candidatoData,
+            'dataTemperamento' => $dataTemperamento,
+            'dataBriggs' => $dataBriggs,
+            'dataValanti' => $dataValanti,
+            'data16pf' => $data16pf,
+            'logo'=> $base64LogoGestorT,
+            'encabezado'=>$encabezado
         ];
 
-        $html = $this->load->view('Reporte', $viewData, true);
-
+    // Pasar los datos a la vista
+    $html = $this->load->view('Reporte', $data, true);
         // Cargar contenido HTML
         $this->dompdf->loadHtml($html);
 

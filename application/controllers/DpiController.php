@@ -22,8 +22,6 @@ class DpiController extends CI_Controller
 
     public function login()
     {
-        $this->load->model('DpiModel');
-
         $DPI = $this->input->post('DPI');
 
         $validarDPI = $this->DpiModel->VerificarDPI($DPI);
@@ -66,7 +64,7 @@ class DpiController extends CI_Controller
         $idCandidato = $data['Candidato']->idCandidato; //obtengo el id del candidato segun su dpi que recibo antes
 
 
-        if ($data['Candidato']->valanti === '1') {
+        if ($data['Candidato']->Valanti === '1') {
             $this->load->view('Pruebas/Valanti', $data);
         } else {
             $this->load->view('Pruebas/Login', $data);
@@ -100,6 +98,8 @@ class DpiController extends CI_Controller
             $this->load->view('Pruebas/Login', $data);
         }
     }
+
+    
     public function procesarPF(){
         $DPI = $this->input->post('DPI'); // Obtén el DPI desde el formulario
         $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
@@ -451,146 +451,39 @@ class DpiController extends CI_Controller
     
 
     public function procesarRespuestas()
-    {
+{
+    $DPI = $this->input->post('DPI'); // Obtén el DPI desde el formulario
+    $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
+    $idCandidato = $data['Candidato']->idCandidato; // Obtén el id del candidato
 
-        $DPI = $this->input->post('DPI'); // Obtén el DPI desde el formulario
-        $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
-        $idCandidato = $data['Candidato']->idCandidato; // Obtén el id del candidato
+    // Definimos las categorías y las preguntas asociadas
+    $categorias = [
+        'extrovertido' => range(1, 5),
+        'introvertido' => range(6, 10),
+        'sensorial'    => range(11, 15),
+        'intuitivo'    => range(16, 20),
+        'racional'     => range(21, 25),
+        'emocional'    => range(26, 30),
+        'calificador'  => range(31, 35),
+        'perceptivo'   => range(36, 40),
+    ];
 
-        // Verifica las respuestas del formulario y actualiza la tabla según corresponda
-        if ($this->input->post('respuesta1') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'extrovertido');
+    // Recorremos cada categoría y sus preguntas
+    foreach ($categorias as $tipo => $preguntas) {
+        foreach ($preguntas as $numero) {
+            if ($this->input->post("respuesta$numero") == 'x') {
+                $this->DpiModel->actualizarBriggs($idCandidato, $tipo);
+            }
         }
-        if ($this->input->post('respuesta2') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'extrovertido');
-        }
-        if ($this->input->post('respuesta3') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'extrovertido');
-        }
-        if ($this->input->post('respuesta4') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'extrovertido');
-        }
-        if ($this->input->post('respuesta5') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'extrovertido');
-        }
-        if ($this->input->post('respuesta6') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'introvertido');
-        }
-        if ($this->input->post('respuesta7') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'introvertido');
-        }
-        if ($this->input->post('respuesta8') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'introvertido');
-        }
-        if ($this->input->post('respuesta9') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'introvertido');
-        }
-        if ($this->input->post('respuesta10') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'introvertido');
-        }
-        if ($this->input->post('respuesta11') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'sensorial');
-        }
-        if ($this->input->post('respuesta12') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'sensorial');
-        }
-        if ($this->input->post('respuesta13') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'sensorial');
-        }
-        if ($this->input->post('respuesta14') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'sensorial');
-        }
-        if ($this->input->post('respuesta15') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'sensorial');
-        }
-        if ($this->input->post('respuesta16') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'intuitivo');
-        }
-        if ($this->input->post('respuesta17') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'intuitivo');
-        }
-        if ($this->input->post('respuesta18') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'intuitivo');
-        }
-        if ($this->input->post('respuesta19') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'intuitivo');
-        }
-        if ($this->input->post('respuesta20') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'intuitivo');
-        }
-
-        if ($this->input->post('respuesta21') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'racional');
-        }
-        if ($this->input->post('respuesta22') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'racional');
-        }
-        if ($this->input->post('respuesta23') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'racional');
-        }
-        if ($this->input->post('respuesta24') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'racional');
-        }
-        if ($this->input->post('respuesta25') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'racional');
-        }
-        if ($this->input->post('respuesta26') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'emocional');
-        }
-        if ($this->input->post('respuesta27') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'emocional');
-        }
-        if ($this->input->post('respuesta28') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'emocional');
-        }
-        if ($this->input->post('respuesta29') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'emocional');
-        }
-        if ($this->input->post('respuesta30') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'emocional');
-        }
-        if ($this->input->post('respuesta31') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'calificador');
-        }
-        if ($this->input->post('respuesta32') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'calificador');
-        }
-        if ($this->input->post('respuesta33') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'calificador');
-        }
-        if ($this->input->post('respuesta34') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'calificador');
-        }
-        if ($this->input->post('respuesta35') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'calificador');
-        }
-        if ($this->input->post('respuesta36') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'perceptivo');
-        }
-        if ($this->input->post('respuesta37') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'perceptivo');
-        }
-        if ($this->input->post('respuesta38') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'perceptivo');
-        }
-        if ($this->input->post('respuesta39') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'perceptivo');
-        }
-        if ($this->input->post('respuesta40') == 'x') {
-            $this->DpiModel->actualizarBriggs($idCandidato, 'perceptivo');
-        }
-
-
-
-        $this->CandidatoModel->desactivarbriggs($idCandidato);
-
-        //esta es la nueva data con el briggs desactivado
-        $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
-
-        $this->load->view('Pruebas/Login', $data);
-
     }
 
+    $this->CandidatoModel->desactivarbriggs($idCandidato);
+
+    // Actualizamos los datos del candidato
+    $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI);
+
+    $this->load->view('Pruebas/Login', $data);
+}
 
 
 
@@ -755,6 +648,82 @@ class DpiController extends CI_Controller
         $this->DpiModel->actualizarColerico($DPI, $puntosactual); // Le sumo un punto a sanguineo
 
         $this->RealizarPruebas($DPI);
+
+
+    }
+
+
+    //PROCESAR LA PRUEBA CLEAVER
+
+    public function cleaver($DPI, $indice)
+    {
+            $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
+            $idCandidato = $data['Candidato']->idCandidato; // Obtener el id del candidato según su DPI que recibo antes
+            $data['Cleaverdata'] = $this->DpiModel->preguntasCleaver($indice); // Llamar al método correctamente
+            $data['indice']=$indice;
+
+            if ($data['Candidato']->cleaver === '1') {
+                $this->load->view('Pruebas/cleaver', $data);
+            } else {
+                $this->load->view('Pruebas/Login', $data);
+    }
+    }
+
+    public function procesarCleaver()
+    {
+        $indice = $this->input->post('indice');
+        $DPI = $this->input->post('DPI'); // Capturar el DPI desde el formulario
+        $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
+        $idCandidato = $data['Candidato']->idCandidato; // Obtener el id del candidato según su DPI que recibo antes
+        
+
+
+        $M = $this->input->post('mas'); // A QUE CASILLA DE la tabla cleaver se carga un +1
+        $L = $this->input->post('menos'); // a qwue casilla de la tabla cleaver se carga el +1
+
+        $id = $this->input->post('idcleaverdata'); // Necesitas pasar este valor desde el formulario
+
+        // Actualizar la tabla cleaver
+        $this->DpiModel->actualizarCleaver($idCandidato, $M, $L);
+
+
+
+        if($indice==24){
+            $this->CandidatoModel->desactivarcleaver($idCandidato);
+            $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI);  //Actualizo la data, por que la data anterior no tiene la preuba desactivada, esto me da conflicto
+            $this->DpiModel->Cleaver($idCandidato);
+
+            $valores =  $this->DpiModel->obtenerValoresCleaver($idCandidato);
+
+            $data_grafica = array(
+                'idCandidato' => $idCandidato,
+                'M1' => $this->DpiModel->ObtenerCampo('idM1', $valores->M1, 'M1'),
+                'M2' => $this->DpiModel->ObtenerCampo('idM2', $valores->M2, 'M2'),
+                'M3' => $this->DpiModel->ObtenerCampo('idM3', $valores->M3, 'M3'),
+                'M4' => $this->DpiModel->ObtenerCampo('idM4', $valores->M4, 'M4'),
+                'L1' => $this->DpiModel->ObtenerCampo('idL1', $valores->L1, 'L1'),
+                'L2' => $this->DpiModel->ObtenerCampo('idL2', $valores->L2, 'L2'),
+                'L3' => $this->DpiModel->ObtenerCampo('idL3', $valores->L3, 'L3'),
+                'L4' => $this->DpiModel->ObtenerCampo('idL4', $valores->L4, 'L4'),
+                'T1' => $this->DpiModel->ObtenerCampo('idT1', $valores->T1, 'T1'),
+                'T2' => $this->DpiModel->ObtenerCampo('idT2', $valores->T2, 'T2'),
+                'T3' => $this->DpiModel->ObtenerCampo('idT3', $valores->T3, 'T3'),
+                'T4' => $this->DpiModel->ObtenerCampo('idT4', $valores->T4, 'T4')
+            );
+
+            
+                
+            // Insertar los nuevos valores en la tabla `graficaCleaver`
+            $this->DpiModel->insertGraficaCleaver($data_grafica);
+
+            $this->load->view('Pruebas/Login', $data); //cargo la vista con la nueva data
+    
+
+
+        }else{
+            $this->cleaver($DPI,$indice+1);
+
+        }
 
 
     }

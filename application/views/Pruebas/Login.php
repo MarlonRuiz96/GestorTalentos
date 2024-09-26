@@ -92,7 +92,7 @@
                 <?php endif; ?>
 
                 <br>
-                <?php if ($Candidato->valanti == 1): ?>
+                <?php if ($Candidato->Valanti == 1): ?>
 
                     <div class="Valanti">
                         <a href="<?= site_url('DpiController/pruebaValanti/' . $Candidato->DPI); ?>" class="btn btn-success"
@@ -110,9 +110,18 @@
                         </a>
                     </div>
                 <?php endif; ?>
+                <br>
+                <?php if ($Candidato->cleaver == 1): ?>
+
+                    <div class="16pf">
+                    <a href="<?= site_url('DpiController/cleaver/' . $Candidato->DPI . '/1'); ?>" class="btn btn-success">Ver Prueba Cleaver</a>
+                    
+                        </a>
+                    </div>
+                <?php endif; ?>
 
                 <br>
-                <?php if ($Candidato->temperamento == 0 && $Candidato->Briggs == 0 && $Candidato->valanti == 0 && $Candidato->fp16 == 0): ?>
+                <?php if ($Candidato->temperamento == 0 && $Candidato->Briggs == 0 && $Candidato->Valanti == 0 && $Candidato->fp16 == 0 && $Candidato->cleaver == 0): ?>
 
                 <div class="Sin_pruebas">
                     No hay pruebas a realizarse.

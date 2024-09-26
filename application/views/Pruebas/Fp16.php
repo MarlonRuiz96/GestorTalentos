@@ -231,7 +231,7 @@
                             <!-- Pregunta 14 -->
                             <tr>
                                 <td>14</td>
-                                <td>Qué prefiere jugar:</td>
+                                <td>Qué prefiere jugar:  (A) Ajedrez; (B) N/A; o (C ) Bolos?</td>
                                 <td><input class="form-check-input" type="radio" name="14a" id="opcion14A" value="0">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="14b" id="opcion14B" value="0">
@@ -305,7 +305,7 @@
                             <!-- Pregunta 20 -->
                             <tr>
                                 <td>20</td>
-                                <td>¿Qué es lo opuesto a inexacto?</td>
+                                <td>¿Qué es lo opuesto a inexacto? <br>  (A) Casual; (B) Preciso; (C ) Burdo</td>
                                 <td><input class="form-check-input" type="radio" name="20a" id="opcion20A" value="0">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="20b" id="opcion20B" value="1">
@@ -352,7 +352,7 @@
                             <!-- Pregunta 24 -->
                             <tr>
                                 <td>24</td>
-                                <td>Cree usted que:</td>
+                                <td>Cree usted que: <br>  (A) En trabajos que no requieren cuidado que otros, (B) N/A o ( C) Cualquier trabajo que deba hacerse bien</td>
                                 <td><input class="form-check-input" type="radio" name="24a" id="opcion24A" value="0">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="24b" id="opcion24B" value="0">
@@ -376,7 +376,7 @@
                             <!-- Pregunta 26 -->
                             <tr>
                                 <td>26</td>
-                                <td>Qué prefiere usted:</td>
+                                <td>Qué prefiere usted: <br>(A) Obispo; (B) N/A o ( C) Coronel</td>
                                 <td><input class="form-check-input" type="radio" name="26a" id="opcion26A" value="0">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="26b" id="opcion26B" value="0">
@@ -388,7 +388,7 @@
                             <!-- Pregunta 27 -->
                             <tr>
                                 <td>27</td>
-                                <td>Si un vecino le hace trampas:</td>
+                                <td>Si un vecino le hace trampas <br>  (A) Usted se acomoda; (B) No actúa o (C ) Lo desenmascara</td>
                                 <td><input class="form-check-input" type="radio" name="27a" id="opcion27A" value="0">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="27b" id="opcion27B" value="0">
@@ -400,7 +400,7 @@
                             <!-- Pregunta 28 -->
                             <tr>
                                 <td>28</td>
-                                <td>Preferiría ver:</td>
+                                <td>Preferiría ver: <br>  (A) Una buena película de la colonización (B) N/A o (C ) Una farsa ingeniosa sobre la sociedad del futuro</td>
                                 <td><input class="form-check-input" type="radio" name="28a" id="opcion28A" value="0">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="28b" id="opcion28B" value="0">
@@ -412,7 +412,7 @@
                             <!-- Pregunta 29 -->
                             <tr>
                                 <td>29</td>
-                                <td>Cuando se ha hecho responsable de algún proyecto:</td>
+                                <td>Cuando se ha hecho responsable de algún proyecto: <br> (A) Insiste hasta concluir; (B) N/A o (C ) Renuncia cuando no sale bien</td>
                                 <td><input class="form-check-input" type="radio" name="29a" id="opcion29A" value="1">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="29b" id="opcion29B" value="0">
@@ -424,7 +424,7 @@
                             <!-- Pregunta 30 -->
                             <tr>
                                 <td>30</td>
-                                <td>Si alguien muestra mala educación:</td>
+                                <td>Si alguien muestra mala educación:  (A) No dice nada para no fastidiar, (B) N/A o (C ) Le hace ver a esa persona su malestar</td>
                                 <td><input class="form-check-input" type="radio" name="30a" id="opcion30A" value="0">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="30b" id="opcion30B" value="0">
@@ -436,7 +436,7 @@
                             <!-- Pregunta 31 -->
                             <tr>
                                 <td>31</td>
-                                <td>Con alquien que le acaban de presentar:</td>
+                                <td>Con alquien que le acaban de presentar: <br> (A) Habla sobre política y sociedad; (B) Se intimida o (C ) Sobre la evolución humana </td>
                                 <td><input class="form-check-input" type="radio" name="31a" id="opcion31A" value="0">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="31b" id="opcion31B" value="0">
@@ -460,7 +460,7 @@
                             <!-- Pregunta 33 -->
                             <tr>
                                 <td>33</td>
-                                <td>En qué confía?</td>
+                                <td>En qué confía? <br>(A) Seguro sobre la Vida (B) N/A (C ) La educación</td>
                                 <td><input class="form-check-input" type="radio" name="33a" id="opcion33A" value="0">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="33b" id="opcion33B" value="0">
@@ -497,7 +497,7 @@
                             <!-- Pregunta 36 -->
                             <tr>
                                 <td>36</td>
-                                <td>En una fábrica, preferiría usted encargarse de:</td>
+                                <td>En una fábrica, preferiría usted encargarse de: <br> (A) Máquinas; (B) N/A o (C ) Entrevistar y contratar al nuevo personal</td>
                                 <td><input class="form-check-input" type="radio" name="36a" id="opcion36A" value="0">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="36b" id="opcion36B" value="0">
@@ -508,7 +508,7 @@
                             <!-- Pregunta 37 -->
                             <tr>
                                 <td>37</td>
-                                <td>¿Cuál palabra no va con las otras dos?</td>
+                                <td>¿Cuál palabra no va con las otras dos? <br>(A) Gato; (B) Atrás, (C ) Sol</td>
                                 <td><input class="form-check-input" type="radio" name="37a" id="opcion37A" value="0">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="37b" id="opcion37B" value="1">
@@ -618,7 +618,7 @@
                             <!-- Pregunta 46 -->
                             <tr>
                                 <td>46</td>
-                                <td>Nuestro país debe invertir en:</td>
+                                <td>Nuestro país debe invertir en: <br> (A) Armas; (B) N/A;  (C ) Escuelas</td>
                                 <td><input class="form-check-input" type="radio" name="46a" id="opcion46A" value="0">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="46b" id="opcion46B" value="0">
@@ -630,7 +630,7 @@
                             <!-- Pregunta 47 -->
                             <tr>
                                 <td>47</td>
-                                <td>Prefiere:</td>
+                                <td>Prefiere: <br>(A) Jugar barajas; (B) N/A (C) Viendo fotos del recuerdo</td>
                                 <td><input class="form-check-input" type="radio" name="47a" id="opcion47A" value="1">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="47b" id="opcion47B" value="0">
@@ -642,7 +642,7 @@
                             <!-- Pregunta 48 -->
                             <tr>
                                 <td>48</td>
-                                <td>Prefiere:</td>
+                                <td>Prefiere: <br>(A) Una novela histórica; (B) N/A (C) Ensayo científico.</td>
                                 <td><input class="form-check-input" type="radio" name="48a" id="opcion48A" value="0">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="48b" id="opcion48B" value="0">
@@ -702,7 +702,7 @@
                             <!-- Pregunta 53 -->
                             <tr>
                                 <td>53</td>
-                                <td>Prefiere:</td>
+                                <td>Prefiere: <br> (A) Trabajar en una oficina de negocio, organizando a la gente; (B) N/A (C ) Ser arquitecto, proyectando edificios</td>
                                 <td><input class="form-check-input" type="radio" name="53a" id="opcion53A" value="1">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="53b" id="opcion53B" value="0">
@@ -714,7 +714,7 @@
                             <!-- Pregunta 54 -->
                             <tr>
                                 <td>54</td>
-                                <td>El negro se compara con el gris como el dolor se compara con:</td>
+                                <td>El negro se compara con el gris como el dolor se compara con: <br>(A) La Herida; (B) La enfermedad y (C ) La molestia</td>
                                 <td><input class="form-check-input" type="radio" name="54a" id="opcion54A" value="0">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="54b" id="opcion54B" value="0">
@@ -763,7 +763,7 @@
                             <!-- Pregunta 58 -->
                             <tr>
                                 <td>58</td>
-                                <td>¿A quien admira más?</td>
+                                <td>¿A quien admira más? <br> (A) Una persona lista pero poco confiable (B) N/A; (C ) Una persona media capaz a resistir tentaciones</td>
                                 <td><input class="form-check-input" type="radio" name="58a" id="opcion58A" value="0">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="58b" id="opcion58B" value="0">
@@ -849,7 +849,7 @@
                             <!-- Pregunta 65 -->
                             <tr>
                                 <td>65</td>
-                                <td>¿Cómo aprendió usted más en la escuela?</td>
+                                <td>¿Cómo aprendió usted más en la escuela? <br>(A) Asistiendo a clases; (B) N/A o (C ) Leyendo Textos</td>
                                 <td><input class="form-check-input" type="radio" name="65a" id="opcion65A" value="0">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="65b" id="opcion65B" value="0">
@@ -873,7 +873,7 @@
                             <!-- Pregunta 67 -->
                             <tr>
                                 <td>67</td>
-                                <td>Cuando un problema es difícil y tiene mucho qué hacer, busca ud:</td>
+                                <td>Cuando un problema es difícil y tiene mucho qué hacer, busca ud: <br>(A) Un problema distinto (B) N/A (C ) Otra forma de resolver</td>
                                 <td><input class="form-check-input" type="radio" name="67a" id="opcion67A" value="0">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="67b" id="opcion67B" value="0">
@@ -921,7 +921,7 @@
                             <tr>
                                 <td>71</td>
                                 <td>Si la mamá de María es hermana del papá de Federico, ¿Qué parentesco tiene éste con
-                                    el papá de María?</td>
+                                    el papá de María? <br>(A) Primo; (B) Tío o (C ) Sobrino</td>
                                 <td><input class="form-check-input" type="radio" name="71a" id="opcion71A" value="0">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="71b" id="opcion71B" value="0">
@@ -993,7 +993,7 @@
                             <!-- Pregunta 77 -->
                             <tr>
                                 <td>77</td>
-                                <td>Qué prefiere ser?</td>
+                                <td>Qué prefiere ser? <br>(A) Ingeniero; (B) N/A (C ) Profesor de Sociales</td>
                                 <td><input class="form-check-input" type="radio" name="77a" id="opcion77A" value="0">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="77b" id="opcion77B" value="0">
@@ -1017,7 +1017,7 @@
                             <!-- Pregunta 79 -->
                             <tr>
                                 <td>79</td>
-                                <td>¿Cuántos de sus vecinos le aburren platicando?</td>
+                                <td>¿Cuántos de sus vecinos le aburren platicando? <br> (A) La Mayoría; (B) N/A; (C ) Casi ninguno</td>
                                 <td><input class="form-check-input" type="radio" name="79a" id="opcion79A" value="0">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="79b" id="opcion79B" value="0">
@@ -1054,7 +1054,7 @@
                             <!-- Pregunta 82 -->
                             <tr>
                                 <td>82</td>
-                                <td>Hay dificultad en la gente cuando:</td>
+                                <td>Hay dificultad en la gente cuando: <br>(A)Modifica métodos ya bien comprobados; (B)N/A; (C )Rechaza nuevos métodos y modernos</td>
                                 <td><input class="form-check-input" type="radio" name="82a" id="opcion82A" value="0">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="82b" id="opcion82B" value="0">
@@ -1123,7 +1123,7 @@
                             <tr>
                                 <td>88</td>
                                 <td>¿Qué número es el correcto para continuar con la siguiente serie de números: 1,
-                                    2,3,6,5, es?</td>
+                                    2,3,6,5, es? <br> (A) 5; (B) 7; (C ) 4 </td>
                                 <td> <input class="form-check-input" type="radio" name="88a" id="opcion88A" value="0">
                                 </td>
                                 <td> <input class="form-check-input" type="radio" name="88b" id="opcion88B" value="0">
@@ -1169,7 +1169,7 @@
                             <!-- Pregunta 92 -->
                             <tr>
                                 <td>92</td>
-                                <td>En casa:</td>
+                                <td>En casa: <br>(A) Platica (B) Descansa (C ) Elabora tareas especiales</td>
                                 <td><input class="form-check-input" type="radio" name="92a" id="opcion92A" value="0">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="92b" id="opcion92B" value="0">
@@ -1256,7 +1256,7 @@
                             <!-- Pregunta 99 -->
                             <tr>
                                 <td>99</td>
-                                <td>Dentro de un grupo, prefiere usted:</td>
+                                <td>Dentro de un grupo, prefiere usted: <br> (A) Trabajar sobre desarrollos técnicos (B) N/A; (C )Vigilar los registros y reglas</td>
                                 <td><input class="form-check-input" type="radio" name="99a" id="opcion99A" value="0">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="99b" id="opcion99B" value="0">
@@ -1268,7 +1268,7 @@
                             <!-- Pregunta 100 -->
                             <tr>
                                 <td>100</td>
-                                <td>Para saber más de sociedad, leería:</td>
+                                <td>Para saber más de sociedad, leería: <br>(A) Una novela inteligente con buenas reseñas; (B) N/A; (C )Textos estadísticos y otros datos</td>
                                 <td><input class="form-check-input" type="radio" name="100a" id="opcion100A" value="0">
                                 </td>
                                 <td><input class="form-check-input" type="radio" name="100b" id="opcion100B" value="0">
