@@ -7,7 +7,7 @@ class LoginController extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('UsuarioModel'); 
+        $this->load->model('ModeloUsuario');
     }
     public function index()
     {
@@ -27,7 +27,7 @@ class LoginController extends CI_Controller
         $clave = $this->input->post('clave');
 
 
-        $this->load->model('UsuarioModel');
+        $this->load->model('ModeloUsuario');
         $usuario_valido = $this->UsuarioModel->validar_usuario($usuario, $clave);
 
 
