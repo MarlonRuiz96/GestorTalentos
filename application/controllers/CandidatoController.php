@@ -1,4 +1,5 @@
 <?php
+
 defined('BASEPATH') or exit('No direct script access allowed');
 class CandidatoController extends CI_Controller
 {
@@ -30,15 +31,8 @@ class CandidatoController extends CI_Controller
         verificar_autenticacion($this);
 
         if ($this->input->server('REQUEST_METHOD') === 'POST') {
-            $nombres = "";
-            $Puesto = "";
+			//obtengo los datos con post
             $DPI = $this->input->post('DPI');
-            $Temperamento = 0;
-            $Contacto = "";
-            $correo = "";
-
-
-
 
             $fecha_actual = date("Y-m-d");
 
@@ -87,6 +81,7 @@ class CandidatoController extends CI_Controller
         $data['dataValanti'] = $this->CandidatoModel->getDatosValanti($idCandidato);
         $data['data16pf'] = $this->CandidatoModel->getDatos16pf($idCandidato);
         $data['dataCleaver'] = $this->CandidatoModel->getDatoscleaver($idCandidato);
+		$data['interpretacionCleaver'] = $this->CandidatoModel->obtenerInterpretacionCleaver($idCandidato);
         
 
 
@@ -131,19 +126,19 @@ class CandidatoController extends CI_Controller
           */
 
           if ($maxM === 'M1' && $minM === 'M2') {
-            $interpretacionM = "Creatividad: Tiende a ser lógico, crítico e incisivo en sus enfoques hacia la obtención de metas. Se sentirá retado por problemas que requieren esfuerzos de análisis y originalidad. Será llano y crítico con la gente.";
+            $interpretacionM = "Tiende a ser lógico, crítico e incisivo en sus enfoques hacia la obtención de metas. Se sentirá retado por problemas que requieren esfuerzos de análisis y originalidad. Será llano y crítico con la gente.";
           } else if ($maxM === 'M1' && $minM === 'M3') {
-            $interpretacionM = "Empuje: Responde rápidamente a los retos, demuestra movilidad y flexibilidad en sus enfoques. Tiende a ser iniciador versátil respondiendo rápidamente a la competencia.";
+            $interpretacionM = "Responde rápidamente a los retos, demuestra movilidad y flexibilidad en sus enfoques. Tiende a ser iniciador versátil respondiendo rápidamente a la competencia.";
           } else if ($maxM === 'M1' && $minM === 'M4') {
-            $interpretacionM = "Individualidad: Actúa de una manera directa y positiva ante la oposición. Es una persona fuerte que toma posición y lucha por mantenerla. Está dispuesto a tomar riesgos y puede aún ignorar niveles jerárquicos.";
+            $interpretacionM = "Actúa de una manera directa y positiva ante la oposición. Es una persona fuerte que toma posición y lucha por mantenerla. Está dispuesto a tomar riesgos y puede aún ignorar niveles jerárquicos.";
           } else if ($maxM === 'M2' && $minM === 'M1') {
-            $interpretacionM = "Buena voluntad: Tiende a comportarse en una forma equilibrada y cordial, desplegando 'agresividad social' en situaciones que percibe como favorables y sin amenazas. Tiende a mostrarse simpático y a establecer relaciones armoniosas con la gente desde el primer contacto.";
+            $interpretacionM = "Tiende a comportarse en una forma equilibrada y cordial, desplegando 'agresividad social' en situaciones que percibe como favorables y sin amenazas. Tiende a mostrarse simpático y a establecer relaciones armoniosas con la gente desde el primer contacto.";
           } else if ($maxM === 'M2' && $minM === 'M3') {
-            $interpretacionM = "Habilidad de contactos: Tiende a buscar a la gente con entusiasmo y chispa. Es una persona abierta que despliega un optimismo contagioso y trata de ganarse a la gente a través de la persuasión de un acercamiento sociable.";
+            $interpretacionM = "Tiende a buscar a la gente con entusiasmo y chispa. Es una persona abierta que despliega un optimismo contagioso y trata de ganarse a la gente a través de la persuasión de un acercamiento sociable.";
           } else if ($maxM === 'M2' && $minM === 'M4') {
-            $interpretacionM = "Confianza en sí mismo: Despliega confianza en sí mismo en la mayoría de sus tratos con otras personas. Aunque siempre lucha por ganarse a la gente, se muestra reacio a ceder su propio punto de vista. Esta persona tiende a no aguantar que una situación se presente, él será capaz de resolverla.";
+            $interpretacionM = "Despliega confianza en sí mismo en la mayoría de sus tratos con otras personas. Aunque siempre lucha por ganarse a la gente, se muestra reacio a ceder su propio punto de vista. Esta persona tiende a no aguantar que una situación se presente, él será capaz de resolverla.";
           } else if ($maxM === 'M3' && $minM === 'M1') {
-            $interpretacionM = "Paciencia: Tiende a ser constante y consistente prefiriendo tratar un proyecto o tarea a la vez. En general, esta persona dirigirá sus habilidades y experiencias hacia áreas que requieren profundidad y especialización. Ecuánime bajo las presiones, busca estabilidad.";
+            $interpretacionM = "Tiende a ser constante y consistente prefiriendo tratar un proyecto o tarea a la vez. En general, esta persona dirigirá sus habilidades y experiencias hacia áreas que requieren profundidad y especialización. Ecuánime bajo las presiones, busca estabilidad.";
           } else if ($maxM === 'M3' && $minM === 'M2') {
             $interpretacionM = "Reflexión (Concentración): Tiende a ser un individuo controlado y paciente. Se mueve con moderación y premeditación en la mayoría de las situaciones con cuidado y concentración.";
           } else if ($maxM === 'M3' && $minM === 'M4') {
@@ -568,6 +563,8 @@ class CandidatoController extends CI_Controller
         $this->CandidatoModel->activarPrueba($idCandidato, $prueba);
         $this->VerCandidato($idCandidato);
     }
+
+
 
 }
 

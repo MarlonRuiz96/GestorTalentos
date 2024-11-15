@@ -19,44 +19,16 @@ class CandidatoModel extends CI_Model
     }
 
 
-
-
-
-
-
-
     public function InsertarCandidato($data) //Insertar 0 en los temperamentos
     {
         // Insertamos los datos en la tabla Candidatos
         $this->db->insert('Candidato', $data);
 
-        // Obtenemos el id del Candidato recién creado
-        $idCandidato = $this->db->insert_id();
-
+//pendiente verificar la ffecha
         $fecha_actual = date("Y-m-d");
 
-        // Insertamos los datos en la tabla temperamento
-        $dataTemperamento = array(
-            'melancolico' => 0,
-            'flematico' => 0,
-            'colerico' => 0,
-            'sanguineo' => 0,
-            'idCandidato' => $idCandidato,
-        );
-        $dataCandidato = array(
-            'Nombres' => "",
-            'Puesto' => "",
-            'DPI' => "",
-            'temperamento' => 0,
-            'Contacto' => "",
-            'Correo' => "",
-            'fecha_crear' => $fecha_actual,
-            'Temporal' => 1,
-            'Briggs' => 0,
 
-        );
 
-        $this->db->insert('temperamento', $dataTemperamento);
     }
 
     public function ActualizarCandidato($idCandidato, $nuevoNombre, $nuevaPuesto, $nuevoConctacto, $nuevoCorreo)
@@ -501,27 +473,137 @@ class CandidatoModel extends CI_Model
 	}
     public function desactivarPrueba($idCandidato, $prueba)
     {
-        $data = array(
-            $prueba => 0
-        );
+		if($prueba=="temperamento"){
+			$data = array(
+				'Temporal' => 1,
+				 $prueba => 0
 
-        $this->db->where('idCandidato', $idCandidato);
-        $this->db->update("Candidato", $data);
+			);
+			$this->db->where('idCandidato', $idCandidato);
+			$this->db->update("Candidato", $data);
+		}else{
+			$data = array(
+				$prueba => 0
+			);
+
+			$this->db->where('idCandidato', $idCandidato);
+			$this->db->update("Candidato", $data);
+		}
+
 
         return $this->db->affected_rows();
     }
 
 	public function activarPrueba($idCandidato, $prueba)
 	{
+		// Actualizar el campo correspondiente en la tabla 'Candidato'
 		$data = array(
-			$prueba => 1
+			$prueba => 1 // Activar la prueba correspondiente
 		);
 
+		// Actualizamos la tabla Candidato
 		$this->db->where('idCandidato', $idCandidato);
 		$this->db->update("Candidato", $data);
+		// Verificar y corregir el nombre de la prueba si es necesario
+		if ($prueba === "fp16") {
+			$prueba = "16pf";
+		}
+		// Verificar si ya existe el registro en la tabla correspondiente ($prueba)
+		$this->db->where('idCandidato', $idCandidato);
+		$query = $this->db->get($prueba);
 
-		return $this->db->affected_rows();
+		if ($query->num_rows() == 0) {
+			// Si no existe el registro, crear uno nuevo
+			$dataPrueba = array(
+				'idCandidato' => $idCandidato
+			);
+
+			// Insertamos el nuevo registro en la tabla correspondiente
+			$this->db->insert($prueba, $dataPrueba);
+
+			// Retornamos el número de filas afectadas para saber si se creó el registro
+			return $this->db->affected_rows();
+		}
+
+		// Si ya existe, no hacemos nada
+		return 0; // Retornamos 0 si no se hizo ningún cambio
 	}
+
+	public function obtenerInterpretacionCleaver($idCandidato)
+	{
+		// Consulta para obtener los datos de M1, M2, M3, M4, L1, L2, L3, L4, T1, T2, T3, T4 del candidato específico
+		$query = $this->db->select('M1, M2, M3, M4, L1, L2, L3, L4, T1, T2, T3, T4')
+			->from('graficacleaver')
+			->where('idCandidato', $idCandidato)
+			->get();
+
+		// Verificar si existen resultados
+		if ($query->num_rows() > 0) {
+			$result = $query->row();
+
+			// Calcular los promedios para D, I, S, y C
+			$D = ($result->M1 + $result->L1 + $result->T1) / 3;
+			$I = ($result->M2 + $result->L2 + $result->T2) / 3;
+			$S = ($result->M3 + $result->L3 + $result->T3) / 3;
+			$C = ($result->M4 + $result->L4 + $result->T4) / 3;
+
+			// Determinar cuál es el valor más alto y asignar una interpretación
+			$interpretacion = '';
+			if ($D >= $I && $D >= $S && $D >= $C) {
+				$interpretacion = "
+Le apasionan los retos. Puede ser considerado 'descontrolado' por los demás. Siempre listo a la competencia.
+
+Cuando algo está en juego, sale lo mejor de él. Tiene respeto por aquellos que ganan contra todas las expectativas. Se desempeña mejor cuando tiene autoridad y responsabilidad. Piensa en grande y quiere que su autoridad sea aceptada sin duda alguna.
+
+Si no existe algún reto, puede crear alguna situación en que los haya. Trabajará largas horas, con insistencia, hasta vencer alguna situación difícil.
+
+En su trato con la gente, es generalmente directo, positivo e incisivo. Dice lo que piensa, es seco y aún sarcástico, aunque no rencoroso.
+
+Podrá herir a los demás sin darse cuenta. En general pertenecerá a organizaciones que buscan el logro de algún objetivo más que por el simple hecho de convivir socialmente.";
+			} elseif ($I >= $D && $I >= $S && $I >= $C) {
+				$interpretacion = "
+Abierto, persuasivo y sociable. Generalmente optimista, puede ver algo bueno en cualquier situación.
+
+Interesado principalmente en la gente, sus problemas y actividades. Dispuesto a ayudar a otros a promover sus proyectos así como los suyos propios.
+
+Tiende a saltar a conclusiones y puede actuar bajo impulsos emocionales. Toma decisiones basadas en análisis superficiales de los hechos.
+
+Debido a su confianza y aceptación indiscriminada de la gente, puede mal juzgar las habilidades de otras personas.";
+			} elseif ($S >= $D && $S >= $I && $S >= $C) {
+				$interpretacion = "
+Generalmente amable, tranquilo y llevadero. Es poco demostrativo y controlado. Puede ocultar sus sentimientos y ser rencoroso.
+
+Gusta de establecer relaciones amistosas cercanas con un grupo limitado de sus asociados. Se muestra satisfecho y relajado. La paciencia y la predeterminación caracterizan su comportamiento usual.
+
+Prefiere pasar las noches en su casa más que viajando.
+
+Funciona bien como miembro de un equipo y puede coordinar sus esfuerzos con otros mostrando ritmo y facilidad.";
+			} else {
+				$interpretacion = "
+Es generalmente pacífico y se adapta a las situaciones con el fin de evitar antagonismos.
+
+Siendo sensible, busca apreciación y es fácilmente herido por otros. Es humilde, leal y dócil, tratando siempre de hacer las cosas lo mejor posible.
+
+Actúa de forma cautelosa y muy diplomática, en general es un buen candidato a promociones.
+
+Procura llevar una vida estable y ordenada, con una mente sistemática. Procede en forma ordenada y premeditada, es preciso y atento al detalle.";
+			}
+
+			// Retornar los resultados en un arreglo, incluyendo la interpretación
+			return [
+				'D' => round($D, 2),
+				'I' => round($I, 2),
+				'S' => round($S, 2),
+				'C' => round($C, 2),
+				'interpretacion' => $interpretacion
+			];
+		} else {
+			// Si no hay datos, retornar un arreglo vacío o nulo
+			return null;
+		}
+	}
+
+
 
 
 

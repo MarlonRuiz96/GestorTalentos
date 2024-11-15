@@ -448,42 +448,148 @@ class DpiController extends CI_Controller
 
         return (($noViolencia - 21.2246575342466) / (7.19426270463846 - 21.2246575342466)) * 10 + 50;
     }
-    
 
-    public function procesarRespuestas()
-{
-    $DPI = $this->input->post('DPI'); // Obtén el DPI desde el formulario
-    $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
-    $idCandidato = $data['Candidato']->idCandidato; // Obtén el id del candidato
 
-    // Definimos las categorías y las preguntas asociadas
-    $categorias = [
-        'extrovertido' => range(1, 5),
-        'introvertido' => range(6, 10),
-        'sensorial'    => range(11, 15),
-        'intuitivo'    => range(16, 20),
-        'racional'     => range(21, 25),
-        'emocional'    => range(26, 30),
-        'calificador'  => range(31, 35),
-        'perceptivo'   => range(36, 40),
-    ];
+	public function procesarRespuestas()
+	{
 
-    // Recorremos cada categoría y sus preguntas
-    foreach ($categorias as $tipo => $preguntas) {
-        foreach ($preguntas as $numero) {
-            if ($this->input->post("respuesta$numero") == 'x') {
-                $this->DpiModel->actualizarBriggs($idCandidato, $tipo);
-            }
-        }
-    }
+		$DPI = $this->input->post('DPI'); // Obtén el DPI desde el formulario
+		$data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
+		$idCandidato = $data['Candidato']->idCandidato; // Obtén el id del candidato
 
-    $this->CandidatoModel->desactivarbriggs($idCandidato);
+		// Verifica las respuestas del formulario y actualiza la tabla según corresponda
+		if ($this->input->post('respuesta1') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'extrovertido');
+		}
+		if ($this->input->post('respuesta2') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'extrovertido');
+		}
+		if ($this->input->post('respuesta3') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'extrovertido');
+		}
+		if ($this->input->post('respuesta4') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'extrovertido');
+		}
+		if ($this->input->post('respuesta5') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'extrovertido');
+		}
+		if ($this->input->post('respuesta6') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'introvertido');
+		}
+		if ($this->input->post('respuesta7') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'introvertido');
+		}
+		if ($this->input->post('respuesta8') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'introvertido');
+		}
+		if ($this->input->post('respuesta9') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'introvertido');
+		}
+		if ($this->input->post('respuesta10') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'introvertido');
+		}
+		if ($this->input->post('respuesta11') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'sensorial');
+		}
+		if ($this->input->post('respuesta12') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'sensorial');
+		}
+		if ($this->input->post('respuesta13') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'sensorial');
+		}
+		if ($this->input->post('respuesta14') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'sensorial');
+		}
+		if ($this->input->post('respuesta15') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'sensorial');
+		}
+		if ($this->input->post('respuesta16') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'intuitivo');
+		}
+		if ($this->input->post('respuesta17') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'intuitivo');
+		}
+		if ($this->input->post('respuesta18') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'intuitivo');
+		}
+		if ($this->input->post('respuesta19') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'intuitivo');
+		}
+		if ($this->input->post('respuesta20') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'intuitivo');
+		}
 
-    // Actualizamos los datos del candidato
-    $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI);
+		if ($this->input->post('respuesta21') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'racional');
+		}
+		if ($this->input->post('respuesta22') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'racional');
+		}
+		if ($this->input->post('respuesta23') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'racional');
+		}
+		if ($this->input->post('respuesta24') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'racional');
+		}
+		if ($this->input->post('respuesta25') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'racional');
+		}
+		if ($this->input->post('respuesta26') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'emocional');
+		}
+		if ($this->input->post('respuesta27') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'emocional');
+		}
+		if ($this->input->post('respuesta28') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'emocional');
+		}
+		if ($this->input->post('respuesta29') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'emocional');
+		}
+		if ($this->input->post('respuesta30') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'emocional');
+		}
+		if ($this->input->post('respuesta31') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'calificador');
+		}
+		if ($this->input->post('respuesta32') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'calificador');
+		}
+		if ($this->input->post('respuesta33') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'calificador');
+		}
+		if ($this->input->post('respuesta34') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'calificador');
+		}
+		if ($this->input->post('respuesta35') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'calificador');
+		}
+		if ($this->input->post('respuesta36') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'perceptivo');
+		}
+		if ($this->input->post('respuesta37') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'perceptivo');
+		}
+		if ($this->input->post('respuesta38') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'perceptivo');
+		}
+		if ($this->input->post('respuesta39') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'perceptivo');
+		}
+		if ($this->input->post('respuesta40') == 'x') {
+			$this->DpiModel->actualizarBriggs($idCandidato, 'perceptivo');
+		}
 
-    $this->load->view('Pruebas/Login', $data);
-}
+
+
+		$this->CandidatoModel->desactivarbriggs($idCandidato);
+
+		//esta es la nueva data con el briggs desactivado
+		$data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
+
+		$this->load->view('Pruebas/Login', $data);
+
+	}
 
 
 
@@ -548,7 +654,7 @@ class DpiController extends CI_Controller
 
         $puntosactual = $data['Candidato']->sanguineo; //pbtener el dato actual
 
-        $this->DpiModel->actualizarSanguineo($DPI, $puntosactual); // Le sumo un punto a sanguineo
+        $this->DpiModel->actualizarSanguineo($idCandidato, $puntosactual); // Le sumo un punto a sanguineo
 
         $this->RealizarPruebas($DPI);
 
