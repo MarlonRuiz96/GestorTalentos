@@ -40,24 +40,92 @@ class DpiController extends CI_Controller
 
     }
 
-    public function guardarCambios()
-    {
-        // Recupera los datos del formulario
-        $nombre = $this->input->post('Nombres');
-        $contacto = $this->input->post('Contacto');
-        $DPI = $this->input->post('DPI');
-        $correo = $this->input->post('Correo');
-        $puesto = $this->input->post('Puesto');
+	public function guardarCambios()
+	{
+		$nombre = $this->input->post('primer_nombre');
+		$segundoNombre = $this->input->post('segundo_nombres');
+		$primerApellido = $this->input->post('primer_apellido');
+		$segundoApellido = $this->input->post('segundo_apellido');
+		$apellidoCasada = $this->input->post('apellido_casada');
+		$fechaNacimiento = $this->input->post('fecha_nacimiento');
+		$edadActual = $this->input->post('edad_actual');
+		$genero = $this->input->post('genero');
+		$estadoCivil = $this->input->post('estado_civil');
+		$documentoIdentificacion = $this->input->post('documento_identificacion');
+		$numeroDocumento = $this->input->post('numero_documento');
+		$lugarExtension = $this->input->post('lugar_extension');
+		$tipoLicencia = $this->input->post('tipo_licencia');
+		$numeroLicencia = $this->input->post('numero_licencia');
+		$nit = $this->input->post('nit');
+		$profesion = $this->input->post('profesion');
+		$numeroColegial = $this->input->post('numero_colegiado');
+		$telefonoCasa = $this->input->post('telefono_casa');
+		$telefonoMovil = $this->input->post('telefono_movil');
+		$correo = $this->input->post('correo');
+		$emergenciaContacto = $this->input->post('emergencia_contacto');
+		$parentesco = $this->input->post('parentesco');
+		$telefonoLocalizacion = $this->input->post('telefono_localizacion');
+		$direccionResidencia = $this->input->post('direccion_residencia');
+		$zonaKilometro = $this->input->post('zona_kilometro');
+		$colonia = $this->input->post('colonia');
+		$municipio = $this->input->post('municipio');
+		$departamento = $this->input->post('departamento');
+		$firma = $this->input->post('firma');
+		$fechaHoy = $this->input->post('fecha_hoy');
 
-        // Realiza la actualización en la base de datos
-        $this->DpiModel->actualizarDatos($nombre, $contacto, $DPI, $correo, $puesto);
+		// Crear el array con todos los datos para insertarlo en la tabla
+		$array = [
+			'primer_nombre' => $nombre,
+			'segundo_nombres' => $segundoNombre,
+			'primer_apellido' => $primerApellido,
+			'segundo_apellido' => $segundoApellido,
+			'apellido_casada' => $apellidoCasada,
+			'fecha_nacimiento' => $fechaNacimiento,
+			'edad_actual' => $edadActual,
+			'genero' => $genero,
+			'estado_civil' => $estadoCivil,
+			'documento_identificacion' => $documentoIdentificacion,
+			'numero_documento' => $numeroDocumento,
+			'lugar_extension' => $lugarExtension,
+			'tipo_licencia' => $tipoLicencia,
+			'numero_licencia' => $numeroLicencia,
+			'nit' => $nit,
+			'profesion' => $profesion,
+			'numero_colegiado' => $numeroColegial,
+			'telefono_casa' => $telefonoCasa,
+			'telefono_movil' => $telefonoMovil,
+			'correo' => $correo,
+			'emergencia_contacto' => $emergenciaContacto,
+			'parentesco' => $parentesco,
+			'telefono_localizacion' => $telefonoLocalizacion,
+			'direccion_residencia' => $direccionResidencia,
+			'zona_kilometro' => $zonaKilometro,
+			'colonia' => $colonia,
+			'municipio' => $municipio,
+			'departamento' => $departamento,
+			'firma' => $firma,
+			'fecha_hoy' => $fechaHoy
+		];
+		$this->DpiModel->guardarAplicants($array,'applicants');
 
-        $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI);
+		$family_data = [
+			'applicant_id' => $applicant_id,
+			'nombre_padre' => $this->input->post('nombre_padre'),
+			'ocupacion_padre' => $this->input->post('ocupacion_padre'),
+			'nombre_madre' => $this->input->post('nombre_madre'),
+			'ocupacion_madre' => $this->input->post('ocupacion_madre'),
+			'nombre_conyuge' => $this->input->post('nombre_conyuge'),
+			'ocupacion_conyuge' => $this->input->post('ocupacion_conyuge'),
+			'numero_hijos' => $this->input->post('numero_hijos'),
+			'edades_sexos_hijos' => $this->input->post('edades_sexos_hijos'),
+			'actividades_recreativas' => $this->input->post('actividades_recreativas'),
+			'relacion_familiar' => $this->input->post('relacion_familiar')
+		];
+		$this->DpiModel->guardar($array);
+
+	}
 
 
-        // Redirecciona a la vista principal u otra página de confirmación
-        $this->load->view('Pruebas/Login', $data);
-    }
     public function pruebaValanti($DPI)
     {
         $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato

@@ -5,318 +5,325 @@ class DpiModel extends CI_Model
 {
 
 
-    public function VerificarDPI($DPI)
-    {
-        $this->db->select('*');
-        $this->db->from('Candidato');
-        $this->db->where('DPI', $DPI);
+	public function VerificarDPI($DPI)
+	{
+		$this->db->select('*');
+		$this->db->from('Candidato');
+		$this->db->where('DPI', $DPI);
 
-        $query = $this->db->get();
+		$query = $this->db->get();
 
-        if ($query->num_rows() > 0) {
-            return $query->row();
-        } else {
-            return null;
-        }
+		if ($query->num_rows() > 0) {
+			return $query->row();
+		} else {
+			return null;
+		}
 
-    }
+	}
 
-    public function actualizarDatos($nombre, $contacto, $dpi, $correo, $puesto)
-    {
-        $data = array(
-            'Nombres' => $nombre,
-            'Contacto' => $contacto,
-            'DPI' => $dpi,
-            'Correo' => $correo,
-            'Puesto' => $puesto
-        );
+	public function actualizarDatos($nombre, $contacto, $dpi, $correo, $puesto)
+	{
+		$data = array(
+			'Nombres' => $nombre,
+			'Contacto' => $contacto,
+			'DPI' => $dpi,
+			'Correo' => $correo,
+			'Puesto' => $puesto
+		);
 
-        $this->db->where('DPI', $dpi); // Ajusta la condición según la clave primaria de tu tabla
-        $this->db->update('Candidato', $data);
-    }
-    
-
+		$this->db->where('DPI', $dpi); // Ajusta la condición según la clave primaria de tu tabla
+		$this->db->update('Candidato', $data);
+	}
 
 
-    public function dataTemperamentos($Indice)
-    {
-        // Consulta para obtener los datos de la tabla de respuesta
-        $this->db->select('*');
-        $this->db->from('respuesta');
-        $this->db->where('idRespuesta', $Indice);
+	public function dataTemperamentos($Indice)
+	{
+		// Consulta para obtener los datos de la tabla de respuesta
+		$this->db->select('*');
+		$this->db->from('respuesta');
+		$this->db->where('idRespuesta', $Indice);
 
 
-        $query = $this->db->get();
+		$query = $this->db->get();
 
-        if ($query->num_rows() > 0) {
-            return $query->row();
-        } else {
-            return null;
-        }
-    }
+		if ($query->num_rows() > 0) {
+			return $query->row();
+		} else {
+			return null;
+		}
+	}
 
-    public function preguntasCleaver($indice) {
-        // Esta me sirve para obtener las características de acuerdo al índice, para ahorrar código.
-        $this->db->select('*');
-        $this->db->from('cleaverdata');
-        $this->db->where('idCleaverData', $indice);
+	public function preguntasCleaver($indice)
+	{
+		// Esta me sirve para obtener las características de acuerdo al índice, para ahorrar código.
+		$this->db->select('*');
+		$this->db->from('cleaverdata');
+		$this->db->where('idCleaverData', $indice);
 
-        $query = $this->db->get();
+		$query = $this->db->get();
 
-        if ($query->num_rows() > 0) {
-            return $query->row();
-        } else {
-            return null;
-        }
-    }
+		if ($query->num_rows() > 0) {
+			return $query->row();
+		} else {
+			return null;
+		}
+	}
 
-    public function Cleaver($idCandidato) {
-        // Esta me sirve para obtener las características de acuerdo al índice, para ahorrar código.
-        $this->db->select('*');
-        $this->db->from('cleaver');
-        $this->db->where('idCandidato', $idCandidato);
-    
-        $query = $this->db->get();
-    
-        if ($query->num_rows() > 0) {
-            $row = $query->row();
-    
-            // Acceder a los valores individuales
-            $M1 = $row->M1;
-            $M2 = $row->M2;
-            $M3 = $row->M3;
-            $M4 = $row->M4;
-            $L1 = $row->L1;
-            $L2 = $row->L2;
-            $L3 = $row->L3;
-            $L4 = $row->L4;
-    
-            // Calcular los valores de T1, T2, T3 y T4
-            $T1 = $M1 - $L1;
-            $T2 = $M2 - $L2;
-            $T3 = $M3 - $L3;
-            $T4 = $M4 - $L4;
-    
-            // Actualizar los valores en la base de datos
-            $data = [
-                'T1' => $T1,
-                'T2' => $T2,
-                'T3' => $T3,
-                'T4' => $T4,
-            ];
-            $this->db->where('idCandidato', $idCandidato);
-            $this->db->update('cleaver', $data);
-    
-            return true; // Indicar que la actualización fue exitosa
-        } else {
-            return false; // Indicar que no se encontraron datos para el candidato
-        }
-    }
+	public function Cleaver($idCandidato)
+	{
+		// Esta me sirve para obtener las características de acuerdo al índice, para ahorrar código.
+		$this->db->select('*');
+		$this->db->from('cleaver');
+		$this->db->where('idCandidato', $idCandidato);
 
-    public function obtenerValoresCleaver($idCandidato) {
-        $this->db->select('*');
-        $this->db->from('cleaver');
-        $this->db->where('idCandidato', $idCandidato);
-        $query = $this->db->get();
-    
-        if ($query->num_rows() > 0) {
-            return $query->row();
-        } else {
-            return null;
-        }
-    }
-    
-    public function ObtenerCampo($campo, $indice, $campo2) {
-        $this->db->select($campo2);
-        $this->db->from('metricascleaver');
-        $this->db->where($campo, $indice);
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            return $query->row()->$campo2; // Devuelve el valor específico
-        } else {
-            return null;
-        }
-    }
+		$query = $this->db->get();
 
-    public function insertGraficaCleaver($data) {
-        // Verificar si ya existe un registro con el mismo idCandidato
-        $this->db->where('idCandidato', $data['idCandidato']);
-        $query = $this->db->get('graficacleaver');
-    
-        if ($query->num_rows() > 0) {
-            // Si existe, actualizamos el registro
-            $this->db->where('idCandidato', $data['idCandidato']);
-            $this->db->update('graficacleaver', $data);
-        } else {
-            // Si no existe, lo insertamos
-            $this->db->insert('graficacleaver', $data);
-        }
-    }
-    
+		if ($query->num_rows() > 0) {
+			$row = $query->row();
 
-    
-    
-    
+			// Acceder a los valores individuales
+			$M1 = $row->M1;
+			$M2 = $row->M2;
+			$M3 = $row->M3;
+			$M4 = $row->M4;
+			$L1 = $row->L1;
+			$L2 = $row->L2;
+			$L3 = $row->L3;
+			$L4 = $row->L4;
 
-        public function obtenerValorCleaver($id, $campo)
-    {
-        $this->db->select($campo);
-        $this->db->from('cleaverdata');
-        $this->db->where('idcleaverdata', $id);
+			// Calcular los valores de T1, T2, T3 y T4
+			$T1 = $M1 - $L1;
+			$T2 = $M2 - $L2;
+			$T3 = $M3 - $L3;
+			$T4 = $M4 - $L4;
 
-        $query = $this->db->get();
+			// Actualizar los valores en la base de datos
+			$data = [
+				'T1' => $T1,
+				'T2' => $T2,
+				'T3' => $T3,
+				'T4' => $T4,
+			];
+			$this->db->where('idCandidato', $idCandidato);
+			$this->db->update('cleaver', $data);
 
-        if ($query->num_rows() > 0) {
-            $row = $query->row();
-            return $row->$campo; // Retorna el valor del campo solicitado
-        } else {
-            return null; // O maneja el caso en que no se encuentre el registro
-        }
-    }
+			return true; // Indicar que la actualización fue exitosa
+		} else {
+			return false; // Indicar que no se encontraron datos para el candidato
+		}
+	}
 
-    public function actualizarCleaver($idCandidato, $campoM, $campoL)
-    {
-        // Incrementar el valor de la casilla seleccionada en la columna 'Más'
-        $this->db->set($campoM, "$campoM + 1", FALSE);
-        // Incrementar el valor de la casilla seleccionada en la columna 'Menos'
-        $this->db->set($campoL, "$campoL + 1", FALSE);
-    
-        $this->db->where('idCandidato', $idCandidato);
-        $this->db->update('cleaver');
-    }
+	public function obtenerValoresCleaver($idCandidato)
+	{
+		$this->db->select('*');
+		$this->db->from('cleaver');
+		$this->db->where('idCandidato', $idCandidato);
+		$query = $this->db->get();
+
+		if ($query->num_rows() > 0) {
+			return $query->row();
+		} else {
+			return null;
+		}
+	}
+
+	public function ObtenerCampo($campo, $indice, $campo2)
+	{
+		$this->db->select($campo2);
+		$this->db->from('metricascleaver');
+		$this->db->where($campo, $indice);
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->row()->$campo2; // Devuelve el valor específico
+		} else {
+			return null;
+		}
+	}
+
+	public function insertGraficaCleaver($data)
+	{
+		// Verificar si ya existe un registro con el mismo idCandidato
+		$this->db->where('idCandidato', $data['idCandidato']);
+		$query = $this->db->get('graficacleaver');
+
+		if ($query->num_rows() > 0) {
+			// Si existe, actualizamos el registro
+			$this->db->where('idCandidato', $data['idCandidato']);
+			$this->db->update('graficacleaver', $data);
+		} else {
+			// Si no existe, lo insertamos
+			$this->db->insert('graficacleaver', $data);
+		}
+	}
 
 
-    public function actualizarTemporal($DPI, $indice)
-    {
+	public function obtenerValorCleaver($id, $campo)
+	{
+		$this->db->select($campo);
+		$this->db->from('cleaverdata');
+		$this->db->where('idcleaverdata', $id);
 
-        $nuevovalor = $indice + 1;
+		$query = $this->db->get();
 
-        $data = array(
-            'Temporal' => $nuevovalor,
-        );
+		if ($query->num_rows() > 0) {
+			$row = $query->row();
+			return $row->$campo; // Retorna el valor del campo solicitado
+		} else {
+			return null; // O maneja el caso en que no se encuentre el registro
+		}
+	}
 
-        $this->db->where('DPI', $DPI);
-        $this->db->update('Candidato', $data);
-    }
+	public function actualizarCleaver($idCandidato, $campoM, $campoL)
+	{
+		// Incrementar el valor de la casilla seleccionada en la columna 'Más'
+		$this->db->set($campoM, "$campoM + 1", FALSE);
+		// Incrementar el valor de la casilla seleccionada en la columna 'Menos'
+		$this->db->set($campoL, "$campoL + 1", FALSE);
 
-    public function actualizarSanguineo($idCandidato, $sanguineoActual)
-    {
-
-        $nuevovalor = $sanguineoActual + 1;
-
-        $data = array(
-            'sanguineo' => $nuevovalor,
-            
-        );
-
-        $this->db->where($idCandidato, $idCandidato);
-        $this->db->update('temperamento', $data);
-    }
-
-    public function actualizarColerico($DPI, $datoActual)
-    {
-
-        $nuevovalor = $datoActual + 1;
-
-        $data = array(
-            'colerico' => $nuevovalor,
-        );
-
-        $this->db->where('DPI', $DPI);
-        $this->db->update('Candidato', $data);
-    }
-    public function actualizarFlematico($DPI, $datoActual)
-    {
-
-        $nuevovalor = $datoActual + 1;
-
-        $data = array(
-            'flematico' => $nuevovalor,
-        );
-
-        $this->db->where('DPI', $DPI);
-        $this->db->update('Candidato', $data);
-    }
-
-    public function actualizarMelancolico($DPI, $datoActual)
-    {
-
-        $nuevovalor = $datoActual + 1;
-
-        $data = array(
-            'melancolico' => $nuevovalor,
-        );
-
-        $this->db->where('DPI', $DPI);
-        $this->db->update('Candidato', $data);
-    }
+		$this->db->where('idCandidato', $idCandidato);
+		$this->db->update('cleaver');
+	}
 
 
-    public function IngresarFortaleza($personalidad, $idCandidato, $tipo)
-    {
-        // Datos a insertar en la tabla "personalidad"
-        $data = array(
-            'Personalidad' => $personalidad,
-            'Tipo'=> $tipo,
-            'idCandidato' => $idCandidato
-        );
+	public function actualizarTemporal($DPI, $indice)
+	{
 
-        // Insertar datos en la tabla "personalidad"
-        $this->db->insert('fortaleza', $data);
+		$nuevovalor = $indice + 1;
 
-        // Verificar si la inserción tuvo éxito
-        return $this->db->affected_rows() > 0;
-    }
+		$data = array(
+			'Temporal' => $nuevovalor,
+		);
 
-    public function IngresarDebilidad($personalidad, $idCandidato, $tipo)
-    {
-        // Datos a insertar en la tabla "debilidad"
-        $data = array(
-            'Personalidad' => $personalidad,
-            'Tipo'=> $tipo,
+		$this->db->where('DPI', $DPI);
+		$this->db->update('Candidato', $data);
+	}
 
-            'idCandidato' => $idCandidato
-        );
+	public function actualizarSanguineo($idCandidato, $sanguineoActual)
+	{
 
-        // Insertar datos en la tabla "personalidad"
-        $this->db->insert('debilidad', $data);
+		$nuevovalor = $sanguineoActual + 1;
 
-        // Verificar si la inserción tuvo éxito
-        return $this->db->affected_rows() > 0;
-    }
+		$data = array(
+			'sanguineo' => $nuevovalor,
+
+		);
+
+		$this->db->where($idCandidato, $idCandidato);
+		$this->db->update('temperamento', $data);
+	}
+
+	public function actualizarColerico($DPI, $datoActual)
+	{
+
+		$nuevovalor = $datoActual + 1;
+
+		$data = array(
+			'colerico' => $nuevovalor,
+		);
+
+		$this->db->where('DPI', $DPI);
+		$this->db->update('Candidato', $data);
+	}
+
+	public function actualizarFlematico($DPI, $datoActual)
+	{
+
+		$nuevovalor = $datoActual + 1;
+
+		$data = array(
+			'flematico' => $nuevovalor,
+		);
+
+		$this->db->where('DPI', $DPI);
+		$this->db->update('Candidato', $data);
+	}
+
+	public function actualizarMelancolico($DPI, $datoActual)
+	{
+
+		$nuevovalor = $datoActual + 1;
+
+		$data = array(
+			'melancolico' => $nuevovalor,
+		);
+
+		$this->db->where('DPI', $DPI);
+		$this->db->update('Candidato', $data);
+	}
 
 
-    public function AgregarResultadosValanti($idCandidato,$verdad,$rectitud,$paz,$amor,$noViolencia){
+	public function IngresarFortaleza($personalidad, $idCandidato, $tipo)
+	{
+		// Datos a insertar en la tabla "personalidad"
+		$data = array(
+			'Personalidad' => $personalidad,
+			'Tipo' => $tipo,
+			'idCandidato' => $idCandidato
+		);
 
-        $data = array(
-            'Verdad' => $verdad,
-            'Rectitud' => $rectitud,
-            'Paz' => $paz,
-            'Amor' => $amor,
-            'No_violencia' => $noViolencia
-        );
+		// Insertar datos en la tabla "personalidad"
+		$this->db->insert('fortaleza', $data);
 
-        $this->db->where('idCandidato', $idCandidato);
-        $this->db->update('valanti', $data);
+		// Verificar si la inserción tuvo éxito
+		return $this->db->affected_rows() > 0;
+	}
 
-        
+	public function IngresarDebilidad($personalidad, $idCandidato, $tipo)
+	{
+		// Datos a insertar en la tabla "debilidad"
+		$data = array(
+			'Personalidad' => $personalidad,
+			'Tipo' => $tipo,
 
-    }
+			'idCandidato' => $idCandidato
+		);
 
-    public function actualizarBriggs($idCandidato, $campo) {
-        // Aquí se asume que cada campo en la tabla `Briggs` representa un tipo de personalidad
-        // Supongamos que la tabla `Briggs` tiene los campos: extrovertido, introvertido, sensorial, intuitivo, etc.
-        
-        // Asegúrate de ajustar el nombre de la tabla y los campos según tu base de datos
-        $this->db->set($campo, $campo.' + 1', FALSE); // Incrementa en 1 el campo indicado
-        $this->db->where('idCandidato', $idCandidato);
-        $this->db->update('Briggs');
-    }
+		// Insertar datos en la tabla "personalidad"
+		$this->db->insert('debilidad', $data);
 
-    public function AgregarPf($idCandidato, $datos)
-{
-    // Actualizar los campos en la tabla 16pf
-    $this->db->where('idCandidato', $idCandidato);
-    $this->db->update('16pf', $datos);
-}
+		// Verificar si la inserción tuvo éxito
+		return $this->db->affected_rows() > 0;
+	}
+
+
+	public function AgregarResultadosValanti($idCandidato, $verdad, $rectitud, $paz, $amor, $noViolencia)
+	{
+
+		$data = array(
+			'Verdad' => $verdad,
+			'Rectitud' => $rectitud,
+			'Paz' => $paz,
+			'Amor' => $amor,
+			'No_violencia' => $noViolencia
+		);
+
+		$this->db->where('idCandidato', $idCandidato);
+		$this->db->update('valanti', $data);
+
+
+	}
+
+	public function actualizarBriggs($idCandidato, $campo)
+	{
+		// Aquí se asume que cada campo en la tabla `Briggs` representa un tipo de personalidad
+		// Supongamos que la tabla `Briggs` tiene los campos: extrovertido, introvertido, sensorial, intuitivo, etc.
+
+		// Asegúrate de ajustar el nombre de la tabla y los campos según tu base de datos
+		$this->db->set($campo, $campo . ' + 1', FALSE); // Incrementa en 1 el campo indicado
+		$this->db->where('idCandidato', $idCandidato);
+		$this->db->update('Briggs');
+	}
+
+	public function AgregarPf($idCandidato, $datos)
+	{
+		// Actualizar los campos en la tabla 16pf
+		$this->db->where('idCandidato', $idCandidato);
+		$this->db->update('16pf', $datos);
+	}
+
+	public function guardarAplicants($datos,$table)
+	{
+		// Inserta los datos en la base de datos
+		return $this->db->insert($table, $datos);
+	}
 }
