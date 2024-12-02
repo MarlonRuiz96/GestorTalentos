@@ -106,7 +106,8 @@ class DpiController extends CI_Controller
 			'firma' => $firma,
 			'fecha_hoy' => $fechaHoy
 		];
-		$this->DpiModel->guardarAplicants($array,'applicants');
+		$applicant_id = $this->DpiModel->guardarAplicants($array, 'applicants');
+
 
 		$family_data = [
 			'applicant_id' => $applicant_id,
@@ -121,7 +122,304 @@ class DpiController extends CI_Controller
 			'actividades_recreativas' => $this->input->post('actividades_recreativas'),
 			'relacion_familiar' => $this->input->post('relacion_familiar')
 		];
-		$this->DpiModel->guardar($array);
+		$this->DpiModel->guardarDataSolicitud($family_data, 'family_data');
+
+
+		// Capturar datos de 'current_studies'
+		$current_studies = [
+			'applicant_id' => $applicant_id,
+			'estudia_actualmente' => $this->input->post('estudia_actualmente'),
+			'dias_estudio' => $this->input->post('dias_estudio'),
+			'horarios_estudio' => $this->input->post('horarios_estudio'),
+			'carrera_actual' => $this->input->post('carrera_actual')
+		];
+
+		// Guardar datos en la tabla 'current_studies'
+		$this->DpiModel->guardarDataSolicitud($current_studies, 'current_studies');
+
+
+		// Capturar datos del formulario
+		$economic_contributions = [
+			'applicant_id' => $applicant_id,
+			'aporte_alimentacion' => $this->input->post('aporte_alimentacion'),
+			'aporte_servicios' => $this->input->post('aporte_servicios'),
+			'aporte_educacion' => $this->input->post('aporte_educacion'),
+			'aporte_medicamentos' => $this->input->post('aporte_medicamentos'),
+			'otros_aportes' => $this->input->post('otros_aportes')
+		];
+
+		// Insertar en la tabla 'economic_contributions'
+		$this->DpiModel->guardarDataSolicitud($economic_contributions, 'economic_contributions');
+
+// Lista de niveles educativos con sufijos seguros
+		$niveles = [
+			'Primario' => 'primario',
+			'Básico' => 'básico',
+			'Diversificado' => 'diversificado',
+			'Uni' => 'uni',
+			'Post Grado' => 'postgrado'
+		];
+
+// Iteramos sobre los niveles esperados
+		foreach ($niveles as $nivel => $suffix) {
+			$periodo = $this->input->post("periodo_$suffix");
+			$establecimiento = $this->input->post("establecimiento_$suffix");
+			$situacion = $this->input->post("situacion_$suffix");
+			$titulo = $this->input->post("titulo_$suffix");
+
+			// Solo agregamos si el periodo y establecimiento tienen datos
+			if (!empty($periodo) && !empty($establecimiento)) {
+				$educational_history[] = [
+					'applicant_id' => $applicant_id,
+					'nivel' => $nivel, // Utilizamos el nombre original del nivel
+					'periodo' => $periodo,
+					'establecimiento' => $establecimiento,
+					'situacion' => $situacion ?? null, // Valores opcionales
+					'titulo' => $titulo ?? null
+				];
+			}
+		}
+
+// Guardamos cada nivel educativo en la base de datos
+		foreach ($educational_history as $level) {
+			$this->DpiModel->guardarDataSolicitud($level, 'educational_history');
+		}
+
+
+		// Crear el array con los datos de preferencias laborales
+		$employment_preferences = [
+			'applicant_id' => $applicant_id,
+			'puesto_deseado' => $this->input->post('puesto_deseado'),
+			'otros_puestos_interes' => $this->input->post('otros_puestos_interes'),
+			'tipo_empresa' => $this->input->post('tipo_empresa'),
+			'areas_deseadas' => $this->input->post('areas_deseadas'),
+			'pretension_salarial' => $this->input->post('pretension_salarial'),
+			'sueldo_negociable' => $this->input->post('sueldo_negociable'),
+			'horarios_deseados' => $this->input->post('horarios_deseados'),
+			'disponibilidad_trabajo' => $this->input->post('disponibilidad_trabajo'),
+			'disponibilidad_viajar' => $this->input->post('disponibilidad_viajar'),
+			'disposicion_interior' => $this->input->post('disposicion_interior'),
+			'motivo_posicion' => $this->input->post('motivo_posicion'),
+			'tiene_experiencia' => $this->input->post('tiene_experiencia'),
+			'tiempo_experiencia' => $this->input->post('tiempo_experiencia')
+		];
+
+		// Insertar los datos en la base de datos
+		$this->DpiModel->guardarDataSolicitud($employment_preferences, 'employment_preferences');
+
+
+		// Array con los datos familiares
+		$family_data = [
+			'applicant_id' => $applicant_id,
+			'nombre_padre' => $this->input->post('nombre_padre'),
+			'ocupacion_padre' => $this->input->post('ocupacion_padre'),
+			'nombre_madre' => $this->input->post('nombre_madre'),
+			'ocupacion_madre' => $this->input->post('ocupacion_madre'),
+			'nombre_conyuge' => $this->input->post('nombre_conyuge'),
+			'ocupacion_conyuge' => $this->input->post('ocupacion_conyuge'),
+			'numero_hijos' => $this->input->post('numero_hijos'),
+			'edades_sexos_hijos' => $this->input->post('edades_sexos_hijos'),
+			'actividades_recreativas' => $this->input->post('actividades_recreativas'),
+			'relacion_familiar' => $this->input->post('relacion_familiar') // Valores como 'Excelente', 'Buena', etc.
+		];
+
+		// Guardar en la base de datos
+		$this->DpiModel->guardarDataSolicitud($family_data, 'family_data');
+
+
+		// Array con los datos de salud
+		$health_data = [
+			'applicant_id' => $applicant_id,
+			'tipo_sangre' => $this->input->post('tipo_sangre'),
+			'estatura' => $this->input->post('estatura'),
+			'peso' => $this->input->post('peso'),
+			'condicion_salud' => $this->input->post('condicion_salud'),
+			'enfermedades' => $this->input->post('enfermedades'),
+			'alergias' => $this->input->post('alergias'),
+			'accidentes' => $this->input->post('accidentes'),
+			'operaciones' => $this->input->post('operaciones'),
+			'usa_anteojos' => $this->input->post('usa_anteojos'),
+			'toma_medicamentos' => $this->input->post('toma_medicamentos')
+		];
+
+		// Guardar en la base de datos
+		$this->DpiModel->guardarDataSolicitud($health_data, 'health_data');
+
+		// Inicializamos un array para guardar los idiomas
+		$languages_data = [];
+
+		// Iteramos sobre los idiomas enviados (por ejemplo, hasta 5 idiomas)
+		for ($i = 1; $i <= 3; $i++) {
+			$idioma = $this->input->post("idioma_$i");
+			$escritura = $this->input->post("escritura_$i");
+			$lectura = $this->input->post("lectura_$i");
+			$conversacion = $this->input->post("conversacion_$i");
+			$establecimiento = $this->input->post("establecimiento_$i");
+
+			// Verificamos si el idioma tiene datos (al menos el nombre del idioma)
+			if (!empty($idioma)) {
+				$languages_data[] = [
+					'applicant_id' => $applicant_id,
+					'idioma' => $idioma,
+					'escritura' => $escritura ?? 0, // Si está vacío, asigna 0
+					'lectura' => $lectura ?? 0, // Si está vacío, asigna 0
+					'conversacion' => $conversacion ?? 0, // Si está vacío, asigna 0
+					'establecimiento' => $establecimiento ?? null // Si está vacío, asigna null
+				];
+			}
+
+		}
+
+		// Guardamos cada idioma en la tabla
+		foreach ($languages_data as $language) {
+			$this->DpiModel->guardarDataSolicitud($language, 'languages');
+		}
+
+		// Recibimos las listas de datos desde el formulario
+		$nombres = $this->input->post('nombre_referencia');
+		$tipos = $this->input->post('tipo_referencia');
+		$lugares_trabajo = $this->input->post('lugar_trabajo_referencia');
+		$tiempos_conocer = $this->input->post('tiempo_conocer');
+		$telefonos = $this->input->post('telefono_referencia');
+
+		// Verificamos que todos los arrays tengan datos
+		if (!empty($nombres) && is_array($nombres)) {
+			foreach ($nombres as $index => $nombre) {
+				// Solo procesamos las filas completas
+				if (!empty($nombre) && !empty($tipos[$index]) && !empty($lugares_trabajo[$index]) &&
+					!empty($tiempos_conocer[$index]) && !empty($telefonos[$index])) {
+					$reference_data = [
+						'applicant_id' => $applicant_id,
+						'nombre_referencia' => $nombre,
+						'tipo_referencia' => $tipos[$index],
+						'lugar_trabajo' => $lugares_trabajo[$index],
+						'tiempo_conocer' => $tiempos_conocer[$index],
+						'telefono' => $telefonos[$index]
+					];
+
+					// Insertamos cada referencia en la base de datos
+					$this->DpiModel->guardarDataSolicitud($reference_data, 'references');
+				}
+			}
+
+		}
+
+		// Capturamos el texto completo del textarea
+		$capacitaciones_texto = $this->input->post('capacitaciones');
+
+		// Creamos el array con los datos a guardar
+		$training_data = [
+			'applicant_id' => $applicant_id,
+			'descripcion' => $capacitaciones_texto
+		];
+
+		// Insertamos en la base de datos
+		$this->DpiModel->guardarDataSolicitud($training_data, 'capacitaciones');
+
+
+		// Capturamos los datos del formulario
+		$programas_computacion = $this->input->post('programas_computacion');
+		$equipos_operar = $this->input->post('equipos_operar');
+
+		// Creamos el array con los datos
+		$skills_data = [
+			'applicant_id' => $applicant_id,
+			'programas_computacion' => $programas_computacion,
+			'equipos_operar' => $equipos_operar
+		];
+
+		// Insertamos los datos en la base de datos
+		$this->DpiModel->guardarDataSolicitud($skills_data, 'skills');
+
+
+		// Capturamos los datos del formulario
+		$tipo_vivienda = $this->input->post('tipo_vivienda');
+		$renta_mensual = $this->input->post('renta_mensual');
+		$tipo_vehiculo = $this->input->post('tipo_vehiculo');
+		$tipo_deudas = $this->input->post('tipo_deudas');
+		$deuda_total = $this->input->post('deuda_total');
+		$ingresos_extraordinarios = $this->input->post('ingresos_extraordinarios');
+		$monto_otros_ingresos = $this->input->post('monto_otros_ingresos');
+		$religion = $this->input->post('religion');
+		$asociaciones = $this->input->post('asociaciones');
+		$deportes = $this->input->post('deportes');
+		$tiempo_libre = $this->input->post('tiempo_libre');
+		$cualidades = $this->input->post('cualidades');
+
+		// Crear el array con los datos
+		$social_economic_data = [
+			'applicant_id' => $applicant_id,
+			'tipo_vivienda' => $tipo_vivienda,
+			'renta_mensual' => $renta_mensual,
+			'tipo_vehiculo' => $tipo_vehiculo,
+			'tipo_deudas' => $tipo_deudas,
+			'deuda_total' => $deuda_total,
+			'ingresos_extraordinarios' => $ingresos_extraordinarios,
+			'monto_otros_ingresos' => $monto_otros_ingresos,
+			'religion' => $religion,
+			'asociaciones' => $asociaciones,
+			'deportes' => $deportes,
+			'tiempo_libre' => $tiempo_libre,
+			'cualidades' => $cualidades
+		];
+
+		// Insertar los datos en la base de datos
+		$this->DpiModel->guardarDataSolicitud($social_economic_data, 'social_economic_data');
+
+		// Capturamos los datos en arrays
+		$nombre_empresa = $this->input->post('nombre_empresa');
+		$direccion_empresa = $this->input->post('direccion_empresa');
+		$telefono_empresa = $this->input->post('telefono_empresa');
+		$email_empresa = $this->input->post('email_empresa');
+		$actividad_comercial = $this->input->post('actividad_comercial');
+		$puesto_inicial = $this->input->post('puesto_inicial');
+		$puesto_final = $this->input->post('puesto_final');
+		$fecha_inicio = $this->input->post('fecha_inicio');
+		$fecha_retiro = $this->input->post('fecha_retiro');
+		$salario_inicial = $this->input->post('salario_inicial');
+		$salario_final = $this->input->post('salario_final');
+		$motivo_retiro = $this->input->post('motivo_retiro');
+		$atribuciones = $this->input->post('atribuciones');
+		$referencias = $this->input->post('referencias');
+		$porque_referencias = $this->input->post('porque_referencias');
+		$jefe_inmediato = $this->input->post('jefe_inmediato');
+		$valores_empresa = $this->input->post('valores_empresa');
+		$disgusto_empresa = $this->input->post('disgusto_empresa');
+
+		// Iteramos sobre los datos para construir múltiples registros
+		for ($i = 0; $i < count($nombre_empresa); $i++) {
+			if (!empty($nombre_empresa[$i])) { // Verificamos que el nombre de la empresa no esté vacío
+				$job_experience_data = [
+					'applicant_id' => $applicant_id,
+					'nombre_empresa' => $nombre_empresa[$i],
+					'direccion_empresa' => $direccion_empresa[$i],
+					'telefono_empresa' => $telefono_empresa[$i],
+					'email_empresa' => $email_empresa[$i],
+					'actividad_comercial' => $actividad_comercial[$i],
+					'puesto_inicial' => $puesto_inicial[$i],
+					'puesto_final' => $puesto_final[$i],
+					'fecha_inicio' => $fecha_inicio[$i],
+					'fecha_retiro' => $fecha_retiro[$i],
+					'salario_inicial' => $salario_inicial[$i],
+					'salario_final' => $salario_final[$i],
+					'motivo_retiro' => $motivo_retiro[$i],
+					'atribuciones' => $atribuciones[$i],
+					'referencias' => $referencias[$i],
+					'porque_referencias' => $porque_referencias[$i],
+					'jefe_inmediato' => $jefe_inmediato[$i],
+					'valores_empresa' => $valores_empresa[$i],
+					'disgusto_empresa' => $disgusto_empresa[$i],
+				];
+
+				// Insertamos cada registro
+				$this->DpiModel->guardarDataSolicitud($job_experience_data, 'work_experience');
+			}
+		}
+
+		$dataCandidato =
+			[
+
+			]
 
 	}
 

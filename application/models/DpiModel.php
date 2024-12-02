@@ -320,10 +320,16 @@ class DpiModel extends CI_Model
 		$this->db->where('idCandidato', $idCandidato);
 		$this->db->update('16pf', $datos);
 	}
-
-	public function guardarAplicants($datos,$table)
+	public function guardarAplicants($datos, $table)
 	{
 		// Inserta los datos en la base de datos
-		return $this->db->insert($table, $datos);
+		$this->db->insert($table, $datos);
+		// Retorna el ID del registro insertado
+		return $this->db->insert_id();
 	}
+	public function guardarDataSolicitud($datos, $table)
+	{
+		$this->db->insert($table, $datos);
+	}
+
 }

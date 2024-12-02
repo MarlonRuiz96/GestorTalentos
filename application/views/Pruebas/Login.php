@@ -77,7 +77,6 @@
 									<option value="" disabled selected>Seleccione...</option>
 									<option value="Masculino">Masculino</option>
 									<option value="Femenino">Femenino</option>
-									<option value="Otro">Otro</option>
 								</select>
 							</div>
 						</div>
@@ -105,7 +104,6 @@
 									<option value="" disabled selected>Seleccione...</option>
 									<option value="DPI">DPI</option>
 									<option value="Pasaporte">Pasaporte</option>
-									<option value="Otro">Otro</option>
 								</select>
 							</div>
 							<div class="col-md-6">
@@ -120,7 +118,7 @@
 							</div>
 							<div class="col-md-6">
 								<label for="tipo_licencia" class="form-label">Tipo de Licencia para conducir (si posee)</label>
-								<select class="form-select" name="tipo_licencia" id="tipo_licencia">
+								<select class="form-select" name="tipo_licencia" id="tipo_licencia" required>
 									<option value="" disabled selected>Seleccione...</option>
 									<option value="A">A</option>
 									<option value="B">B</option>
@@ -149,11 +147,11 @@
 						<div class="row mb-3">
 							<div class="col-md-6">
 								<label for="profesion" class="form-label">Profesión u oficio</label>
-								<input type="text" class="form-control" name="profesion" id="profesion" maxlength="35" required>
+								<input type="text" class="form-control" name="profesion" id="profesion" maxlength="35" placeholder="Maestro, Doctor, Ama de casa, etc." required>
 							</div>
 							<div class="col-md-6">
 								<label for="numero_colegiado" class="form-label">No. Colegiado, matrícula o licencia</label>
-								<input type="text" class="form-control" name="numero_colegiado" id="numero_colegiado" maxlength="35">
+								<input type="text" class="form-control" name="numero_colegiado" id="numero_colegiado" maxlength="35" placeholder="Lo puede dejar en blanco si no procede" >
 							</div>
 						</div>
 					</div>
@@ -174,21 +172,21 @@
 						<div class="row mb-3">
 							<div class="col-md-6">
 								<label for="correo" class="form-label">Correo electrónico</label>
-								<input type="email" class="form-control" name="correo" id="correo" maxlength="35" required>
+								<input type="email" class="form-control" name="correo" id="correo" maxlength="35" placeholder="Ejemplo@gmail.com" required>
 							</div>
 							<div class="col-md-6">
 								<label for="emergencia_contacto" class="form-label">En caso de emergencia avisar a:</label>
-								<input type="text" class="form-control" name="emergencia_contacto" id="emergencia_contacto" maxlength="35" required>
+								<input type="text" class="form-control" name="emergencia_contacto" id="emergencia_contacto" maxlength="35" placeholder="Nombre" required>
 							</div>
 						</div>
 						<div class="row mb-3">
 							<div class="col-md-6">
 								<label for="parentesco" class="form-label">Parentesco o relación</label>
-								<input type="text" class="form-control" name="parentesco" id="parentesco" maxlength="35" required>
+								<input type="text" class="form-control" name="parentesco" id="parentesco" maxlength="35" placeholder="Madre, padre, hermano, tío, etc." required>
 							</div>
 							<div class="col-md-6">
 								<label for="telefono_localizacion" class="form-label">Teléfono de localización</label>
-								<input type="text" class="form-control" name="telefono_localizacion" id="telefono_localizacion" maxlength="35" required>
+								<input type="text" class="form-control" name="telefono_localizacion" id="telefono_localizacion" maxlength="35" placeholder="Numero de familiar" required>
 							</div>
 						</div>
 					</div>
@@ -196,33 +194,28 @@
 					<!-- Dirección -->
 					<div class="mb-4">
 						<h5 class="card-title">Dirección</h5>
+
+						<!-- Dirección de Residencia -->
 						<div class="row mb-3">
-							<div class="col-md-6">
+							<div class="col-12"> <!-- Columna completa para ocupar el 100% -->
 								<label for="direccion_residencia" class="form-label">Dirección de Residencia</label>
-								<input type="text" class="form-control" name="direccion_residencia" id="direccion_residencia" maxlength="35" required>
-							</div>
-							<div class="col-md-6">
-								<label for="zona_kilometro" class="form-label">Zona o Kilómetro</label>
-								<input type="text" class="form-control" name="zona_kilometro" id="zona_kilometro" maxlength="35">
+								<input type="text" class="form-control" name="direccion_residencia" id="direccion_residencia" maxlength="100" placeholder="Ingrese su direccion actual" required>
 							</div>
 						</div>
+
+						<!-- Municipio y Departamento -->
 						<div class="row mb-3">
-							<div class="col-md-6">
-								<label for="colonia" class="form-label">Colonia, aldea, Barrio o Caserío</label>
-								<input type="text" class="form-control" name="colonia" id="colonia" maxlength="35" required>
-							</div>
-							<div class="col-md-6">
+							<div class="col-md-6"> <!-- Ocupa el 50% del ancho -->
 								<label for="municipio" class="form-label">Municipio</label>
 								<input type="text" class="form-control" name="municipio" id="municipio" maxlength="35" required>
 							</div>
-						</div>
-						<div class="row mb-3">
-							<div class="col-md-6">
+							<div class="col-md-6"> <!-- Ocupa el 50% del ancho -->
 								<label for="departamento" class="form-label">Departamento</label>
 								<input type="text" class="form-control" name="departamento" id="departamento" maxlength="35" required>
 							</div>
 						</div>
 					</div>
+
 				</div>
 			</div>
 		</section>
@@ -243,7 +236,7 @@
 							<div class="row mb-3">
 								<div class="col-md-6">
 									<label for="nombre_padre" class="form-label">Nombre del Padre</label>
-									<input type="text" class="form-control" name="nombre_padre" id="nombre_padre" required>
+									<input type="text" class="form-control" name="nombre_padre" id="nombre_padre" >
 								</div>
 								<div class="col-md-6">
 									<label for="ocupacion_padre" class="form-label">Ocupación del Padre</label>
@@ -253,11 +246,11 @@
 							<div class="row mb-3">
 								<div class="col-md-6">
 									<label for="nombre_madre" class="form-label">Nombre de la Madre</label>
-									<input type="text" class="form-control" name="nombre_madre" id="nombre_madre" required>
+									<input type="text" class="form-control" name="nombre_madre" id="nombre_madre" >
 								</div>
 								<div class="col-md-6">
 									<label for="ocupacion_madre" class="form-label">Ocupación de la Madre</label>
-									<input type="text" class="form-control" name="ocupacion_madre" id="ocupacion_madre">
+									<input type="text" class="form-control" name="ocupacion_madre" id="ocupacion_madre" >
 								</div>
 							</div>
 						</div>
@@ -272,21 +265,21 @@
 							<div class="row mb-3">
 								<div class="col-md-6">
 									<label for="nombre_conyuge" class="form-label">Nombre del (la) Cónyuge</label>
-									<input type="text" class="form-control" name="nombre_conyuge" id="nombre_conyuge">
+									<input type="text" class="form-control" name="nombre_conyuge" id="nombre_conyuge" >
 								</div>
 								<div class="col-md-6">
 									<label for="ocupacion_conyuge" class="form-label">Ocupación del (la) Cónyuge</label>
-									<input type="text" class="form-control" name="ocupacion_conyuge" id="ocupacion_conyuge">
+									<input type="text" class="form-control" name="ocupacion_conyuge" id="ocupacion_conyuge" >
 								</div>
 							</div>
 							<div class="row mb-3">
 								<div class="col-md-6">
 									<label for="numero_hijos" class="form-label">Número de Hijos</label>
-									<input type="number" class="form-control" name="numero_hijos" id="numero_hijos" min="0">
+									<input type="number" class="form-control" name="numero_hijos" id="numero_hijos" min="0" value="0" >
 								</div>
 								<div class="col-md-6">
 									<label for="edades_sexos_hijos" class="form-label">Edades y sexos de los hijos</label>
-									<input type="text" class="form-control" name="edades_sexos_hijos" id="edades_sexos_hijos" placeholder="Ej: 5 años, M; 3 años, F">
+									<input type="text" class="form-control" name="edades_sexos_hijos" id="edades_sexos_hijos" placeholder="Ej: 5 años, M; 3 años, F" >
 								</div>
 							</div>
 						</div>
@@ -303,16 +296,7 @@
 									<label for="actividades_recreativas" class="form-label">Actividades Recreativas</label>
 									<input type="text" class="form-control" name="actividades_recreativas" id="actividades_recreativas" placeholder="Ej: Deportes, Lectura">
 								</div>
-								<div class="col-md-6">
-									<label for="relacion_familiar" class="form-label">Calificación de la Relación Familiar</label>
-									<select class="form-select" name="relacion_familiar" id="relacion_familiar">
-										<option value="" disabled selected>Seleccione...</option>
-										<option value="Excelente">Excelente</option>
-										<option value="Buena">Buena</option>
-										<option value="Regular">Regular</option>
-										<option value="Mala">Mala</option>
-									</select>
-								</div>
+
 							</div>
 						</div>
 					</div>
@@ -326,27 +310,27 @@
 							<div class="row mb-3">
 								<div class="col-md-6">
 									<label for="aporte_alimentacion" class="form-label">Aporte Mensual en Alimentación</label>
-									<input type="number" class="form-control" name="aporte_alimentacion" id="aporte_alimentacion" min="0" step="0.01">
+									<input type="number" class="form-control" name="aporte_alimentacion" id="aporte_alimentacion" min="0" step="0.01" placeholder="Cuanto aporta usted a su familia">
 								</div>
 								<div class="col-md-6">
 									<label for="aporte_servicios" class="form-label">Aporte Mensual en Servicios Básicos</label>
-									<input type="number" class="form-control" name="aporte_servicios" id="aporte_servicios" min="0" step="0.01">
+									<input type="number" class="form-control" name="aporte_servicios" id="aporte_servicios" min="0" step="0.01" placeholder="Ejemplo: 300 Luz, 200 Agua, 200 Internet">
 								</div>
 							</div>
 							<div class="row mb-3">
 								<div class="col-md-6">
 									<label for="aporte_educacion" class="form-label">Aporte Mensual en Educación de Hijos</label>
-									<input type="number" class="form-control" name="aporte_educacion" id="aporte_educacion" min="0" step="0.01">
+									<input type="number" class="form-control" name="aporte_educacion" id="aporte_educacion" min="0" step="0.01" placeholder="Monto aproximado, puede dejar en blanco si no tiene.">
 								</div>
 								<div class="col-md-6">
 									<label for="aporte_medicamentos" class="form-label">Aporte Mensual en Medicamentos</label>
-									<input type="number" class="form-control" name="aporte_medicamentos" id="aporte_medicamentos" min="0" step="0.01">
+									<input type="number" class="form-control" name="aporte_medicamentos" id="aporte_medicamentos" min="0" step="0.01" placeholder="Monto aproximado, puede dejar en blanco si no tiene.">
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-md-12">
 									<label for="otros_aportes" class="form-label">Otros Aportes</label>
-									<input type="text" class="form-control" name="otros_aportes" id="otros_aportes" placeholder="Describa otros aportes económicos">
+									<input type="text" class="form-control" name="otros_aportes" id="otros_aportes" placeholder="Describa otros aportes económicos. Ejemplo: Guarderia, seguridad, etc.">
 								</div>
 							</div>
 						</div>
@@ -365,53 +349,60 @@
 					<!-- Periodo de Nivel -->
 					<h5>Historial Académico</h5>
 					<?php
+					// Formulario y Controlador
 					$niveles = [
-						'Primario' => 'Diplomas o reconocimientos',
-						'Básico' => 'Diplomas o reconocimientos',
-						'Diversificado' => 'Título Obtenido',
-						'Técnico' => 'Título Obtenido o Carrera',
-						'Universitario' => 'Título Obtenido o Carrera',
-						'Post Grado' => 'Título Obtenido o Carrera'
+						'Primario' => ['titulo' => 'Diplomas o reconocimientos', 'suffix' => 'primario'],
+						'Básico' => ['titulo' => 'Diplomas o reconocimientos', 'suffix' => 'básico'],
+						'Diversificado' => ['titulo' => 'Título Obtenido', 'suffix' => 'diversificado'],
+						'Uni' => ['titulo' => 'Título Obtenido o Carrera', 'suffix' => 'uni'],
+						'Post Grado' => ['titulo' => 'Título Obtenido o Carrera', 'suffix' => 'postgrado']
 					];
-					foreach ($niveles as $nivel => $tituloObtenido) : ?>
-						<div class="row mb-3">
-							<div class="col-md-3">
-								<label class="form-label">Periodo del Nivel <?php echo $nivel; ?></label>
-								<input type="text" class="form-control" name="periodo_<?php echo strtolower($nivel); ?>">
-							</div>
-							<div class="col-md-3">
-								<label class="form-label">Establecimiento</label>
-								<input type="text" class="form-control" name="establecimiento_<?php echo strtolower($nivel); ?>">
-							</div>
-							<div class="col-md-3">
-								<label class="form-label">Situación</label>
-								<input type="text" class="form-control" name="situacion_<?php echo strtolower($nivel); ?>">
-							</div>
-							<div class="col-md-3">
-								<label class="form-label"><?php echo $tituloObtenido; ?></label>
-								<input type="text" class="form-control" name="titulo_<?php echo strtolower($nivel); ?>">
-							</div>
+
+					foreach ($niveles as $nivel => $data) : ?>
+					<div class="row mb-3">
+						<div class="col-md-3">
+							<label class="form-label">Periodo del Nivel <?php echo $nivel; ?></label>
+							<input type="text" class="form-control" name="periodo_<?php echo $data['suffix']; ?>" placeholder="Ejem: 2012-2015">
 						</div>
+						<div class="col-md-3">
+							<label class="form-label">Establecimiento</label>
+							<input type="text" class="form-control" name="establecimiento_<?php echo $data['suffix']; ?>" placeholder="Nombre del establecimiento">
+						</div>
+						<div class="col-md-3">
+							<label class="form-label">Situación</label>
+							<select class="form-select" name="situacion_<?php echo $data['suffix']; ?>">
+								<option value="" disabled selected>Seleccione...</option>
+								<option value="Completo">Completo</option>
+								<option value="Incompleto">Incompleto</option>
+								<option value="En Curso">En Curso</option>
+							</select>
+						</div>
+						<div class="col-md-3">
+							<label class="form-label"><?php echo $data['titulo']; ?></label>
+							<input type="text" class="form-control" name="titulo_<?php echo $data['suffix']; ?>">
+						</div>
+					</div>
 					<?php endforeach; ?>
+
 
 					<!-- Estudios Actuales -->
 					<h5 class="mt-4">Estudios Actuales</h5>
 					<div class="row mb-3">
 						<div class="col-md-3">
 							<label class="form-label">Estudia Actualmente</label>
-							<input type="text" class="form-control" name="estudia_actualmente">
+							<input type="text" class="form-control" name="estudia_actualmente" placeholder="Si/No" required>
 						</div>
 						<div class="col-md-3">
 							<label class="form-label">Días de Estudio</label>
-							<input type="text" class="form-control" name="dias_estudio">
+							<input type="text" class="form-control" name="dias_estudio" placeholder="Que dias de la semana">
 						</div>
 						<div class="col-md-3">
 							<label class="form-label">Horarios de Estudio</label>
-							<input type="text" class="form-control" name="horarios_estudio">
+							<input type="text" class="form-control" name="horarios_estudio" placeholder="En qué horarios estudia">
 						</div>
 						<div class="col-md-3">
 							<label class="form-label">Carrera o Diplomado que Estudia</label>
-							<input type="text" class="form-control" name="carrera_actual">
+							<input type="text" class="form-control" name="carrera_actual" placeholder="Qué esta estudiando actualmente">
 						</div>
 					</div>
 
@@ -485,17 +476,17 @@
 							<div class="row mb-3">
 								<div class="col-md-6">
 									<label class="form-label">Nombre de la Empresa, Organización o Institución</label>
-									<input type="text" class="form-control" name="nombre_empresa[]" required>
+									<input type="text" class="form-control" name="nombre_empresa[]" >
 								</div>
 								<div class="col-md-6">
 									<label class="form-label">Dirección (Ubicación de la empresa)</label>
-									<input type="text" class="form-control" name="direccion_empresa[]" required>
+									<input type="text" class="form-control" name="direccion_empresa[]" >
 								</div>
 							</div>
 							<div class="row mb-3">
 								<div class="col-md-6">
 									<label class="form-label">Números de Teléfono</label>
-									<input type="text" class="form-control" name="telefono_empresa[]" required>
+									<input type="text" class="form-control" name="telefono_empresa[]" >
 								</div>
 								<div class="col-md-6">
 									<label class="form-label">Correo electrónico o página Web</label>
@@ -505,41 +496,41 @@
 							<div class="row mb-3">
 								<div class="col-md-6">
 									<label class="form-label">Actividad Comercial</label>
-									<input type="text" class="form-control" name="actividad_comercial[]" required>
+									<input type="text" class="form-control" name="actividad_comercial[]" placeholder="Aduanas, restaurante, transporte, etc" >
 								</div>
 								<div class="col-md-6">
 									<label class="form-label">Puesto inicial desempeñado</label>
-									<input type="text" class="form-control" name="puesto_inicial[]" required>
+									<input type="text" class="form-control" name="puesto_inicial[]" PLACEHOLDER="Puesto con el que inició a laboral" >
 								</div>
 							</div>
 							<div class="row mb-3">
 								<div class="col-md-6">
 									<label class="form-label">Puesto final desempeñado</label>
-									<input type="text" class="form-control" name="puesto_final[]" required>
+									<input type="text" class="form-control" name="puesto_final[]" PLACEHOLDER="El ultimo puesto que tuvo en la empresa"  >
 								</div>
 								<div class="col-md-3">
 									<label class="form-label">Fecha de Inicio</label>
-									<input type="date" class="form-control" name="fecha_inicio[]" required>
+									<input type="date" class="form-control" name="fecha_inicio[]" placeholder="En que fecha inicio: Ejemplo: 12/01/2022" >
 								</div>
 								<div class="col-md-3">
 									<label class="form-label">Fecha de Retiro</label>
-									<input type="date" class="form-control" name="fecha_retiro[]" required>
+									<input type="date" class="form-control" name="fecha_retiro[]" placeholder="En que fecha se retiró: Ejemplo 30/11/2024" >
 								</div>
 							</div>
 							<div class="row mb-3">
 								<div class="col-md-6">
 									<label class="form-label">Salario Inicial</label>
-									<input type="number" class="form-control" name="salario_inicial[]" required>
+									<input type="number" class="form-control" name="salario_inicial[]" placeholder="Con que salario inicio laborando" >
 								</div>
 								<div class="col-md-6">
 									<label class="form-label">Salario Final</label>
-									<input type="number" class="form-control" name="salario_final[]" required>
+									<input type="number" class="form-control" name="salario_final[]" placeholder="Cual fue su ultimo salario" >
 								</div>
 							</div>
 							<div class="row mb-3">
 								<div class="col-md-12">
 									<label class="form-label">Motivo de Retiro</label>
-									<input type="text" class="form-control" name="motivo_retiro[]" required>
+									<input type="text" class="form-control" name="motivo_retiro[]" PLACEHOLDER="Por qué se retiró de la empresa." >
 								</div>
 							</div>
 							<div class="row mb-3">
@@ -551,20 +542,20 @@
 							<div class="row mb-3">
 								<div class="col-md-6">
 									<label class="form-label">¿Se pueden pedir referencias?</label>
-									<select class="form-select" name="referencias[]">
+									<select class="form-select" name="referencias[]" >
 										<option value="Sí">Sí</option>
 										<option value="No">No</option>
 									</select>
 								</div>
 								<div class="col-md-6">
 									<label class="form-label">¿Por qué?</label>
-									<input type="text" class="form-control" name="porque_referencias[]">
+									<input type="text" class="form-control" name="porque_referencias[]" >
 								</div>
 							</div>
 							<div class="row mb-3">
 								<div class="col-md-6">
 									<label class="form-label">Nombre de su Jefe Inmediato</label>
-									<input type="text" class="form-control" name="jefe_inmediato[]" required>
+									<input type="text" class="form-control" name="jefe_inmediato[]" >
 								</div>
 								<div class="col-md-6">
 									<label class="form-label">¿Qué valoró en esa empresa?</label>
@@ -599,25 +590,30 @@
 							<div class="row mb-3">
 								<div class="col-md-6">
 									<label class="form-label">Nombre de la persona</label>
-									<input type="text" class="form-control" name="nombre_referencia[]" required>
+									<input type="text" class="form-control" name="nombre_referencia[]" >
 								</div>
 								<div class="col-md-6">
 									<label class="form-label">Tipo de Referencia</label>
-									<input type="text" class="form-control" name="tipo_referencia[]" required>
+									<select class="form-select" name="tipo_referencia[]" >
+										<option value="" disabled selected>Seleccione...</option>
+										<option value="Personal">Personal</option>
+										<option value="Laboral">Laboral</option>
+										<option value="Académica">Académica</option>
+									</select>
 								</div>
 							</div>
 							<div class="row mb-3">
 								<div class="col-md-6">
 									<label class="form-label">Lugar donde trabaja</label>
-									<input type="text" class="form-control" name="lugar_trabajo_referencia[]" required>
+									<input type="text" class="form-control" name="lugar_trabajo_referencia[]" value=""  >
 								</div>
 								<div class="col-md-3">
 									<label class="form-label">Tiempo de Conocerle</label>
-									<input type="text" class="form-control" name="tiempo_conocer[]" required>
+									<input type="text" class="form-control" name="tiempo_conocer[]" placeholder="Años de conocerle">
 								</div>
 								<div class="col-md-3">
 									<label class="form-label">Número de Teléfono</label>
-									<input type="text" class="form-control" name="telefono_referencia[]" required>
+									<input type="text" class="form-control" name="telefono_referencia[]" >
 								</div>
 							</div>
 							<hr>
@@ -635,23 +631,61 @@
 				</div>
 				<div class="card-body">
 					<div class="row mb-3">
+						<!-- Tipo de Sangre -->
 						<div class="col-md-3">
 							<label class="form-label">Tipo de Sangre</label>
-							<input type="text" class="form-control" name="tipo_sangre" required>
+							<select class="form-select" name="tipo_sangre" required>
+								<option value="" disabled selected>Seleccione...</option>
+								<option value="A+">A+</option>
+								<option value="A-">A-</option>
+								<option value="B+">B+</option>
+								<option value="B-">B-</option>
+								<option value="O+">O+</option>
+								<option value="O-">O-</option>
+								<option value="AB+">AB+</option>
+								<option value="AB-">AB-</option>
+								<option value="No sabe">No sabe</option>
+
+							</select>
 						</div>
+
+						<!-- Estatura -->
 						<div class="col-md-3">
 							<label class="form-label">Estatura</label>
-							<input type="text" class="form-control" name="estatura" required>
+							<input
+								type="text"
+								class="form-control"
+								name="estatura"
+								placeholder="Ej: 1.75 m"
+								required
+							>
 						</div>
+
+						<!-- Peso -->
 						<div class="col-md-3">
 							<label class="form-label">Peso</label>
-							<input type="text" class="form-control" name="peso" required>
+							<input
+								type="text"
+								class="form-control"
+								name="peso"
+								placeholder="Ej: 70 kg"
+								required
+							>
 						</div>
+
+						<!-- Condición de Salud -->
 						<div class="col-md-3">
-							<label class="form-label">Condición de salud</label>
-							<input type="text" class="form-control" name="condicion_salud" required>
+							<label class="form-label">¿Alguna Condición de Salud?</label>
+							<input
+								type="text"
+								class="form-control"
+								name="condicion_salud"
+								placeholder="Ej: Diabetes, Hipertensión, Ninguna"
+								required
+							>
 						</div>
 					</div>
+
 					<div class="row mb-3">
 						<div class="col-md-6">
 							<label class="form-label">Enfermedades que padece</label>
@@ -665,11 +699,11 @@
 					<div class="row mb-3">
 						<div class="col-md-4">
 							<label class="form-label">Accidentes</label>
-							<input type="text" class="form-control" name="accidentes">
+							<input type="text" class="form-control" name="accidentes" placeholder="En caso de no tener colocar ninguna">
 						</div>
 						<div class="col-md-4">
 							<label class="form-label">Operaciones</label>
-							<input type="text" class="form-control" name="operaciones">
+							<input type="text" class="form-control" name="operaciones" placeholder="En caso de no tener colocar ninguna">
 						</div>
 						<div class="col-md-4">
 							<label class="form-label">¿Usa anteojos para ver?</label>
@@ -702,22 +736,46 @@
 					<div class="row mb-3">
 						<div class="col-md-4">
 							<label class="form-label">Tipo de Vivienda</label>
-							<input type="text" class="form-control" name="tipo_vivienda" required>
+							<select class="form-select" name="tipo_vivienda" required>
+								<option value="" disabled selected>Seleccione...</option>
+								<option value="Propia">Propia</option>
+								<option value="Alquiler">Alquiler</option>
+								<option value="Prestada">Prestada</option>
+								<option value="Hipoteca">Hipoteca</option>
+								<option value="Otra">Otra</option>
+							</select>
 						</div>
+
 						<div class="col-md-4">
 							<label class="form-label">Renta o cuota mensual</label>
-							<input type="number" class="form-control" name="renta_mensual" required>
+							<input type="number" class="form-control" name="renta_mensual" placeholder="Cuanto paga por vivienda." required>
 						</div>
 						<div class="col-md-4">
 							<label class="form-label">Tipo de Vehículo que posee</label>
-							<input type="text" class="form-control" name="tipo_vehiculo">
+							<select class="form-select" name="tipo_vehiculo">
+								<option value="" disabled selected>Seleccione...</option>
+								<option value="Automóvil">Automóvil</option>
+								<option value="Motocicleta">Motocicleta</option>
+								<option value="No Posee">No Posee</option>
+							</select>
 						</div>
+
 					</div>
 					<div class="row mb-3">
 						<div class="col-md-4">
 							<label class="form-label">Tipo de deudas que posee</label>
-							<input type="text" class="form-control" name="tipo_deudas">
+							<select class="form-select" name="tipo_deudas">
+								<option value="" disabled selected>Seleccione...</option>
+								<option value="Hipoteca">Hipoteca</option>
+								<option value="Vehículo">Vehículo</option>
+								<option value="Préstamo Personal">Préstamo Personal</option>
+								<option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
+								<option value="Educación">Educación</option>
+								<option value="Otro">Otro</option>
+								<option value="No Posee">No Posee</option>
+							</select>
 						</div>
+
 						<div class="col-md-4">
 							<label class="form-label">Deuda total</label>
 							<input type="number" class="form-control" name="deuda_total">
@@ -802,12 +860,28 @@
 					<div class="row mb-3">
 						<div class="col-md-4">
 							<label class="form-label">¿Qué horarios desea laborar?</label>
-							<input type="text" class="form-control" name="horarios_deseados">
+							<select class="form-select" name="horarios_deseados">
+								<option value="" disabled selected>Seleccione...</option>
+								<option value="Tiempo Completo">Tiempo Completo</option>
+								<option value="Medio Tiempo">Medio Tiempo</option>
+								<option value="Turno Matutino">Turno Matutino</option>
+								<option value="Turno Vespertino">Turno Vespertino</option>
+								<option value="Turno Nocturno">Turno Nocturno</option>
+								<option value="Turnos Rotativos">Turnos Rotativos</option>
+								<option value="Otro">Otro</option>
+							</select>
 						</div>
+
 						<div class="col-md-4">
 							<label class="form-label">Disponibilidad para trabajar</label>
-							<input type="text" class="form-control" name="disponibilidad_trabajo">
+							<select class="form-select" name="disponibilidad_trabajo"  required>
+								<option value="" disabled selected>Seleccione...</option>
+								<option value="Inmediata">Inmediata</option>
+								<option value="15 Días">15 Días</option>
+								<option value="1 Mes">1 Mes</option>
+							</select>
 						</div>
+
 						<div class="col-md-4">
 							<label class="form-label">Disponibilidad en viajar</label>
 							<select class="form-select" name="disponibilidad_viajar">
