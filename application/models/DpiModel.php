@@ -21,6 +21,26 @@ class DpiModel extends CI_Model
 
 	}
 
+	public function actualizarSolicitudEmpleo($dpi)
+	{
+		// Datos a actualizar
+		$data = array(
+			'solicitudEmpleo' => 1
+		);
+
+		// Actualizar el registro donde el 'dpi' coincide
+		$this->db->where('dpi', $dpi);
+		$this->db->update('Candidato', $data);
+
+		// Opcional: Verificar si la actualización fue exitosa
+		if ($this->db->affected_rows() > 0) {
+			return TRUE;
+		} else {
+			// Manejar el caso donde no se actualizó ningún registro
+			return FALSE;
+		}
+	}
+
 	public function actualizarDatos($nombre, $contacto, $dpi, $correo, $puesto)
 	{
 		$data = array(

@@ -8,6 +8,8 @@ class LoginController extends CI_Controller
     {
         parent::__construct();
         $this->load->model('ModeloUsuario');
+        $this->load->helper('cookie');
+
     }
     public function index()
     {

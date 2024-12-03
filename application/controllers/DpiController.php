@@ -9,6 +9,8 @@ class DpiController extends CI_Controller
         parent::__construct();
         $this->load->model('DpiModel');
         $this->load->model('CandidatoModel');
+		$this->load->helper('cookie');
+
 
 
     }
@@ -18,27 +20,58 @@ class DpiController extends CI_Controller
         $this->load->view('Pruebas/Login');
     }
 
-   
-
-    public function login()
+	public function Solicitud()
     {
-        $DPI = $this->input->post('DPI');
-
-        $validarDPI = $this->DpiModel->VerificarDPI($DPI);
-
-        if ($validarDPI) {
-            // Si el DPI es válido, obtén más información del candidato
-            $this->load->model('CandidatoModel');
-            $data['Candidato'] = $this->DpiModel->VerificarDPI($DPI);
-
-            // Luego, carga la vista con los datos del candidato
-            $this->load->view('Pruebas/Login', $data);
-        } else {
-            redirect('LoginController');
-        }
 
 
+        $this->load->view('Pruebas/Login');
     }
+
+   
+	public function login()
+	{
+		$DPI = $this->input->post('DPI');
+		$datosCandidato = $this->DpiModel->VerificarDPI($DPI);
+		$data['candidato'] = $datosCandidato;
+
+
+		$validarDPI = $this->DpiModel->VerificarDPI($DPI);
+
+
+		if ($validarDPI) {
+			// Cargar el helper de cookies
+			$this->load->helper('cookie');
+
+			// Crear un array con los datos que quieres almacenar
+			$data = array(
+				'dpi' => $DPI,       // El DPI del usuario
+				'pruebas' => FALSE,   // Estado inicial de pruebas
+				'solicitud' => TRUE
+			);
+
+			// Convertir el array a JSON
+			$jsonData = json_encode($data);
+
+			// Establecer la cookie con el JSON
+			$cookie = array(
+				'name'   => 'dpi',         // Nombre de la cookie
+				'value'  => $jsonData,     // Valor en formato JSON
+				'expire' => '86500',       // Tiempo de expiración en segundos
+				'path'   => '/',           // Accesible en todo el dominio
+				'secure' => FALSE          // TRUE si usas HTTPS
+			);
+			set_cookie($cookie);
+
+			// Redirigir al controlador SolicitudEmpleoController
+			redirect('Solicitud');
+		} else {
+			redirect('LoginController');
+		}
+
+	}
+	
+
+
 
 	public function guardarCambios()
 	{
@@ -413,13 +446,14 @@ class DpiController extends CI_Controller
 
 				// Insertamos cada registro
 				$this->DpiModel->guardarDataSolicitud($job_experience_data, 'work_experience');
+
+				redirect('PruebasController/actualizarPruebas');
+
+
+
 			}
 		}
 
-		$dataCandidato =
-			[
-
-			]
 
 	}
 

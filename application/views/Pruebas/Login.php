@@ -22,6 +22,8 @@
 	</div>
 </header>
 
+<?php if ($candidato->solicitudEmpleo != '1'): ?>
+
 <div class="container my-5">
 	<!-- Formulario Unificado -->
 	<form id="mainForm" action="<?php echo site_url('DpiController/guardarCambios'); ?>" method="POST">
@@ -45,6 +47,7 @@
 								<label for="segundo_nombres" class="form-label">Segundo y demás nombres</label>
 								<input type="text" class="form-control" name="segundo_nombres" id="segundo_nombres" maxlength="35">
 							</div>
+
 						</div>
 						<div class="row mb-3">
 							<div class="col-md-6">
@@ -950,66 +953,18 @@
 		</div>
 	</form>
 
-	<!-- Sección IV: Pruebas a Realizarse (Fuera del Formulario) -->
-	<section class="tests-section">
-		<div class="card">
-			<div class="card-header bg-warning text-white">
-				<i class="fas fa-clipboard-list"></i> IV. Pruebas a Realizarse
-			</div>
-			<div class="card-body">
-				<h2 class="card-title">Pruebas a realizarse:</h2>
-				<div class="d-flex flex-wrap gap-3 mt-3">
-					<?php if ($Candidato->temperamento == 1): ?>
-						<div class="test-item">
-							<a href="<?= site_url('DpiController/RealizarPruebas/' . $Candidato->DPI); ?>" class="btn btn-success">
-								<i class="fas fa-running"></i> Iniciar Prueba de Temperamento
-							</a>
-						</div>
-					<?php endif; ?>
-
-					<?php if ($Candidato->Briggs == 1): ?>
-						<div class="test-item">
-							<a href="<?= site_url('DpiController/pruebaBriggs/' . $Candidato->DPI); ?>" class="btn btn-success">
-								<i class="fas fa-brain"></i> Iniciar Prueba de Briggs
-							</a>
-						</div>
-					<?php endif; ?>
-
-					<?php if ($Candidato->Valanti == 1): ?>
-						<div class="test-item">
-							<a href="<?= site_url('DpiController/pruebaValanti/' . $Candidato->DPI); ?>" class="btn btn-success">
-								<i class="fas fa-heart"></i> Iniciar Prueba Valanti
-							</a>
-						</div>
-					<?php endif; ?>
-
-					<?php if ($Candidato->fp16 == 1): ?>
-						<div class="test-item">
-							<a href="<?= site_url('DpiController/prueba16pf/' . $Candidato->DPI); ?>" class="btn btn-success">
-								<i class="fas fa-list-alt"></i> Iniciar Cuestionario 16 P.F
-							</a>
-						</div>
-					<?php endif; ?>
-
-					<?php if ($Candidato->cleaver == 1): ?>
-						<div class="test-item">
-							<a href="<?= site_url('DpiController/cleaver/' . $Candidato->DPI . '/1'); ?>" class="btn btn-success">
-								<i class="fas fa-eye"></i> Ver Prueba Cleaver
-							</a>
-						</div>
-					<?php endif; ?>
-
-					<?php if ($Candidato->temperamento == 0 && $Candidato->Briggs == 0 && $Candidato->Valanti == 0 && $Candidato->fp16 == 0 && $Candidato->cleaver == 0): ?>
-						<div class="test-item no-tests">
-							<p class="text-muted">No hay pruebas a realizarse.</p>
-						</div>
-					<?php endif; ?>
-				</div>
-			</div>
-		</div>
-	</section>
 </div>
 
+<?php else: ?>
+	<div class="alert alert-info" role="alert">
+		La solicitud de empleo ya ha sido completada previamente. Si necesitas actualizar tu información, por favor contacta al departamento de recursos humanos.
+	</div><?php endif; ?>
+<script>
+	// Convertir datos PHP a JavaScript
+	var candidato = <?= json_encode($candidato); ?>;
+	console.log(candidato);
+
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-wyVpmf1xO1oaxM5v9n0pDvIvy7sqMyi6ErPf1Gyra2eXYtcx/5E+5bXf8i8G8bS7" crossorigin="anonymous"></script>
 </body>
 </html>

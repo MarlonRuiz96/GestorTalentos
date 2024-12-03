@@ -21,38 +21,18 @@
             </a>
             <hr class="sidebar-divider my-0">
             <li class="nav-item active">
-                <a class="nav-link" href="<?= site_url('TokenController') ?>">
-                <i class="far fa-futbol" style="font-size: 24px;"></i>
-                <span class="nav-link" style="font-size: 15px;">Menú Principal</span></a>
-            </li>
-            <hr class="sidebar-divider">
-           
-            <!-- Apartado de Candidatos -->
-            <li class="nav-item">
-            <a class="nav-link" href="<?= site_url('Temperamento') ?>">
-                    <i class="far fa-user" style="font-size: 20px;"></i>
-                    <span class="nav-link" style="font-size: 15px;">Prueba 1</span>
+                <a class="nav-link" href="<?= site_url('Solicitud') ?>">
+                    <i class="fas fa-file-signature" style="font-size: 20px;"></i>
+                    <span style="font-size: 15px;">Solicitud de empleo</span>
                 </a>
-                <div id="clientes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Consultar Candidatos</h6>
-                        <a class="collapse-item" href="<?= site_url('Candidatos') ?>">Consultar Candidatos
-                        </a>
-                        <a class="collapse-item" href="<?= site_url('Clientes') ?>">Nuevo Candidato
-                        </a>
-                    </div>
-                </div>
             </li>
-            <!-- Apartado de Ofertas  -->
-        
-
-            <!-- Apartado de Proceso de seleccion -->
-            
-
-            
-
-            
-            
+            <!-- Apartado de Pruebas a Realizarse -->
+            <li class="nav-item">
+                <a class="nav-link" href="<?= site_url('Pruebas') ?>">
+                    <i class="fas fa-clipboard-check" style="font-size: 20px;"></i>
+                    <span style="font-size: 15px;">Pruebas a realizarse</span>
+                </a>
+            </li>
 
         </ul>
         <div id="content-wrapper" class="d-flex flex-column">
