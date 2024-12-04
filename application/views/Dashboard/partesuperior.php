@@ -23,7 +23,7 @@
             <li class="nav-item active">
                 <a class="nav-link" href="<?= site_url('Dashboard') ?>">
                 <i class="far fa-futbol" style="font-size: 24px;"></i>
-                <span class="nav-link" style="font-size: 15px;">Menú Principals</span></a>
+                <span class="nav-link" style="font-size: 15px;">Menú Principal</span></a>
             </li>
             <hr class="sidebar-divider">
            
@@ -37,9 +37,9 @@
             </li>
             <!-- Apartado de Ofertas  -->
             <li class="nav-item">
-            <a class="nav-link" href="<?= site_url('#') ?>">
+            <a class="nav-link" href="<?= site_url('Plazas') ?>">
                     <i class="far fa-user" style="font-size: 20px;"></i>
-                    <span class="nav-link" style="font-size: 15px;">POR DEFINIR</span>
+                    <span class="nav-link" style="font-size: 15px;">Plazas</span>
                 </a>
                 
             </li>
@@ -48,7 +48,7 @@
             <li class="nav-item">
             <a class="nav-link" href="<?= site_url('#') ?>">
                     <i class="far fa-user" style="font-size: 20px;"></i>
-                    <span class="nav-link" style="font-size: 15px;">POR DEFINIR</span>
+                    <span class="nav-link" style="font-size: 15px;">Estadisticas</span>
                 </a>
                 
             </li>

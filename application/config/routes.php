@@ -60,6 +60,8 @@ $route['RegistroUsuario'] = 'UsuarioController/AltaUsuario';
 $route['Usuarios'] = 'UsuarioController/index';
 $route['Solicitud'] = 'SolicitudEmpleoController/index';
 $route['Pruebas'] = 'PruebasController/index';
+$route['Plazas'] = 'PlazaController/index';
+$route['IngregarPlaza'] = 'PlazaController/vistaIngresarPlaza';
 
 
 

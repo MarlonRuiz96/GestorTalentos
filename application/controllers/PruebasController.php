@@ -39,7 +39,7 @@ class PruebasController extends CI_Controller
 					if ($datosCandidato->solicitudEmpleo == 1) {
 						// Pasar los datos del candidato a la vista
 						$data['candidato'] = $datosCandidato;
-						$this->load->view('Pruebas/pruebas', $data);
+						$this->load->view('Pruebas/Pruebas', $data);
 					} else {
 						// Si 'solicitudEmpleo' no es 1, redirigir al controlador 'Solicitud'
 						redirect('Solicitud');

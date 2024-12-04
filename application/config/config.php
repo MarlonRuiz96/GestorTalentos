@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |https://gestordetelantos.000webhostapp.com/
 */
-$config['base_url'] = '';
+$config['base_url'] = 'http://172.17.0.4/';
 
 /*
 |--------------------------------------------------------------------------
