@@ -22,7 +22,6 @@
 	</div>
 </header>
 
-<?php if ($candidato->solicitudEmpleo != '1'): ?>
 
 <div class="container my-5">
 	<!-- Formulario Unificado -->
@@ -955,10 +954,6 @@
 
 </div>
 
-<?php else: ?>
-	<div class="alert alert-info" role="alert">
-		La solicitud de empleo ya ha sido completada previamente. Si necesitas actualizar tu información, por favor contacta al departamento de recursos humanos.
-	</div><?php endif; ?>
 <script>
 	// Convertir datos PHP a JavaScript
 	var candidato = <?= json_encode($candidato); ?>;

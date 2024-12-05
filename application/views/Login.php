@@ -25,16 +25,16 @@
 
         </div>
         <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-          <form action="<?php echo site_url('DpiController/login'); ?>" method="post">
+          <form action="<?php echo site_url('PlazaController/login'); ?>" method="post">
 
             <div class="divider d-flex align-items-center my-4">
-              <p class="text-center fw-bold mx-3 mb-0">Pruebas Psicométricas</p>
+              <p class="text-center fw-bold mx-3 mb-0">Ingresa el numero de la plaza</p>
             </div>
 
             <!-- Email input -->
             <div class="form-outline mb-4">
               <input type="text" id="form3Example3" class="form-control form-control-lg"
-                placeholder="Ingresa tu DPI sin espacios" name="DPI"/>
+                placeholder="Ingresa el codigo de la plaza" name="codigo"/>
             </div>
 
 

@@ -16,40 +16,21 @@ class PruebasController extends CI_Controller
 
 	public function index()
 	{
-		// Obtener la cookie 'dpi'
-		$cookie = get_cookie('dpi', TRUE);
-
+		// Obtener la cookie 'codigo_plaza'
+		$cookie = get_cookie('codigo_plaza', TRUE);
+	
 		if ($cookie) {
 			// Decodificar el JSON almacenado en la cookie
 			$cookieData = json_decode($cookie, TRUE);
-
-			// Verificar si el 'dpi' está presente en la cookie
-			if (isset($cookieData['dpi'])) {
-				// Extraer el DPI del JSON
-				$dpi = $cookieData['dpi'];
-
-				// Cargar el modelo
-				$this->load->model('DpiModel');
-
-				// Obtener los datos del candidato usando el DPI
-				$datosCandidato = $this->DpiModel->VerificarDPI($dpi);
-
-				if ($datosCandidato) {
-					// Verificar si 'solicitudEmpleo' es igual a 1
-					if ($datosCandidato->solicitudEmpleo == 1) {
-						// Pasar los datos del candidato a la vista
-						$data['candidato'] = $datosCandidato;
-						$this->load->view('Pruebas/Pruebas', $data);
-					} else {
-						// Si 'solicitudEmpleo' no es 1, redirigir al controlador 'Solicitud'
-						redirect('Solicitud');
-					}
-				} else {
-					// Si no se encontró el candidato, redirigir al controlador 'Solicitud'
-					redirect('Solicitud');
-				}
+	
+			// Verificar si 'pruebas' es true y 'solicitud' es false
+			if (isset($cookieData['pruebas']) && $cookieData['pruebas'] === true &&
+				isset($cookieData['solicitud']) && $cookieData['solicitud'] === false) {
+				// Cargar la vista Pruebas/Pruebas con los datos necesarios
+				$data = []; // Si necesitas pasar datos adicionales a la vista, los agregas aquí
+				$this->load->view('Pruebas/Pruebas', $data);
 			} else {
-				// Si el DPI no está en la cookie, redirigir al controlador 'Solicitud'
+				// Si no se cumplen las condiciones, redirigir al controlador 'Solicitud'
 				redirect('Solicitud');
 			}
 		} else {
@@ -57,6 +38,8 @@ class PruebasController extends CI_Controller
 			redirect('Solicitud');
 		}
 	}
+	
+	
 
 
 
@@ -65,7 +48,7 @@ class PruebasController extends CI_Controller
 	public function actualizarPruebas()
 	{
 		// Obtener la cookie 'dpi'
-		$cookie = get_cookie('dpi', TRUE);
+		$cookie = get_cookie('codigo-plaza', TRUE);
 
 		if ($cookie) {
 			// Decodificar el JSON almacenado en la cookie

@@ -33,5 +33,20 @@ class PlazasModel extends CI_Model
 		$this->db->update('plazas_trabajo', $datosActualizados);
 	}
 
+	public function VerificarCodigoPlaza($codigo)
+{
+    // Consulta a la base de datos para verificar si existe el código
+    $this->db->where('codigo', $codigo);
+    $query = $this->db->get('plazas_trabajo'); // Asegúrate de que el nombre de la tabla sea correcto
+
+    // Devolver los datos si se encuentra el código
+    if ($query->num_rows() > 0) {
+        return $query->row();
+    } else {
+        return false;
+    }
+}
+
+
     
 }
