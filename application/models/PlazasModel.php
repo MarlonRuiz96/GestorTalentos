@@ -12,9 +12,26 @@ class PlazasModel extends CI_Model
     }
 
     public function insertarPlaza($data)
-{
-    return $this->db->insert('plazas_trabajo', $data);
-}
+	{
+		return $this->db->insert('plazas_trabajo', $data);
+	}
+
+
+	public function actualizarPlaza($id, $titulo, $descripcion, $requisitos, $salario, $ubicacion, $estado, $codigo)
+	{
+		$datosActualizados = array(
+			'titulo' => $titulo,
+			'descripcion' => $descripcion,
+			'requisitos' => $requisitos,
+			'salario' => $salario,
+			'ubicacion' => $ubicacion,
+			'estado' => $estado,
+			'codigo' => $codigo
+		);
+
+		$this->db->where('id', $id);
+		$this->db->update('plazas_trabajo', $datosActualizados);
+	}
 
     
 }

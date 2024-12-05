@@ -44,10 +44,7 @@
                     <option value="en proceso">En proceso</option>
                 </select>
             </div>
-            <div class="mb-3">
-                <label for="codigo" class="form-label">Código</label>
-                <input type="text" class="form-control" id="codigo" name="codigo" placeholder="Código único para la plaza">
-            </div>
+
             <button type="submit" class="btn btn-primary">Guardar Plaza</button>
             <a href="<?= site_url('Plazas'); ?>" class="btn btn-secondary">Cancelar</a>
         </form>

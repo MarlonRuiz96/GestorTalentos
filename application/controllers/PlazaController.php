@@ -16,7 +16,7 @@ class PlazaController extends CI_Controller
 
     public function index()
     {
-        $data['plazas'] = $this->PlazasModel->getPlazas();
+        $data['dataplaza'] = $this->PlazasModel->getPlazas();
         $this->load->view('Plaza/index', $data);
     }
     
@@ -36,7 +36,6 @@ class PlazaController extends CI_Controller
     public function guardarPlaza()
 {
 
-    // Validar los datos enviados desde el formulario
     $data = array(
         'titulo' => $this->input->post('titulo'),
         'descripcion' => $this->input->post('descripcion'),
@@ -47,36 +46,33 @@ class PlazaController extends CI_Controller
         'codigo' => $this->input->post('codigo')
     );
 
-    // Llamar al modelo para guardar la plaza
-    $this->PlazasModel->insertarPlaza($data);
+	// Actualizar los datos de la plaza
+	$this->PlazasModel->insertarPlaza($data);;
 
     // Redirigir al listado de plazas con un mensaje de éxito
     $this->session->set_flashdata('success', 'Plaza creada exitosamente.');
     redirect('Plazas');
 }
 
-public function guardarCambios($id)
-{
-    $this->load->model('PlazasModel');
+	public function guardarCambios($id)
+	{
+		// Recopilar los datos del formulario
+		$nuevoTitulo = $this->input->post('titulo');
+		$nuevaDescripcion = $this->input->post('descripcion');
+		$nuevosRequisitos = $this->input->post('requisitos');
+		$nuevoSalario = $this->input->post('salario');
+		$nuevaUbicacion = $this->input->post('ubicacion');
+		$nuevoEstado = $this->input->post('estado');
+		$nuevoCodigo = $this->input->post('codigo');
 
-    // Recopilar los datos del formulario
-    $data = array(
-        'titulo' => $this->input->post('titulo'),
-        'descripcion' => $this->input->post('descripcion'),
-        'requisitos' => $this->input->post('requisitos'),
-        'salario' => $this->input->post('salario'),
-        'ubicacion' => $this->input->post('ubicacion'),
-        'estado' => $this->input->post('estado'),
-        'codigo' => $this->input->post('codigo')
-    );
+		// Actualizar los datos de la plaza
+		$this->PlazasModel->actualizarPlaza($id, $nuevoTitulo, $nuevaDescripcion, $nuevosRequisitos, $nuevoSalario, $nuevaUbicacion, $nuevoEstado, $nuevoCodigo);
 
-    // Actualizar los datos de la plaza
-    $this->PlazasModel->actualizarPlaza($id, $data);
+		// Redirigir al listado con un mensaje
+		$this->session->set_flashdata('success', 'Plaza actualizada correctamente.');
+		redirect('Plazas');
+	}
 
-    // Redirigir al listado con un mensaje
-    $this->session->set_flashdata('success', 'Plaza actualizada correctamente.');
-    redirect('PlazasController/index');
-}
 
 
 
