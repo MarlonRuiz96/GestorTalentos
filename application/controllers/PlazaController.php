@@ -27,6 +27,10 @@ class PlazaController extends CI_Controller
     
         // Verificar si el código de la plaza existe en la base de datos
         $datosPlaza = $this->PlazasModel->VerificarCodigoPlaza($codigo);
+
+        $obtenerData = $this->PlazasModel->GetPlazaCodigo($codigo);
+        $dataPlazas['plazas'] = $obtenerData;
+
     
         if ($datosPlaza) {
             // Cargar el helper de cookies
@@ -47,14 +51,15 @@ class PlazaController extends CI_Controller
             $cookie = array(
                 'name'   => 'codigo_plaza', // Nombre de la cookie
                 'value'  => $jsonData,     // Valor en formato JSON
-                'expire' => '86500',       // Tiempo de expiración en segundos
+                'expire' => '86500',       // Tiempo de expiración en szegundos
                 'path'   => '/',           // Accesible en todo el dominio
                 'secure' => FALSE          // TRUE si usas HTTPS
             );
             set_cookie($cookie);
     
+            
             // Redirigir al controlador SolicitudEmpleoController
-            redirect('Solicitud');
+            redirect('Plaza');
         } else {
             // Si el código de la plaza no es válido, redirigir al login
             redirect('LoginController');

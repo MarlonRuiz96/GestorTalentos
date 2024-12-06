@@ -11,6 +11,8 @@ class PruebasController extends CI_Controller
 		$this->load->helper('cookie');
 
 		$this->load->model('DpiModel');
+		$this->load->model('PlazasModel');
+
 
 	}
 
@@ -26,18 +28,28 @@ class PruebasController extends CI_Controller
 			// Verificar si 'pruebas' es true y 'solicitud' es false
 			if (isset($cookieData['pruebas']) && $cookieData['pruebas'] === true &&
 				isset($cookieData['solicitud']) && $cookieData['solicitud'] === false) {
-				// Cargar la vista Pruebas/Pruebas con los datos necesarios
-				$data = []; // Si necesitas pasar datos adicionales a la vista, los agregas aquí
-				$this->load->view('Pruebas/Pruebas', $data);
+				
+				// Validar si el código de la plaza existe en la base de datos
+				$codigoPlaza = $cookieData['codigo_plaza'];
+				$plaza = $this->PlazasModel->VerificarCodigoPlaza($codigoPlaza);
+	
+				if ($plaza) {
+					$data['pruebas'] = $plaza; // Pasar datos válidos a la vista
+					$this->load->view('Pruebas/Pruebas', $data);
+				} else {
+					// Si no se encuentra la plaza, redirigir o manejar el error
+					redirect('Plaza');
+				}
 			} else {
-				// Si no se cumplen las condiciones, redirigir al controlador 'Solicitud'
-				redirect('Solicitud');
+				// Si no se cumplen las condiciones, redirigir
+				redirect('Plaza');
 			}
 		} else {
-			// Si la cookie no existe, redirigir al controlador 'Solicitud'
-			redirect('Solicitud');
+			// Si la cookie no existe, redirigir
+			redirect('Plaza');
 		}
 	}
+	
 	
 	
 

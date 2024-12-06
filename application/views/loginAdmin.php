@@ -59,7 +59,7 @@
     class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-custom">
     <!-- Copyright -->
     <div class="text-white mb-3 mb-md-0">
-      Copyright © 2024. Todos los derechos reservados   -  Desarrollado por BroDevs.
+      Copyright © 2024. Todos los derechos reservados   -  Desarrollado por MR.
     </div>
     <!-- Copyright -->
 

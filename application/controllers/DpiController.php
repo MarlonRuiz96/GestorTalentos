@@ -108,6 +108,22 @@ class DpiController extends CI_Controller
 		$firma = $this->input->post('firma');
 		$fechaHoy = $this->input->post('fecha_hoy');
 
+		// Obtener el valor de la cookie
+		$cookie = get_cookie('codigo_plaza', TRUE);
+
+		// Inicializar el campo 'plaza_id'
+		$plaza_id = null;
+
+		if ($cookie) {
+			// Decodificar la cookie para extraer 'codigo_plaza'
+			$cookieData = json_decode($cookie, TRUE);
+
+			if (!empty($cookieData['codigo_plaza'])) {
+				// Asignar directamente el valor de 'codigo_plaza' al campo 'plaza_id'
+				$plaza_id = $cookieData['codigo_plaza'];
+			}
+		}
+
 		// Crear el array con todos los datos para insertarlo en la tabla
 		$array = [
 			'primer_nombre' => $nombre,
@@ -139,8 +155,11 @@ class DpiController extends CI_Controller
 			'municipio' => $municipio,
 			'departamento' => $departamento,
 			'firma' => $firma,
-			'fecha_hoy' => $fechaHoy
+			'fecha_hoy' => $fechaHoy,
+			'plaza_id' => $plaza_id, // Asignar directamente el código de la plaza
 		];
+
+
 		$applicant_id = $this->DpiModel->guardarAplicants($array, 'applicants');
 
 
@@ -480,7 +499,7 @@ class DpiController extends CI_Controller
 					set_cookie($newCookie);
 
 					// Redirigir al controlador de Solicitud
-					redirect('Solicitud');
+					redirect('Plaza');
 				}
 
 
