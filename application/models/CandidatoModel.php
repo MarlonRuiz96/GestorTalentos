@@ -178,7 +178,7 @@ class CandidatoModel extends CI_Model
 
     public function VerificarDPI($DPI)
     {
-        $this->db->select('idCandidato, Nombres, Puesto, DPI, Contacto, Correo, temperamento,Temporal, sanguineo, melancolico, flematico, colerico, notas');
+        $this->db->select('*');
         $this->db->from('Candidato');
         $this->db->where('DPI', $DPI);
 

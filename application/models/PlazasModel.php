@@ -55,7 +55,7 @@ class PlazasModel extends CI_Model
     $query = $this->db->get();            // Ejecuta la consulta
 
     // Devuelve un array de objetos o un array vacío si no hay resultados
-    return $query->result();
+	return $query->row();
 }
 
 

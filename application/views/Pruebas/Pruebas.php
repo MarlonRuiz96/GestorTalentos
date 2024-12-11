@@ -37,65 +37,73 @@
 			<div class="card-body">
 				<h2 class="card-title">Pruebas a realizarse:</h2>
 				<div class="d-flex flex-wrap gap-3 mt-3">
-					<?php if ($pruebas->temperamento == "si"): ?>
+					<?php if (isset($pruebas) && $pruebas->temperamento == "si" && isset($Candidato) && $Candidato->temperamento == "1"): ?>
 						<div class="test-item">
-							<a href="<?= site_url('DpiController/RealizarPruebas/' . $Candidato->DPI); ?>" class="btn btn-success">
+							<a href="<?= site_url('DpiController/RealizarPruebas/' . htmlspecialchars($DPI)); ?>" class="btn btn-success">
 								<i class="fas fa-running"></i> Iniciar Prueba de Temperamento
 							</a>
 						</div>
 					<?php endif; ?>
 
-					<?php if ($pruebas->Briggs == "si"): ?>
+					<?php if ($pruebas->Briggs == "si" && isset($Candidato) && $Candidato->Briggs == "1"): ?>
 						<div class="test-item">
-							<a href="<?= site_url('DpiController/pruebaBriggs/' . $Candidato->DPI); ?>" class="btn btn-success">
+							<a href="<?= site_url('DpiController/pruebaBriggs/' . htmlspecialchars($DPI)); ?>" class="btn btn-success">
 								<i class="fas fa-brain"></i> Iniciar Prueba de Briggs
 							</a>
 						</div>
 					<?php endif; ?>
 
-					<?php if ($pruebas->Valanti == "si"): ?>
+					<?php if ($pruebas->Valanti == "si" && isset($Candidato) && $Candidato->Valanti == "1"): ?>
 						<div class="test-item">
-							<a href="<?= site_url('DpiController/pruebaValanti/' . $Candidato->DPI); ?>" class="btn btn-success">
+							<a href="<?= site_url('DpiController/pruebaValanti/' . htmlspecialchars($DPI)); ?>" class="btn btn-success">
 								<i class="fas fa-heart"></i> Iniciar Prueba Valanti
 							</a>
 						</div>
 					<?php endif; ?>
 
-					<?php if ($pruebas->fp16 == "si"): ?>
+					<?php if ($pruebas->fp16 == "si"&& isset($Candidato) && $Candidato->fp16 == "1"): ?>
 						<div class="test-item">
-							<a href="<?= site_url('DpiController/prueba16pf/' . $candidato->DPI); ?>" class="btn btn-success">
+							<a href="<?= site_url('DpiController/prueba16pf/' . htmlspecialchars($DPI)); ?>" class="btn btn-success">
 								<i class="fas fa-list-alt"></i> Iniciar Cuestionario 16 P.F
 							</a>
 						</div>
 					<?php endif; ?>
 
-					<?php if ($pruebas->cleaver == "si"): ?>
+					<?php if ($pruebas->cleaver == "si" && isset($Candidato) && $Candidato->cleaver == "1"): ?>
 						<div class="test-item">
-							<a href="<?= site_url('DpiController/cleaver/' . $candidato->DPI . '/1'); ?>" class="btn btn-success">
+							<a href="<?= site_url('DpiController/cleaver/' . htmlspecialchars($DPI) . '/1'); ?>" class="btn btn-success">
 								<i class="fas fa-eye"></i> Ver Prueba Cleaver
 							</a>
 						</div>
 					<?php endif; ?>
 
-					<?php if ($pruebas->temperamento == 0 && $pruebas->Briggs == 0 && $candidato->Valanti == 0 && $candidato->fp16 == 0 && $candidato->cleaver == 0): ?>
-						<div class="test-item no-tests">
-							<p class="text-muted">No hay pruebas a realizarse.</p>
-						</div>
-					<?php endif; ?>
+
 				</div>
 			</div>
 		</div>
 	</section>
 </div>
-<script>
-		<?php if (!empty($pruebas)): ?>
-			const dataPlaza = <?php echo json_encode($pruebas); ?>;
-			console.log('Datos de la Plaza:', dataPlaza);
-		<?php else: ?>
-			console.log('No hay datos de la plaza disponibles.');
-		<?php endif; ?>
+<?php if (!empty($pruebas) && !empty($Candidato)): ?>
+	<script>
+		const dataPlaza = <?php echo json_encode($pruebas); ?>;
+		const dataDPI = <?php echo json_encode($Candidato); ?>;
 
+		console.log('Datos de la Plaza:', dataPlaza);
+		console.log('DPI:', dataDPI);
+
+		// Si deseas combinarlos en un solo objeto:
+		const combinedData = {
+			plaza: dataPlaza,
+			dpi: dataDPI
+		};
+		console.log('Datos Combinados:', combinedData);
 	</script>
+<?php else: ?>
+	<script>
+		console.log('No hay datos de la plaza o del DPI disponibles.');
+	</script>
+<?php endif; ?>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-wyVpmf1xO1oaxM5v9n0pDvIvy7sqMyi6ErPf1Gyra2eXYtcx/5E+5bXf8i8G8bS7" crossorigin="anonymous"></script>
 </body>
 </html>

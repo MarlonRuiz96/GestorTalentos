@@ -36,7 +36,7 @@ class CandidatoController extends CI_Controller
 
             $fecha_actual = date("Y-m-d");
 
-            $data = array(
+			$data = array(
                 'Nombres' => $nombres,
                 'Puesto' => $Puesto,
                 'DPI' => $DPI,

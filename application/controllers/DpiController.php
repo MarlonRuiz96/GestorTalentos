@@ -9,7 +9,10 @@ class DpiController extends CI_Controller
 		parent::__construct();
 		$this->load->model('DpiModel');
 		$this->load->model('CandidatoModel');
+		$this->load->model('PlazasModel');
 		$this->load->helper('cookie');
+
+
 
 
 
@@ -467,7 +470,7 @@ class DpiController extends CI_Controller
 					'disgusto_empresa' => $disgusto_empresa[$i],
 				];
 
-				// Insertamos cada registro ingresar mas campos en la cookie
+				// Insertamos cada registro ingresar mas campos en la cookieCandidato
 				$this->DpiModel->guardarDataSolicitud($job_experience_data, 'work_experience');
 
 
@@ -495,11 +498,59 @@ class DpiController extends CI_Controller
 						'secure' => FALSE    // TRUE si usas HTTPS
 					);
 
+					//Creo el registro en la tabla Candidato para poder controlar manualmente las preubas y reiniciar los datos
+
+					$fecha_actual = date("Y-m-d");
+					$Puesto = $this->input->post('puesto_deseado');
+					$primernombre = $this->input->post('primer_nombre');
+
+					$nombres = trim(
+						$primernombre . ' ' .
+						$segundoNombre . ' ' .
+						$primerApellido . ' ' .
+						$segundoApellido .
+						(!empty($apellidoCasada) ? ' de ' . $apellidoCasada : '')
+					);
+
+					//Consigo la
+					$plaza_id = $cookieData['codigo_plaza'];
+					$plaza = $this->PlazasModel->GetPlazaCodigo($plaza_id);
+
+
+					// Validar si el campo 'temperamento' es "si" y asignar el valor correspondiente
+					$Temperamento = (isset($plaza->temperamento) && $plaza->temperamento === "si") ? 1 : 0;
+					$Briggs = (isset($plaza->Briggs) && $plaza->Briggs === "si") ? 1 : 0;
+					$Valanti = (isset($plaza->Valanti) && $plaza->Valanti === "si") ? 1 : 0;
+					$fp16 = (isset($plaza->fp16) && $plaza->fp16 === "si") ? 1 : 0;
+					$cleaver = (isset($plaza->cleaver) && $plaza->cleaver === "si") ? 1 : 0;
+
+
+
+
+					$data = array(
+						'Nombres' => $nombres,
+						'Puesto' => $Puesto,
+						'DPI' => $documentoIdentificacion,
+						'temperamento' => $Temperamento,
+						'Contacto' => $telefonoMovil,
+						'Correo' => $correo,
+						'fecha_crear' => $fecha_actual,
+						'Temporal' => 1,
+						'Briggs' => $Briggs,
+						'Valanti' => $Valanti,
+						'fp16' => $fp16,
+						'cleaver' => $cleaver,
+						'plaza' => $plaza_id,
+						'solicitudEmpleo'=>'1',
+					);
+					$this->CandidatoModel->InsertarCandidato($data);
+
+
 					// Establecer la nueva cookie
 					set_cookie($newCookie);
 
 					// Redirigir al controlador de Solicitud
-					redirect('Plaza');
+					redirect('Pruebas');
 				}
 
 
@@ -525,18 +576,16 @@ class DpiController extends CI_Controller
 		}
 	}
 
-
+//aqui
 
 	public function pruebaBriggs($DPI)
 	{
 		$data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
-		$idCandidato = $data['Candidato']->idCandidato; //obtengo el id del candidato segun su dpi que recibo antes
-
 
 		if ($data['Candidato']->Briggs === '1') {
 			$this->load->view('Pruebas/Briggs', $data);
 		} else {
-			$this->load->view('Pruebas/Login', $data);
+			redirect('Pruebas');
 		}
 	}
 
@@ -549,7 +598,7 @@ class DpiController extends CI_Controller
 		if ($data['Candidato']->fp16 === '1') {
 			$this->load->view('Pruebas/Fp16', $data);
 		} else {
-			$this->load->view('Pruebas/Login', $data);
+			redirect('Pruebas');
 		}
 	}
 
@@ -730,8 +779,7 @@ class DpiController extends CI_Controller
 		$this->DpiModel->AgregarPf($idCandidato, $sumasCategorias);
 
 		$this->CandidatoModel->desactivarPf($idCandidato); //Desactivo la prueba
-		$data['Candidato'] = $this->DpiModel->VerificarDPI($DPI);  //Actualizo la data, por que la data anterior no tiene la preuba desactivada, esto me da conflicto
-		$this->load->view('Pruebas/Login', $data); //cargo la vista con la nueva data
+		redirect('Pruebas');
 
 
 	}
@@ -883,8 +931,7 @@ class DpiController extends CI_Controller
 		$data['noViolencia'] = $noViolencia;
 
 		$this->CandidatoModel->desactivarValanti($idCandidato); //Desactivo la prueba
-		$data['Candidato'] = $this->DpiModel->VerificarDPI($DPI);  //Actualizo la data, por que la data anterior no tiene la preuba desactivada, esto me da conflicto
-		$this->load->view('Pruebas/Login', $data); //cargo la vista con la nueva data
+		redirect('Pruebas');
 
 
 
@@ -1041,10 +1088,8 @@ class DpiController extends CI_Controller
 
 		$this->CandidatoModel->desactivarbriggs($idCandidato);
 
-		//esta es la nueva data con el briggs desactivado
-		$data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
 
-		$this->load->view('Pruebas/Login', $data);
+		redirect('Pruebas');
 
 	}
 
@@ -1072,10 +1117,9 @@ class DpiController extends CI_Controller
 
 		} else {
 			$this->CandidatoModel->desactivarTemperamento($idCandidato);
-			$data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
 
 
-			$this->load->view('Pruebas/Login', $data);
+			redirect('Pruebas');
 		}
 	}
 
@@ -1220,6 +1264,7 @@ class DpiController extends CI_Controller
 
 	public function cleaver($DPI, $indice)
 	{
+
 		$data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
 		$idCandidato = $data['Candidato']->idCandidato; // Obtener el id del candidato según su DPI que recibo antes
 		$data['Cleaverdata'] = $this->DpiModel->preguntasCleaver($indice); // Llamar al método correctamente
@@ -1228,7 +1273,7 @@ class DpiController extends CI_Controller
 		if ($data['Candidato']->cleaver === '1') {
 			$this->load->view('Pruebas/cleaver', $data);
 		} else {
-			$this->load->view('Pruebas/Login', $data);
+			redirect('Pruebas');
 		}
 	}
 
@@ -1279,7 +1324,7 @@ class DpiController extends CI_Controller
 			// Insertar los nuevos valores en la tabla `graficaCleaver`
 			$this->DpiModel->insertGraficaCleaver($data_grafica);
 
-			$this->load->view('Pruebas/Login', $data); //cargo la vista con la nueva data
+			redirect('Pruebas');
 
 
 

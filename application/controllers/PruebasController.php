@@ -12,6 +12,8 @@ class PruebasController extends CI_Controller
 
 		$this->load->model('DpiModel');
 		$this->load->model('PlazasModel');
+		$this->load->model('CandidatoModel');
+
 
 
 	}
@@ -20,21 +22,33 @@ class PruebasController extends CI_Controller
 	{
 		// Obtener la cookie 'codigo_plaza'
 		$cookie = get_cookie('codigo_plaza', TRUE);
-	
+
 		if ($cookie) {
 			// Decodificar el JSON almacenado en la cookie
 			$cookieData = json_decode($cookie, TRUE);
-	
-			// Verificar si 'pruebas' es true y 'solicitud' es false
+
+			// Verificar si 'pruebas' es true, 'solicitud' es false y 'codigo_plaza' existe
 			if (isset($cookieData['pruebas']) && $cookieData['pruebas'] === true &&
-				isset($cookieData['solicitud']) && $cookieData['solicitud'] === false) {
-				
+				isset($cookieData['solicitud']) && $cookieData['solicitud'] === false &&
+				isset($cookieData['codigo_plaza'])) {
+
 				// Validar si el código de la plaza existe en la base de datos
 				$codigoPlaza = $cookieData['codigo_plaza'];
-				$plaza = $this->PlazasModel->VerificarCodigoPlaza($codigoPlaza);
-	
+				$plaza = $this->PlazasModel->GetPlazaCodigo($codigoPlaza);
+
 				if ($plaza) {
-					$data['pruebas'] = $plaza; // Pasar datos válidos a la vista
+					// Validar que el DPI exista en la cookie
+					if (isset($cookieData['dpi'])) {
+						$DPI = $cookieData['dpi'];
+					} else {
+						$DPI = null; // Valor por defecto si no existe
+					}
+
+					// Pasar los datos válidos a la vista
+					$data['DPI'] = $DPI;
+					$data['pruebas'] = $plaza;
+					$data['Candidato'] = $this->CandidatoModel->VerificarDPI($DPI); // Obtener los datos del candidato
+
 					$this->load->view('Pruebas/Pruebas', $data);
 				} else {
 					// Si no se encuentra la plaza, redirigir o manejar el error
@@ -49,6 +63,7 @@ class PruebasController extends CI_Controller
 			redirect('Plaza');
 		}
 	}
+
 	
 	
 	

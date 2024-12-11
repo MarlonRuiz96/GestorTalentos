@@ -195,14 +195,30 @@ class DpiModel extends CI_Model
 
 	public function actualizarCleaver($idCandidato, $campoM, $campoL)
 	{
-		// Incrementar el valor de la casilla seleccionada en la columna 'Más'
-		$this->db->set($campoM, "$campoM + 1", FALSE);
-		// Incrementar el valor de la casilla seleccionada en la columna 'Menos'
-		$this->db->set($campoL, "$campoL + 1", FALSE);
-
+		// Primero verificamos si existe un registro con ese idCandidato
+		$this->db->select('idCandidato');
+		$this->db->from('cleaver');
 		$this->db->where('idCandidato', $idCandidato);
-		$this->db->update('cleaver');
+		$query = $this->db->get();
+
+		if ($query->num_rows() > 0) {
+			// Si existe, realizamos la actualización
+			$this->db->set($campoM, "$campoM + 1", FALSE);
+			$this->db->set($campoL, "$campoL + 1", FALSE);
+			$this->db->where('idCandidato', $idCandidato);
+			$this->db->update('cleaver');
+		} else {
+			// Si no existe, insertamos un nuevo registro con los valores iniciales en 1
+			$data = array(
+				'idCandidato' => $idCandidato,
+				$campoM => 1,
+				$campoL => 1
+			);
+
+			$this->db->insert('cleaver', $data);
+		}
 	}
+
 
 
 	public function actualizarTemporal($DPI, $indice)

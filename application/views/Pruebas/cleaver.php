@@ -202,7 +202,7 @@
 
         <script>
         // Pasar los datos del servidor al cliente
-        var data = <?= json_encode($indice) ?>;
+        var data = <?= json_encode($Candidato) ?>;
 
         console.log(data); // Imprimir los datos en la consola
         </script>
