@@ -39,6 +39,8 @@
 						<th>Estado</th>
 						<th>Aspirantes</th>
 						<th>Acciones</th>
+						<th>Codigo</th>
+
 					</tr>
 				</thead>
 				<tbody>
@@ -52,9 +54,13 @@
 							</td>
 							<td><?php echo $row->ubicacion; ?></td>
 							<td><?php echo ucfirst($row->estado); ?></td>
+							<td><?php echo ($row->codigo); ?></td>
+
 							<td>
-								<a href="<?= site_url('PlazasController/verPlaza/' . $row->id); ?>"
-									class="btn btn-success btn-sm">Ver aspirantes</a>
+								<a href="<?= site_url('AspirantesController/getAspirantes/' . $row->codigo); ?>" class="btn btn-success btn-sm">
+									Ver aspirantes
+								</a>
+
 							</td>
 							<td class="d-flex justify-content-start flex-wrap">
 								<a href="#" class="edit-btn btn btn-primary btn-sm me-2 mb-2" data-bs-toggle="modal"

@@ -4,148 +4,148 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class CandidatoModel extends CI_Model
 {
 
-    public function getCandidato()
-    {
-        $estado = "Activo";
-        $this->db->select('c.idCandidato, c.Nombres,c.Puesto , c.Contacto, c.Correo, c.temperamento');
-        $this->db->from('Candidato c');
-        $query = $this->db->get();
+	public function getCandidato()
+	{
+		$estado = "Activo";
+		$this->db->select('c.idCandidato, c.Nombres,c.Puesto , c.Contacto, c.Correo, c.temperamento');
+		$this->db->from('Candidato c');
+		$query = $this->db->get();
 
-        if ($query->num_rows() > 0) {
-            return $query->result();
-        } else {
-            return array();
-        }
-    }
+		if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+			return array();
+		}
+	}
 
 
-    public function InsertarCandidato($data) //Insertar 0 en los temperamentos
-    {
-        // Insertamos los datos en la tabla Candidatos
-        $this->db->insert('Candidato', $data);
+	public function InsertarCandidato($data) //Insertar 0 en los temperamentos
+	{
+		// Insertamos los datos en la tabla Candidatos
+		$this->db->insert('Candidato', $data);
 
 //pendiente verificar la ffecha
-        $fecha_actual = date("Y-m-d");
+		$fecha_actual = date("Y-m-d");
 
 
+	}
 
-    }
+	public function ActualizarCandidato($idCandidato, $nuevoNombre, $nuevaPuesto, $nuevoConctacto, $nuevoCorreo)
+	{
+		$datosActualizados = array(
+			'Nombres' => $nuevoNombre,
+			'Puesto' => $nuevaPuesto,
+			'Contacto' => $nuevoConctacto,
+			'Correo' => $nuevoCorreo,
 
-    public function ActualizarCandidato($idCandidato, $nuevoNombre, $nuevaPuesto, $nuevoConctacto, $nuevoCorreo)
-    {
-        $datosActualizados = array(
-            'Nombres' => $nuevoNombre,
-            'Puesto' => $nuevaPuesto,
-            'Contacto' => $nuevoConctacto,
-            'Correo' => $nuevoCorreo,
+		);
 
-        );
+		$this->db->where('idCandidato', $idCandidato);
+		$this->db->update('Candidato', $datosActualizados);
+	}
 
-        $this->db->where('idCandidato', $idCandidato);
-        $this->db->update('Candidato', $datosActualizados);
-    }
-    public function getCandidatoPorId($idCandidato)
-    {
-        $this->db->select('*');
-        $this->db->from('Candidato');
-        $this->db->where('idCandidato', $idCandidato);
+	public function getCandidatoPorId($idCandidato)
+	{
+		$this->db->select('*');
+		$this->db->from('Candidato');
+		$this->db->where('idCandidato', $idCandidato);
 
-        $query = $this->db->get();
+		$query = $this->db->get();
 
-        if ($query->num_rows() > 0) {
-            return $query->row();
-        } else {
-            return null;
-        }
+		if ($query->num_rows() > 0) {
+			return $query->row();
+		} else {
+			return null;
+		}
 
-    }
+	}
 
-    public function getDatosPrueba($idCandidato)
-    {
-        $this->db->select('*');
-        $this->db->from('Candidato');
-        $this->db->where('idCandidato', $idCandidato);
+	public function getDatosPrueba($idCandidato)
+	{
+		$this->db->select('*');
+		$this->db->from('Candidato');
+		$this->db->where('idCandidato', $idCandidato);
 
-        $query = $this->db->get();
+		$query = $this->db->get();
 
-        if ($query->num_rows() > 0) {
-            return $query->row();
-        } else {
-            return null;
-        }
+		if ($query->num_rows() > 0) {
+			return $query->row();
+		} else {
+			return null;
+		}
 
-    }
-    public function getDatosBriggs($idCandidato)
-    {
-        $this->db->select('*');
-        $this->db->from('Briggs');
-        $this->db->where('idCandidato', $idCandidato);
+	}
 
-        $query = $this->db->get();
+	public function getDatosBriggs($idCandidato)
+	{
+		$this->db->select('*');
+		$this->db->from('Briggs');
+		$this->db->where('idCandidato', $idCandidato);
 
-        if ($query->num_rows() > 0) {
-            return $query->row();
-        } else {
-            return null;
-        }
+		$query = $this->db->get();
+
+		if ($query->num_rows() > 0) {
+			return $query->row();
+		} else {
+			return null;
+		}
 
 
+	}
 
-    }
+	public function getDatosValanti($idCandidato)
+	{
 
-    public function getDatosValanti($idCandidato)
-    {
+		$this->db->select('*');
+		$this->db->from('valanti');
+		$this->db->where('idCandidato', $idCandidato);
 
-        $this->db->select('*');
-        $this->db->from('valanti');
-        $this->db->where('idCandidato', $idCandidato);
+		$query = $this->db->get();
 
-        $query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->row();
+		} else {
+			return null;
+		}
+	}
 
-        if ($query->num_rows() > 0) {
-            return $query->row();
-        } else {
-            return null;
-        }
-    }
+	public function getDatos16pf($idCandidato)
+	{
 
-    public function getDatos16pf($idCandidato)
-    {
+		$this->db->select('*');
+		$this->db->from('16pf');
+		$this->db->where('idCandidato', $idCandidato);
 
-        $this->db->select('*');
-        $this->db->from('16pf');
-        $this->db->where('idCandidato', $idCandidato);
+		$query = $this->db->get();
 
-        $query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->row();
+		} else {
+			return null;
+		}
 
-        if ($query->num_rows() > 0) {
-            return $query->row();
-        } else {
-            return null;
-        }
-    
-    }
+	}
 
-    public function getDatoscleaver($idCandidato)
-    {
+	public function getDatoscleaver($idCandidato)
+	{
 
-        $this->db->select('*');
-        $this->db->from('graficacleaver');
-        $this->db->where('idCandidato', $idCandidato);
+		$this->db->select('*');
+		$this->db->from('graficacleaver');
+		$this->db->where('idCandidato', $idCandidato);
 
-        $query = $this->db->get();
+		$query = $this->db->get();
 
-        if ($query->num_rows() > 0) {
-            return $query->row();
-        } else {
-            return null;
-        }
-    
-    }
+		if ($query->num_rows() > 0) {
+			return $query->row();
+		} else {
+			return null;
+		}
 
-    public function masGrande($idCandidato)
-    {
-        $query = $this->db->query("
+	}
+
+	public function masGrande($idCandidato)
+	{
+		$query = $this->db->query("
         SELECT 
         idCandidato,
         CASE 
@@ -165,323 +165,322 @@ class CandidatoModel extends CI_Model
         idCandidato = $idCandidato
         ");
 
-        return $query->row(); // Retorna una sola fila con el resultado
-    }
+		return $query->row(); // Retorna una sola fila con el resultado
+	}
 
 
+	public function VerificarDPI($DPI)
+	{
+		$this->db->select('*');
+		$this->db->from('Candidato');
+		$this->db->where('DPI', $DPI);
+
+		$query = $this->db->get();
+
+		if ($query->num_rows() > 0) {
+			return $query->row();
+		} else {
+			return null;
+		}
+
+	}
+
+	public function guardarAnotaciones($idCandidato, $notas)
+	{
+		// Actualiza las notas del Candidato en la base de datos
+		$this->db->where('idCandidato', $idCandidato);
+		$data = array(
+			'notas' => $notas
+		);
+		$this->db->update('Candidato', $data);
+
+		// Verifica si la actualización fue exitosa
+		if ($this->db->affected_rows() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function guardarValanti($idCandidato, $Verdad, $Rectitud, $Paz, $Amor, $NoViolencia)
+	{
+		// Actualiza las notas del Candidato en la base de datos
+		$this->db->where('idCandidato', $idCandidato);
+		$data = array(
+			'verdadEmpresa' => $Verdad,
+			'rectitudEmpresa' => $Rectitud,
+			'pazEmpresa' => $Paz,
+			'amorEmpresa' => $Amor,
+			'noViolenciaEmpresa' => $NoViolencia
+
+		);
+		$this->db->update('valanti', $data);
+
+		// Verifica si la actualización fue exitosa
+		if ($this->db->affected_rows() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function activarTemperamento($idCandidato)
+	{
+		// Actualiza el estado de la prueba de temperamentos a 1
+		$data = array(
+			'temperamento' => 1
+		);
+
+		$this->db->where('idCandidato', $idCandidato);
+		$this->db->update('Candidato', $data);
+
+		return $this->db->affected_rows();
+	}
+
+	public function desactivarTemperamento($idCandidato)
+	{
+		// Actualiza el estado de la prueba de temperamentos a 1
+		$data = array(
+			'temperamento' => 0
+		);
+
+		$this->db->where('idCandidato', $idCandidato);
+		$this->db->update('Candidato', $data);
+
+		return $this->db->affected_rows();
+	}
+
+	public function activarbriggs($idCandidato)
+	{
+		// Actualiza el estado de la prueba de temperamentos a 1
+		$data = array(
+			'Briggs' => 1
+		);
+
+		$this->db->where('idCandidato', $idCandidato);
+		$this->db->update('Candidato', $data);
+
+		return $this->db->affected_rows();
+	}
+
+	public function desactivarbriggs($idCandidato)
+	{
+		// Actualiza el estado de la prueba de temperamentos a 1
+		$data = array(
+			'Briggs' => 0
+		);
+
+		$this->db->where('idCandidato', $idCandidato);
+		$this->db->update('Candidato', $data);
+
+		return $this->db->affected_rows();
+	}
+
+	public function activarValanti($idCandidato)
+	{
+		// Actualiza el estado de la prueba de temperamentos a 1
+		$data = array(
+			'valanti' => 1
+		);
+
+		$this->db->where('idCandidato', $idCandidato);
+		$this->db->update('Candidato', $data);
+
+		return $this->db->affected_rows();
+	}
+
+	public function desactivarValanti($idCandidato)
+	{
+		// Actualiza el estado de la prueba de temperamentos a 1
+		$data = array(
+			'valanti' => 0
+		);
+
+		$this->db->where('idCandidato', $idCandidato);
+		$this->db->update('Candidato', $data);
+
+		return $this->db->affected_rows();
+	}
+
+	public function existeRegistroBriggs($idCandidato)
+	{
+		$this->db->where('idCandidato', $idCandidato);
+		$query = $this->db->get('Briggs');
+
+		return $query->num_rows() > 0; // Retorna true si hay al menos un registro para el idCandidato
+	}
+
+	public function insertarRegistroBriggs($idCandidato)
+	{
+		$data = array(
+			'extrovertido' => 0, // Aquí deberías proporcionar el valor correspondiente para cada campo
+			'introvertido' => 0,
+			'sensorial' => 0,
+			'intuitivo' => 0,
+			'racional' => 0,
+			'emocional' => 0,
+			'calificador' => 0,
+			'perceptivo' => 0,
+			'idCandidato' => $idCandidato
+		);
+
+		$this->db->insert('Briggs', $data);
+
+	}
+
+	public function existeRegistroValanti($idCandidato)
+	{
+		$this->db->where('idCandidato', $idCandidato);
+		$query = $this->db->get('valanti');
+
+		return $query->num_rows() > 0;
+	}
 
 
+	public function insertarRegistroValanti($idCandidato)
+	{
+		$data = array(
+			'Verdad' => 0,
+			'Rectitud' => 0,
+			'Paz' => 0,
+			'Amor' => 0,
+			'No_violencia' => 0,
+			'verdadEmpresa' => 50,
+			'rectitudEmpresa' => 50,
+			'pazEmpresa' => 50,
+			'amorEmpresa' => 50,
+			'noViolenciaEmpresa' => 50,
+			'idCandidato' => $idCandidato
+		);
 
+		$this->db->insert('valanti', $data);
 
+	}
 
+	public function existe16pf($idCandidato)
+	{
+		$this->db->where('idCandidato', $idCandidato);
+		$query = $this->db->get('16pf');
 
+		return $query->num_rows() > 0;
+	}
 
-    public function VerificarDPI($DPI)
-    {
-        $this->db->select('*');
-        $this->db->from('Candidato');
-        $this->db->where('DPI', $DPI);
+	public function activar16pf($idCandidato)
+	{
+		// Actualiza el estado de la prueba de temperamentos a 1
+		$data = array(
+			'fp16' => 1
+		);
 
-        $query = $this->db->get();
+		$this->db->where('idCandidato', $idCandidato);
+		$this->db->update('Candidato', $data);
 
-        if ($query->num_rows() > 0) {
-            return $query->row();
-        } else {
-            return null;
-        }
+		return $this->db->affected_rows();
+	}
 
-    }
-    public function guardarAnotaciones($idCandidato, $notas)
-    {
-        // Actualiza las notas del Candidato en la base de datos
-        $this->db->where('idCandidato', $idCandidato);
-        $data = array(
-            'notas' => $notas
-        );
-        $this->db->update('Candidato', $data);
+	public function desactivarpf($idCandidato)
+	{
+		// Actualiza el estado de la prueba de temperamentos a 1
+		$data = array(
+			'fp16' => 0
+		);
 
-        // Verifica si la actualización fue exitosa
-        if ($this->db->affected_rows() > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+		$this->db->where('idCandidato', $idCandidato);
+		$this->db->update('Candidato', $data);
 
-    public function guardarValanti($idCandidato, $Verdad, $Rectitud, $Paz, $Amor, $NoViolencia)
-    {
-        // Actualiza las notas del Candidato en la base de datos
-        $this->db->where('idCandidato', $idCandidato);
-        $data = array(
-            'verdadEmpresa' => $Verdad,
-            'rectitudEmpresa' => $Rectitud,
-            'pazEmpresa' => $Paz,
-            'amorEmpresa' => $Amor,
-            'noViolenciaEmpresa' => $NoViolencia
+		return $this->db->affected_rows();
+	}
 
-        );
-        $this->db->update('valanti', $data);
+	public function crearregistro16pf($idCandidato)
+	{
+		$data = array(
+			'p1' => 0,
+			'p2' => 0,
+			'p3' => 0,
+			'p4' => 0,
+			'p5' => 0,
+			'p6' => 0,
+			'p7' => 0,
+			'p8' => 0,
+			'p9' => 0,
+			'p10' => 0,
+			'p11' => 0,
+			'p12' => 0,
+			'p13' => 0,
+			'p14' => 0,
+			'p15' => 0,
+			'p16' => 0,
+			'idCandidato' => $idCandidato
+		);
 
-        // Verifica si la actualización fue exitosa
-        if ($this->db->affected_rows() > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    public function activarTemperamento($idCandidato)
-    {
-        // Actualiza el estado de la prueba de temperamentos a 1
-        $data = array(
-            'temperamento' => 1
-        );
+		$this->db->insert('16pf', $data);
 
-        $this->db->where('idCandidato', $idCandidato);
-        $this->db->update('Candidato', $data);
+	}
 
-        return $this->db->affected_rows();
-    }
+	public function existecleaver($idCandidato)
+	{
+		$this->db->where('idCandidato', $idCandidato);
+		$query = $this->db->get('cleaver');
 
-    public function desactivarTemperamento($idCandidato)
-    {
-        // Actualiza el estado de la prueba de temperamentos a 1
-        $data = array(
-            'temperamento' => 0
-        );
+		return $query->num_rows() > 0;
+	}
 
-        $this->db->where('idCandidato', $idCandidato);
-        $this->db->update('Candidato', $data);
+	public function activarCleaver($idCandidato)
+	{
+		// Actualiza el estado de la prueba de temperamentos a 1
+		$data = array(
+			'cleaver' => 1
+		);
 
-        return $this->db->affected_rows();
-    }
+		$this->db->where('idCandidato', $idCandidato);
+		$this->db->update('Candidato', $data);
 
-    public function activarbriggs($idCandidato)
-    {
-        // Actualiza el estado de la prueba de temperamentos a 1
-        $data = array(
-            'Briggs' => 1
-        );
+		return $this->db->affected_rows();
+	}
 
-        $this->db->where('idCandidato', $idCandidato);
-        $this->db->update('Candidato', $data);
+	public function desactivarcleaver($idCandidato)
+	{
+		// Actualiza el estado de la prueba de temperamentos a 1
+		$data = array(
+			'cleaver' => 0
+		);
 
-        return $this->db->affected_rows();
-    }
+		$this->db->where('idCandidato', $idCandidato);
+		$this->db->update('Candidato', $data);
 
-    public function desactivarbriggs($idCandidato)
-    {
-        // Actualiza el estado de la prueba de temperamentos a 1
-        $data = array(
-            'Briggs' => 0
-        );
+		return $this->db->affected_rows();
+	}
 
-        $this->db->where('idCandidato', $idCandidato);
-        $this->db->update('Candidato', $data);
+	public function crearRegistroCleaver($idCandidato)
+	{
+		$data = array(
+			'idCandidato' => $idCandidato
+		);
 
-        return $this->db->affected_rows();
-    }
+		$this->db->insert('cleaver', $data);
 
-    public function activarValanti($idCandidato)
-    {
-        // Actualiza el estado de la prueba de temperamentos a 1
-        $data = array(
-            'valanti' => 1
-        );
+	}
 
-        $this->db->where('idCandidato', $idCandidato);
-        $this->db->update('Candidato', $data);
-
-        return $this->db->affected_rows();
-    }
-
-    public function desactivarValanti($idCandidato)
-    {
-        // Actualiza el estado de la prueba de temperamentos a 1
-        $data = array(
-            'valanti' => 0
-        );
-
-        $this->db->where('idCandidato', $idCandidato);
-        $this->db->update('Candidato', $data);
-
-        return $this->db->affected_rows();
-    }
-
-    public function existeRegistroBriggs($idCandidato)
-    {
-        $this->db->where('idCandidato', $idCandidato);
-        $query = $this->db->get('Briggs');
-
-        return $query->num_rows() > 0; // Retorna true si hay al menos un registro para el idCandidato
-    }
-
-    public function insertarRegistroBriggs($idCandidato)
-    {
-        $data = array(
-            'extrovertido' => 0, // Aquí deberías proporcionar el valor correspondiente para cada campo
-            'introvertido' => 0,
-            'sensorial' => 0,
-            'intuitivo' => 0,
-            'racional' => 0,
-            'emocional' => 0,
-            'calificador' => 0,
-            'perceptivo' => 0,
-            'idCandidato' => $idCandidato
-        );
-
-        $this->db->insert('Briggs', $data);
-
-    }
-
-    public function existeRegistroValanti($idCandidato)
-    {
-        $this->db->where('idCandidato', $idCandidato);
-        $query = $this->db->get('valanti');
-
-        return $query->num_rows() > 0;
-    }
-
-
-
-    public function insertarRegistroValanti($idCandidato)
-    {
-        $data = array(
-            'Verdad' => 0,
-            'Rectitud' => 0,
-            'Paz' => 0,
-            'Amor' => 0,
-            'No_violencia' => 0,
-            'verdadEmpresa' => 50,
-            'rectitudEmpresa' => 50,
-            'pazEmpresa' => 50,
-            'amorEmpresa' => 50,
-            'noViolenciaEmpresa' => 50,
-            'idCandidato' => $idCandidato
-        );
-
-        $this->db->insert('valanti', $data);
-
-    }
-
-    public function existe16pf($idCandidato)
-    {
-        $this->db->where('idCandidato', $idCandidato);
-        $query = $this->db->get('16pf');
-
-        return $query->num_rows() > 0;
-    }
-    public function activar16pf($idCandidato)
-    {
-        // Actualiza el estado de la prueba de temperamentos a 1
-        $data = array(
-            'fp16' => 1
-        );
-
-        $this->db->where('idCandidato', $idCandidato);
-        $this->db->update('Candidato', $data);
-
-        return $this->db->affected_rows();
-    }
-    public function desactivarpf($idCandidato)
-    {
-        // Actualiza el estado de la prueba de temperamentos a 1
-        $data = array(
-            'fp16' => 0
-        );
-
-        $this->db->where('idCandidato', $idCandidato);
-        $this->db->update('Candidato', $data);
-
-        return $this->db->affected_rows();
-    }
-
-    public function crearregistro16pf($idCandidato)
-    {
-        $data = array(
-            'p1' => 0,
-            'p2' => 0,
-            'p3' => 0,
-            'p4' => 0,
-            'p5' => 0,
-            'p6' => 0,
-            'p7' => 0,
-            'p8' => 0,
-            'p9' => 0,
-            'p10' => 0,
-            'p11' => 0,
-            'p12' => 0,
-            'p13' => 0,
-            'p14' => 0,
-            'p15' => 0,
-            'p16' => 0,
-            'idCandidato' => $idCandidato
-        );
-
-        $this->db->insert('16pf', $data);
-
-    }
-    public function existecleaver($idCandidato)
-    {
-        $this->db->where('idCandidato', $idCandidato);
-        $query = $this->db->get('cleaver');
-
-        return $query->num_rows() > 0;
-    }
-    public function activarCleaver($idCandidato)
-    {
-        // Actualiza el estado de la prueba de temperamentos a 1
-        $data = array(
-            'cleaver' => 1
-        );
-
-        $this->db->where('idCandidato', $idCandidato);
-        $this->db->update('Candidato', $data);
-
-        return $this->db->affected_rows();
-    }
-    public function desactivarcleaver($idCandidato)
-    {
-        // Actualiza el estado de la prueba de temperamentos a 1
-        $data = array(
-            'cleaver' => 0
-        );
-
-        $this->db->where('idCandidato', $idCandidato);
-        $this->db->update('Candidato', $data);
-
-        return $this->db->affected_rows();
-    }
-
-    public function crearRegistroCleaver($idCandidato)
-    {
-        $data = array(
-            'idCandidato' => $idCandidato
-        );
-
-        $this->db->insert('cleaver', $data);
-
-    }
-
-    public function resetPrueba($idCandidato, $prueba)
-    {
+	public function resetPrueba($idCandidato, $prueba)
+	{
 
 		$this->db->where('idCandidato', $idCandidato);
 		$this->db->delete($prueba);
 
 
-
 	}
-    public function desactivarPrueba($idCandidato, $prueba)
-    {
-		if($prueba=="temperamento"){
+
+	public function desactivarPrueba($idCandidato, $prueba)
+	{
+		if ($prueba == "temperamento") {
 			$data = array(
 				'Temporal' => 1,
-				 $prueba => 0
+				$prueba => 0
 
 			);
 			$this->db->where('idCandidato', $idCandidato);
 			$this->db->update("Candidato", $data);
-		}else{
+		} else {
 			$data = array(
 				$prueba => 0
 			);
@@ -491,8 +490,8 @@ class CandidatoModel extends CI_Model
 		}
 
 
-        return $this->db->affected_rows();
-    }
+		return $this->db->affected_rows();
+	}
 
 	public function activarPrueba($idCandidato, $prueba)
 	{
@@ -602,10 +601,6 @@ Procura llevar una vida estable y ordenada, con una mente sistemática. Procede 
 			return null;
 		}
 	}
-
-
-
-
 
 
 }
