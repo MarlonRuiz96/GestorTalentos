@@ -25,7 +25,7 @@
     <div class="container">
         <main>
             <div class="d-flex justify-content-start">
-                <img src="<?php echo base_url('assets/img/logo.jpeg'); ?>" class="d-block" alt="Imagen"
+				<img src="<?php echo base_url('assets/img/logo.png'); ?>" class="d-block" alt="Imagen"
                     style="width: 35%; height: auto;"><br><br>
                 <p class="text-center"><br><br>Seleccione las opciones que reflejen algún aspecto de su
                     personalidad o se identifiquen con

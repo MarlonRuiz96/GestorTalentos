@@ -527,6 +527,8 @@ class DpiController extends CI_Controller
 
 
 
+
+
 					$data = array(
 						'Nombres' => $nombres,
 						'Puesto' => $Puesto,
@@ -543,7 +545,25 @@ class DpiController extends CI_Controller
 						'plaza' => $plaza_id,
 						'solicitudEmpleo'=>'1',
 					);
+
+
 					$this->CandidatoModel->InsertarCandidato($data);
+
+
+					// Lista de pruebas y sus estados
+					$pruebas = [
+						'temperamento' => $Temperamento,
+						'Briggs' => $Briggs,
+						'Valanti' => $Valanti,
+						'fp16' => $fp16,
+						'cleaver' => $cleaver
+					];
+					foreach ($pruebas as $nombrePrueba => $estado) {
+						if ($estado === 1) {
+							$this->activarPruebas($documentoIdentificacion, $nombrePrueba);
+						}
+					}
+
 
 
 					// Establecer la nueva cookie
@@ -556,10 +576,20 @@ class DpiController extends CI_Controller
 
 
 
+
+
 			}
 		}
 
 
+	}
+
+	public function activarPruebas($DPI, $prueba)
+	{
+// crear la logica para activar la prueba 16/09
+		$data['Candidato'] = $this->CandidatoModel->VerificarDPI($DPI); // Obtener los datos del candidato
+		$idCandidato = $data['Candidato']->idCandidato;
+		$this->CandidatoModel->activarPrueba($idCandidato, $prueba);
 	}
 
 
@@ -1129,37 +1159,23 @@ class DpiController extends CI_Controller
 		$data['Candidato'] = $this->DpiModel->VerificarDPI($DPI); // Obtener los datos del candidato
 
 		$indice = $data['Candidato']->Temporal; //Obtengo el indice para las preguntas, esto me ayuda para verificar en que pregunta se quedo el candidato
-
 		$aspectopersonalidad = $this->DpiModel->dataTemperamentos($indice - 1);
-
 		$idCandidato = $data['Candidato']->idCandidato;
-
 		$personalidad = $aspectopersonalidad->P4;
+		$puntosactual = $data['Candidato']->sanguineo; //pbtener el dato actual
 
 
 		$tipo = "D";
 
 		if ($indice <= 21) {
-			$this->DpiModel->IngresarFortaleza($personalidad, $idCandidato, $tipo);
+			$this->DpiModel->IngresarFortaleza($personalidad, $idCandidato, $puntosactual);
 
 		} elseif ($indice > 21) {
-			$this->DpiModel->IngresarDebilidad($personalidad, $idCandidato, $tipo);
-
-
+			$this->DpiModel->IngresarDebilidad($personalidad, $idCandidato, $puntosactual);
 		}
 
-
-
-
-
-
-		$puntosactual = $data['Candidato']->sanguineo; //pbtener el dato actual
-
-		$this->DpiModel->actualizarSanguineo($idCandidato, $puntosactual); // Le sumo un punto a sanguineo
-
+		$this->DpiModel->actualizarSanguineo($DPI, $puntosactual); // Le sumo un punto a sanguineo
 		$this->RealizarPruebas($DPI);
-
-
 	}
 
 	public function melancolico($DPI)

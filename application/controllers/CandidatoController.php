@@ -565,6 +565,13 @@ class CandidatoController extends CI_Controller
     }
 
 
+	public function obtenerCandidato($DPI)
+	{
+		$data['Candidato'] = $this->CandidatoModel->VerificarDPI($DPI); // Obtener los datos del candidato
+		$idCandidato = $data['Candidato']->idCandidato;
+		$this->verCandidato($idCandidato);
+	}
+
 
 }
 

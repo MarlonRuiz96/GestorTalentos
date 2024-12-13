@@ -60,12 +60,9 @@
 						<td><?= htmlspecialchars($aspirante->numero_documento) ?></td>
 						<td><?= htmlspecialchars($aspirante->profesion) ?></td>
 						<td>
-							<button class="btn btn-info btn-sm view-btn" data-bs-toggle="modfveal" data-bs-target="#viewModal"
-									data-aspirante='<?= json_encode($aspirante) ?>'>
-								<i class="fa fa-eye"></i> Resumen
-							</button>
-							<a href="<?= site_url('CandidatoController/VerCandidato/' . $aspirante->numero_documento); ?>"
-							   class="btn btn-success">Ver pruebas
+							<a href="<?= site_url('CandidatoController/obtenerCandidato/' . $aspirante->numero_documento); ?>"
+							   class="btn btn-success btn-sm">
+								<i class="fa fa-eye"></i> Ver pruebas
 							</a>
 						</td>
 					</tr>
@@ -79,26 +76,6 @@
 		<?php endif; ?>
 	</div>
 </main>
-
-<!-- Modal to View Applicant Details -->
-<div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="viewModalLabel">Información Completa del Aspirante</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<table class="table table-bordered">
-					<tbody id="modalAspiranteBody"></tbody>
-				</table>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-			</div>
-		</div>
-	</div>
-</div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
@@ -142,32 +119,6 @@
 					}
 				}
 			}
-		});
-
-		// View Modal for Applicant Details
-		const viewButtons = document.querySelectorAll('.view-btn');
-		const modalAspiranteBody = document.getElementById('modalAspiranteBody');
-
-		viewButtons.forEach(button => {
-			button.addEventListener('click', function () {
-				const aspirante = JSON.parse(this.getAttribute('data-aspirante'));
-
-				// Limpiar contenido previo
-				modalAspiranteBody.innerHTML = '';
-
-				// Crear una fila para cada campo del aspirante
-				Object.entries(aspirante).forEach(([key, value]) => {
-					if (value === null) value = 'No especificado';
-					const formattedKey = key.replace(/_/g, ' ').toUpperCase();
-					const row = `
-						<tr>
-							<th>${formattedKey}</th>
-							<td>${value}</td>
-						</tr>
-					`;
-					modalAspiranteBody.innerHTML += row;
-				});
-			});
 		});
 	});
 </script>

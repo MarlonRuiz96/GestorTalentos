@@ -27,7 +27,7 @@
     <div class="container">
         <main>
             <div class="d-flex justify-content-start">
-                <img src="<?php echo base_url('assets/img/logo.jpeg'); ?>" class="d-block" alt="Imagen"
+				<img src="<?php echo base_url('assets/img/logo.png'); ?>" class="d-block" alt="Imagen"
                     style="width: 35%; height: auto;"><br><br>
                 <p class="text-center"><br><br>Por favor, marque cero, uno, dos o tres puntos en las casillas del
                     centro, según la importancia que usted le da a cada frase en su vida personal.

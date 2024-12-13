@@ -45,11 +45,9 @@
                     cuatro palabras. Para cada grupo, realice los siguientes pasos:
                 </p>
                 <ol>
-                    <li><strong>Seleccione una característica que más se adecúe a usted</strong> colocando el número
-                        <strong>1</strong> en la casilla de la columna (+) correspondiente a esa palabra.
+                    <li><strong>Seleccione una característica que más se adecúe a usted</strong> marcando  la casilla de la columna (+) correspondiente a esa palabra.
                     </li>
-                    <li><strong>Seleccione una característica que menos se adecúe a usted</strong> colocando el número
-                        <strong>1</strong> en la casilla de la columna (-) correspondiente a esa palabra.
+                    <li><strong>Seleccione una característica que menos se adecúe a usted</strong> marcando la casilla de la columna (-) correspondiente a esa palabra.
                     </li>
                 </ol>
             </div>
@@ -59,8 +57,8 @@
                     <h5>Reglas:</h5>
                 </strong>
                 <ul>
-                    <li>Coloque únicamente un número <strong>1</strong> en la columna (+) y un número <strong>1</strong>
-                        en la columna (-) por cada grupo de cuatro palabras.</li>
+                    <li>Marque únicamente una casilla en la columna (más) y
+                        en la columna (menos) por cada grupo de cuatro palabras.</li>
                     <li>No deje ningún grupo sin contestar.</li>
                     <li>Esta prueba no tiene límite de tiempo, pero asegúrese de leer cada palabra cuidadosamente antes
                         de hacer su selección.</li>

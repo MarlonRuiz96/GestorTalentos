@@ -234,7 +234,7 @@ class DpiModel extends CI_Model
 		$this->db->update('Candidato', $data);
 	}
 
-	public function actualizarSanguineo($idCandidato, $sanguineoActual)
+	public function actualizarSanguineo($DPI, $sanguineoActual)
 	{
 
 		$nuevovalor = $sanguineoActual + 1;
@@ -244,8 +244,8 @@ class DpiModel extends CI_Model
 
 		);
 
-		$this->db->where($idCandidato, $idCandidato);
-		$this->db->update('temperamento', $data);
+		$this->db->where('DPI', $DPI);
+		$this->db->update('Candidato', $data);
 	}
 
 	public function actualizarColerico($DPI, $datoActual)

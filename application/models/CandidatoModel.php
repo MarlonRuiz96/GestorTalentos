@@ -500,12 +500,16 @@ class CandidatoModel extends CI_Model
 			$prueba => 1 // Activar la prueba correspondiente
 		);
 
+
 		// Actualizamos la tabla Candidato
 		$this->db->where('idCandidato', $idCandidato);
 		$this->db->update("Candidato", $data);
 		// Verificar y corregir el nombre de la prueba si es necesario
 		if ($prueba === "fp16") {
 			$prueba = "16pf";
+		}
+		if ($prueba === "Valanti") {
+			$prueba = "valanti";
 		}
 		// Verificar si ya existe el registro en la tabla correspondiente ($prueba)
 		$this->db->where('idCandidato', $idCandidato);
