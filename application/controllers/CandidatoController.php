@@ -527,7 +527,7 @@ class CandidatoController extends CI_Controller
     {
         $data['candidato_data'] = $this->CandidatoModel->getCandidatoPorId($idCandidato);
 
-        $html = $this->load->view('reporte', $data, true);
+        $html = $this->load->view('Reporte', $data, true);
         $mpdf = new \Mpdf\Mpdf();
         $mpdf->WriteHTML($html);
         $mpdf->Output();
@@ -572,7 +572,13 @@ class CandidatoController extends CI_Controller
 		$this->verCandidato($idCandidato);
 	}
 
+	public function obtenerCandidatoPlaza($DPI,$plaza)
+	{
+		$data['Candidato'] = $this->CandidatoModel->VerificarDPIPlaza($DPI,$plaza); // Obtener los datos del candidato
+		$idCandidato = $data['Candidato']->idCandidato;
+		$this->verCandidato($idCandidato);
+	}
+
 
 }
 
-?>

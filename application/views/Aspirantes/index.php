@@ -46,6 +46,8 @@
 					<th>Edad</th>
 					<th>DPI</th>
 					<th>Profesión</th>
+					<th>Plaza</th>
+
 					<th>Acciones</th>
 				</tr>
 				</thead>
@@ -59,8 +61,10 @@
 						<td><?= htmlspecialchars($aspirante->edad_actual) ?></td>
 						<td><?= htmlspecialchars($aspirante->numero_documento) ?></td>
 						<td><?= htmlspecialchars($aspirante->profesion) ?></td>
+						<td><?= htmlspecialchars($aspirante->plaza_id) ?></td>
+
 						<td>
-							<a href="<?= site_url('CandidatoController/obtenerCandidato/' . $aspirante->numero_documento); ?>"
+							<a href="<?= site_url('CandidatoController/obtenerCandidatoPlaza/' . $aspirante->numero_documento.'/'. $aspirante->plaza_id); ?>"
 							   class="btn btn-success btn-sm">
 								<i class="fa fa-eye"></i> Ver pruebas
 							</a>

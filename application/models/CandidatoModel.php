@@ -184,6 +184,26 @@ class CandidatoModel extends CI_Model
 		}
 
 	}
+	public function VerificarDPIPlaza($DPI, $plaza)
+	{
+		if (empty($DPI) || empty($plaza)) {
+			return null; // Devuelve null si alguno de los valores no es válido
+		}
+
+		$this->db->select('*');
+		$this->db->from('Candidato');
+		$this->db->where('DPI', $DPI);
+		$this->db->where('plaza', $plaza);
+
+		$query = $this->db->get();
+
+		if ($query->num_rows() > 0) {
+			return $query->row(); // Retorna el objeto encontrado
+		} else {
+			return null; // Retorna null si no se encuentra nada
+		}
+	}
+
 
 	public function guardarAnotaciones($idCandidato, $notas)
 	{
@@ -605,6 +625,8 @@ Procura llevar una vida estable y ordenada, con una mente sistemática. Procede 
 			return null;
 		}
 	}
+
+
 
 
 }

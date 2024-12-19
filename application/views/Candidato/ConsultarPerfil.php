@@ -29,9 +29,19 @@
 		<a href="<?= site_url('Plazas'); ?>" class="btn btn-secondary mb-3">
 			<i class="fa fa-arrow-left"></i> Volver a la plaza
 		</a>
-		<a href="<?= site_url('PdfController/facturaPdf/' . $candidato_data->idCandidato); ?>"
-		   id="generateReportLink" class="btn btn-success sweetalert-linkReporte" data-title="Generar Reporte"
-		   style="float: right;">Generar Reporte</a>
+		<a href="<?= site_url('PdfController/vervista/' . $candidato_data->plaza); ?>"
+		   class="btn btn-success sweetalert-linkReporte"
+		   style="float: right; margin-bottom: 10px;">
+			Generar Pruebas
+		</a>
+
+		<a href="<?= site_url('PdfController/solicitud/' . $candidato_data->DPI); ?>"
+		   class="btn btn-success sweetalert-linkReporte"
+		   style="float: right; margin-bottom: 10px;">
+			 Solicitud de empleo
+		</a>
+
+
 
 		<h2 class="text">Datos del Candidato</h2>
 
@@ -64,7 +74,7 @@
 						   readonly>
 				</div>
 				<div class="form-group col-md-6">
-					<label for="DPI">DPI</label>
+					<label for="DPI">Plaza a la que aplicó:</label>
 					<input type="text" class="form-control" id="DPI" value="<?php echo $candidato_data->plaza; ?>"
 						   readonly>
 				</div>
@@ -720,8 +730,15 @@
 					<div style="width: 60%; padding-left: 20px;">
 						<h2 style="color: #2c3e50; font-weight: bold;">Interpretación del Perfil</h2>
 						<p style="font-size: 16px; line-height: 1.6; color: #555;">
-							<?php echo $interpretacionCleaver['interpretacion']; ?>
+							<?php
+							if (!empty($interpretacionCleaver['interpretacion'])) {
+								echo $interpretacionCleaver['interpretacion'];
+							} else {
+								echo 'No hay interpretación disponible.';
+							}
+							?>
 						</p>
+
 					</div>
 
 				</div>
@@ -730,7 +747,7 @@
 
 
 
-			</section>
+			</main>
 </div>
 
 	</main>

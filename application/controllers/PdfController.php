@@ -7,9 +7,11 @@ class PdfController extends CI_Controller {
         parent::__construct();
         $this->load->model('DpiModel');
         $this->load->model('CandidatoModel');
-        
+		$this->load->model('ReporteModel');
 
-        require_once(APPPATH . 'libraries/dompdf/autoload.inc.php');
+
+
+		require_once(APPPATH . 'libraries/dompdf/autoload.inc.php');
         $this->dompdf = new \Dompdf\Dompdf();
     }
 
@@ -39,7 +41,7 @@ class PdfController extends CI_Controller {
         return 'data:image/' . $ext . ';base64,' . base64_encode($data);
     }
 
-    public function facturaPdf($idCandidato) {
+    public function solicitud($DPI) {
         // Obtener la ruta de la imagen desde los parámetros GET
         $imagePath = $this->input->get('imagePath');
 
@@ -47,44 +49,55 @@ class PdfController extends CI_Controller {
         // Obtener el logo y el GestorT como base64
     $base64Logo = $this->getBase64Image(base_url('uploads/grafica.png'));
     $base64LogoGestorT = $this->getBase64Image(base_url('assets/img/logo.png'));
-    $encabezado = $this->getBase64Image(base_url('assets/img/encabezado.png'));
+    $encabezado = $this->getBase64Image(base_url('assets/reporte/solicitud.png'));
 
+// Obtener los datos del candidato
+		$candidatoData = $this->ReporteModel->getApplicant($DPI);
 
+		$id = $candidatoData->id;
+		$familyData = $this->ReporteModel->getFamilyData($id);
+		$workExperience = $this->ReporteModel->getWorkExperience($id);
+		$currentStudies = $this->ReporteModel->getCurrentStudies($id);
+		$educationHistory = $this->ReporteModel->getEducationalHistory($id);
+		$capacitaciones = $this->ReporteModel->getCapacitaciones($id);
+		$skils = $this->ReporteModel->getSkills($id);
+		$economic_contributions = $this->ReporteModel->getEconomicContributions($id);
+		$references = $this->ReporteModel->getReferences($id);
+		$socialEconomicData = $this->ReporteModel->getSocialEconomicData($id);
+		$languages = $this->ReporteModel->getLanguages($id);
+		$heath_data = $this->ReporteModel->getHeathData($id);
+		$employment_preferences = $this->ReporteModel->getEmploymentPreferences($id);
 
-        // Obtener los datos del candidato
-        $candidatoData = $this->CandidatoModel->getCandidatoPorId($idCandidato);
-        $dataTemperamento = $this->CandidatoModel->getDatosPrueba($idCandidato);
-        $dataBriggs = $this->CandidatoModel->getDatosBriggs($idCandidato);
-        $dataValanti = $this->CandidatoModel->getDatosValanti($idCandidato);
-        $data16pf = $this->CandidatoModel->getDatos16pf($idCandidato);
-
-        // Combinar todos los datos en un solo array
+		// Combinar todos los datos en un solo array
         $data = [
             'base64Logo' => $base64Logo,
             'imagePath' => $imagePath,
             'candidato_data' => $candidatoData,
-            'dataTemperamento' => $dataTemperamento,
-            'dataBriggs' => $dataBriggs,
-            'dataValanti' => $dataValanti,
-            'data16pf' => $data16pf,
+			'family_data' => $familyData,
+			'workExperience' => $workExperience,
+			'currentStudies' => $currentStudies,
+			'educationHistory' => $educationHistory,
+			'skils' => $skils,
+			'references' => $references,
+			'economic_contributions' => $economic_contributions,
+			'socialEconomicData' => $socialEconomicData,
+			'capacitaciones' => $capacitaciones,
+			'employment_preferences' => $employment_preferences,
+			'languages' => $languages,
+			'heath_data' => $heath_data,
             'logo'=> $base64LogoGestorT,
             'encabezado'=>$encabezado
         ];
 
-    // Pasar los datos a la vista
     $html = $this->load->view('Reporte', $data, true);
-        // Cargar contenido HTML
         $this->dompdf->loadHtml($html);
 
-        // (Opcional) Configurar el tamaño y la orientación del papel
         $this->dompdf->setPaper('letter', 'portrait');
 
-        // Renderizar el HTML como PDF
         $this->dompdf->render();
 
-        // Salida del PDF generado
         $output = $this->dompdf->output();
-        $pdfFileName = 'reporte' . '.pdf';
+        $pdfFileName = 'Reporte' . '.pdf';
 
         header('Content-type: application/pdf');
         header("Content-Disposition: inline; filename=$pdfFileName");
@@ -93,4 +106,4 @@ class PdfController extends CI_Controller {
         echo $output;
     }
 }
-?>
+

@@ -17,7 +17,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-trdophy"></i>
                 </div>
-                <img src="<?php echo base_url('assets/reporte/enca.png'); ?>" class="d-block" alt="Imagen"
+                <img src="<?php echo base_url('assets/Reporte/enca.png'); ?>" class="d-block" alt="Imagen"
                     style="width: 100%; height: auto;">            </a>
             <hr class="sidebar-divider my-0">
             <li class="nav-item active">

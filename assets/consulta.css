@@ -344,3 +344,26 @@ canvas {
 	border-top: 1px solid #ddd;
 }
 
+input[type="radio"] {
+	appearance: none; /* Quitar el estilo por defecto */
+	-webkit-appearance: none; /* Compatibilidad con navegadores webkit (Chrome, Safari) */
+	width: 24px; /* Ancho del radio */
+	height: 24px; /* Altura del radio */
+	background-color: #fff; /* Fondo blanco */
+	border: 2px solid #555; /* Borde gris oscuro */
+	border-radius: 50%; /* Hace que el radio sea circular */
+	display: inline-block;
+	position: relative;
+	cursor: pointer; /* Cambia el cursor a una mano al pasar por encima */
+}
+
+input[type="radio"]:checked::before {
+	content: '';
+	width: 12px; /* Tamaño del punto interno */
+	height: 12px; /* Tamaño del punto interno */
+	background-color: #007bff; /* Color del punto interno (puedes cambiar este color) */
+	border-radius: 50%; /* Para que sea circular */
+	position: absolute;
+	top: 5px; /* Centrar verticalmente */
+	left: 5px; /* Centrar horizontalmente */
+}
