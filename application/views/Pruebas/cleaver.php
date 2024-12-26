@@ -1,4 +1,3 @@
-<?php require_once APPPATH . 'views/Dashboard/pruebas.php'; ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -33,26 +32,24 @@
     <header>
         <h1 class="text-center my-4">Prueba Cleaver</h1>
     </header>
-
-    <main class="container">
-        <div class="row mb-">
-            <div class="col-4">
-                <img src="<?php echo base_url('assets/img/logo.png'); ?>" class="img-fluid" alt="Logo">
+    <main>
+        <div class="row mb-4">
+            <div class="col-12 col-md-4 text-center">
+                <img src="<?php echo base_url('assets/img/logo.png'); ?>" class="img-fluid mb-4" alt="Logo">
             </div>
-            <div class="col-8">
+            <div class="col-12 col-md-8">
                 <p>
                     A continuación, encontrará una serie de características de personalidad distribuidas en grupos de
                     cuatro palabras. Para cada grupo, realice los siguientes pasos:
                 </p>
                 <ol>
-                    <li><strong>Seleccione una característica que más se adecúe a usted</strong> marcando  la casilla de la columna (+) correspondiente a esa palabra.
+                    <li><strong>Seleccione una característica que más se adecúe a usted</strong> marcando la casilla de la columna (+) correspondiente a esa palabra.
                     </li>
                     <li><strong>Seleccione una característica que menos se adecúe a usted</strong> marcando la casilla de la columna (-) correspondiente a esa palabra.
                     </li>
                 </ol>
             </div>
-            <div class="col">
-
+            <div class="col-12">
                 <strong>
                     <h5>Reglas:</h5>
                 </strong>
@@ -69,9 +66,9 @@
                     parcial. <strong>¡Gracias y muchos éxitos!</strong>
                 </p>
             </div>
-
         </div>
-
+    </main>
+    <main>
         <form id="cleaverForm" method="post" action="<?= site_url('DpiController/procesarCleaver/') ?>">
             <input type="hidden" name="DPI" value="<?= $Candidato->DPI ?>">
             <input type="hidden" name="idcleaverdata" value="<?= $Cleaverdata->idcleaverdata ?>">
@@ -119,6 +116,7 @@
             <button type="submit" class="btn btn-primary">Enviar</button>
             </div>
         </form>
+    </main>
 
         <script>
         // Validar que no se seleccionen ambas opciones en la misma fila

@@ -1,4 +1,3 @@
-<?php require_once APPPATH . 'views/Dashboard/pruebas.php'; ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -15,12 +14,12 @@
 
 <body>
 <header class="header py-3 bg-light">
-	<div class="container d-flex align-items-center">
-		<img src="<?php echo base_url('assets/img/logo.png'); ?>" alt="Gestor de Talentos Logo" class="logo me-3" style="height: 200px;">
-		<br>
-		<h1 class="title h3 mb-0">Solicitud de Empleo</h1>
-	</div>
+	<img src="<?php echo base_url('assets/img/logo.png'); ?>" class="img-fluid mx-auto d-block mb-4" alt="Logo">
+
 </header>
+
+<div class="text-center mt-3">
+<h1>Solicitud de empleo</h1></div>
 
 
 <div class="container my-5">
@@ -434,9 +433,9 @@
 							<thead>
 							<tr>
 								<th>Idiomas</th>
-								<th>Porcentaje (%) en escritura</th>
-								<th>Porcentaje (%) en lectura</th>
-								<th>Porcentaje (%) en conversación</th>
+								<th> (%) en escritura</th>
+								<th> (%) en lectura</th>
+								<th> (%) en conversación</th>
 								<th>Establecimiento donde aprendió</th>
 							</tr>
 							</thead>
@@ -470,7 +469,7 @@
 					<i class="fas fa-briefcase"></i> IV. Experiencia Laboral
 				</div>
 				<div class="card-body">
-					<p>Comience desde el último o el más reciente, puede ser su empleo actual hasta llegar al primero</p>
+					<p>Comience desde el último o el más reciente, puede ser su empleo actual hasta llegar al primero, no es neceario que llene las 4, puede dejar en blanco esta seccion si no cuenta con experiencia.</p>
 
 					<?php for ($i = 1; $i <= 3; $i++): // Repite la estructura para tres experiencias laborales ?>
 						<div class="experiencia-item mb-4">

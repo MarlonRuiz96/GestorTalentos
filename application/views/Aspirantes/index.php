@@ -20,11 +20,12 @@
 </header>
 
 <main>
-	<a href="<?= site_url('Plazas'); ?>" class="btn btn-secondary mb-3">
-		<i class="fa fa-arrow-left"></i> Volver a Plazas
+	<a href="javascript:history.back()" class="btn btn-secondary mb-3">
+		<i class="fa fa-arrow-left"></i> Volver
 	</a>
 
-	<!-- Pie Chart Section -->
+
+	<!-- Pie Chart Section
 	<div class="container mt-4">
 		<div class="row">
 			<div class="col-md-6 offset-md-3">
@@ -32,6 +33,7 @@
 			</div>
 		</div>
 	</div>
+	 -->
 
 	<!-- Applicants Table -->
 	<div class="table-responsive mt-4">
@@ -66,7 +68,7 @@
 						<td>
 							<a href="<?= site_url('CandidatoController/obtenerCandidatoPlaza/' . $aspirante->numero_documento.'/'. $aspirante->plaza_id); ?>"
 							   class="btn btn-success btn-sm">
-								<i class="fa fa-eye"></i> Ver pruebas
+								<i class="fa fa-eye"></i> Ver Proceso
 							</a>
 						</td>
 					</tr>

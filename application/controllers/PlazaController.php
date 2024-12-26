@@ -130,7 +130,7 @@ class PlazaController extends CI_Controller
 
         // Redirigir al listado con un mensaje
         $this->session->set_flashdata('success', 'Plaza actualizada correctamente.');
-        redirect('PlazasController/index');
+        redirect('PlazaController/index');
     }
 
     private function generarCodigoUnico()

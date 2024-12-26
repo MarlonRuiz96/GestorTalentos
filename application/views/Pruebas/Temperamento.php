@@ -1,4 +1,3 @@
-<?php require_once APPPATH . 'views/Dashboard/pruebas.php'; ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -18,26 +17,22 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/sb-admin-2.min.css'); ?>">
 </head>
 
-<body>
-    <header>
-        <h1>Prueba de temperamentos</h1>
-    </header>
+<header class="text-center my-4">
+    <h1 class="display-4">Prueba de temperamentos</h1>
+</header>
     <div class="container">
         <main>
-            <div class="d-flex justify-content-start">
-                <img src="<?php echo base_url('assets/img/logo.png'); ?>" class="d-block" alt="Imagen"
-                    style="width: 35%; height: auto;"><br><br>
+        <img src="<?php echo base_url('assets/img/logo.png'); ?>" class="img-fluid mx-auto d-block mb-4" alt="Logo">
+
+
                 <p class="text-center"><br><br>A continuación, deberás elegir una de las cuatro alternativas que se te
                     presentan en cada pantalla. Toma en cuenta que no podrás regresar a corregir. Debes tomar tu tiempo
-                    para elegir la mejor opción. Esta prueba, no tiene tiempo. Procura trabajar ordenadamente. Si tienes
-                    problemas en ingresar a cualquier página haz click aquí y se te apoyará.
+                    para elegir la mejor opción. Esta prueba, no tiene tiempo. Procura trabajar ordenadamente. 
 
 
                 </p>
 
-
-
-            </div><br><br><br>
+            <br>
             <h2 style="text-align: center;">
                 Llevas
                 <?php echo $Formulario->idRespuesta; ?> de preguntas de 40:
@@ -54,57 +49,44 @@
             $imagen_src4 = $valor_P4 . '.jpg'; // Concatena el valor de P1 con la extensión del archivo de imagen
             
             ?>
-            <table class="table">
-                <tr>
-                    <td style="text-align: center;">
-                        <div style="display: flex; flex-direction: column; align-items: center;">
-                            <a href="<?= site_url('DpiController/melancolico/' . $Candidato->DPI); ?>"
-                                class="btn btn-success">
-                                <?php echo $Formulario->P1; ?>
-                            </a>
-                            <img src="<?php echo base_url('assets/temperamentos/' . $imagen_src1); ?>" class="d-block"
-                                alt="Imagen" style="width: 70%; height: auto; margin-top: 10px;">
-
-                        </div>
-                    </td>
-                    <td style="text-align: center;">
-                        <div style="display: flex; flex-direction: column; align-items: center;">
-                            <a href="<?= site_url('DpiController/colerico/' . $Candidato->DPI); ?>"
-                                class="btn btn-success">
-                                <?php echo $Formulario->P2; ?>
-                            </a>
-                            <img src="<?php echo base_url('assets/temperamentos/' . $imagen_src2); ?>" class="d-block"
-                                alt="Imagen" style="width: 70%; height: auto; margin-top: 10px;">
-
-                        </div>
-                    </td>
-                    <td style="text-align: center;">
-                        <div style="display: flex; flex-direction: column; align-items: center;">
-                            <a href="<?= site_url('DpiController/flematico/' . $Candidato->DPI); ?>"
-                                class="btn btn-success">
-                                <?php echo $Formulario->P3; ?>
-                            </a>
-                            <img src="<?php echo base_url('assets/temperamentos/' . $imagen_src3); ?>" class="d-block"
-                                alt="Imagen" style="width: 70%; height: auto; margin-top: 10px;">
-
-                        </div>
-                    </td>
-                    <td style="text-align: center;">
-                        <div style="display: flex; flex-direction: column; align-items: center;">
-                            <a href="<?= site_url('DpiController/sanguineo/' . $Candidato->DPI); ?>"
-                                class="btn btn-success">
-                                <?php echo $Formulario->P4; ?>
-                            </a>
-                            <img src="<?php echo base_url('assets/temperamentos/' . $imagen_src4); ?>" class="d-block"
-                                alt="Imagen" style="width: 70%; height: auto; margin-top: 10px;">
-
-                        </div>
-                    </td>
-                </tr>
-            </table>
 
 
-            <!-- Agrega un campo oculto para almacenar la opción seleccionada -->
+            <div class="container">
+    <div class="row text-center">
+        <!-- Opción 1 -->
+        <div class="col-12 col-md-3 mb-4">
+            <a href="<?= site_url('DpiController/melancolico/' . $Candidato->DPI); ?>" class="btn btn-success w-100 mb-2">
+                <?php echo $Formulario->P1; ?>
+            </a>
+            <img src="<?php echo base_url('assets/temperamentos/' . $imagen_src1); ?>" class="img-fluid rounded" alt="Imagen 1">
+        </div>
+
+        <!-- Opción 2 -->
+        <div class="col-12 col-md-3 mb-4">
+            <a href="<?= site_url('DpiController/colerico/' . $Candidato->DPI); ?>" class="btn btn-success w-100 mb-2">
+                <?php echo $Formulario->P2; ?>
+            </a>
+            <img src="<?php echo base_url('assets/temperamentos/' . $imagen_src2); ?>" class="img-fluid rounded" alt="Imagen 2">
+        </div>
+
+        <!-- Opción 3 -->
+        <div class="col-12 col-md-3 mb-4">
+            <a href="<?= site_url('DpiController/flematico/' . $Candidato->DPI); ?>" class="btn btn-success w-100 mb-2">
+                <?php echo $Formulario->P3; ?>
+            </a>
+            <img src="<?php echo base_url('assets/temperamentos/' . $imagen_src3); ?>" class="img-fluid rounded" alt="Imagen 3">
+        </div>
+
+        <!-- Opción 4 -->
+        <div class="col-12 col-md-3 mb-4">
+            <a href="<?= site_url('DpiController/sanguineo/' . $Candidato->DPI); ?>" class="btn btn-success w-100 mb-2">
+                <?php echo $Formulario->P4; ?>
+            </a>
+            <img src="<?php echo base_url('assets/temperamentos/' . $imagen_src4); ?>" class="img-fluid rounded" alt="Imagen 4">
+        </div>
+    </div>
+</div>
+
 
     </div>
 

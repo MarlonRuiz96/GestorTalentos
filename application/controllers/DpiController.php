@@ -544,6 +544,7 @@ class DpiController extends CI_Controller
 						'cleaver' => $cleaver,
 						'plaza' => $plaza_id,
 						'solicitudEmpleo'=>'1',
+						'progreso'=>1
 					);
 
 

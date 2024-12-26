@@ -26,76 +26,112 @@
 
 
 	<main>
+		<!-- Botón para volver a la plaza -->
 		<a href="<?= site_url('Plazas'); ?>" class="btn btn-secondary mb-3">
 			<i class="fa fa-arrow-left"></i> Volver a la plaza
 		</a>
-		<a href="<?= site_url('PdfController/vervista/' . $candidato_data->plaza); ?>"
-		   class="btn btn-success sweetalert-linkReporte"
-		   style="float: right; margin-bottom: 10px;">
-			Generar Pruebas
-		</a>
 
+		<!-- Botón para generar la solicitud de empleo en PDF -->
 		<a href="<?= site_url('PdfController/solicitud/' . $candidato_data->DPI); ?>"
-		   class="btn btn-success sweetalert-linkReporte"
-		   style="float: right; margin-bottom: 10px;">
-			 Solicitud de empleo
+		   class="btn btn-success sweetalert-linkReporte float-right mb-3">
+			Solicitud de empleo
 		</a>
 
+		<div class="clearfix"></div>
+
+		<!-- Encabezado principal -->
+		<h2 class="my-4 text-center">Datos del Candidato</h2>
 
 
-		<h2 class="text">Datos del Candidato</h2>
-
-		<!-- Formulario Principal -->
-		<form>
-			<div class="form-row">
-				<div class="form-group col-md-6">
-					<label for="nombres">Nombres</label>
-					<input type="text" class="form-control" id="nombres"
-						   value="<?php echo $candidato_data->Nombres; ?>" readonly>
-				</div>
-				<div class="form-group col-md-6">
-					<label for="Puesto">Puesto</label>
-					<input type="text" class="form-control" id="Puesto"
-						   value="<?php echo $candidato_data->Puesto; ?>" readonly>
-				</div>
-				<div class="form-group col-md-6">
-					<label for="Contacto">Contacto</label>
-					<input type="text" class="form-control" id="Contacto"
-						   value="<?php echo $candidato_data->Contacto; ?>" readonly>
-				</div>
-				<div class="form-group col-md-6">
-					<label for="Correo">Correo</label>
-					<input type="email" class="form-control" id="Correo"
-						   value="<?php echo $candidato_data->Correo; ?>" readonly>
-				</div>
-				<div class="form-group col-md-6">
-					<label for="DPI">DPI</label>
-					<input type="text" class="form-control" id="DPI" value="<?php echo $candidato_data->DPI; ?>"
-						   readonly>
-				</div>
-				<div class="form-group col-md-6">
-					<label for="DPI">Plaza a la que aplicó:</label>
-					<input type="text" class="form-control" id="DPI" value="<?php echo $candidato_data->plaza; ?>"
-						   readonly>
-				</div>
-			</div>
-		</form>
-
-		<!-- Formulario de Anotaciones -->
-		<div class="form-row mt-3">
-			<div class="form-group col-md-12">
-				<label for="Anotaciones">Anotaciones</label>
-				<form id="editForm" action="<?php echo site_url('CandidatoController/guardarNotas'); ?>"
-					  method="POST">
-					<div class="anotaciones-container">
-                            <textarea class="form-control" id="Anotaciones" name="notas"
-									  style="width: 100%;"><?php echo $candidato_data->notas; ?></textarea>
-						<button type="submit" class="btn btn-primary sweetalert-guardar mt-2" id="GuardarAnotaciones"
-								style="margin-left: 10px;">Guardar</button>
+		<!-- Tarjeta con información principal del candidato -->
+		<div class="card mb-4">
+			<div class="card-body">
+				<div class="row">
+					<!-- Datos personales del candidato -->
+					<div class="col-md-6">
+						<h5><strong>Nombres:</strong> <?= $candidato_data->Nombres ?></h5>
+						<p><strong>Contacto:</strong> <?= $candidato_data->Contacto ?></p>
+						<p><strong>Correo:</strong> <?= $candidato_data->Correo ?></p>
 					</div>
-				</form>
+					<!-- Datos de la plaza y DPI -->
+					<div class="col-md-6">
+						<h5><strong>Puesto:</strong> <?= $candidato_data->Puesto ?></h5>
+						<p><strong>DPI:</strong> <?= $candidato_data->DPI ?></p>
+						<p><strong>Plaza a la que aplicó:</strong> <?= $candidato_data->plaza ?></p>
+					</div>
+				</div>
 			</div>
 		</div>
+
+		<!-- Timeline Horizontal -->
+		<!-- Timeline Horizontal -->
+
+		<div class="md-stepper-horizontal orange">
+			<?php
+			// Supongamos que $candidato_data->progreso contiene el número del paso actual (1 a 5)
+			$progreso = $candidato_data->progreso;
+
+			// Array con los títulos y descripciones de cada paso
+			$steps = [
+				1 => ["title" => "Solicitud", "optional" => "Solicitud llena"],
+				2 => ["title" => "Pruebas", "optional" => "Pruebas pendiente"],
+				3 => ["title" => "Entrevista", "optional" => "Entrevista pendiente"],
+				4 => ["title" => "Contrato", "optional" => "Contrato pendiente"],
+			];
+
+			// Verificar si el progreso indica rechazo
+			$isRejected = ($progreso == 5);
+
+			// Iterar sobre los pasos
+			foreach ($steps as $step => $data) {
+				// Determinar la clase según el progreso o rechazo
+				if ($isRejected) {
+					$class = "md-step rechazado"; // Estado rechazado
+					$dynamicText = "Rechazado"; // Texto para estado rechazado
+					$circleContent = '<i class="fa-solid fa-x"></i>'; // Ícono de rechazo
+				} elseif ($step < $progreso) {
+					$class = "md-step active done"; // Pasos completados
+					$dynamicText = $data['title'] . " realizada"; // Texto dinámico para pasos completados
+					$circleContent = '<i class="fa-solid fa-x"></i>'; // Ícono de rechazo
+				} elseif ($step == $progreso) {
+					$class = "md-step active editable"; // Paso actual
+					$dynamicText = $data['title'] . " en progreso"; // Texto dinámico para el paso actual
+					$circleContent = '<i class="fa-solid fa-x"></i>'; // Ícono de rechazo
+				} else {
+					$class = "md-step"; // Pasos pendientes
+					$dynamicText = $data['title'] . " pendiente"; // Texto dinámico para pasos pendientes
+					$circleContent = '<i class="fa-solid fa-x"></i>'; // Ícono de rechazo
+				}
+				?>
+				<div class="<?= $class ?>">
+					<div class="md-step-circle"><?= $circleContent ?></div>
+					<div class="md-step-title"><?= $data['title'] ?></div>
+					<div class="md-step-optional"><?= $dynamicText ?></div>
+					<div class="md-step-bar-left"></div>
+					<div class="md-step-bar-right"></div>
+				</div>
+			<?php } ?>
+		</div>
+
+		<div class="form-row mt-3">
+			<div class="form-group col-md-12">
+				<!-- Contenedor para los botones centrados -->
+				<div class="d-flex justify-content-center">
+					<!-- Botón Aceptar -->
+					<button type="button" class="btn btn-success mx-2 custom-button" id="AceptarCandidato"
+							onclick="cambiarEstado(<?php echo $candidato_data->progreso; ?>)">
+						<i class="fa-solid fa-check"></i> Aceptar Candidato
+					</button>
+					<!-- Botón Rechazar -->
+					<button type="button" class="btn btn-danger mx-2 custom-button" id="RechazarCandidato"
+							onclick="cambiarEstado(<?php echo $candidato_data->progreso; ?>)">
+						<i class="fa-solid fa-xmark"></i> Rechazar Candidato
+					</button>
+				</div>
+			</div>
+		</div>
+
+<main>
 
 		<!-- Navegación de Pruebas -->
 		<nav aria-label="Page navigation example">
@@ -1287,6 +1323,29 @@
 		// Agregar el evento al enlace para generar el reporte
 		document.getElementById('generateReportLink').addEventListener('click', captureAndSendImage);
 	});
+</script>
+
+<!-- Script para cambiar el estado-->
+<script>
+	function cambiarEstado(candidatoId) {
+		// Llamada AJAX para cambiar el progreso del candidato
+		fetch('<?php echo site_url('CandidatoController/progreso'); ?>/' + candidatoId, {
+			method: 'POST',
+		})
+			.then(response => response.json())
+			.then(data => {
+				if (data.success) {
+					alert('Estado cambiado con éxito.');
+					location.reload();
+				} else {
+					alert('Error al cambiar el estado.');
+				}
+			})
+			.catch(error => {
+				console.error('Error:', error);
+				alert('Hubo un problema con la solicitud.');
+			});
+	}
 </script>
 </body>
 

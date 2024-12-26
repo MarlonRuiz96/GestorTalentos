@@ -1,4 +1,3 @@
-<?php require_once APPPATH . 'views/Dashboard/pruebas.php'; ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -12,6 +11,8 @@
 </head>
 
 <body>
+<img src="<?php echo base_url('assets/img/logo.png'); ?>" class="img-fluid mx-auto d-block mb-4" alt="Logo">
+
 	<?php if ($this->session->flashdata('error')): ?>
 		<script>
 			alert('<?php echo $this->session->flashdata('error'); ?>');
@@ -35,10 +36,12 @@
 					<p><strong>Ubicación:</strong> <?php echo $plaza->ubicacion; ?></p>
 				</div>
 			</div>
-			<div class="mt-4">
-				<a href="<?php echo site_url('Solicitud'); ?>" class="btn btn-primary">Continuar con la
-					Solicitud</a>
+			<div class="d-flex justify-content-center mt-4">
+				<a href="<?php echo site_url('Solicitud'); ?>" class="btn btn-primary">
+					Continuar con la Solicitud de empleo
+				</a>
 			</div>
+
 		<?php else: ?>
 			<div class="alert alert-danger" role="alert">
 				No se encontraron datos de la plaza.

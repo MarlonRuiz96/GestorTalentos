@@ -1,5 +1,3 @@
-<?php require_once APPPATH . 'views/Dashboard/pruebas.php'; ?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -24,23 +22,18 @@
     </header>
     <div class="container">
         <main>
+        <img src="<?php echo base_url('assets/img/logo.png'); ?>" class="img-fluid mb-4" alt="Logo">
+
             <div class="d-flex justify-content-start">
-				<img src="<?php echo base_url('assets/img/logo.png'); ?>" class="d-block" alt="Imagen"
-                    style="width: 35%; height: auto;"><br><br>
                 <p class="text-center"><br><br>Seleccione las opciones que reflejen algún aspecto de su
-                    personalidad o se identifiquen con
-                    parámetros de acción ante las diferentes situaciones que se plantean. Si no se relacionan con su
-                    forma
-                    de ser o
-                    pensar, déjelas en blanco.
-
+                    personalidad o se identifiquen con parámetros de acción ante las diferentes situaciones que se plantean. 
+                    Si no se relacionan con su forma de ser o pensar, déjelas en blanco.
                 </p>
-
-
             </div><br>
-            <h2 style="text-align: center;">
+            <h5 style="text-align: center;">
                 Por favor no abandone la prueba o quedará anulada.
-            </h2>
+            </h5>
+            <p class="text-center"><br><br><strong>¡Buena suerte!</strong></p>
 
             <br><br>
 

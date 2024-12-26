@@ -1,4 +1,3 @@
-<?php require_once APPPATH . 'views/Dashboard/pruebas.php'; ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -14,13 +13,8 @@
 </head>
 
 <body>
-<header class="header py-3 bg-light">
-	<div class="container d-flex align-items-center">
-		<img src="<?php echo base_url('assets/img/logo.png'); ?>" alt="Gestor de Talentos Logo" class="logo me-3" style="height: 200px;">
-		<br>
-		<h1 class="title h3 mb-0">Pruebas psicométricas a realizar</h1>
-	</div>
-</header>
+<img src="<?php echo base_url('assets/img/logo.png'); ?>" class="img-fluid mx-auto d-block mb-4" alt="Logo">
+
 
 
 
@@ -35,8 +29,9 @@
 				<i class="fas fa-clipboard-list"></i> IV. Pruebas a Realizarse
 			</div>
 			<div class="card-body">
-				<h2 class="card-title">Pruebas a realizarse:</h2>
-				<div class="d-flex flex-wrap gap-3 mt-3">
+<h5>
+	A continuacion se le persentan una serie de pruebas que debera realizar para poder continuar con el proceso de seleccion.
+</h5>				<div class="d-flex flex-wrap gap-3 mt-3">
 					<?php if (isset($pruebas) && $pruebas->temperamento == "si" && isset($Candidato) && $Candidato->temperamento == "1"): ?>
 						<div class="test-item">
 							<a href="<?= site_url('DpiController/RealizarPruebas/' . htmlspecialchars($DPI)); ?>" class="btn btn-success">
