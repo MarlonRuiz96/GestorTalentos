@@ -49,6 +49,8 @@ class PruebasController extends CI_Controller
 					$data['pruebas'] = $plaza;
 					$data['Candidato'] = $this->CandidatoModel->VerificarDPI($DPI); // Obtener los datos del candidato
 
+				
+
 					$this->load->view('Pruebas/Pruebas', $data);
 				} else {
 					// Si no se encuentra la plaza, redirigir o manejar el error
@@ -65,10 +67,6 @@ class PruebasController extends CI_Controller
 	}
 
 	
-	
-	
-
-
 
 
 	// Método para actualizar el valor de 'pruebas' en la cookie

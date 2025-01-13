@@ -143,6 +143,50 @@ class CandidatoModel extends CI_Model
 
 	}
 
+	public function getComentario($idCandidato)
+	{
+		$this->db->select('*');
+		$this->db->from('Comments');
+		$this->db->where('idCandidato', $idCandidato);
+
+		$query = $this->db->get();
+
+		if ($query->num_rows() > 0) {
+			return $query->result(); // Retorna todos los resultados como un array
+		} else {
+			return array(); // Retorna un array vacío si no hay resultados
+		}
+	}
+
+	public function guardarComentario($idCandidato, $etapa, $comentario)
+	{
+		$data = [
+			'idCandidato' => $idCandidato,
+			'etapa' => $etapa,
+			'comment' => $comentario,
+			'fecha' => date('Y-m-d H:i:s')
+		];
+	
+		if (!$this->db->insert('Comments', $data)) {
+			$error = $this->db->error();
+			log_message('error', 'Error al insertar comentario: ' . json_encode($error));
+			return false;
+		}
+	
+		return true;
+	}
+
+	public function getNombreEtapa($etapa)
+{
+    switch ($etapa) {
+        case 1: return 'Solicitud';
+        case 2: return 'Pruebas';
+        case 3: return 'Entrevista';
+        case 4: return 'Contrato';
+        default: return 'Desconocida';
+    }
+}
+	
 	public function masGrande($idCandidato)
 	{
 		$query = $this->db->query("
@@ -627,6 +671,59 @@ Procura llevar una vida estable y ordenada, con una mente sistemática. Procede 
 	}
 
 
+	public function rechazarCandidato($idCandidato, $razon)
+	{
+		$data = array(
+			'progreso' => 6,
+			'comentario' => $razon
+		);
 
+		$this->db->where('idCandidato', $idCandidato);
+		$this->db->update('Candidato', $data);
+
+		return $this->db->affected_rows();
+	}
+
+
+	public function AvanzarFase($idCandidato, $progresoActual)
+	{
+		$data = array(
+			'progreso' => $progresoActual + 1
+		);
+
+		$this->db->where('idCandidato', $idCandidato);
+		$this->db->update('Candidato', $data);
+
+		return $this->db->affected_rows();
+	}
+
+	public function getEventoPorId($idCandidato)
+{
+	$this->db->select('*');
+	$this->db->from('Evento');
+	$this->db->where('IdCandidato', $idCandidato);
+	$query = $this->db->get();
+
+
+	if ($query->num_rows() > 0) {
+		return $query->row();
+	} else {
+		return null;
+	}
+	
+
+}
+
+public function programarEntrevista($data)
+{
+	$this->db->insert('Evento', $data);
+
+	// Extraer el idCandidato de los datos
+	$idCandidato = $data['IdCandidato'];
+
+	// Actualizar el campo 'Entrevista' en la tabla 'Candidato'
+	$this->db->where('idCandidato', $idCandidato);
+	$this->db->update('Candidato', ['Entrevista' => 1]);
+}
 
 }

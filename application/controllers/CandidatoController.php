@@ -73,17 +73,56 @@ class CandidatoController extends CI_Controller
     }
     public function VerCandidato($idCandidato)
     {
-
-
-        $data['candidato_data'] = $this->CandidatoModel->getCandidatoPorId($idCandidato);
-        $data['dataTemperamento'] = $this->CandidatoModel->getDatosPrueba($idCandidato);
-        $data['dataBriggs'] = $this->CandidatoModel->getDatosBriggs($idCandidato);
-        $data['dataValanti'] = $this->CandidatoModel->getDatosValanti($idCandidato);
-        $data['data16pf'] = $this->CandidatoModel->getDatos16pf($idCandidato);
-        $data['dataCleaver'] = $this->CandidatoModel->getDatoscleaver($idCandidato);
-		$data['interpretacionCleaver'] = $this->CandidatoModel->obtenerInterpretacionCleaver($idCandidato);
-        
-
+        $data['candidato_data']         = $this->CandidatoModel->getCandidatoPorId($idCandidato);
+        $data['dataTemperamento']       = $this->CandidatoModel->getDatosPrueba($idCandidato);
+        $data['dataBriggs']            = $this->CandidatoModel->getDatosBriggs($idCandidato);
+        $data['dataValanti']           = $this->CandidatoModel->getDatosValanti($idCandidato);
+        $data['data16pf']              = $this->CandidatoModel->getDatos16pf($idCandidato);
+        $data['dataCleaver']           = $this->CandidatoModel->getDatoscleaver($idCandidato);
+        $data['comentario']            = $this->CandidatoModel->getComentario($idCandidato);
+        $data['interpretacionCleaver'] = $this->CandidatoModel->obtenerInterpretacionCleaver($idCandidato);
+        $data['eventos']= $this->CandidatoModel->getEventoPorId($idCandidato);
+    
+        // Log para verificar el progreso actual
+        log_message('debug', '[VerCandidato] ID Candidato=' . $idCandidato . 
+            ', Progreso actual=' . $data['candidato_data']->progreso);
+    
+        // Verificar si el candidato tiene pruebas activas
+        if ($data['candidato_data']->progreso == 2) {
+            log_message('debug', '[VerCandidato] El candidato está en progreso=2. Validando pruebas...');
+            
+            // Log de cada prueba para asegurarnos de que estén en 0
+            log_message('debug', '[VerCandidato] fp16=' . $data['candidato_data']->fp16 .
+                ', Briggs=' . $data['candidato_data']->Briggs .
+                ', Valanti=' . $data['candidato_data']->Valanti .
+                ', cleaver=' . $data['candidato_data']->cleaver .
+                ', temperamento=' . $data['candidato_data']->temperamento
+            );
+    
+            if (
+                $data['candidato_data']->fp16         == 0 &&
+                $data['candidato_data']->Briggs       == 0 &&
+                $data['candidato_data']->Valanti      == 0 &&
+                $data['candidato_data']->cleaver      == 0 &&
+                $data['candidato_data']->temperamento == 0
+            ) {
+                log_message('debug', '[VerCandidato] Todas las pruebas están en 0. Se llamará a AvanzarFase.');
+    
+                $progresoActual = $data['candidato_data']->progreso;
+                log_message('debug', '[VerCandidato] Llamando AvanzarFase con progreso=' . $progresoActual);
+    
+                $this->CandidatoModel->AvanzarFase($idCandidato, $progresoActual);
+    
+                // Recargar la info del candidato después de AvanzarFase
+                $data['candidato_data'] = $this->CandidatoModel->getCandidatoPorId($idCandidato);
+                log_message('debug', '[VerCandidato] Nuevo progreso tras AvanzarFase=' . $data['candidato_data']->progreso);
+    
+            } else {
+                log_message('debug', '[VerCandidato] No se cumplen las condiciones (pruebas en 0). NO se llama AvanzarFase.');
+            }
+        } else {
+            log_message('debug', '[VerCandidato] El progreso NO es 2, es=' . $data['candidato_data']->progreso . '. No se hace nada especial.');
+        }
 
           // Validar si dataCleaver está vacío
     if (empty($data['dataCleaver'])) {
@@ -311,6 +350,7 @@ class CandidatoController extends CI_Controller
             'emocionesD' => $emocionesD,
             'trabajoD' => $trabajoD,
             'familiaD' => $familiaD,
+
             'amigoD' => $amigoD,
         );
 
@@ -569,6 +609,8 @@ class CandidatoController extends CI_Controller
 	{
 		$data['Candidato'] = $this->CandidatoModel->VerificarDPI($DPI); // Obtener los datos del candidato
 		$idCandidato = $data['Candidato']->idCandidato;
+
+
 		$this->verCandidato($idCandidato);
 	}
 
@@ -579,6 +621,110 @@ class CandidatoController extends CI_Controller
 		$this->verCandidato($idCandidato);
 	}
 
+  public function PostComment()
+  {
+    $idCandidato = $this->input->post('idCandidato');
+    $etapa= $this->input->post('etapa');
+    $comentario = $this->input->post('comentario');
+    $this->CandidatoModel->guardarComentario($idCandidato, $comentario, $etapa);
+    $this->verCandidato($idCandidato);
+  }
 
+  public function agregarComentario()
+{
+    try {
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        log_message('debug', 'Datos recibidos: ' . json_encode($data));
+
+        $idCandidato = $data['idCandidato'] ?? null;
+        $etapa = $data['etapa'] ?? null;
+        $comentario = $data['comentario'] ?? null;
+
+        if ($idCandidato && $etapa && $comentario) {
+            $this->CandidatoModel->guardarComentario($idCandidato, $etapa, $comentario);
+            log_message('debug', 'Comentario guardado con éxito.');
+            echo json_encode([
+                'success' => true,
+                'message' => 'Comentario agregado correctamente.'
+            ]);
+        } else {
+            log_message('error', 'Datos incompletos recibidos: ' . json_encode($data));
+            echo json_encode([
+                'success' => false,
+                'message' => 'Datos incompletos.'
+            ]);
+        }
+    } catch (Exception $e) {
+        log_message('error', 'Error al procesar la solicitud: ' . $e->getMessage());
+        echo json_encode([
+            'success' => false,
+            'message' => 'Error interno del servidor.'
+        ]);
+    }
 }
 
+public function rechazarCandidato()
+{
+    try {
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        log_message('debug', 'Datos recibidos: ' . json_encode($data));
+
+        
+        $idCandidato = $data['idCandidato'] ?? null;
+        $comentario = $data['comentarios'] ?? null;
+
+        if ($idCandidato && $comentario) {
+            $this->CandidatoModel->rechazarCandidato($idCandidato, $comentario);
+            log_message('debug', 'Candidato rechazado con éxito.');
+            echo json_encode([
+                'success' => true,
+                'message' => 'Candidato rechazado correctamente.'
+            ]);
+        } else {
+            log_message('error', 'Datos incompletos recibidos: ' . json_encode($data));
+            echo json_encode([
+                'success' => false,
+                'message' => 'Datos incompletos.'
+            ]);
+        }
+    } catch (Exception $e) {
+        log_message('error', 'Error al procesar la solicitud: ' . $e->getMessage());
+        echo json_encode([
+            'success' => false,
+            'message' => 'Error interno del servidor en el controller.'
+        ]);
+    }
+}
+
+public function ContinuarProceso($idCandidato, $proceso)
+{
+    $this->CandidatoModel->AvanzarFase($idCandidato, $proceso);
+    $this->verCandidato($idCandidato);
+}
+
+public function ProgramarEvento ($idCandidato, $tipoEvento)
+{
+  
+    // Obtiene los datos enviados desde el formulario
+    $idCandidato = $this->input->post('idCandidato');
+    $fecha = $this->input->post('fechaEntrevista');
+    $hora = $this->input->post('horaEntrevista');
+    $lugar = $this->input->post('lugarEntrevista');
+
+    // Prepara los datos para la inserción
+    $data = [
+        'IdCandidato' => $idCandidato,
+        'TipoEvento' => $tipoEvento, // Puedes cambiarlo según el caso
+        'Fecha' => $fecha,
+        'Hora' => $hora,
+        'Lugar' => $lugar
+    ];
+
+    // Llama al modelo para insertar los datos
+        $this->CandidatoModel->programarEntrevista($data);
+        $this->verCandidato($idCandidato);
+}
+
+}
