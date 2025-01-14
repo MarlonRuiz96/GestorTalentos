@@ -61,172 +61,189 @@
                 </div>
             </div>
             <?php if ($candidato_data->progreso == 6): ?>
-            <div class="alert alert-danger mt-3 text-center" role="alert">
-                <strong>Este candidato ya no continua en el proceso.</strong><br>
-                Motivo: <?= $candidato_data->comentario ?>
-            </div>
+                <div class="alert alert-danger mt-3 text-center" role="alert">
+                    <strong>Este candidato ya no continua en el proceso.</strong><br>
+                    Motivo: <?= $candidato_data->comentario ?>
+                </div>
             <?php endif; ?>
             <?php if ($candidato_data->progreso == 3): ?>
                 <?php if ($candidato_data->Entrevista == null): ?>
-                <div class="card mt-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Programar Entrevista</h5>
-                        <form action="<?= site_url('CandidatoController/ProgramarEvento/' . $candidato_data->idCandidato); ?>" method="post">
-                            <input type="hidden" name="idCandidato" value="<?= $candidato_data->idCandidato; ?>">
-                            <input type="hidden" name="idCandidato" value="Entrevista">
+                    <div class="card mt-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Programar Entrevista</h5>
+                            <form
+                                action="<?= site_url('CandidatoController/ProgramarEvento/' . $candidato_data->idCandidato); ?>"
+                                method="post">
+                                <input type="hidden" name="idCandidato" value="<?= $candidato_data->idCandidato; ?>">
+                                <input type="hidden" name="idCandidato" value="Entrevista">
 
-                            <div class="mb-3">
-                                <label for="fechaEntrevista" class="form-label">Fecha de la Entrevista</label>
-                                <input type="date" class="form-control" id="fechaEntrevista" name="fechaEntrevista" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="horaEntrevista" class="form-label">Hora de la Entrevista</label>
-                                <input type="time" class="form-control" id="horaEntrevista" name="horaEntrevista" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="lugarEntrevista" class="form-label">Lugar de la Entrevista</label>
-                                <input type="text" class="form-control" id="lugarEntrevista" name="lugarEntrevista" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Programar Entrevista</button>
-                        </form>
+                                <div class="mb-3">
+                                    <label for="fechaEntrevista" class="form-label">Fecha de la Entrevista</label>
+                                    <input type="date" class="form-control" id="fechaEntrevista" name="fechaEntrevista"
+                                        required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="horaEntrevista" class="form-label">Hora de la Entrevista</label>
+                                    <input type="time" class="form-control" id="horaEntrevista" name="horaEntrevista" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="lugarEntrevista" class="form-label">Lugar de la Entrevista</label>
+                                    <input type="text" class="form-control" id="lugarEntrevista" name="lugarEntrevista"
+                                        required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Programar Entrevista</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
                 <?php else: ?>
-                <div class="alert alert-info mt-3 text-left" role="alert">
-                    <h5><i class="fa-solid fa-calendar-check"></i> <strong>Entrevista Programada</strong></h5>
-                    <p>
-                        <i class="fa-solid fa-calendar-day"></i> Fecha: <?= $eventos->Fecha ?><br>
-                        <i class="fa-solid fa-clock"></i> Hora: <?= $eventos->Hora ?><br>
-                        <i class="fa-solid fa-map-marker-alt"></i> Lugar: <?= $eventos->Lugar ?>
-                    </p>
-                </div>
+                    <div class="alert alert-info mt-3 text-left" role="alert">
+                        <h5><i class="fa-solid fa-calendar-check"></i> <strong>Entrevista Programada</strong></h5>
+                        <p>
+                            <i class="fa-solid fa-calendar-day"></i> Fecha: <?= $eventos->Fecha ?><br>
+                            <i class="fa-solid fa-clock"></i> Hora: <?= $eventos->Hora ?><br>
+                            <i class="fa-solid fa-map-marker-alt"></i> Lugar: <?= $eventos->Lugar ?>
+                        </p>
+                        <hr>
+                        <p>
+                            <i class="fa-solid fa-info-circle"></i> <strong>Nota:</strong> Una vez concluida la entrevista,
+                            puede continuar o rechazar al candidato utilizando las opciones disponibles en la parte inferior de
+                            esta página. Además, puede agregar su feedback sobre la entrevista en la sección de comentarios para
+                            un mejor seguimiento del proceso.
+                        </p>
+
+                    </div>
+
                 <?php endif; ?>
             <?php endif; ?>
 
             <?php if ($candidato_data->progreso == 4): ?>
                 <?php if ($candidato_data->Entrevista == null): ?>
-                <div class="card mt-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Programar Firma Contrato</h5>
-                        <form action="<?= site_url('CandidatoController/ProgramarEvento/' . $candidato_data->idCandidato); ?>" method="post">
-                            <input type="hidden" name="idCandidato" value="<?= $candidato_data->idCandidato; ?>">
-                            <input type="hidden" name="idCandidato" value="Contrato">
+                    <div class="card mt-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Programar Firma Contrato</h5>
+                            <form
+                                action="<?= site_url('CandidatoController/ProgramarEvento/' . $candidato_data->idCandidato); ?>"
+                                method="post">
+                                <input type="hidden" name="idCandidato" value="<?= $candidato_data->idCandidato; ?>">
+                                <input type="hidden" name="idCandidato" value="Contrato">
 
-                            <div class="mb-3">
-                                <label for="fechaEntrevista" class="form-label">Fecha de la Entrevista</label>
-                                <input type="date" class="form-control" id="fechaEntrevista" name="fechaEntrevista" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="horaEntrevista" class="form-label">Hora de la Entrevista</label>
-                                <input type="time" class="form-control" id="horaEntrevista" name="horaEntrevista" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="lugarEntrevista" class="form-label">Lugar de la Entrevista</label>
-                                <input type="text" class="form-control" id="lugarEntrevista" name="lugarEntrevista" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Programar Entrevista</button>
-                        </form>
+                                <div class="mb-3">
+                                    <label for="fechaEntrevista" class="form-label">Fecha de la Entrevista</label>
+                                    <input type="date" class="form-control" id="fechaEntrevista" name="fechaEntrevista"
+                                        required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="horaEntrevista" class="form-label">Hora de la Entrevista</label>
+                                    <input type="time" class="form-control" id="horaEntrevista" name="horaEntrevista" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="lugarEntrevista" class="form-label">Lugar de la Entrevista</label>
+                                    <input type="text" class="form-control" id="lugarEntrevista" name="lugarEntrevista"
+                                        required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Programar Entrevista</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
                 <?php else: ?>
-                <div class="alert alert-info mt-3 text-left" role="alert">
-                    <h5><i class="fa-solid fa-calendar-check"></i> <strong>Entrevista Programada</strong></h5>
-                    <p>
-                        <i class="fa-solid fa-calendar-day"></i> Fecha: <?= $eventos->Fecha ?><br>
-                        <i class="fa-solid fa-clock"></i> Hora: <?= $eventos->Hora ?><br>
-                        <i class="fa-solid fa-map-marker-alt"></i> Lugar: <?= $eventos->Lugar ?>
-                    </p>
-                </div>
+                    <div class="alert alert-info mt-3 text-left" role="alert">
+                        <h5><i class="fa-solid fa-calendar-check"></i> <strong>Entrevista Programada</strong></h5>
+                        <p>
+                            <i class="fa-solid fa-calendar-day"></i> Fecha: <?= $eventos->Fecha ?><br>
+                            <i class="fa-solid fa-clock"></i> Hora: <?= $eventos->Hora ?><br>
+                            <i class="fa-solid fa-map-marker-alt"></i> Lugar: <?= $eventos->Lugar ?>
+                        </p>
+                    </div>
                 <?php endif; ?>
             <?php endif; ?>
-            
+
 
             <div class="timeline-container">
                 <ul class="timeline">
                     <?php
-        $progreso = $candidato_data->progreso; // Obtener el progreso del candidato
-        $steps = [
-            1 => ["title" => "Solicitud", "icon" => "fa-file-alt"], // Icono: Archivo
-            2 => ["title" => "Pruebas", "icon" => "fa-vial"],      // Icono: Probeta
-            3 => ["title" => "Entrevista", "icon" => "fa-user-tie"], // Icono: Persona con corbata
-            4 => ["title" => "Contrato", "icon" => "fa-file-contract"],// Icono: Contrato
-        ];
-        $isRejected = ($progreso == 6); // Verificar si el candidato fue rechazado
-
-        foreach ($steps as $step => $data) {
-            $class = "step";
-            $statusText = $data['title'] . " pendiente";
-            $iconClass = $data['icon'];
-            $iconStatus = '<i class="fa-solid fa-regular fa-circle"></i>'; // Icono por defecto (círculo vacío)
-
-            if ($isRejected) {
-                $class .= " rejected";
-                $statusText = "Rechazado";
-                $iconStatus = '<i class="fa-solid fa-xmark"></i>'; // Icono de rechazo (X)
-            } elseif ($step < $progreso) {
-                $class .= " completed";
-                $statusText = $data['title'] . " realizada";
-                $iconStatus = '<i class="fa-solid fa-check"></i>'; // Icono de completado (check)
-            } elseif ($step == $progreso) {
-                $class .= " active";
-                $statusText = $data['title'] . " en progreso";
-                $iconStatus = '<i class="fa-solid fa-spinner fa-spin"></i>'; // Icono de en progreso (spinner)
-            }
-            ?>
-                    <li class="<?= $class ?>">
-                        <div class="step-icon"><?= $iconStatus ?></div>
-                        <div class="step-content">
-                            <h3 class="step-title"><?= $data['title'] ?></h3>
-                            <p class="step-status"><?= $statusText ?></p>
-                        </div>
-                    </li>
+                    $progreso = $candidato_data->progreso; // Obtener el progreso del candidato
+                    $steps = [
+                        1 => ["title" => "Solicitud", "icon" => "fa-file-alt"], // Icono: Archivo
+                        2 => ["title" => "Pruebas", "icon" => "fa-vial"],      // Icono: Probeta
+                        3 => ["title" => "Entrevista", "icon" => "fa-user-tie"], // Icono: Persona con corbata
+                        4 => ["title" => "Contrato", "icon" => "fa-file-contract"],// Icono: Contrato
+                    ];
+                    $isRejected = ($progreso == 6); // Verificar si el candidato fue rechazado
+                    
+                    foreach ($steps as $step => $data) {
+                        $class = "step";
+                        $statusText = $data['title'] . " pendiente";
+                        $iconClass = $data['icon'];
+                        $iconStatus = '<i class="fa-solid fa-regular fa-circle"></i>'; // Icono por defecto (círculo vacío)
+                    
+                        if ($isRejected) {
+                            $class .= " rejected";
+                            $statusText = "Rechazado";
+                            $iconStatus = '<i class="fa-solid fa-xmark"></i>'; // Icono de rechazo (X)
+                        } elseif ($step < $progreso) {
+                            $class .= " completed";
+                            $statusText = $data['title'] . " realizada";
+                            $iconStatus = '<i class="fa-solid fa-check"></i>'; // Icono de completado (check)
+                        } elseif ($step == $progreso) {
+                            $class .= " active";
+                            $statusText = $data['title'] . " en progreso";
+                            $iconStatus = '<i class="fa-solid fa-spinner fa-spin"></i>'; // Icono de en progreso (spinner)
+                        }
+                        ?>
+                        <li class="<?= $class ?>">
+                            <div class="step-icon"><?= $iconStatus ?></div>
+                            <div class="step-content">
+                                <h3 class="step-title"><?= $data['title'] ?></h3>
+                                <p class="step-status"><?= $statusText ?></p>
+                            </div>
+                        </li>
                     <?php } ?>
                 </ul>
             </div>
             <div class="timeline-wrapper">
                 <div class="timeline-container2">
                     <?php if (!empty($comentario)): ?>
-                    <?php foreach ($comentario as $comentarios): ?>
-                    <?php
-                    // Determinamos el nombre y color de la etapa
-                    $etapa = '';
-                    $stageColorClass = '';
+                        <?php foreach ($comentario as $comentarios): ?>
+                            <?php
+                            // Determinamos el nombre y color de la etapa
+                            $etapa = '';
+                            $stageColorClass = '';
 
-                    switch ($comentarios->Etapa) {
-                        case 1:
-                            $etapa = 'Solicitud';
-                            $stageColorClass = 'stage-solicitud';
-                            break;
-                        case 2:
-                            $etapa = 'Pruebas';
-                            $stageColorClass = 'stage-pruebas';
-                            break;
-                        case 3:
-                            $etapa = 'Entrevista';
-                            $stageColorClass = 'stage-entrevista';
-                            break;
-                        case 4:
-                            $etapa = 'Contrato';
-                            $stageColorClass = 'stage-contrato';
-                            break;
-                        default:
-                            $etapa = 'Desconocida';
-                            $stageColorClass = 'stage-desconocida';
-                            break;
-                    }
-                ?>
-                    <div class="timeline-item <?= $stageColorClass ?>">
-                        <div class="timeline-content">
-                            <h5>
-                                <?= $etapa ?>
-                                <span class="date"><?= $comentarios->Fecha ?></span>
-                            </h5>
-                            <p><?= $comentarios->comment ?></p>
-                        </div>
-                    </div>
-                    <?php endforeach; ?>
+                            switch ($comentarios->Etapa) {
+                                case 1:
+                                    $etapa = 'Solicitud';
+                                    $stageColorClass = 'stage-solicitud';
+                                    break;
+                                case 2:
+                                    $etapa = 'Pruebas';
+                                    $stageColorClass = 'stage-pruebas';
+                                    break;
+                                case 3:
+                                    $etapa = 'Entrevista';
+                                    $stageColorClass = 'stage-entrevista';
+                                    break;
+                                case 4:
+                                    $etapa = 'Contrato';
+                                    $stageColorClass = 'stage-contrato';
+                                    break;
+                                default:
+                                    $etapa = 'Desconocida';
+                                    $stageColorClass = 'stage-desconocida';
+                                    break;
+                            }
+                            ?>
+                            <div class="timeline-item <?= $stageColorClass ?>">
+                                <div class="timeline-content">
+                                    <h5>
+                                        <?= $etapa ?>
+                                        <span class="date"><?= $comentarios->Fecha ?></span>
+                                    </h5>
+                                    <p><?= $comentarios->comment ?></p>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
                     <?php else: ?>
-                    <p class="no-comments" id="comentarios">Aún no hay comentarios.</p>
+                        <p class="no-comments" id="comentarios">Aún no hay comentarios.</p>
                     <?php endif; ?>
                 </div>
             </div>
@@ -271,7 +288,11 @@
                         </button>
                         <!-- Botón Aceptar -->
                         <button id="btnContinuar" class="btn btn-success">Continuar Proceso</button>
-
+                        <br>    
+                        <a href="<?= site_url('EmailController/enviarCorreo/'); ?>"
+                            class="btn btn-warning sweetalert-reiniciar">
+                            Enviar correo
+                        </a>
 
                     </div>
                 </div>
@@ -324,24 +345,24 @@
                             <h3 style="margin-right: 400px;">Temperamento</h3>
                             <div>
                                 <?php if (!($candidato_data->temperamento)): ?>
-                                <a href="<?= site_url('CandidatoController/activarPruebas/' . $candidato_data->DPI . '/temperamento'); ?>"
-                                    class="btn btn-success sweetalert-activar" data-title="¿Activar la prueba?">Activar
-                                    Prueba</a>
+                                    <a href="<?= site_url('CandidatoController/activarPruebas/' . $candidato_data->DPI . '/temperamento'); ?>"
+                                        class="btn btn-success sweetalert-activar" data-title="¿Activar la prueba?">Activar
+                                        Prueba</a>
                                 <?php else: ?>
-                                <a href="#" class="btn btn-success disabled"
-                                    style="pointer-events: none; opacity: 0.5;">Prueba
-                                    activada</a>
+                                    <a href="#" class="btn btn-success disabled"
+                                        style="pointer-events: none; opacity: 0.5;">Prueba
+                                        activada</a>
                                 <?php endif; ?>
 
                                 <?php if ($candidato_data->temperamento): ?>
-                                <a href="<?= site_url('CandidatoController/desactivarPruebas/' . $candidato_data->DPI . '/temperamento'); ?>"
-                                    class="btn btn-danger sweetalert-desactivar"
-                                    data-title="¿Desactivar la Prueba">Desactivar
-                                    Prueba</a>
+                                    <a href="<?= site_url('CandidatoController/desactivarPruebas/' . $candidato_data->DPI . '/temperamento'); ?>"
+                                        class="btn btn-danger sweetalert-desactivar"
+                                        data-title="¿Desactivar la Prueba">Desactivar
+                                        Prueba</a>
                                 <?php else: ?>
-                                <a href="#" class="btn btn-danger disabled"
-                                    style="pointer-events: none; opacity: 0.5;">Prueba
-                                    desactivada</a>
+                                    <a href="#" class="btn btn-danger disabled"
+                                        style="pointer-events: none; opacity: 0.5;">Prueba
+                                        desactivada</a>
                                 <?php endif; ?>
 
                                 <a href="<?= site_url('CandidatoController/reiniciarDatos/' . $candidato_data->DPI . '/temperamento'); ?>"
@@ -434,24 +455,24 @@
                             <h2 style="margin-right: 400px;">Myers-Briggs</h2>
                             <div>
                                 <?php if (!($candidato_data->Briggs)): ?>
-                                <a href="<?= site_url('CandidatoController/activarPruebas/' . $candidato_data->DPI . '/Briggs'); ?>"
-                                    class="btn btn-success sweetalert-activar" data-title="¿Activar la prueba?">Activar
-                                    Prueba</a>
+                                    <a href="<?= site_url('CandidatoController/activarPruebas/' . $candidato_data->DPI . '/Briggs'); ?>"
+                                        class="btn btn-success sweetalert-activar" data-title="¿Activar la prueba?">Activar
+                                        Prueba</a>
                                 <?php else: ?>
-                                <a href="#" class="btn btn-success disabled"
-                                    style="pointer-events: none; opacity: 0.5;">Prueba
-                                    activada</a>
+                                    <a href="#" class="btn btn-success disabled"
+                                        style="pointer-events: none; opacity: 0.5;">Prueba
+                                        activada</a>
                                 <?php endif; ?>
 
                                 <?php if ($candidato_data->Briggs): ?>
-                                <a href="<?= site_url('CandidatoController/desactivarPruebas/' . $candidato_data->DPI . '/Briggs'); ?>"
-                                    class="btn btn-danger sweetalert-desactivar"
-                                    data-title="¿Desactivar la Prueba">Desactivar
-                                    Prueba</a>
+                                    <a href="<?= site_url('CandidatoController/desactivarPruebas/' . $candidato_data->DPI . '/Briggs'); ?>"
+                                        class="btn btn-danger sweetalert-desactivar"
+                                        data-title="¿Desactivar la Prueba">Desactivar
+                                        Prueba</a>
                                 <?php else: ?>
-                                <a href="#" class="btn btn-danger disabled"
-                                    style="pointer-events: none; opacity: 0.5;">Prueba
-                                    desactivada</a>
+                                    <a href="#" class="btn btn-danger disabled"
+                                        style="pointer-events: none; opacity: 0.5;">Prueba
+                                        desactivada</a>
                                 <?php endif; ?>
 
                                 <a href="<?= site_url('CandidatoController/reiniciarDatos/' . $candidato_data->DPI . '/Briggs'); ?>"
@@ -563,24 +584,24 @@
                             <h3 style="margin-right: 500px;">Valanti</h3>
                             <div>
                                 <?php if (!($candidato_data->Valanti)): ?>
-                                <a href="<?= site_url('CandidatoController/activarPruebas/' . $candidato_data->DPI . '/valanti'); ?>"
-                                    class="btn btn-success sweetalert-activar" data-title="¿Activar la prueba?">Activar
-                                    Prueba</a>
+                                    <a href="<?= site_url('CandidatoController/activarPruebas/' . $candidato_data->DPI . '/valanti'); ?>"
+                                        class="btn btn-success sweetalert-activar" data-title="¿Activar la prueba?">Activar
+                                        Prueba</a>
                                 <?php else: ?>
-                                <a href="#" class="btn btn-success disabled"
-                                    style="pointer-events: none; opacity: 0.5;">Prueba
-                                    activada</a>
+                                    <a href="#" class="btn btn-success disabled"
+                                        style="pointer-events: none; opacity: 0.5;">Prueba
+                                        activada</a>
                                 <?php endif; ?>
 
                                 <?php if ($candidato_data->Valanti): ?>
-                                <a href="<?= site_url('CandidatoController/desactivarPruebas/' . $candidato_data->DPI . '/valanti'); ?>"
-                                    class="btn btn-danger sweetalert-desactivar"
-                                    data-title="¿Desactivar la Prueba">Desactivar
-                                    Prueba</a>
+                                    <a href="<?= site_url('CandidatoController/desactivarPruebas/' . $candidato_data->DPI . '/valanti'); ?>"
+                                        class="btn btn-danger sweetalert-desactivar"
+                                        data-title="¿Desactivar la Prueba">Desactivar
+                                        Prueba</a>
                                 <?php else: ?>
-                                <a href="#" class="btn btn-danger disabled"
-                                    style="pointer-events: none; opacity: 0.5;">Prueba
-                                    desactivada</a>
+                                    <a href="#" class="btn btn-danger disabled"
+                                        style="pointer-events: none; opacity: 0.5;">Prueba
+                                        desactivada</a>
                                 <?php endif; ?>
 
                                 <a href="<?= site_url('CandidatoController/reiniciarDatos/' . $candidato_data->DPI . '/valanti'); ?>"
@@ -692,24 +713,24 @@
                             <h3 style="margin-right: 500px;">16 P.F</h3>
                             <div>
                                 <?php if (!($candidato_data->fp16)): ?>
-                                <a href="<?= site_url('CandidatoController/activarPruebas/' . $candidato_data->DPI . '/fp16'); ?>"
-                                    class="btn btn-success sweetalert-activar" data-title="¿Activar la prueba?">Activar
-                                    Prueba</a>
+                                    <a href="<?= site_url('CandidatoController/activarPruebas/' . $candidato_data->DPI . '/fp16'); ?>"
+                                        class="btn btn-success sweetalert-activar" data-title="¿Activar la prueba?">Activar
+                                        Prueba</a>
                                 <?php else: ?>
-                                <a href="#" class="btn btn-success disabled"
-                                    style="pointer-events: none; opacity: 0.5;">Prueba
-                                    activada</a>
+                                    <a href="#" class="btn btn-success disabled"
+                                        style="pointer-events: none; opacity: 0.5;">Prueba
+                                        activada</a>
                                 <?php endif; ?>
 
                                 <?php if ($candidato_data->fp16): ?>
-                                <a href="<?= site_url('CandidatoController/desactivarPruebas/' . $candidato_data->DPI . '/fp16'); ?>"
-                                    class="btn btn-danger sweetalert-desactivar"
-                                    data-title="¿Desactivar la Prueba">Desactivar
-                                    Prueba</a>
+                                    <a href="<?= site_url('CandidatoController/desactivarPruebas/' . $candidato_data->DPI . '/fp16'); ?>"
+                                        class="btn btn-danger sweetalert-desactivar"
+                                        data-title="¿Desactivar la Prueba">Desactivar
+                                        Prueba</a>
                                 <?php else: ?>
-                                <a href="#" class="btn btn-danger disabled"
-                                    style="pointer-events: none; opacity: 0.5;">Prueba
-                                    desactivada</a>
+                                    <a href="#" class="btn btn-danger disabled"
+                                        style="pointer-events: none; opacity: 0.5;">Prueba
+                                        desactivada</a>
                                 <?php endif; ?>
 
                                 <a href="<?= site_url('CandidatoController/reiniciarDatos/' . $candidato_data->DPI . '/fp16'); ?>"
@@ -870,24 +891,24 @@
                             <h3 style="margin-right: 500px;">Cleaver</h3>
                             <div>
                                 <?php if (!($candidato_data->cleaver)): ?>
-                                <a href="<?= site_url('CandidatoController/activarPruebas/' . $candidato_data->DPI . '/cleaver'); ?>"
-                                    class="btn btn-success sweetalert-activar" data-title="¿Activar la prueba?">Activar
-                                    Prueba</a>
+                                    <a href="<?= site_url('CandidatoController/activarPruebas/' . $candidato_data->DPI . '/cleaver'); ?>"
+                                        class="btn btn-success sweetalert-activar" data-title="¿Activar la prueba?">Activar
+                                        Prueba</a>
                                 <?php else: ?>
-                                <a href="#" class="btn btn-success disabled"
-                                    style="pointer-events: none; opacity: 0.5;">Prueba
-                                    activada</a>
+                                    <a href="#" class="btn btn-success disabled"
+                                        style="pointer-events: none; opacity: 0.5;">Prueba
+                                        activada</a>
                                 <?php endif; ?>
 
                                 <?php if ($candidato_data->cleaver): ?>
-                                <a href="<?= site_url('CandidatoController/desactivarPruebas/' . $candidato_data->DPI . '/cleaver'); ?>"
-                                    class="btn btn-danger sweetalert-desactivar"
-                                    data-title="¿Desactivar la Prueba">Desactivar
-                                    Prueba</a>
+                                    <a href="<?= site_url('CandidatoController/desactivarPruebas/' . $candidato_data->DPI . '/cleaver'); ?>"
+                                        class="btn btn-danger sweetalert-desactivar"
+                                        data-title="¿Desactivar la Prueba">Desactivar
+                                        Prueba</a>
                                 <?php else: ?>
-                                <a href="#" class="btn btn-danger disabled"
-                                    style="pointer-events: none; opacity: 0.5;">Prueba
-                                    desactivada</a>
+                                    <a href="#" class="btn btn-danger disabled"
+                                        style="pointer-events: none; opacity: 0.5;">Prueba
+                                        desactivada</a>
                                 <?php endif; ?>
 
                                 <a href="<?= site_url('CandidatoController/reiniciarDatos/' . $candidato_data->DPI . '/cleaver'); ?>"
@@ -976,12 +997,12 @@
                                 <h2 style="color: #2c3e50; font-weight: bold;">Interpretación del Perfil</h2>
                                 <p style="font-size: 16px; line-height: 1.6; color: #555;">
                                     <?php
-							if (!empty($interpretacionCleaver['interpretacion'])) {
-								echo $interpretacionCleaver['interpretacion'];
-							} else {
-								echo 'No hay interpretación disponible.';
-							}
-							?>
+                                    if (!empty($interpretacionCleaver['interpretacion'])) {
+                                        echo $interpretacionCleaver['interpretacion'];
+                                    } else {
+                                        echo 'No hay interpretación disponible.';
+                                    }
+                                    ?>
                                 </p>
 
                             </div>
@@ -1004,22 +1025,22 @@
 
     <!-- En tu vista, por ejemplo: application/views/mi_vista.php -->
     <script>
-    // Crear variable global o local, según tu conveniencia
-    var CANDIDATO_PROGRESO = <?php echo $candidato_data->progreso; ?>;
-    var SITE_URL_AGREGAR_COMENTARIO = "<?php echo site_url('CandidatoController/agregarComentario'); ?>";
-    var SITE_URL_RECHAZAR_CANDIDATO = "<?php echo site_url('CandidatoController/rechazarCandidato'); ?>";
-    var RUTA_CONTINUAR_PROCESO = "<?php echo site_url('CandidatoController/ContinuarProceso/' . $candidato_data->idCandidato . '/' . $candidato_data->progreso); ?>";
+        // Crear variable global o local, según tu conveniencia
+        var CANDIDATO_PROGRESO = <?php echo $candidato_data->progreso; ?>;
+        var SITE_URL_AGREGAR_COMENTARIO = "<?php echo site_url('CandidatoController/agregarComentario'); ?>";
+        var SITE_URL_RECHAZAR_CANDIDATO = "<?php echo site_url('CandidatoController/rechazarCandidato'); ?>";
+        var RUTA_CONTINUAR_PROCESO = "<?php echo site_url('CandidatoController/ContinuarProceso/' . $candidato_data->idCandidato . '/' . $candidato_data->progreso); ?>";
 
 
-    //GRAFICAS DE LAS PREUBAS
-    var DATA_BRIGGS = <?php echo json_encode($dataBriggs); ?>;
-    var DATA_TEMPERAMENTOS = <?php echo json_encode($dataTemperamento); ?>;
-    var DATA_VALANTI = <?php echo json_encode($dataValanti); ?>;
-    var CANDIDATO_DATA = <?php echo json_encode($candidato_data); ?>;
-    var DATA_16PF = <?php echo json_encode($data16pf); ?>;
-    var CLEAVER = <?php echo json_encode($dataCleaver); ?>;
-    var CLEAVER2 = <?php echo json_encode($candidato_data); ?>;
-    var INTERPRETACION_CLEAVER = <?php echo json_encode($interpretacionCleaver); ?>;
+        //GRAFICAS DE LAS PREUBAS
+        var DATA_BRIGGS = <?php echo json_encode($dataBriggs); ?>;
+        var DATA_TEMPERAMENTOS = <?php echo json_encode($dataTemperamento); ?>;
+        var DATA_VALANTI = <?php echo json_encode($dataValanti); ?>;
+        var CANDIDATO_DATA = <?php echo json_encode($candidato_data); ?>;
+        var DATA_16PF = <?php echo json_encode($data16pf); ?>;
+        var CLEAVER = <?php echo json_encode($dataCleaver); ?>;
+        var CLEAVER2 = <?php echo json_encode($candidato_data); ?>;
+        var INTERPRETACION_CLEAVER = <?php echo json_encode($interpretacionCleaver); ?>;
 
 
     </script>
@@ -1041,7 +1062,7 @@
     <script src="<?php echo base_url('assets/js/Admin/AvanzarFase.js'); ?>"></script>
 
 
-    
+
 
 
 </body>
