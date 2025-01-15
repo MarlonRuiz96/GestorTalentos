@@ -724,6 +724,7 @@ public function ProgramarEvento ($idCandidato, $tipoEvento)
 
     // Llama al modelo para insertar los datos
         $this->CandidatoModel->programarEntrevista($data);
+        $this->EmailController->enviarCorreo($idCandidato);
         $this->verCandidato($idCandidato);
 }
 
