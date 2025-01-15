@@ -289,7 +289,7 @@
                         <!-- Botón Aceptar -->
                         <button id="btnContinuar" class="btn btn-success">Continuar Proceso</button>
                         <br>    
-                        <a href="<?= site_url('EmailController/enviarCorreo/'); ?>"
+                        <a href="<?= site_url('EmailController/enviarCorreo/' . $candidato_data->idCandidato); ?>"
                             class="btn btn-warning sweetalert-reiniciar">
                             Enviar correo
                         </a>
