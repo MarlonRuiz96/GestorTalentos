@@ -667,22 +667,56 @@ class CandidatoController extends CI_Controller
 public function rechazarCandidato()
 {
     try {
+        // Obtén los datos enviados en el cuerpo de la solicitud (JSON)
         $data = json_decode(file_get_contents('php://input'), true);
 
         log_message('debug', 'Datos recibidos: ' . json_encode($data));
 
-        
+        // Extrae los valores de idCandidato y comentarios
         $idCandidato = $data['idCandidato'] ?? null;
         $comentario = $data['comentarios'] ?? null;
 
+        // Verifica si los datos son válidos
         if ($idCandidato && $comentario) {
+            // Llama al modelo para registrar el rechazo
             $this->CandidatoModel->rechazarCandidato($idCandidato, $comentario);
             log_message('debug', 'Candidato rechazado con éxito.');
-            echo json_encode([
-                'success' => true,
-                'message' => 'Candidato rechazado correctamente.'
-            ]);
+
+            // Obtén los datos necesarios para el correo
+            $candidato = $this->CandidatoModel->getCandidatoPorId($idCandidato);
+
+            // Verifica que el candidato y su correo existan
+            if (empty($candidato) || empty($candidato->Correo)) {
+                log_message('error', 'El candidato no tiene un correo definido.');
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'El candidato no tiene un correo definido.'
+                ]);
+                return;
+            }
+
+            // Datos para la plantilla de correo
+            $datosCorreo = [
+                'nombreCandidato' => $candidato->Nombres,
+            ];
+
+            // Carga y utiliza la biblioteca Correo para enviar el email
+            $this->load->library('correo');
+            if ($this->correo->enviarCorreo($candidato->Correo, 'Actualización de la Plaza', 'Rechazo', $datosCorreo)) {
+                log_message('debug', 'Correo de rechazo enviado con éxito.');
+                echo json_encode([
+                    'success' => true,
+                    'message' => 'Candidato rechazado y notificación enviada.'
+                ]);
+            } else {
+                log_message('error', 'Error al enviar el correo de rechazo.');
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Candidato rechazado, pero no se pudo enviar la notificación.'
+                ]);
+            }
         } else {
+            // Datos incompletos
             log_message('error', 'Datos incompletos recibidos: ' . json_encode($data));
             echo json_encode([
                 'success' => false,
@@ -690,13 +724,15 @@ public function rechazarCandidato()
             ]);
         }
     } catch (Exception $e) {
+        // Manejo de excepciones
         log_message('error', 'Error al procesar la solicitud: ' . $e->getMessage());
         echo json_encode([
             'success' => false,
-            'message' => 'Error interno del servidor en el controller.'
+            'message' => 'Error interno del servidor.'
         ]);
     }
 }
+
 
 public function ContinuarProceso($idCandidato, $proceso)
 {
@@ -704,28 +740,53 @@ public function ContinuarProceso($idCandidato, $proceso)
     $this->verCandidato($idCandidato);
 }
 
-public function ProgramarEvento ($idCandidato, $tipoEvento)
+public function ProgramarEvento($idCandidato, $tipoEvento)
 {
-  
     // Obtiene los datos enviados desde el formulario
-    $idCandidato = $this->input->post('idCandidato');
     $fecha = $this->input->post('fechaEntrevista');
     $hora = $this->input->post('horaEntrevista');
     $lugar = $this->input->post('lugarEntrevista');
 
     // Prepara los datos para la inserción
     $data = [
-        'IdCandidato' => $idCandidato,
-        'TipoEvento' => $tipoEvento, // Puedes cambiarlo según el caso
+        'TipoEvento' => $tipoEvento,
         'Fecha' => $fecha,
         'Hora' => $hora,
-        'Lugar' => $lugar
+        'Lugar' => $lugar,
+        'IdCandidato' => $idCandidato,
     ];
 
     // Llama al modelo para insertar los datos
-        $this->CandidatoModel->programarEntrevista($data);
-        $this->EmailController->enviarCorreo($idCandidato);
-        $this->verCandidato($idCandidato);
+    $this->CandidatoModel->programarEntrevista($data);
+
+    // Obtén los datos necesarios para el correo
+    $candidato = $this->CandidatoModel->getCandidatoPorId($idCandidato);
+
+    // Asegúrate de que el candidato existe y tiene un correo válido
+    if (empty($candidato) || empty($candidato->Correo)) {
+        echo 'Error: No se encontraron datos del candidato o el correo no está definido.';
+        return;
+    }
+
+    // Datos para la plantilla de correo estas variables las usare en la plantilla
+    $datosCorreo = [
+        'nombreCandidato' => $candidato->Nombres,
+        'fecha' => $fecha,
+        'hora' => $hora,
+        'direccion' => $lugar,
+    ];
+
+    // Carga y utiliza la biblioteca Correo para enviar el email
+    $this->load->library('correo');
+    if ($this->correo->enviarCorreo($candidato->Correo, 'Entrevista Programada', 'Entrevista', $datosCorreo)) {
+        echo 'Correo enviado con éxito.';
+    } else {
+        echo 'Error al enviar el correo.';
+    }
+
+    // Redirige o muestra la vista del candidato
+    $this->verCandidato($idCandidato);
 }
+
 
 }

@@ -72,10 +72,10 @@
                         <div class="card-body">
                             <h5 class="card-title">Programar Entrevista</h5>
                             <form
-                                action="<?= site_url('CandidatoController/ProgramarEvento/' . $candidato_data->idCandidato); ?>"
+                                action="<?= site_url('CandidatoController/ProgramarEvento/' . $candidato_data->idCandidato. '/Entrevista'); ?>"
                                 method="post">
                                 <input type="hidden" name="idCandidato" value="<?= $candidato_data->idCandidato; ?>">
-                                <input type="hidden" name="idCandidato" value="Entrevista">
+                                <input type="hidden" name="Evento" value="Entrevista">
 
                                 <div class="mb-3">
                                     <label for="fechaEntrevista" class="form-label">Fecha de la Entrevista</label>
@@ -288,11 +288,7 @@
                         </button>
                         <!-- Botón Aceptar -->
                         <button id="btnContinuar" class="btn btn-success">Continuar Proceso</button>
-                        <br>    
-                        <a href="<?= site_url('EmailController/enviarCorreo/' . $candidato_data->idCandidato); ?>"
-                            class="btn btn-warning sweetalert-reiniciar">
-                            Enviar correo
-                        </a>
+
 
                     </div>
                 </div>

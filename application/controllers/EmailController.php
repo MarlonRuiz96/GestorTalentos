@@ -36,14 +36,13 @@ class EmailController extends CI_Controller
 
         // Configura los detalles del correo
         $this->email->from('notificaciones@pruebasgestordetalentos.com', 'Notificaciones');
-        //$this->email->to($candidato['Correo']);  Usa el correo dinámico del candidato
         $this->email->to('mruiz996@outlook.com');
         $this->email->subject('Entrevista Programada');
 
         $nombreCandidato = htmlspecialchars($candidato->Nombres);
         $fecha = htmlspecialchars($evento->Fecha);
         $hora = htmlspecialchars($evento->Hora);
-        $direccion = htmlspecialchars($evento->Lugar);
+        $direccion = htmlspecialchars($evento->Direccion);
 
 $mensaje = "
 <!DOCTYPE html>
