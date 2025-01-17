@@ -63,6 +63,8 @@ $route['Solicitud'] = 'SolicitudEmpleoController/llenarSolicitud';
 $route['Pruebas'] = 'PruebasController/index';
 $route['Plazas'] = 'PlazaController/index';
 $route['IngregarPlaza'] = 'PlazaController/vistaIngresarPlaza';
+$route['ContactoCorreo'] = 'ContactoController/index';
+
 
 
 

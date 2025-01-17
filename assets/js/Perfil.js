@@ -22,13 +22,20 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // Lógica adicional para ocultar elementos si la etapa es igual a 6
-    if (CANDIDATO_PROGRESO == 6) {
+    // Lógica adicional para ocultar elementos si la etapa RECHAZADO
+    if (CANDIDATO_PROGRESO == 5) {
         document.getElementById('formAgregarComentario').style.display = 'none';
         document.getElementById('RechazarCandidato').style.display = 'none';
         document.getElementById('btnContinuar').style.display = 'none';
         document.getElementById('comentarios').style.display = 'none';
+        
+
     }
+    if (CANDIDATO_PROGRESO == 5){
+        document.getElementById('BotonAcciones').style.display = 'none';
+
+    }
+
 });
 
 //Rechazar candidato

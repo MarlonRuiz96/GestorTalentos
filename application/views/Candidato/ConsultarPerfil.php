@@ -72,7 +72,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Programar Entrevista</h5>
                             <form
-                                action="<?= site_url('CandidatoController/ProgramarEvento/' . $candidato_data->idCandidato. '/Entrevista'); ?>"
+                                action="<?= site_url('CandidatoController/ProgramarEvento/' . $candidato_data->idCandidato . '/Entrevista'); ?>"
                                 method="post">
                                 <input type="hidden" name="idCandidato" value="<?= $candidato_data->idCandidato; ?>">
                                 <input type="hidden" name="Evento" value="Entrevista">
@@ -96,7 +96,7 @@
                         </div>
                     </div>
                 <?php else: ?>
-                    <div class="alert alert-info mt-3 text-left" role="alert">
+                    <div class="alert alert-success mt-3 text-left" role="alert">
                         <h5><i class="fa-solid fa-calendar-check"></i> <strong>Entrevista Programada</strong></h5>
                         <p>
                             <i class="fa-solid fa-calendar-day"></i> Fecha: <?= $eventos->Fecha ?><br>
@@ -117,44 +117,16 @@
             <?php endif; ?>
 
             <?php if ($candidato_data->progreso == 4): ?>
-                <?php if ($candidato_data->Entrevista == null): ?>
-                    <div class="card mt-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Programar Firma Contrato</h5>
-                            <form
-                                action="<?= site_url('CandidatoController/ProgramarEvento/' . $candidato_data->idCandidato); ?>"
-                                method="post">
-                                <input type="hidden" name="idCandidato" value="<?= $candidato_data->idCandidato; ?>">
-                                <input type="hidden" name="idCandidato" value="Contrato">
+                <div class="alert alert-success mt-3 text-center" role="alert">
+                    <strong>El candidato ha completado el proceso de la entrevista exitosamente.</strong>
+                </div>
 
-                                <div class="mb-3">
-                                    <label for="fechaEntrevista" class="form-label">Fecha de la Entrevista</label>
-                                    <input type="date" class="form-control" id="fechaEntrevista" name="fechaEntrevista"
-                                        required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="horaEntrevista" class="form-label">Hora de la Entrevista</label>
-                                    <input type="time" class="form-control" id="horaEntrevista" name="horaEntrevista" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="lugarEntrevista" class="form-label">Lugar de la Entrevista</label>
-                                    <input type="text" class="form-control" id="lugarEntrevista" name="lugarEntrevista"
-                                        required>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Programar Entrevista</button>
-                            </form>
-                        </div>
-                    </div>
-                <?php else: ?>
-                    <div class="alert alert-info mt-3 text-left" role="alert">
-                        <h5><i class="fa-solid fa-calendar-check"></i> <strong>Entrevista Programada</strong></h5>
-                        <p>
-                            <i class="fa-solid fa-calendar-day"></i> Fecha: <?= $eventos->Fecha ?><br>
-                            <i class="fa-solid fa-clock"></i> Hora: <?= $eventos->Hora ?><br>
-                            <i class="fa-solid fa-map-marker-alt"></i> Lugar: <?= $eventos->Lugar ?>
-                        </p>
-                    </div>
-                <?php endif; ?>
+            <?php endif; ?>
+            <?php if ($candidato_data->progreso == 5): ?>
+                <div class="alert alert-success mt-3 text-center" role="alert">
+                    <strong>El candidato ha completado el proceso de seleccion con éxito.</strong>
+                </div>
+
             <?php endif; ?>
 
 
@@ -274,8 +246,8 @@
             </form>
             <!-- Botones para cambiar el estado del candidato -->
 
-
-            <div class="form-row mt-3">
+            
+            <div class="form-row mt-3" id= "BotonAcciones">
                 <div class="form-group col-md-12">
 
                     <!-- Contenedor para los botones centrados -->
@@ -293,6 +265,8 @@
                     </div>
                 </div>
             </div>
+
+
 
             </form>
             <form action="formRechazarCandidato">

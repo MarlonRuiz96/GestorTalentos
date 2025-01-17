@@ -17,6 +17,21 @@ class CandidatoModel extends CI_Model
 			return array();
 		}
 	}
+	public function getCorreoYNombre()
+	{
+		$this->db->select('Nombres, Correo');
+		$this->db->from('Candidato');
+		$query = $this->db->get();
+	
+		if ($query->num_rows() > 0) {
+			// Retorna todos los resultados como objetos
+			return $query->result();
+		} else {
+			// Retorna un array vacío si no hay resultados
+			return [];
+		}
+	}
+	
 
 
 	public function InsertarCandidato($data) //Insertar 0 en los temperamentos
