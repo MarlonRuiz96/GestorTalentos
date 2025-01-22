@@ -19,6 +19,8 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" 
         crossorigin="anonymous"
     >
+    <!-- Quill CSS -->
+    <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
 
     <style>
         body {
@@ -50,13 +52,31 @@
         .dropdown-results div:hover {
             background-color: #f0f0f0;
         }
+        #editor-container {
+            height: 300px;
+        }
+
+        /* Tabla para mostrar correos */
+        #tablaCorreos table {
+            width: 100%;
+            background-color: #fff;
+            margin-top: 1rem;
+            border-collapse: collapse;
+        }
+        #tablaCorreos th, #tablaCorreos td {
+            border: 1px solid #ccc;
+            padding: 8px;
+        }
+        #tablaCorreos th {
+            background-color: #f1f1f1;
+        }
     </style>
 </head>
 <body>
 
 <div class="container my-5">
     <h1 class="mb-4 text-center">Enviar Correo</h1>
-    <div class="card">
+    <div class="card mb-5">
         <div class="card-body">
             <form id="formCorreo">
                 <!-- Campo: Asunto -->
@@ -89,15 +109,8 @@
 
                 <!-- Campo: Cuerpo del Correo -->
                 <div class="mb-3">
-                    <label for="cuerpo" class="form-label fw-semibold">Cuerpo del Correo</label>
-                    <textarea 
-                        name="cuerpo" 
-                        id="cuerpo" 
-                        rows="5" 
-                        class="form-control" 
-                        placeholder="Escribe el contenido del correo..." 
-                        required
-                    ></textarea>
+                    <label for="editor-container" class="form-label fw-semibold">Cuerpo del Correo</label>
+                    <div id="editor-container" class="form-control"></div>
                 </div>
 
                 <!-- Botón de Enviar -->
@@ -109,12 +122,25 @@
             </form>
         </div>
     </div>
+
+    <!-- Sección para leer correos -->
+    <h2 class="text-center mb-4">Bandeja de Entrada</h2>
+    <div class="text-center mb-3">
+        <button type="button" id="btnVerCorreos" class="btn btn-secondary">
+            <i class="fa-solid fa-envelope-open-text me-2"></i>Cargar Correos
+        </button>
+    </div>
+    <div id="tablaCorreos">
+        <!-- Aquí se mostrará la lista de correos -->
+    </div>
 </div>
 
 <!-- SweetAlert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Quill.js -->
+<script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
 
 <script>
 $(document).ready(function () {
@@ -124,7 +150,13 @@ $(document).ready(function () {
     // Datos dinámicos del controlador
     const candidatosData = <?= json_encode($contactoCorreo); ?>;
 
-    // Búsqueda dinámica
+    // Inicializar Quill
+    const quill = new Quill('#editor-container', {
+        theme: 'snow',
+        placeholder: 'Escribe el contenido del correo...'
+    });
+
+    // Búsqueda dinámica para el correo
     correoInput.on('input', function () {
         const query = $(this).val().toLowerCase();
         resultsDiv.empty();
@@ -165,7 +197,7 @@ $(document).ready(function () {
         const formData = {
             asunto: $('#asunto').val(),
             correo: $('#correo').val(),
-            cuerpo: $('#cuerpo').val(),
+            cuerpo: quill.root.innerHTML // Enviamos HTML completo
         };
 
         if (!formData.asunto || !formData.correo || !formData.cuerpo) {
@@ -188,6 +220,7 @@ $(document).ready(function () {
                     text: 'El correo fue enviado exitosamente.',
                 });
                 $('#formCorreo')[0].reset();
+                quill.setContents([]); // Limpiar editor
             },
             error: function () {
                 Swal.fire({
@@ -198,7 +231,57 @@ $(document).ready(function () {
             },
         });
     });
+
+    // Ver correos (Bandeja)
+    $('#btnVerCorreos').on('click', function () {
+        $.ajax({
+            url: '<?= site_url("ContactoController/leerBandeja") ?>',
+            method: 'GET',
+            dataType: 'json',
+            success: function (emails) {
+                if (emails.length === 0) {
+                    $('#tablaCorreos').html('<p class="text-center">No hay correos o no se pudo conectar.</p>');
+                    return;
+                }
+
+                // Armamos la tabla
+                let html = '<table>';
+                html += '<thead><tr><th>Asunto</th><th>Remitente</th><th>Fecha</th><th>Contenido</th></tr></thead>';
+                html += '<tbody>';
+                emails.forEach(function (correo) {
+                    html += '<tr>';
+                    html += '<td>' + escapeHtml(correo.asunto) + '</td>';
+                    html += '<td>' + escapeHtml(correo.remitente) + '</td>';
+                    html += '<td>' + escapeHtml(correo.fecha) + '</td>';
+                    html += '<td><pre>' + escapeHtml(correo.cuerpo) + '</pre></td>';
+                    html += '</tr>';
+                });
+                html += '</tbody></table>';
+
+                $('#tablaCorreos').html(html);
+            },
+            error: function () {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'No se pudieron cargar los correos.',
+                });
+            }
+        });
+    });
+
+    // Función para escapar caracteres especiales (evita inyección HTML)
+    function escapeHtml(text) {
+        if (!text) return '';
+        return text
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
 });
 </script>
+
 </body>
 </html>

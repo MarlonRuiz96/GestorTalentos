@@ -33,4 +33,18 @@ class ContactoController extends CI_Controller
             echo json_encode(['status' => 'error', 'message' => 'Error al enviar el correo.']);
         }
     }
+    public function leerBandeja()
+{
+    // Parámetros de IMAP en Hostinger (ajústalos a tu configuración real)
+    $hostname = '{imap.hostinger.com:993/imap/ssl}INBOX';
+    $username = 'notificaciones@pruebasgestordetalentos.com'; // tu cuenta real
+    $password = 'Pisica2011.'; // tu contraseña real
+
+    // Llama al método de la librería para leer correos
+    $emails = $this->correo->leerCorreosIMAP($hostname, $username, $password);
+
+    // Responde en JSON para usarlo con AJAX
+    echo json_encode($emails);
+}
+
 }
