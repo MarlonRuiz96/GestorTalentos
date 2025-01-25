@@ -86,64 +86,66 @@ class Correo
      * @return array            Arreglo con información de cada correo (asunto, remitente, fecha, cuerpo, etc.)
      */
     public function leerCorreosIMAP($hostname, $username, $password)
-    {
-        // Abre la conexión IMAP
-        $inbox = imap_open($hostname, $username, $password);
-        if (!$inbox) {
-            log_message('error', 'Error al conectar IMAP: ' . imap_last_error());
-            return [];
-        }
-
-        // Busca todos los correos (usar 'UNSEEN' para no leídos, 'ALL' para todos)
-        $emails = imap_search($inbox, 'ALL');
-        if (!$emails) {
-            imap_close($inbox);
-            return [];
-        }
-
-        // Orden descendente (más reciente primero)
-        rsort($emails);
-
-        $mensajes = [];
-
-        foreach ($emails as $numEmail) {
-            // Cabecera
-            $header = imap_headerinfo($inbox, $numEmail);
-
-            // Asunto (decodificado para UTF-8 si es necesario)
-            $asunto = isset($header->subject) ? imap_utf8($header->subject) : '(sin asunto)';
-
-            // Remitente
-            $from = '(desconocido)';
-            if (isset($header->from[0]->mailbox) && isset($header->from[0]->host)) {
-                $from = $header->from[0]->mailbox . '@' . $header->from[0]->host;
-            }
-
-            // Fecha
-            $fecha = isset($header->date) ? $header->date : '(sin fecha)';
-
-            // Cuerpo: se asume que la parte '1' es texto plano o HTML.
-            // A veces hay que usar '1.1' dependiendo del formato.
-            $cuerpo = imap_fetchbody($inbox, $numEmail, '1');
-            if (!$cuerpo) {
-                $cuerpo = '(sin contenido)';
-            }
-
-            // Almacenamos los datos
-            $mensajes[] = [
-                'numero'    => $numEmail,
-                'asunto'    => $asunto,
-                'remitente' => $from,
-                'fecha'     => $fecha,
-                'cuerpo'    => $cuerpo
-            ];
-        }
-
-        // Cierra la conexión
-        imap_close($inbox);
-
-        return $mensajes;
+{
+    // Abre la conexión IMAP
+    $inbox = imap_open($hostname, $username, $password);
+    if (!$inbox) {
+        log_message('error', 'Error al conectar IMAP: ' . imap_last_error());
+        return [];
     }
+
+    // Busca todos los correos
+    $emails = imap_search($inbox, 'ALL');
+    if (!$emails) {
+        imap_close($inbox);
+        return [];
+    }
+
+    // Orden descendente (más reciente primero)
+    rsort($emails);
+
+    $mensajes = [];
+
+    foreach ($emails as $numEmail) {
+        // Cabecera
+        $header = imap_headerinfo($inbox, $numEmail);
+
+        // Asunto
+        $asunto = isset($header->subject) ? imap_utf8($header->subject) : '(sin asunto)';
+
+        // Remitente
+        $from = '(desconocido)';
+        if (isset($header->from[0]->mailbox) && isset($header->from[0]->host)) {
+            $from = $header->from[0]->mailbox . '@' . $header->from[0]->host;
+        }
+
+        // Fecha
+        $fecha = isset($header->date) ? $header->date : '(sin fecha)';
+
+        // Cuerpo: decodifica el contenido si está en formato "quoted-printable"
+        $cuerpo = imap_fetchbody($inbox, $numEmail, '1'); // Parte 1 es texto plano o HTML
+        if (!$cuerpo) {
+            $cuerpo = '(sin contenido)';
+        } else {
+            $cuerpo = quoted_printable_decode($cuerpo); // Decodifica si está en este formato
+        }
+
+        // Almacenamos los datos
+        $mensajes[] = [
+            'numero'    => $numEmail,
+            'asunto'    => $asunto,
+            'remitente' => $from,
+            'fecha'     => $fecha,
+            'cuerpo'    => $cuerpo
+        ];
+    }
+
+    // Cierra la conexión
+    imap_close($inbox);
+
+    return $mensajes;
+}
+
 
     /**
      * Función privada que renderiza la plantilla y devuelve su contenido HTML en un string.

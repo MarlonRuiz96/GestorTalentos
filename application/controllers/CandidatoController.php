@@ -31,7 +31,7 @@ class CandidatoController extends CI_Controller
         verificar_autenticacion($this);
 
         if ($this->input->server('REQUEST_METHOD') === 'POST') {
-			//obtengo los datos con post
+			//obtengo los datos con posts
             $DPI = $this->input->post('DPI');
 
             $fecha_actual = date("Y-m-d");
@@ -45,8 +45,6 @@ class CandidatoController extends CI_Controller
                 'Correo' => $correo,
                 'fecha_crear' => $fecha_actual,
                 'Temporal' => 1,
-
-
             );
 
             $this->CandidatoModel->InsertarCandidato($data);
